@@ -50,6 +50,10 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
+        /* 新增的測驗樣式 */
+        .quiz-option label:hover {
+            background-color: #f0f9ff; /* Light Sky background on hover */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -68,9 +72,8 @@
                     <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
                     <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識測驗</a>
                     <a href="#conclusion" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">結論</a>
-  <a href="index.html">回到首頁</a>
-  <a href=" autodrive-tamsui.html">下一篇</a>
-
+                      <a href="index.html">回到首頁</a>
+                      <a href=" autodrive-tamsui.html">下一篇</a>
                 </div>
             </div>
             <div class="md:hidden flex items-center">
@@ -88,9 +91,8 @@
             <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
             <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識測驗</a>
             <a href="#conclusion" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">結論</a>
-  <a href="index.html">回到首頁</a>
-  <a href=" autodrive-tamsui.html">下一篇</a>
-
+            <a href="index.html">回到首頁</a>
+            <a href=" autodrive-tamsui.html">下一篇</a>
         </div>
     </nav>
 </header>
@@ -140,7 +142,7 @@
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">互動比較：數位脈衝 vs. 類比聲波</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">儘管共享「電路交換」的藍圖，但電報與電話在資訊形式、用戶門檻和溝通本質上存在根本差異。透過下方的互動圖表探索這些分歧。</p>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-             <div class="bg-white p-6 rounded-xl shadow-lg">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h3 class="text-xl font-bold text-center text-slate-800 mb-2">用戶技能要求</h3>
                 <p class="text-sm text-center text-slate-500 mb-4">電話的出現極大地降低了通訊的技術門檻。</p>
                 <div class="chart-container h-64"><canvas id="skillChart"></canvas></div>
@@ -170,13 +172,50 @@
     <section id="quiz" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">您已經完成了這趟從電報到電話的旅程，現在就來測試一下您的學習成果吧！</p>
-        <div class="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto text-center">
-             <a href="https://g.co/gemini/share/e4b6a7bd9c8b" target="_blank" rel="noopener noreferrer" class="inline-block bg-sky-600 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-700 transition-colors duration-300 text-lg">
-                開始測驗
-            </a>
+        <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+            <form id="quiz-form">
+                <div id="question-1" class="mb-8">
+                    <p class="font-semibold text-slate-800 mb-4">1. 在電話發明之前，專用電報系統（例如金融專線）的主要通訊方式是什麼？</p>
+                    <div class="space-y-3">
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q1" value="A" class="mr-3 align-middle">類比語音訊號</label></div>
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q1" value="B" class="mr-3 align-middle">數位化的摩斯電碼</label></div>
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q1" value="C" class="mr-3 align-middle">手寫信件遞送</label></div>
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q1" value="D" class="mr-3 align-middle">視訊會議</label></div>
+                    </div>
+                    <div id="feedback-q1" class="mt-3 text-sm font-medium"></div>
+                </div>
+
+                <div id="question-2" class="mb-8">
+                    <p class="font-semibold text-slate-800 mb-4">2. 早期長途電話的建立，最仰賴下列哪一個關鍵角色？</p>
+                    <div class="space-y-3">
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q2" value="A" class="mr-3 align-middle">AI 自動路由系統</label></div>
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q2" value="B" class="mr-3 align-middle">發話方自行撥號</label></div>
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q2" value="C" class="mr-3 align-middle">人工電話交換員</label></div>
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q2" value="D" class="mr-3 align-middle">衛星通訊</label></div>
+                    </div>
+                    <div id="feedback-q2" class="mt-3 text-sm font-medium"></div>
+                </div>
+
+                <div id="question-3" class="mb-8">
+                    <p class="font-semibold text-slate-800 mb-4">3. 相較於電報，電話最大的革命性突破是什麼？</p>
+                    <div class="space-y-3">
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q3" value="A" class="mr-3 align-middle">傳輸速度更快</label></div>
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q3" value="B" class="mr-3 align-middle">大幅降低了使用者的技術門檻，讓普通人也能使用</label></div>
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q3" value="C" class="mr-3 align-middle">只能用於傳送文字</label></div>
+                        <div class="quiz-option"><label class="block p-3 rounded-lg border border-slate-200 cursor-pointer transition-colors"><input type="radio" name="q3" value="D" class="mr-3 align-middle">完全不需要電線</label></div>
+                    </div>
+                    <div id="feedback-q3" class="mt-3 text-sm font-medium"></div>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" id="submit-quiz" class="bg-sky-600 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-700 transition-colors duration-300 text-lg">
+                        提交答案
+                    </button>
+                </div>
+            </form>
+            <div id="quiz-results" class="mt-6 text-center font-bold text-2xl text-slate-800"></div>
         </div>
     </section>
-
     <section id="conclusion" class="scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">結論：骨架與靈魂的結合</h2>
         <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
@@ -209,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeLink) {
             activeLink.classList.add('active');
         }
-    }
+     }
     window.addEventListener('scroll', changeNavOnScroll);
 
     const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -253,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stageButtons.forEach((btn, index) => {
             btn.classList.toggle('active', index == stageIndex);
         });
-    }
+     }
 
     function createProcessChart() {
         const ctx = document.getElementById('processChart');
@@ -278,8 +317,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 scales: { x: { beginAtZero: true, max: 100 } }
             }
         });
-    }
-    
+     }
+     
     // ---互動比較區塊圖表邏輯---
     const comparisonPalette = {
         accent: 'rgba(2, 132, 199, 0.7)',
@@ -289,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
         highlight: 'rgba(59, 130, 246, 0.8)',
         highlightLight: 'rgba(59, 130, 246, 0.2)'
     };
-    
+     
     function createSkillChart() {
         const ctx = document.getElementById('skillChart');
         if (!ctx) return;
@@ -307,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } } }
         });
-    }
+     }
 
     function createInfoTypeChart() {
         const ctx = document.getElementById('infoTypeChart');
@@ -327,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
         });
-    }
+     }
 
     function createOperatorRoleChart() {
         const ctx = document.getElementById('operatorRoleChart');
@@ -353,12 +392,86 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             },
             options: {
-                responsive: true, maintainAspectRatio: false,
+                responsive: true,
+maintainAspectRatio: false,
                 plugins: { legend: { position: 'bottom' } },
                 scales: { r: { beginAtZero: true, max: 10 } }
             }
         });
+     }
+
+    // --- ===== 新增的知識測驗邏輯開始 ===== ---
+    const quizForm = document.getElementById('quiz-form');
+    if (quizForm) {
+        quizForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const correctAnswers = {
+                q1: 'B',
+                q2: 'C',
+                q3: 'B'
+            };
+            const explanations = {
+                q1: '正確！電報使用數位化的摩斯電碼進行通訊，需要專業訓練。',
+                q2: '正確！早期長途電話需要人工交換員手動連接線路，是通訊的關鍵樞紐。',
+                q3: '正確！電話最大的突破是讓普通人無需特殊訓練即可使用，普及了即時通訊。'
+            };
+            
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (const questionName in correctAnswers) {
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                const feedbackEl = document.getElementById(`feedback-${questionName}`);
+                const questionBlock = document.getElementById(`question-${questionName}`);
+                const allOptions = questionBlock.querySelectorAll('.quiz-option label');
+                const correctAnswerValue = correctAnswers[questionName];
+
+                // 清除舊樣式
+                allOptions.forEach(label => {
+                    label.classList.remove('bg-red-100', 'border-red-400', 'bg-green-100', 'border-green-500', 'font-bold');
+                });
+                
+                if (selectedOption) {
+                    const userAnswerValue = selectedOption.value;
+                    const userLabel = selectedOption.parentElement;
+
+                    if (userAnswerValue === correctAnswerValue) {
+                        score++;
+                        userLabel.classList.add('bg-green-100', 'border-green-500', 'font-bold');
+                        feedbackEl.textContent = explanations[questionName];
+                        feedbackEl.className = 'mt-3 text-sm font-medium text-green-700';
+                    } else {
+                        userLabel.classList.add('bg-red-100', 'border-red-400');
+                        feedbackEl.textContent = '答錯了。正確答案是 (' + correctAnswerValue + ')。';
+                        feedbackEl.className = 'mt-3 text-sm font-medium text-red-700';
+                        // 標示出正確答案
+                        const correctLabel = questionBlock.querySelector(`input[value="${correctAnswerValue}"]`).parentElement;
+                        correctLabel.classList.add('bg-green-100', 'border-green-500', 'font-bold');
+                    }
+                } else {
+                     feedbackEl.textContent = '此題未作答。正確答案是 (' + correctAnswerValue + ')。';
+                     feedbackEl.className = 'mt-3 text-sm font-medium text-orange-600';
+                     const correctLabel = questionBlock.querySelector(`input[value="${correctAnswerValue}"]`).parentElement;
+                     correctLabel.classList.add('bg-green-100', 'border-green-500', 'font-bold');
+                }
+            }
+
+            // 顯示總分
+            const resultsEl = document.getElementById('quiz-results');
+            resultsEl.textContent = `測驗完成！您答對了 ${score} / ${totalQuestions} 題。`;
+
+            // 禁用所有選項和按鈕
+            const allInputs = quizForm.querySelectorAll('input[type="radio"]');
+            allInputs.forEach(input => input.disabled = true);
+            
+            const submitButton = document.getElementById('submit-quiz');
+            submitButton.disabled = true;
+            submitButton.textContent = '已提交';
+            submitButton.classList.remove('bg-sky-600', 'hover:bg-sky-700');
+            submitButton.classList.add('bg-slate-400', 'cursor-not-allowed');
+        });
     }
+    // --- ===== 新增的知識測驗邏輯結束 ===== ---
 
     // ---初始化所有功能---
     if (document.querySelectorAll('.stage-button').length > 0) {
@@ -367,18 +480,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateTelephoneContent(e.target.dataset.stage);
             });
         });
-    }
-    
+     }
+     
     createProcessChart();
     createSkillChart();
     createInfoTypeChart();
     createOperatorRoleChart();
-    
+     
     updateTelephoneContent(0);
     changeNavOnScroll();
 });
 </script>
 </body>
 </html>
-
-
