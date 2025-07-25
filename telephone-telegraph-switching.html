@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互動式應用：從電報到電話的演進</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Light Gray Background */
+            color: #1e293b; /* Slate Text */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif TC', serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .nav-link.active {
+            color: #0284c7; /* Sky Blue */
+            border-bottom-color: #0284c7;
+        }
+        .stage-button {
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+        }
+        .stage-button.active {
+            background-color: #0284c7; /* Sky Blue */
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-600">從電報到電話的演進</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#telegraph" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">電報時代</a>
+                    <a href="#telephone" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">電話革命</a>
+                    <a href="#comparison" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">互動比較</a>
+                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識測驗</a>
+                    <a href="#conclusion" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">結論</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#telegraph" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">電報時代</a>
+            <a href="#telephone" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">電話革命</a>
+            <a href="#comparison" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">互動比較</a>
+            <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識測驗</a>
+            <a href="#conclusion" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">結論</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <section id="telegraph" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">電報時代：通訊的骨架</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">在1870年代，專為金融與新聞業設計的「專用線路」服務，透過人工交換建立了即時通訊的基礎框架。這是一個為專家服務、基於數位脈衝的精密系統。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-center mb-6 text-slate-800">專用電報線路運作流程</h3>
+            <div class="flex flex-col md:flex-row items-stretch justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <div class="text-center p-4 bg-sky-50 rounded-lg w-full md:w-1/4"><div class="text-4xl mb-2">📄</div><h4 class="font-bold text-sky-800">步驟 1：服務合約</h4><p class="text-sm text-sky-700">客戶與電報公司預先簽訂協議，在特定時段租用專屬線路。</p></div>
+                <div class="text-2xl font-bold text-slate-400 transform md:rotate-0 rotate-90 mx-auto">&rarr;</div>
+                <div class="text-center p-4 bg-sky-50 rounded-lg w-full md:w-1/4"><div class="text-4xl mb-2">🔌</div><h4 class="font-bold text-sky-800">步驟 2：人工交換</h4><p class="text-sm text-sky-700">操作員手動將插頭插入對應插孔，建立一條不間斷的物理電路。</p></div>
+                <div class="text-2xl font-bold text-slate-400 transform md:rotate-0 rotate-90 mx-auto">&rarr;</div>
+                <div class="text-center p-4 bg-amber-50 rounded-lg w-full md:w-1/4"><div class="text-4xl mb-2">...---...</div><h4 class="font-bold text-amber-800">步驟 3：即時通訊</h4><p class="text-sm text-amber-700">專業報務員使用摩斯電碼進行即時、雙向的數位資訊交換。</p></div>
+                <div class="text-2xl font-bold text-slate-400 transform md:rotate-0 rotate-90 mx-auto">&rarr;</div>
+                <div class="text-center p-4 bg-emerald-50 rounded-lg w-full md:w-1/4"><div class="text-4xl mb-2">💨</div><h4 class="font-bold text-emerald-800">步驟 4：電路釋放</h4><p class="text-sm text-emerald-700">通訊結束後，操作員拔除接線，釋放線路資源。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="telephone" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">互動探索：一通長途電話的「人力網路協定」</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">電話的發明，將通訊從專業技能轉變為人類本能。點擊下方不同階段，觀察一通從紐約到芝加哥的電話是如何依賴人力協同完成的。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6" id="stage-buttons">
+                <button class="stage-button active px-4 py-2 bg-slate-200 text-slate-700 rounded-full font-semibold text-sm" data-stage="0">階段一：發話方</button>
+                <button class="stage-button px-4 py-2 bg-slate-200 text-slate-700 rounded-full font-semibold text-sm" data-stage="1">階段二：紐約交換員</button>
+                <button class="stage-button px-4 py-2 bg-slate-200 text-slate-700 rounded-full font-semibold text-sm" data-stage="2">階段三：芝加哥交換員</button>
+                <button class="stage-button px-4 py-2 bg-slate-200 text-slate-700 rounded-full font-semibold text-sm" data-stage="3">階段四：受話方</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                <div class="md:col-span-2">
+                    <div id="stage-icon" class="text-6xl text-center mb-4"></div>
+                    <h3 id="stage-title" class="text-xl font-bold text-slate-800 mb-2 text-center"></h3>
+                    <p id="stage-description" class="text-slate-600 text-sm text-center"></p>
+                </div>
+                <div class="md:col-span-3">
+                    <div class="chart-container"><canvas id="processChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">互動比較：數位脈衝 vs. 類比聲波</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">儘管共享「電路交換」的藍圖，但電報與電話在資訊形式、用戶門檻和溝通本質上存在根本差異。透過下方的互動圖表探索這些分歧。</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+             <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-center text-slate-800 mb-2">用戶技能要求</h3>
+                <p class="text-sm text-center text-slate-500 mb-4">電話的出現極大地降低了通訊的技術門檻。</p>
+                <div class="chart-container h-64"><canvas id="skillChart"></canvas></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-center text-slate-800 mb-2">資訊形式的革命</h3>
+                <p class="text-sm text-center text-slate-500 mb-4">從編碼文字到自然語音的飛躍。</p>
+                <div class="chart-container h-64"><canvas id="infoTypeChart"></canvas></div>
+            </div>
+            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-center text-slate-800 mb-2">操作員角色演變</h3>
+                <p class="text-sm text-center text-slate-500 mb-4">從隱形的技術執行者，轉變為直接面對用戶的服務介面。</p>
+                <div class="chart-container h-80"><canvas id="operatorRoleChart"></canvas></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="audio-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">語音摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">不想閱讀文字嗎？點擊下方播放器，聆聽本報告的重點內容摘要，快速掌握從電報到電話演進的核心概念。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto">
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">重點回顧</h3>
+            <audio controls preload="auto" class="w-full" src="telephone_telegraph_sw9min32s.mp3">您的瀏覽器不支援音訊播放。</audio>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">您已經完成了這趟從電報到電話的旅程，現在就來測試一下您的學習成果吧！</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto text-center">
+             <a href="https://g.co/gemini/share/e4b6a7bd9c8b" target="_blank" rel="noopener noreferrer" class="inline-block bg-sky-600 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-700 transition-colors duration-300 text-lg">
+                開始測驗
+            </a>
+        </div>
+    </section>
+
+    <section id="conclusion" class="scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">結論：骨架與靈魂的結合</h2>
+        <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+            <p class="text-center text-slate-600">專用電報系統搭建了通訊的「骨架」，一個高效、精準、但缺乏溫度的框架。而電話則為這個骨架注入了「靈魂」，用類比的聲音傳遞情感，將即時通訊帶給了每一個人。正是這兩者的結合，點燃了現代電信革命的火焰，開啟了我們今日所知的個人化即時通訊時代。</p>
+        </div>
+    </section>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ---通用導覽列邏輯---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('section');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            hamburgerIconOpen.classList.remove('hidden');
+            hamburgerIconClose.classList.add('hidden');
+        });
+    });
+
+    // ---電話革命互動圖表邏輯---
+    const telephoneData = [
+        { icon: "👤", title: "發話方 (紐約)", description: "拿起聽筒，向本地交換員提出通話請求，一切從這裡開始。", params: { progress: 10, complexity: 5, human_involvement: 20 } },
+        { icon: "👩‍💼", title: "紐約交換員", description: "接收請求，插入跳線至長途台，再連接至通往芝加哥的主幹線。這是關鍵的第一跳。", params: { progress: 40, complexity: 60, human_involvement: 80 } },
+        { icon: "👩‍💼", title: "芝加哥交換員", description: "從主幹線接收指令，查找受話方號碼，並將線路連接至對應的本地交換局。這是精準的第二跳。", params: { progress: 80, complexity: 70, human_involvement: 85 } },
+        { icon: "👤", title: "受話方 (芝加哥)", description: "電話鈴響，拿起聽筒，一條橫跨數百公里的物理電路成功建立，通話開始。", params: { progress: 100, complexity: 10, human_involvement: 25 } }
+    ];
+    let processChart;
+    const stageIconEl = document.getElementById('stage-icon');
+    const stageTitleEl = document.getElementById('stage-title');
+    const stageDescriptionEl = document.getElementById('stage-description');
+    const stageButtons = document.querySelectorAll('.stage-button');
+
+    function updateTelephoneContent(stageIndex) {
+        if (!stageTitleEl || !processChart) return;
+        const data = telephoneData[stageIndex];
+        stageIconEl.textContent = data.icon;
+        stageTitleEl.textContent = data.title;
+        stageDescriptionEl.textContent = data.description;
+        processChart.data.datasets[0].data = [data.params.progress, data.params.complexity, data.params.human_involvement];
+        processChart.update();
+        stageButtons.forEach((btn, index) => {
+            btn.classList.toggle('active', index == stageIndex);
+        });
+    }
+
+    function createProcessChart() {
+        const ctx = document.getElementById('processChart');
+        if (!ctx) return;
+        processChart = new Chart(ctx.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['通話建立進度 (%)', '流程複雜度指數', '人力介入指數'],
+                datasets: [{
+                    label: '階段參數值',
+                    data: [],
+                    backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(2, 132, 199, 0.7)', 'rgba(251, 146, 60, 0.7)'],
+                    borderColor: ['rgba(59, 130, 246, 1)', 'rgba(2, 132, 199, 1)', 'rgba(251, 146, 60, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false }, title: { display: true, text: '通話流程各階段分析' } },
+                scales: { x: { beginAtZero: true, max: 100 } }
+            }
+        });
+    }
+    
+    // ---互動比較區塊圖表邏輯---
+    const comparisonPalette = {
+        accent: 'rgba(2, 132, 199, 0.7)',
+        accentLight: 'rgba(107, 185, 240, 0.7)',
+        text: '#1e293b',
+        background: '#f8fafc',
+        highlight: 'rgba(59, 130, 246, 0.8)',
+        highlightLight: 'rgba(59, 130, 246, 0.2)'
+    };
+    
+    function createSkillChart() {
+        const ctx = document.getElementById('skillChart');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['專用電報系統', '人工電話系統'],
+                datasets: [{
+                    label: '技能要求指數 (越高越難)',
+                    data: [90, 15],
+                    backgroundColor: [comparisonPalette.accent, comparisonPalette.accentLight],
+                    borderWidth: 1,
+                    barThickness: 50,
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } } }
+        });
+    }
+
+    function createInfoTypeChart() {
+        const ctx = document.getElementById('infoTypeChart');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['數位 (摩斯電碼)', '類比 (語音)'],
+                datasets: [{
+                    label: '資訊形式',
+                    data: [50, 50],
+                    backgroundColor: [comparisonPalette.accent, comparisonPalette.accentLight],
+                    borderColor: comparisonPalette.background,
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+        });
+    }
+
+    function createOperatorRoleChart() {
+        const ctx = document.getElementById('operatorRoleChart');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['技術複雜度', '服務導向性', '用戶互動性', '流程標準化', '即時決策需求'],
+                datasets: [{
+                    label: '電報操作員 (骨架)',
+                    data: [8, 2, 1, 9, 3],
+                    fill: true,
+                    backgroundColor: comparisonPalette.highlightLight,
+                    borderColor: comparisonPalette.highlight,
+                    pointBackgroundColor: comparisonPalette.highlight,
+                }, {
+                    label: '電話交換員 (靈魂)',
+                    data: [5, 9, 10, 7, 8],
+                    fill: true,
+                    backgroundColor: 'rgba(107, 185, 240, 0.2)',
+                    borderColor: 'rgba(107, 185, 240, 1)',
+                    pointBackgroundColor: 'rgba(107, 185, 240, 1)',
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } },
+                scales: { r: { beginAtZero: true, max: 10 } }
+            }
+        });
+    }
+
+    // ---初始化所有功能---
+    if (document.querySelectorAll('.stage-button').length > 0) {
+        stageButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                updateTelephoneContent(e.target.dataset.stage);
+            });
+        });
+    }
+    
+    createProcessChart();
+    createSkillChart();
+    createInfoTypeChart();
+    createOperatorRoleChart();
+    
+    updateTelephoneContent(0);
+    changeNavOnScroll();
+});
+</script>
+</body>
+</html>
+
+
