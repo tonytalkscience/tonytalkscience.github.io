@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互動應用：從有線世界到網絡世界</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 50vh; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .quiz-option:hover { background-color: #f0f9ff; }
+        .flowchart-arrow { font-size: 2rem; color: #94a3b8; line-height: 1; align-self: center; transform: rotate(90deg); }
+        @media (min-width: 768px) { .flowchart-arrow { transform: rotate(0deg); } }
+</style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-600">從有線世界到網絡世界</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-2 flex-wrap justify-end">
+                    <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">總覽</a>
+                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#telegraph" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">電報時代</a>
+                    <a href="#internet" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">數位宇宙</a>
+                    <a href="#comparison" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">世紀之變</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">學習測驗</a>
+                    <a href="#conclusion" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">結論</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html
+">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">總覽</a>
+            <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#telegraph" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">電報時代</a>
+            <a href="#internet" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">數位宇宙</a>
+            <a href="#comparison" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">世紀之變</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">學習測驗</a>
+            <a href="#conclusion" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">結論</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html
+">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <section id="overview" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">核心洞見：智能的轉移</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">通訊網絡的百年發展史，本質上是一個將昔日由人類報務員大腦執行的複雜邏輯功能——如路由決策——逐步抽象化、標準化，並最終以數十億倍的速度灌注到矽晶片與軟件協議中的過程。理解「維多利亞時代的網際網路」，是為我們當下所處的數位時代提供一個深刻的歷史參照。</p>
+    </section>
+
+    <section id="audio-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">音訊摘要與重點</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">請聆聽以下音訊，了解電報與網際網路之間驚人的傳承關係，以及科技如何將人類的智能轉移並規模化。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
+            <audio controls class="w-full mb-6">
+                <source src="telegraph_internet_9min12s.mp3" type="audio/mpeg">
+                您的瀏覽器不支援音訊播放。
+            </audio>
+            <div class="space-y-3 text-slate-700 border-t pt-4">
+                <h3 class="text-lg font-semibold text-slate-800">摘要重點：</h3>
+                <ul class="list-disc list-inside space-y-2 text-sm">
+                    <li><strong>不變的核心原則：</strong> 網際網路的許多核心概念，如節點、定址、標頭和逐跳路由，都能在電報系統中找到雛形。</li>
+                    <li><strong>智能的載體變革：</strong> 最大的差異在於「智能」的載體。電報的智能在於「人腦」（報務員），而網際網路的智能則在於「矽晶」（路由器與協議）。</li>
+                    <li><strong>從手動到自動：</strong> 電報的「儲存轉發」是手動的、耗時的過程；網際網路的「封包交換」則是自動的、以毫秒計的過程，兩者哲學相通，效率卻有天壤之別。</li>
+                    <li><strong>去中心化的力量：</strong> 電報網絡是中央集權的，由少數公司壟斷。網際網路的去中心化特性，釋放了前所未有的創新與擴展能力。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="telegraph" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第一部分：維多利亞時代的網際網路</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">1870年代的電報是一個以「儲存轉發」為核心、高度依賴人力技能的複雜社會技術系統。</p>
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg mb-8">
+            <h3 class="text-xl font-bold text-center mb-6 text-slate-800">電報發送流程：一場手動的接力賽</h3>
+            <div class="flex flex-col md:flex-row justify-around items-center gap-4 text-center">
+                <div class="flex-1 p-4"><div class="text-4xl font-black text-sky-500">1</div><h4 class="font-bold text-lg mt-2 mb-1">提交訊息</h4><p class="text-sm text-slate-500">用戶將手寫電文提交至電報局櫃檯。</p></div>
+                <div class="flowchart-arrow">→</div>
+                <div class="flex-1 p-4"><div class="text-4xl font-black text-sky-500">2</div><h4 class="font-bold text-lg mt-2 mb-1">編碼與發送</h4><p class="text-sm text-slate-500">報務員將文字轉為摩斯電碼並發送。</p></div>
+                <div class="flowchart-arrow">→</div>
+                <div class="flex-1 p-4"><div class="text-4xl font-black text-sky-500">3</div><h4 class="font-bold text-lg mt-2 mb-1">儲存與轉發</h4><p class="text-sm text-slate-500">中繼站報務員接收完整電文，手動決定下一跳路徑並轉發。</p></div>
+                <div class="flowchart-arrow">→</div>
+                <div class="flex-1 p-4"><div class="text-4xl font-black text-sky-500">4</div><h4 class="font-bold text-lg mt-2 mb-1">解碼與派送</h4><p class="text-sm text-slate-500">目的地報務員譯回文字，由信差專人派送。</p></div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg"><h3 class="text-xl font-bold mb-4 text-slate-800">網絡的引擎：報務員</h3><p class="text-slate-600 mb-4 text-sm">報務員不僅是操作員，更是網絡的「活體處理器」。他們執行的邏輯操作，驚人地對應了現代網絡的多個層級功能。</p><div class="chart-container"><canvas id="operatorTasksChart"></canvas></div></div>
+            <div class="bg-white p-6 rounded-xl shadow-lg"><h3 class="text-xl font-bold mb-4 text-slate-800">關鍵技術與特性</h3><ul class="space-y-4"><li><h4 class="font-semibold text-sky-700">儲存轉發</h4><p class="text-sm text-slate-600">訊息在節點被完整接收、儲存後再轉發，確保準確性但犧牲了即時性。</p></li><li><h4 class="font-semibold text-sky-700">手動路由</h4><p class="text-sm text-slate-600">由人類根據經驗和指南決定訊息的下一站，網絡智能存在於人腦中。</p></li><li><h4 class="font-semibold text-sky-700">中央集權</h4><p class="text-sm text-slate-600">網絡由單一實體（壟斷公司或國家）控制，以確保標準化和管理效率。</p></li></ul></div>
+        </div>
+    </section>
+
+    <section id="internet" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第二部分：數位宇宙的誕生</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">現代網際網路建立在「封包交換」的哲學之上，將數據原子化，由一系列自動化協議和設備進行處理。</p>
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg mb-8">
+            <h3 class="text-xl font-bold text-center mb-6 text-slate-800">電子郵件傳遞：自動化的協議棧</h3>
+             <div class="flex flex-col md:flex-row justify-around items-center gap-4 text-center">
+                <div class="flex-1 p-4"><div class="text-4xl font-black text-sky-500">1</div><h4 class="font-bold text-lg mt-2 mb-1">應用層</h4><p class="text-sm text-slate-500">用戶點擊發送，郵件內容交給操作系統 (SMTP)。</p></div>
+                <div class="flowchart-arrow">→</div>
+                <div class="flex-1 p-4"><div class="text-4xl font-black text-sky-500">2</div><h4 class="font-bold text-lg mt-2 mb-1">傳輸層</h4><p class="text-sm text-slate-500">數據被分割成帶編號的數據段，確保可靠傳輸 (TCP)。</p></div>
+                <div class="flowchart-arrow">→</div>
+                <div class="flex-1 p-4"><div class="text-4xl font-black text-sky-500">3</div><h4 class="font-bold text-lg mt-2 mb-1">網絡層</h4><p class="text-sm text-slate-500">每個數據段被加上IP地址，成為獨立封包 (IP)。</p></div>
+                <div class="flowchart-arrow">→</div>
+                <div class="flex-1 p-4"><div class="text-4xl font-black text-sky-500">4</div><h4 class="font-bold text-lg mt-2 mb-1">路由與重組</h4><p class="text-sm text-slate-500">路由器自動轉發封包，目的地伺服器按編號重組郵件。</p></div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg"><h3 class="text-xl font-bold mb-4 text-slate-800">網絡的引擎：路由器與協議</h3><p class="text-slate-600 mb-4 text-sm">路由器的矽晶片與TCP/IP協議取代了人類大腦，以數十億倍的速度自動執行路由決策。</p><div class="chart-container"><canvas id="protocolLayersChart"></canvas></div></div>
+            <div class="bg-white p-6 rounded-xl shadow-lg"><h3 class="text-xl font-bold mb-4 text-slate-800">關鍵技術與特性</h3><ul class="space-y-4"><li><h4 class="font-semibold text-sky-700">封包交換</h4><p class="text-sm text-slate-600">數據被分割成微小的獨立封包進行傳輸，極大提升線路利用率和網絡穩健性。</p></li><li><h4 class="font-semibold text-sky-700">動態路由</h4><p class="text-sm text-slate-600">由路由器根據實時網絡狀況自動選擇最佳路徑，實現網絡自癒。</p></li><li><h4 class="font-semibold text-sky-700">去中心化</h4><p class="text-sm text-slate-600">由無數獨立網絡自願互聯而成，沒有中央控制點，賦予了網絡驚人的擴展性和創新活力。</p></li></ul></div>
+        </div>
+    </section>
+
+    <section id="comparison" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第三部分：世紀之變</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">從電報到網際網路，核心邏輯一脈相承，但實現方式與效率卻是天壤之別。</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg lg:col-span-2"><h3 class="text-xl font-bold mb-4 text-slate-800">核心概念對比</h3><p class="text-slate-600 mb-4 text-sm">下圖直觀地比較了兩個時代網絡在關鍵特性上的巨大差異。將滑鼠懸停在長條上以查看詳細說明。</p><div class="chart-container h-[450px]"><canvas id="comparisonChart"></canvas></div></div>
+            <div class="bg-white p-6 rounded-xl shadow-lg lg:col-span-2"><h3 class="text-xl font-bold mb-4 text-slate-800">智能的轉移：從人腦到矽晶</h3><p class="text-slate-600 mb-4 text-sm">網絡的發展史，是一部將智能從人類大腦中抽象出來，並固化到協議和晶片中的歷史。下圖概念性地展示了這一權力交接的過程。</p><div class="chart-container"><canvas id="intelligenceShiftChart"></canvas></div></div>
+        </div>
+    </section>
+    
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">學習成效測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對本報告內容的理解程度！完成下面的小測驗，看看您掌握了多少知識。</p>
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+            <div id="quiz-container" class="space-y-6">
+                <div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">1. 1870年代電報系統的核心運作原則是什麼？</p><div class="space-y-2"><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="a" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">A) 封包交換 (Packet Switching)</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="b" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">B) 儲存轉發 (Store-and-Forward)</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="c" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">C) 動態路由 (Dynamic Routing)</span></label></div></div>
+                <div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">2. 在電報系統中，扮演「路由器」角色的是？</p><div class="space-y-2"><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="a" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">A) 發送電報的用戶</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="b" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">B) 中央電腦伺服器</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="c" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">C) 電報報務員 (Telegraph Operator)</span></label></div></div>
+                <div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">3. 本報告的核心論點是，通訊網絡的發展史是一個什麼樣的過程？</p><div class="space-y-2"><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="a" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">A) 將人類智能轉移並固化到技術系統中的過程</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="b" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">B) 完全拋棄舊有概念，從零開始創造新技術的過程</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="c" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">C) 讓網絡速度變得越來越快的單純硬體升級過程</span></label></div></div>
+            </div>
+            <div class="mt-8 text-center"><button id="submit-quiz-btn" class="bg-sky-600 text-white font-bold py-2 px-8 rounded-full hover:bg-sky-700 transition-colors">提交答案</button></div>
+            <div id="quiz-results" class="mt-6 text-center text-lg font-semibold"></div>
+        </div>
+    </section>
+
+    <section id="conclusion" class="scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">結論：不變的網絡DNA</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">網際網路並非憑空出現，其許多核心概念，如網絡節點、定址、標頭、逐跳路由、信號再生和穩健性，都在電報時代已被發現並實踐。網際網路的偉大之處，在於用光纖、矽晶片和標準化協議，將這些原則的實現方式進行了徹底的革新，實現了自動化、規模化和去中心化。</p>
+        <div class="bg-sky-900/90 text-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
+             <p class="text-sky-200 leading-relaxed text-center">從一個連接世界的「有線」網絡，到一個包羅萬象的「網絡」世界，這段旅程揭示了在瞬息萬變的技術表象之下，存在著恆久不變的工程學原理。理解這段歷史，是準確評估我們當前數位基礎設施的韌性、複雜性與變革力量的必要前提。</p>
+        </div>
+    </section>
+</main>
+
+<footer class="text-center text-slate-400 mt-16 pb-8 text-sm">
+    <p>基於「從有線世界到網絡世界」報告生成的視覺化分析。</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Navigation Logic
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('section');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                 if (mobileMenu.classList.contains('hidden') === false) {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIconOpen.classList.remove('hidden');
+                    hamburgerIconClose.classList.add('hidden');
+                }
+            }
+        });
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+    
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    // Chart.js Global Config
+    const sharedChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#334155', // slate-700
+                    font: {
+                        size: 14,
+                        family: "'Noto Sans TC', sans-serif"
+                    }
+                }
+            },
+            tooltip: {
+                backgroundColor: '#0c4a6e', // sky-900
+                titleColor: '#ffffff',
+                bodyColor: '#e0f2fe', // sky-100
+                titleFont: { family: "'Noto Sans TC', sans-serif", size: 14, weight: 'bold' },
+                bodyFont: { family: "'Noto Sans TC', sans-serif", size: 12 },
+                padding: 12,
+                cornerRadius: 4,
+                boxPadding: 4,
+            }
+        },
+        scales: {
+            x: {
+                ticks: { color: '#475569', font: { family: "'Noto Sans TC', sans-serif" } },
+                grid: { color: '#e2e8f0' } // slate-200
+            },
+            y: {
+                ticks: { color: '#475569', font: { family: "'Noto Sans TC', sans-serif" } },
+                grid: { color: '#e2e8f0' } // slate-200
+            }
+        }
+    };
+    
+    // Chart 1: Operator Tasks
+    function createOperatorTasksChart() {
+        const ctx = document.getElementById('operatorTasksChart');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['路由決策', '編碼/解碼', '錯誤校正', '其他管理'],
+                datasets: [{
+                    label: '報務員任務佔比',
+                    data: [40, 35, 15, 10],
+                    backgroundColor: ['#0ea5e9', '#38bdf8', '#7dd3fc', '#bae6fd'],
+                    borderColor: '#ffffff',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                ...sharedChartOptions,
+                plugins: {
+                    ...sharedChartOptions.plugins,
+                    title: { display: true, text: '報務員任務佔比 (概念)', color: '#1e293b' },
+                    legend: { position: 'top' }
+                },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+    }
+
+    // Chart 2: Protocol Layers
+    function createProtocolLayersChart() {
+        const ctx = document.getElementById('protocolLayersChart');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['應用層 (SMTP)', '傳輸層 (TCP)', '網絡層 (IP)', '鏈路層 (Ethernet)'],
+                datasets: [{
+                    label: '協議層級',
+                    data: [4, 3, 2, 1],
+                    backgroundColor: ['#0ea5e9', '#38bdf8', '#7dd3fc', '#bae6fd'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                ...sharedChartOptions,
+                indexAxis: 'y',
+                plugins: {
+                     ...sharedChartOptions.plugins,
+                     title: { display: true, text: '現代網絡協議棧 (OSI簡化)', color: '#1e293b' },
+                     legend: { display: false }
+                },
+                scales: {
+                    x: { ...sharedChartOptions.scales.x, grid: { display: false }, ticks: { display: false } },
+                    y: { ...sharedChartOptions.scales.y, grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // Chart 3: Comparison
+    function createComparisonChart() {
+        const ctx = document.getElementById('comparisonChart');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['數據單元', '路由代理', '端到端延遲', '網絡治理'],
+                datasets: [{
+                    label: '1870年代電報',
+                    data: [2, 4, 1, 4],
+                    backgroundColor: '#94a3b8', // slate-400
+                    barPercentage: 0.5,
+                    categoryPercentage: 0.5
+                }, {
+                    label: '現代網際網路',
+                    data: [4, 1, 4, 1],
+                    backgroundColor: '#38bdf8', // sky-400
+                    barPercentage: 0.5,
+                    categoryPercentage: 0.5
+                }]
+            },
+            options: {
+                ...sharedChartOptions,
+                plugins: {
+                    ...sharedChartOptions.plugins,
+                    tooltip: {
+                        ...sharedChartOptions.plugins.tooltip,
+                        callbacks: {
+                             title: (tooltipItems) => tooltipItems[0].label,
+                             label: function(context) {
+                                const details = [
+                                    ['整份訊息 (不可分割)', '原子化封包 (可分割)'],
+                                    ['人類大腦 (手動)', '矽晶晶片 (自動)'],
+                                    ['高 (分鐘-小時)', '極低 (毫秒)'],
+                                    ['中央集權', '去中心化']
+                                ];
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                label += details[context.dataIndex][context.datasetIndex];
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { ...sharedChartOptions.scales.x, grid: { display: false } },
+                    y: { ...sharedChartOptions.scales.y, ticks: { display: false } }
+                }
+            }
+        });
+    }
+
+    // Chart 4: Intelligence Shift
+    function createIntelligenceShiftChart() {
+        const ctx = document.getElementById('intelligenceShiftChart');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1870', '1900', '1930', '1960', '1990', '2020'],
+                datasets: [{
+                    label: '人類智能 (報務員)',
+                    data: [80, 90, 70, 40, 10, 5],
+                    borderColor: '#94a3b8', // slate-400
+                    backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: '矽晶智能 (路由器/協議)',
+                    data: [0, 0, 5, 15, 60, 95],
+                    borderColor: '#0ea5e9', // sky-500
+                    backgroundColor: 'rgba(14, 165, 233, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                ...sharedChartOptions,
+                scales: {
+                    ...sharedChartOptions.scales,
+                    y: {
+                        ...sharedChartOptions.scales.y,
+                        title: { display: true, text: '概念性網絡智能佔比 (%)', color: '#334155' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Quiz Logic
+    function handleQuiz() {
+        const submitBtn = document.getElementById('submit-quiz-btn');
+        if (!submitBtn) return;
+        
+        const resultsEl = document.getElementById('quiz-results');
+        const correctAnswers = { q1: 'b', q2: 'c', q3: 'a' };
+
+        submitBtn.addEventListener('click', () => {
+            let score = 0;
+            const userAnswers = {
+                q1: document.querySelector('input[name="q1"]:checked'),
+                q2: document.querySelector('input[name="q2"]:checked'),
+                q3: document.querySelector('input[name="q3"]:checked')
+            };
+            const totalQuestions = Object.keys(correctAnswers).length;
+            let answeredQuestions = 0;
+
+            for (const question in userAnswers) {
+                if (userAnswers[question]) {
+                    answeredQuestions++;
+                    if (userAnswers[question].value === correctAnswers[question]) {
+                        score++;
+                    }
+                }
+            }
+
+            if (answeredQuestions < totalQuestions) {
+                resultsEl.textContent = '請回答所有問題後再提交！';
+                resultsEl.className = 'mt-6 text-center text-lg font-semibold text-red-600';
+                return;
+            }
+
+            let resultMessage = `您答對了 ${score} / ${totalQuestions} 題！`;
+            let resultColor = 'text-slate-800';
+
+            if (score === totalQuestions) {
+                resultMessage += " 👍 太棒了，完全正確！";
+                resultColor = 'text-green-600';
+            } else if (score >= totalQuestions / 2) {
+                resultMessage += " 😊 還不錯喔！";
+                resultColor = 'text-amber-600';
+            } else {
+                resultMessage += " 😅 再加加油！";
+                resultColor = 'text-red-600';
+            }
+            
+            resultsEl.textContent = resultMessage;
+            resultsEl.className = `mt-6 text-center text-lg font-semibold ${resultColor}`;
+        });
+    }
+
+    // Initializations
+    window.addEventListener('scroll', changeNavOnScroll);
+    createOperatorTasksChart();
+    createProtocolLayersChart();
+    createComparisonChart();
+    createIntelligenceShiftChart();
+    handleQuiz();
+    changeNavOnScroll(); // Initial check
+});
+</script>
+</body>
+</html>
+
+
