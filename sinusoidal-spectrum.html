@@ -92,7 +92,7 @@
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
     <section id="overview" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">從弦波到5G的宇宙</h2>
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本文將帶您穿越無線通訊的宏偉景觀。我們將從構成所有訊號的數學「原子」出發，探索如何建立全球通訊系統，並展望由AI與感知技術定義的未來。請捲動頁面或點擊上方的導覽列，開始您的探索之旅。</p>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本篇文章將帶您穿越無線通訊的宏偉景觀。我們將從構成所有訊號的數學「原子」出發，探索如何建立全球通訊系統，並展望由AI與感知技術定義的未來。請捲動頁面或點擊上方的導覽列，開始您的探索之旅。</p>
     </section>
 
     <section id="signals" class="mb-16 scroll-mt-20">
@@ -122,7 +122,7 @@
 
     <section id="systems" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題二：打造通訊系統</h2>
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">將從物理原理轉向工程系統。我們將探討如何將資訊編碼於電波之上、通訊的理論極限，以及使這一切成為可能的數位處理技術。</p>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">從物理原理轉向工程系統。我們將探討如何將資訊編碼於電波之上、通訊的理論極限，以及使這一切成為可能的數位處理技術。</p>
         <div class="space-y-8">
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h4 class="text-xl font-bold mb-4 text-slate-800">速度的代價：QAM調變與訊號品質</h4>
@@ -160,7 +160,7 @@
 
     <section id="future_tech" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題四：通往未來的前沿</h2>
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">將探討定義5G獨特能力的尖端技術，並展望6G的未來，探索我們將如何更智慧地利用頻譜，以及哪些新的應用將成為可能。</p>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">探討定義5G獨特能力的尖端技術，並展望6G的未來，探索我們將如何更智慧地利用頻譜，以及哪些新的應用將成為可能。</p>
         <div class="space-y-8">
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="bg-white p-6 rounded-xl shadow-lg">
@@ -199,7 +199,7 @@
                 您的瀏覽器不支援音訊播放。
             </audio>
             <div class="mt-6 text-slate-600 space-y-3 text-sm">
-                <p>這段 12 分鐘的語音摘要，將帶領讀者理解構成所有無線訊號的基本單元。內容要點如下：</p>
+                <p>這段 12 分鐘的語音摘要，將帶領聽眾理解構成所有無線訊號的基本單元。內容要點如下：</p>
                 <ul class="list-disc list-inside space-y-2 pl-2">
                     <li><strong>弦波的本質</strong>：探討為何簡單的弦波（正弦與餘弦）是通訊分析的核心。介紹其三大要素：振幅（Amplitude）、頻率（Frequency）和相位（Phase），並解釋它們如何分別對應到訊號的強度、音高（或資料速率）與時間偏移。</li>
                     <li><strong>從時域到頻域</strong>：闡述傅立葉分析的直觀概念，即任何複雜的波形（如語音、音樂或數據訊號）都可以被拆解為一系列不同頻率和振幅的簡單弦波的組合。這個從時間維度切換到頻率維度的視角，是理解頻譜的關鍵。</li>
@@ -213,7 +213,7 @@
 
     <section id="quiz" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">根據本文內容，測試一下您的理解程度吧！完成下面的小測驗，看看您掌握了多少知識。</p>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">根據本頁內容，測試一下您的理解程度吧！完成下面的小測驗，看看您掌握了多少知識。</p>
         <div class="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto">
             <div id="quiz-container" class="space-y-6">
                 </div>
@@ -300,14 +300,17 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
             ctx.beginPath(); ctx.moveTo(0, centerY); ctx.lineTo(width, centerY); ctx.moveTo(centerX, 0); ctx.lineTo(centerX, height); ctx.stroke();
             ctx.beginPath(); ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI); ctx.stroke();
-            const x = centerX + radius * Math.cos(angle); const y = centerY - radius * Math.sin(angle);
+            const x = centerX + radius * Math.cos(angle); 
+            // Corrected: Use cosine for the vertical position to match the text
+            const y = centerY - radius * Math.cos(angle); 
             ctx.beginPath(); ctx.moveTo(centerX, centerY); ctx.lineTo(x, y); ctx.strokeStyle = '#0284c7'; ctx.lineWidth = 2; ctx.stroke();
             ctx.beginPath(); ctx.arc(x, y, 5, 0, 2 * Math.PI); ctx.fillStyle = '#0284c7'; ctx.fill();
             const waveX = width / 2;
             ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(waveX, y); ctx.setLineDash([4, 4]); ctx.strokeStyle = '#f87171'; ctx.lineWidth = 1.5; ctx.stroke(); ctx.setLineDash([]);
             ctx.beginPath();
             for (let i = 0; i < width / 2; i++) {
-                const waveAngle = angle - (i / (width / 2)) * 4 * Math.PI; const waveY = centerY - radius * Math.sin(waveAngle);
+                // Corrected: Use cosine for the wave to match the rotating point
+                const waveAngle = angle - (i / (width / 2)) * 4 * Math.PI; const waveY = centerY - radius * Math.cos(waveAngle);
                 if (i === 0) ctx.moveTo(waveX + i, waveY); else ctx.lineTo(waveX + i, waveY);
             }
             ctx.strokeStyle = '#f87171'; ctx.lineWidth = 2; ctx.stroke();
