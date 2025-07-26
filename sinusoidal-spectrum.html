@@ -1,993 +1,459 @@
 <!DOCTYPE html>
-
 <html lang="zh-TW" class="scroll-smooth">
-
 <head>
 
-
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
-
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
 <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  window.dataLayer = window.dataLayer || [];
-
-  function gtag(){dataLayer.push(arguments);}
-
-  gtag('js', new Date());
-
-
-
-  gtag('config', 'G-B417SX4GTY');
-
+  gtag('config', 'G-B417SX4GTY');
 </script>
 
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互動式無線通訊策略分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
 
-
-    
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Tony Talks Science</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-
-      MathJax = {
-
-        tex: {
-
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-
-        },
-
-        svg: {
-
-          fontCache: 'global'
-
-        }
-
-      };
-
-    </script>
-
-    <script type="text/javascript" id="MathJax-script" async
-
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-
-    </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="assets/css/style.css" />
-
-
-
-    <style>
-
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
-
-        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 45vh; }
-
-        @media (min-width: 768px) { .chart-container { height: 400px; } }
-
-        .nav-link { transition: color 0.3s, border-color 0.3s; }
-
-        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
-
-        .quiz-option:hover { background-color: #f0f9ff; }
-
-        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-
-        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
-
-    </style>
-
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 45vh; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .quiz-option:hover { background-color: #f0f9ff; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+    </style>
 </head>
-
 <body class="antialiased">
 
-
-
 <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-600">無線通訊探索之旅</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">總覽</a>
+                    <a href="#signals" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">訊號的語言</a>
+                    <a href="#systems" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">打造通訊系統</a>
+                    <a href="#networks" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">全球網路的脈動</a>
+                    <a href="#future_tech" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">未來前沿</a>
+                    <a href="#audio_summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
 
-    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">總覽</a>
+            <a href="#signals" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">訊號的語言</a>
+            <a href="#systems" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">打造通訊系統</a>
+            <a href="#networks" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">全球網路的脈動</a>
+            <a href="#future_tech" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來前沿</a>
+            <a href="#audio_summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
 
-        <div class="flex items-center justify-between h-16">
-
-            <div class="flex-shrink-0">
-
-                <h1 class="text-lg sm:text-xl font-bold text-sky-600">無線通訊探索之旅</h1>
-
-            </div>
-
-            <div class="hidden md:block">
-
-                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
-
-                    <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">總覽</a>
-
-                    <a href="#signals" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">訊號的語言</a>
-
-                    <a href="#systems" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">打造通訊系統</a>
-
-                    <a href="#networks" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">全球網路的脈動</a>
-
-                    <a href="#future_tech" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">未來前沿</a>
-
-                    <a href="#audio_summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
-
-                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
-
-                    <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">回到首頁</a>
-
-                    <a href="autodrive-tamsui.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">下一篇</a>
-
-                </div>
-
-            </div>
-
-            <div class="md:hidden flex items-center">
-
-                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
-
-                    <span class="sr-only">開啟主選單</span>
-
-                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-
-                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <div id="mobile-menu" class="md:hidden hidden pb-4">
-
-            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">總覽</a>
-
-            <a href="#signals" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">訊號的語言</a>
-
-            <a href="#systems" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">打造通訊系統</a>
-
-            <a href="#networks" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">全球網路的脈動</a>
-
-            <a href="#future_tech" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來前沿</a>
-
-            <a href="#audio_summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
-
-            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
-
-            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">回到首頁</a>
-
-            <a href="autodrive-tamsui.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">下一篇</a>
-
-        </div>
-
-    </nav>
-
+        </div>
+    </nav>
 </header>
 
-
-
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-
-    <section id="overview" class="mb-16 scroll-mt-20">
-
-        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">從弦波到5G的宇宙</h2>
-
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本文將帶您穿越無線通訊的宏偉景觀。我們將從構成所有訊號的數學「原子」出發，探索如何建立全球通訊系統，並展望由AI與感知技術定義的未來。請捲動頁面或點擊上方的導覽列，開始您的探索之旅。</p>
-
-    </section>
-
-
-
-    <section id="signals" class="mb-16 scroll-mt-20">
-
-        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題一：訊號的語言</h2>
-
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本節旨在建立所有無線通訊所依循的數學與物理定律。我們將從優雅的數學概念出發，為後續所有技術的探討奠定堅實的基礎。</p>
-
-        <div class="space-y-8">
-
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-
-                <h4 class="text-xl font-bold mb-4 text-slate-800">尤拉公式的旋轉之美</h4>
-
-                <p class="mb-4 text-slate-600">工程師偏愛使用尤拉公式 \(e^{j\theta} = \cos(\theta) + j\sin(\theta)\) 來描述弦波，因其將複雜的三角運算轉為簡潔的代數，並提供了一個直觀的「旋轉」物理模型。下方的視覺化展示了一個點在複數平面上旋轉，其在實數軸上的投影，就完美地構成了一個餘弦波。這個視角是理解頻率與相位的關鍵。</p>
-
-                <div class="chart-container h-64"><canvas id="eulerVisualizer"></canvas></div>
-
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-
-                <h4 class="text-xl font-bold mb-4 text-slate-800">傅立葉分析：解構訊號的指紋</h4>
-
-                <p class="mb-4 text-slate-600">任何複雜的訊號，都可以被看作是多個簡單弦波的疊加。傅立葉分析讓我們能從「時域」（訊號隨時間的變化）切換到「頻域」（構成訊號的頻率成分），看到訊號獨特的「指紋」。請點擊按鈕，觀察不同弦波組合在時域與頻域中的樣貌。</p>
-
-                <div class="flex justify-center space-x-2 mb-4">
-
-                    <button id="ft-btn-1" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">單一頻率</button>
-
-                    <button id="ft-btn-2" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">雙頻率組合</button>
-
-                    <button id="ft-btn-3" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">方波近似</button>
-
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8">
-
-                    <div><h5 class="text-center font-semibold mb-2">時域圖</h5><div class="chart-container h-64"><canvas id="timeDomainChart"></canvas></div></div>
-
-                    <div><h5 class="text-center font-semibold mb-2">頻域圖 (頻譜)</h5><div class="chart-container h-64"><canvas id="freqDomainChart"></canvas></div></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <section id="systems" class="mb-16 scroll-mt-20">
-
-        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題二：打造通訊系統</h2>
-
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">將從物理原理轉向工程系統。我們將探討如何將資訊編碼於電波之上、通訊的理論極限，以及使這一切成為可能的數位處理技術。</p>
-
-        <div class="space-y-8">
-
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-
-                <h4 class="text-xl font-bold mb-4 text-slate-800">速度的代價：QAM調變與訊號品質</h4>
-
-                <p class="mb-4 text-slate-600">為了在有限的頻寬內傳輸更多數據，現代通訊（如5G和Wi-Fi）採用高階QAM調變技術。然而，更高的速度需要更乾淨的訊號。下圖顯示，隨著調變階數的提升，對訊號雜訊比（SNR）的要求也急遽增加。這解釋了為何5G需要大量部署小型基地台以確保訊號品質。</p>
-
-                <div class="chart-container"><canvas id="qamSnrChart"></canvas></div>
-
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-
-                <h4 class="text-xl font-bold mb-4 text-slate-800">夏農極限計算機</h4>
-
-                <p class="mb-4 text-slate-600">克勞德·夏農定義了任何通道的理論最大傳輸速率，即通道容量 \(C = B \log_{2}(1 + S/N)\)。此公式揭示了頻寬(B)和功率(S/N)與速度的根本關係。請拖動下方的滑桿，親身體驗增加頻寬或功率對通道容量的不同影響。您會發現，頻寬是遠比功率更「強大」的資源。</p>
-
-                <div class="space-y-4">
-
-                    <div><label for="bandwidth" class="font-medium">頻寬 (B): <span id="bwValue">10</span> MHz</label><input type="range" id="bandwidth" min="1" max="100" value="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"></div>
-
-                    <div><label for="snr" class="font-medium">訊號雜訊比 (S/N): <span id="snrValue">20</span> dB</label><input type="range" id="snr" min="0" max="40" value="20" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"></div>
-
-                    <div class="text-center pt-4"><p class="text-lg text-slate-600">理論通道容量 (C):</p><p class="text-3xl font-bold text-sky-600"><span id="capacityValue">66.6</span> Mbps</p></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <section id="networks" class="mb-16 scroll-mt-20">
-
-        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題三：全球網路的脈動</h2>
-
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">將視角提升到整個網路的架構層面，探討如何服務數百萬用戶、管理有限的頻譜資源，以及技術、經濟和政治之間的複雜互動。</p>
-
-        <div class="space-y-8">
-
-             <div class="bg-white p-6 rounded-xl shadow-lg">
-
-                <h4 class="text-xl font-bold mb-4 text-slate-800">共享空中介面：多重接取技術的演進</h4>
-
-                <p class="mb-4 text-slate-600">為了讓多個用戶共享有限的頻譜，通訊技術經歷了數代的演進。點擊下方的卡片，了解從1G到5G，我們是如何從分配專用車道，演變到像玩俄羅斯方塊一樣動態分配資源的。</p>
-
-                <div id="access-tech-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-
-                <h4 class="text-xl font-bold mb-4 text-slate-800">台灣5G頻譜戰場</h4>
-
-                <p class="mb-4 text-slate-600">頻譜是國家的無形國土，也是電信商的必爭之地。下圖展示了台灣三大電信商在兩大關鍵5G頻段（3.5GHz 和 28GHz）所獲得的頻寬資源。頻寬的多寡，直接決定了網路容量與未來發展的潛力。</p>
-
-                <div class="chart-container"><canvas id="tw5gSpectrumChart"></canvas></div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <section id="future_tech" class="mb-16 scroll-mt-20">
-
-        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題四：通往未來的前沿</h2>
-
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">將探討定義5G獨特能力的尖端技術，並展望6G的未來，探索我們將如何更智慧地利用頻譜，以及哪些新的應用將成為可能。</p>
-
-        <div class="space-y-8">
-
-            <div class="grid md:grid-cols-2 gap-8">
-
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-
-                    <h4 class="text-xl font-bold mb-4 text-slate-800">波束成形：聚焦能量</h4>
-
-                    <p class="mb-4 text-slate-600">傳統天線像燈泡一樣向四周廣播能量，效率低下。5G的波束成形技術則像探照燈，利用天線陣列將能量匯集成狹窄的波束，精準地投向用戶。這不僅增強了訊號，也減少了對他人的干擾，對於克服毫米波的高損耗至關重要。</p>
-
-                    <div class="text-center text-5xl flex justify-around items-center h-32"><span>💡</span><span class="text-sky-500">&rarr;</span><span>🎯</span></div>
-
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-
-                    <h4 class="text-xl font-bold mb-4 text-slate-800">網路切片：客製化虛擬網路</h4>
-
-                    <p class="mb-4 text-slate-600">5G的網路切片技術，允許在單一實體網路上，為不同應用創建多個相互隔離的虛擬網路。例如，為自動駕駛提供超低延遲切片，同時為物聯網提供海量連接切片，實現一網多用。</p>
-
-                    <div class="text-center text-3xl flex flex-col justify-center items-center h-32 space-y-2">
-
-                        <div class="font-mono text-sm">物理網路🏢</div>
-
-                        <div class="w-full border-t-2 border-dashed border-slate-400"></div>
-
-                        <div class="flex justify-around w-full"><span class="text-sm text-red-500">🚗 URLLC</span><span class="text-sm text-green-500">🎮 eMBB</span><span class="text-sm text-purple-500">🔌 mMTC</span></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-
-                <h4 class="text-xl font-bold mb-4 text-slate-800">頻譜共享的未來：CBRS模型</h4>
-
-                <p class="mb-4 text-slate-600">傳統的頻譜管理是「獨家授權」與「免費使用」的二元對立。美國的CBRS框架則開創了精巧的三層共享模型，在保護現有軍方用戶的前提下，讓營運商和一般企業都能公平接取高品質頻譜，極大地促進了創新與偏鄉網路建設。</p>
-
-                <div class="flex flex-col md:flex-row justify-around text-center space-y-4 md:space-y-0 md:space-x-4">
-
-                    <div class="border-2 border-red-500 p-4 rounded-lg flex-1"><p class="font-bold text-red-600">第一層：現有使用者</p><p class="text-sm text-slate-600">美國海軍等，最高優先級，受完全保護。</p></div>
-
-                    <div class="border-2 border-yellow-500 p-4 rounded-lg flex-1"><p class="font-bold text-yellow-600">第二層：優先接取</p><p class="text-sm text-slate-600">營運商透過拍賣獲得，受保護的頻譜。</p></div>
-
-                    <div class="border-2 border-green-500 p-4 rounded-lg flex-1"><p class="font-bold text-green-600">第三層：一般接取</p><p class="text-sm text-slate-600">公眾輕度授權使用，由雲端系統(SAS)協調避免干擾。</p></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <section id="audio_summary" class="mb-16 scroll-mt-20">
-
-        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">語音摘要：弦波與頻譜</h2>
-
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">此語音旨在深入探討無線通訊的基石：弦波及其在頻域中的表現——頻譜。</p>
-
-        <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
-
-            <audio controls class="w-full" preload="auto">
-
-                <source src="sinusoidal-spectrum12min03s.mp3" type="audio/mpeg">
-
-                您的瀏覽器不支援音訊播放。
-
-            </audio>
-
-            <div class="mt-6 text-slate-600 space-y-3 text-sm">
-
-                <p>這段 12 分鐘的語音摘要，將帶領讀者理解構成所有無線訊號的基本單元。內容要點如下：</p>
-
-                <ul class="list-disc list-inside space-y-2 pl-2">
-
-                    <li><strong>弦波的本質</strong>：探討為何簡單的弦波（正弦與餘弦）是通訊分析的核心。介紹其三大要素：振幅（Amplitude）、頻率（Frequency）和相位（Phase），並解釋它們如何分別對應到訊號的強度、音高（或資料速率）與時間偏移。</li>
-
-                    <li><strong>從時域到頻域</strong>：闡述傅立葉分析的直觀概念，即任何複雜的波形（如語音、音樂或數據訊號）都可以被拆解為一系列不同頻率和振幅的簡單弦波的組合。這個從時間維度切換到頻率維度的視角，是理解頻譜的關鍵。</li>
-
-                    <li><strong>頻譜的意義</strong>：解釋「頻譜」或「頻譜圖」的含義——它是一張視覺化的圖表，顯示了一個訊號中包含了哪些頻率成份，以及各個成份的強度。這就像是訊號的「成分列表」或「基因指紋」，對於設計濾波器、分配頻道至關重要。</li>
-
-                    <li><strong>實際應用</strong>：透過實例說明頻譜分析的應用，例如 Wi-Fi 如何利用不同頻道（頻譜中的不同位置）來避免互相干擾，以及等化器（Equalizer）如何透過調整不同頻段的振幅來改變音樂的聽感。</li>
-
-                </ul>
-
-                <p>總結來說，這段摘要的核心思想是：理解單一弦波的特性，並透過傅立葉分析掌握其構成的頻譜，是進入現代無線通訊世界的入場券。</p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <section id="quiz" class="mb-16 scroll-mt-20">
-
-        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
-
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">根據本文內容，測試一下您的理解程度吧！完成下面的小測驗，看看您掌握了多少知識。</p>
-
-        <div class="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto">
-
-            <div id="quiz-container" class="space-y-6">
-
-                </div>
-
-            <div class="mt-8 text-center"><button id="submit-quiz-btn" class="bg-sky-600 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-700 transition-colors">提交答案</button></div>
-
-            <div id="quiz-results" class="mt-6 text-center text-lg font-semibold"></div>
-
-        </div>
-
-    </section>
-
-
+    <section id="overview" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">從弦波到5G的宇宙</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本文將帶您穿越無線通訊的宏偉景觀。我們將從構成所有訊號的數學「原子」出發，探索如何建立全球通訊系統，並展望由AI與感知技術定義的未來。請捲動頁面或點擊上方的導覽列，開始您的探索之旅。</p>
+    </section>
+
+    <section id="signals" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題一：訊號的語言</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本節旨在建立所有無線通訊所依循的數學與物理定律。我們將從優雅的數學概念出發，為後續所有技術的探討奠定堅實的基礎。</p>
+        <div class="space-y-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h4 class="text-xl font-bold mb-4 text-slate-800">尤拉公式的旋轉之美</h4>
+                <p class="mb-4 text-slate-600">工程師偏愛使用尤拉公式 $e^{j\theta} = \cos(\theta) + j\sin(\theta)$ 來描述弦波，因其將複雜的三角運算轉為簡潔的代數，並提供了一個直觀的「旋轉」物理模型。下方的視覺化展示了一個點在複數平面上旋轉，其在實數軸上的投影，就完美地構成了一個餘弦波。這個視角是理解頻率與相位的關鍵。</p>
+                <div class="chart-container h-64"><canvas id="eulerVisualizer"></canvas></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h4 class="text-xl font-bold mb-4 text-slate-800">傅立葉分析：解構訊號的指紋</h4>
+                <p class="mb-4 text-slate-600">任何複雜的訊號，都可以被看作是多個簡單弦波的疊加。傅立葉分析讓我們能從「時域」（訊號隨時間的變化）切換到「頻域」（構成訊號的頻率成分），看到訊號獨特的「指紋」。請點擊按鈕，觀察不同弦波組合在時域與頻域中的樣貌。</p>
+                <div class="flex justify-center space-x-2 mb-4">
+                    <button id="ft-btn-1" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">單一頻率</button>
+                    <button id="ft-btn-2" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">雙頻率組合</button>
+                    <button id="ft-btn-3" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">方波近似</button>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div><h5 class="text-center font-semibold mb-2">時域圖</h5><div class="chart-container h-64"><canvas id="timeDomainChart"></canvas></div></div>
+                    <div><h5 class="text-center font-semibold mb-2">頻域圖 (頻譜)</h5><div class="chart-container h-64"><canvas id="freqDomainChart"></canvas></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="systems" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題二：打造通訊系統</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本章節將從物理原理轉向工程系統。我們將探討如何將資訊編碼於電波之上、通訊的理論極限，以及使這一切成為可能的數位處理技術。</p>
+        <div class="space-y-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h4 class="text-xl font-bold mb-4 text-slate-800">速度的代價：QAM調變與訊號品質</h4>
+                <p class="mb-4 text-slate-600">為了在有限的頻寬內傳輸更多數據，現代通訊（如5G和Wi-Fi）採用高階QAM調變技術。然而，更高的速度需要更乾淨的訊號。下圖顯示，隨著調變階數的提升，對訊號雜訊比（SNR）的要求也急遽增加。這解釋了為何5G需要大量部署小型基地台以確保訊號品質。</p>
+                <div class="chart-container"><canvas id="qamSnrChart"></canvas></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h4 class="text-xl font-bold mb-4 text-slate-800">夏農極限計算機</h4>
+                <p class="mb-4 text-slate-600">克勞德·夏農定義了任何通道的理論最大傳輸速率，即通道容量 $C = B \log_{2}(1 + S/N)$。此公式揭示了頻寬(B)和功率(S/N)與速度的根本關係。請拖動下方的滑桿，親身體驗增加頻寬或功率對通道容量的不同影響。您會發現，頻寬是遠比功率更「強大」的資源。</p>
+                <div class="space-y-4">
+                    <div><label for="bandwidth" class="font-medium">頻寬 (B): <span id="bwValue">10</span> MHz</label><input type="range" id="bandwidth" min="1" max="100" value="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"></div>
+                    <div><label for="snr" class="font-medium">訊號雜訊比 (S/N): <span id="snrValue">20</span> dB</label><input type="range" id="snr" min="0" max="40" value="20" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"></div>
+                    <div class="text-center pt-4"><p class="text-lg text-slate-600">理論通道容量 (C):</p><p class="text-3xl font-bold text-sky-600"><span id="capacityValue">66.6</span> Mbps</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="networks" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題三：全球網路的脈動</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本章節將視角提升到整個網路的架構層面，探討如何服務數百萬用戶、管理有限的頻譜資源，以及技術、經濟和政治之間的複雜互動。</p>
+        <div class="space-y-8">
+             <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h4 class="text-xl font-bold mb-4 text-slate-800">共享空中介面：多重接取技術的演進</h4>
+                <p class="mb-4 text-slate-600">為了讓多個用戶共享有限的頻譜，通訊技術經歷了數代的演進。點擊下方的卡片，了解從1G到5G，我們是如何從分配專用車道，演變到像玩俄羅斯方塊一樣動態分配資源的。</p>
+                <div id="access-tech-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h4 class="text-xl font-bold mb-4 text-slate-800">台灣5G頻譜戰場</h4>
+                <p class="mb-4 text-slate-600">頻譜是國家的無形國土，也是電信商的必爭之地。下圖展示了台灣三大電信商在兩大關鍵5G頻段（3.5GHz 和 28GHz）所獲得的頻寬資源。頻寬的多寡，直接決定了網路容量與未來發展的潛力。</p>
+                <div class="chart-container"><canvas id="tw5gSpectrumChart"></canvas></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="future_tech" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題四：通往未來的前沿</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本章節將探討定義5G獨特能力的尖端技術，並展望6G的未來，探索我們將如何更智慧地利用頻譜，以及哪些新的應用將成為可能。</p>
+        <div class="space-y-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">波束成形：聚焦能量</h4>
+                    <p class="mb-4 text-slate-600">傳統天線像燈泡一樣向四周廣播能量，效率低下。5G的波束成形技術則像探照燈，利用天線陣列將能量匯集成狹窄的波束，精準地投向用戶。這不僅增強了訊號，也減少了對他人的干擾，對於克服毫米波的高損耗至關重要。</p>
+                    <div class="text-center text-5xl flex justify-around items-center h-32"><span>💡</span><span class="text-sky-500">&rarr;</span><span>🎯</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">網路切片：客製化虛擬網路</h4>
+                    <p class="mb-4 text-slate-600">5G的網路切片技術，允許在單一實體網路上，為不同應用創建多個相互隔離的虛擬網路。例如，為自動駕駛提供超低延遲切片，同時為物聯網提供海量連接切片，實現一網多用。</p>
+                    <div class="text-center text-3xl flex flex-col justify-center items-center h-32 space-y-2">
+                        <div class="font-mono text-sm">物理網路🏢</div>
+                        <div class="w-full border-t-2 border-dashed border-slate-400"></div>
+                        <div class="flex justify-around w-full"><span class="text-sm text-red-500">🚗 URLLC</span><span class="text-sm text-green-500">🎮 eMBB</span><span class="text-sm text-purple-500">🔌 mMTC</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h4 class="text-xl font-bold mb-4 text-slate-800">頻譜共享的未來：CBRS模型</h4>
+                <p class="mb-4 text-slate-600">傳統的頻譜管理是「獨家授權」與「免費使用」的二元對立。美國的CBRS框架則開創了精巧的三層共享模型，在保護現有軍方用戶的前提下，讓營運商和一般企業都能公平接取高品質頻譜，極大地促進了創新與偏鄉網路建設。</p>
+                <div class="flex flex-col md:flex-row justify-around text-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="border-2 border-red-500 p-4 rounded-lg flex-1"><p class="font-bold text-red-600">第一層：現有使用者</p><p class="text-sm text-slate-600">美國海軍等，最高優先級，受完全保護。</p></div>
+                    <div class="border-2 border-yellow-500 p-4 rounded-lg flex-1"><p class="font-bold text-yellow-600">第二層：優先接取</p><p class="text-sm text-slate-600">營運商透過拍賣獲得，受保護的頻譜。</p></div>
+                    <div class="border-2 border-green-500 p-4 rounded-lg flex-1"><p class="font-bold text-green-600">第三層：一般接取</p><p class="text-sm text-slate-600">公眾輕度授權使用，由雲端系統(SAS)協調避免干擾。</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="audio_summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">語音摘要：弦波與頻譜</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">此語音旨在深入探討無線通訊的基石：弦波及其在頻域中的表現——頻譜。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
+            <audio controls class="w-full" preload="auto">
+                <source src="sinusoidal-spectrum12min03s.mp3" type="audio/mpeg">
+                您的瀏覽器不支援音訊播放。
+            </audio>
+            <div class="mt-6 text-slate-600 space-y-3 text-sm">
+                <p>這段 12 分鐘的音訊摘要，將帶領聽眾理解構成所有無線訊號的基本單元。內容要點如下：</p>
+                <ul class="list-disc list-inside space-y-2 pl-2">
+                    <li><strong>弦波的本質</strong>：探討為何簡單的弦波（正弦與餘弦）是通訊分析的核心。介紹其三大要素：振幅（Amplitude）、頻率（Frequency）和相位（Phase），並解釋它們如何分別對應到訊號的強度、音高（或資料速率）與時間偏移。</li>
+                    <li><strong>從時域到頻域</strong>：闡述傅立葉分析的直觀概念，即任何複雜的波形（如語音、音樂或數據訊號）都可以被拆解為一系列不同頻率和振幅的簡單弦波的組合。這個從時間維度切換到頻率維度的視角，是理解頻譜的關鍵。</li>
+                    <li><strong>頻譜的意義</strong>：解釋「頻譜」或「頻譜圖」的含義——它是一張視覺化的圖表，顯示了一個訊號中包含了哪些頻率成份，以及各個成份的強度。這就像是訊號的「成分列表」或「基因指紋」，對於設計濾波器、分配頻道至關重要。</li>
+                    <li><strong>實際應用</strong>：透過實例說明頻譜分析的應用，例如 Wi-Fi 如何利用不同頻道（頻譜中的不同位置）來避免互相干擾，以及等化器（Equalizer）如何透過調整不同頻段的振幅來改變音樂的聽感。</li>
+                </ul>
+                <p>總結來說，這段摘要的核心思想是：理解單一弦波的特性，並透過傅立葉分析掌握其構成的頻譜，是進入現代無線通訊世界的入場券。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">根據報告內容，測試一下您的理解程度吧！完成下面的小測驗，看看您掌握了多少知識。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto">
+            <div id="quiz-container" class="space-y-6">
+                </div>
+            <div class="mt-8 text-center"><button id="submit-quiz-btn" class="bg-sky-600 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-700 transition-colors">提交答案</button></div>
+            <div id="quiz-results" class="mt-6 text-center text-lg font-semibold"></div>
+        </div>
+    </section>
 
 </main>
 
-
-
 <script>
-
 document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Navigation Logic ---
-
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-
-    const sections = document.querySelectorAll('main section[id]');
-
-    
-
-    navLinks.forEach(link => {
-
-        const targetId = link.getAttribute('href');
-
-        // Only add smooth scroll for internal links
-
-        if (targetId && targetId.startsWith('#')) {
-
-            link.addEventListener('click', function(e) {
-
-                e.preventDefault();
-
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-                }
-
-            });
-
-        }
-
-    });
-
-
-
-    function changeNavOnScroll() {
-
-        let index = sections.length;
-
-        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
-
-        
-
-        document.querySelectorAll('.nav-link').forEach((link) => {
-
-            if(link.getAttribute('href').startsWith('#')){
-
-               link.classList.remove('active');
-
-            }
-
-        });
-
-        
-
-        if (index >= 0 && sections[index]) {
-
-            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-
-            if (activeLink) {
-
-                activeLink.classList.add('active');
-
-            }
-
-        }
-
-    }
-
-    window.addEventListener('scroll', changeNavOnScroll);
-
-
-
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
-
-    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
-
-
-
-    mobileMenuButton.addEventListener('click', () => {
-
-        mobileMenu.classList.toggle('hidden');
-
-        hamburgerIconOpen.classList.toggle('hidden');
-
-        hamburgerIconClose.classList.toggle('hidden');
-
-    });
-
-
-
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-
-        if (link.getAttribute('href').startsWith('#')) {
-
-            link.addEventListener('click', () => {
-
-                mobileMenu.classList.add('hidden');
-
-                hamburgerIconOpen.classList.remove('hidden');
-
-                hamburgerIconClose.classList.add('hidden');
-
-            });
-
-        }
-
-    });
-
-    
-
-    // --- Chart and Interactive Elements Initialization ---
-
-    
-
-    function initEulerVisualizer() {
-
-        const ctx = document.getElementById('eulerVisualizer')?.getContext('2d');
-
-        if (!ctx) return;
-
-        let angle = 0;
-
-        function draw() {
-
-            const width = ctx.canvas.width;
-
-            const height = ctx.canvas.height;
-
-            const radius = height / 3.5;
-
-            const centerX = width / 4;
-
-            const centerY = height / 2;
-
-            ctx.clearRect(0, 0, width, height);
-
-            ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
-
-            ctx.beginPath(); ctx.moveTo(0, centerY); ctx.lineTo(width, centerY); ctx.moveTo(centerX, 0); ctx.lineTo(centerX, height); ctx.stroke();
-
-            ctx.beginPath(); ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI); ctx.stroke();
-
-            const x = centerX + radius * Math.cos(angle); const y = centerY - radius * Math.sin(angle);
-
-            ctx.beginPath(); ctx.moveTo(centerX, centerY); ctx.lineTo(x, y); ctx.strokeStyle = '#0284c7'; ctx.lineWidth = 2; ctx.stroke();
-
-            ctx.beginPath(); ctx.arc(x, y, 5, 0, 2 * Math.PI); ctx.fillStyle = '#0284c7'; ctx.fill();
-
-            const waveX = width / 2;
-
-            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(waveX, y); ctx.setLineDash([4, 4]); ctx.strokeStyle = '#f87171'; ctx.lineWidth = 1.5; ctx.stroke(); ctx.setLineDash([]);
-
-            ctx.beginPath();
-
-            for (let i = 0; i < width / 2; i++) {
-
-                const waveAngle = angle - (i / (width / 2)) * 4 * Math.PI; const waveY = centerY - radius * Math.sin(waveAngle);
-
-                if (i === 0) ctx.moveTo(waveX + i, waveY); else ctx.lineTo(waveX + i, waveY);
-
-            }
-
-            ctx.strokeStyle = '#f87171'; ctx.lineWidth = 2; ctx.stroke();
-
-            angle += 0.02; requestAnimationFrame(draw);
-
-        }
-
-        draw();
-
-    }
-
-
-
-    function initFourierCharts() {
-
-        const timeCtx = document.getElementById('timeDomainChart')?.getContext('2d');
-
-        const freqCtx = document.getElementById('freqDomainChart')?.getContext('2d');
-
-        if (!timeCtx || !freqCtx) return;
-
-        
-
-        const timeLabels = Array.from({length: 128}, (_, i) => i);
-
-        const chartOptions = (title) => ({ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: false } }, scales: { x: { title: { display: true, text: title } }, y: { beginAtZero: true } } });
-
-        
-
-        const timeDomainChart = new Chart(timeCtx, { type: 'line', options: chartOptions('時間') });
-
-        const freqDomainChart = new Chart(freqCtx, { type: 'bar', options: chartOptions('頻率') });
-
-        
-
-        const updateFourier = (components) => {
-
-            const timeData = timeLabels.map(t => {
-
-                return components.reduce((sum, comp) => sum + comp.amp * Math.sin(comp.freq * t * 2 * Math.PI / 128), 0);
-
-            });
-
-            const freqData = Array(32).fill(0);
-
-            components.forEach(comp => {
-
-               if(comp.freq - 1 < 32) {
-
-                   freqData[comp.freq - 1] = comp.amp;
-
-               }
-
-            });
-
-            
-
-            timeDomainChart.data = { labels: timeLabels, datasets: [{ data: timeData, borderColor: '#0ea5e9', tension: 0.1, pointRadius: 0 }] };
-
-            freqDomainChart.data = { labels: Array.from({length: 32}, (_, i) => i + 1), datasets: [{ data: freqData, backgroundColor: '#0ea5e9' }] };
-
-            timeDomainChart.update(); 
-
-            freqDomainChart.update();
-
-        };
-
-
-
-        const squareWaveComponents = [1, 3, 5, 7, 9, 11, 13, 15].map(f => ({freq: f, amp: 1/f}));
-
-
-
-        document.getElementById('ft-btn-1')?.addEventListener('click', () => updateFourier([{freq: 5, amp: 1}]));
-
-        document.getElementById('ft-btn-2')?.addEventListener('click', () => updateFourier([{freq: 3, amp: 1}, {freq: 10, amp: 0.8}]));
-
-        document.getElementById('ft-btn-3')?.addEventListener('click', () => updateFourier(squareWaveComponents));
-
-        
-
-        // Set initial state
-
-        updateFourier([{freq: 5, amp: 1}]);
-
-    }
-
-
-
-    function initQamSnrChart() {
-
-        const ctx = document.getElementById('qamSnrChart')?.getContext('2d');
-
-        if (!ctx) return;
-
-        new Chart(ctx, {
-
-            type: 'bar',
-
-            data: {
-
-                labels: ['QPSK', '16-QAM', '64-QAM', '256-QAM', '1024-QAM'],
-
-                datasets: [{ label: '典型所需 SNR (dB)', data: [13, 19, 25, 31, 37], backgroundColor: ['#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9', '#0284c7'], borderColor: '#ffffff', borderWidth: 1 }]
-
-            },
-
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: '訊號雜訊比 (SNR) in dB' } }, x: { title: { display: true, text: '調變方案' } } } }
-
-        });
-
-    }
-
-
-
-    function initShannonCalculator() {
-
-        const bwSlider = document.getElementById('bandwidth');
-
-        const snrSlider = document.getElementById('snr');
-
-        const bwValue = document.getElementById('bwValue');
-
-        const snrValue = document.getElementById('snrValue');
-
-        const capacityValue = document.getElementById('capacityValue');
-
-        if (!bwSlider || !snrSlider) return;
-
-
-
-        function calculate() {
-
-            const B = parseFloat(bwSlider.value);
-
-            const SNR_dB = parseFloat(snrSlider.value);
-
-            const SNR_linear = Math.pow(10, SNR_dB / 10);
-
-            const C = B * Math.log2(1 + SNR_linear);
-
-            bwValue.textContent = B; snrValue.textContent = SNR_dB; capacityValue.textContent = C.toFixed(1);
-
-        }
-
-        bwSlider.addEventListener('input', calculate); snrSlider.addEventListener('input', calculate);
-
-        calculate();
-
-    }
-
-    
-
-    function initAccessTech() {
-
-        const container = document.getElementById('access-tech-container');
-
-        if (!container) return;
-
-        const techs = [
-
-            { name: 'FDMA', analogy: '多車道高速公路，每輛車有專屬車道。', gen: '1G' },
-
-            { name: 'TDMA', analogy: '單線道公路，由交通號誌控制車輛輪流通行。', gen: '2G' },
-
-            { name: 'CDMA', analogy: '派對上多對人用不同語言交談，只聽得懂自己的語言。', gen: '3G' },
-
-            { name: 'OFDMA', analogy: '像玩俄羅斯方塊一樣，將不同大小的資源塊動態地分配給不同用戶。', gen: '4G/5G' }
-
-        ];
-
-        container.innerHTML = techs.map(tech => `
-
-            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 interactive-card cursor-pointer">
-
-                <div class="flex justify-between items-center mb-2">
-
-                    <h5 class="text-xl font-bold text-sky-600">${tech.name}</h5>
-
-                    <span class="text-sm font-semibold bg-sky-100 text-sky-800 px-2 py-1 rounded-full">${tech.gen}</span>
-
-                </div><p class="text-slate-600 text-sm">${tech.analogy}</p>
-
-            </div>`).join('');
-
-    }
-
-
-
-    function initTw5gSpectrumChart() {
-
-        const ctx = document.getElementById('tw5gSpectrumChart')?.getContext('2d');
-
-        if (!ctx) return;
-
-        new Chart(ctx, {
-
-            type: 'bar',
-
-            data: {
-
-                labels: ['中華電信', '台灣大哥大', '遠傳電信'],
-
-                datasets: [
-
-                    { label: '3.5 GHz頻寬 (MHz)', data: [90, 60, 80], backgroundColor: '#38bdf8' },
-
-                    { label: '28 GHz 頻寬 (MHz)', data: [600, 200, 400], backgroundColor: '#075985' }
-
-                ]
-
-            },
-
-            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: '頻寬 (MHz)' } }, x: { title: { display: true, text: '電信商' } } }, plugins: { tooltip: { mode: 'index', intersect: false } } }
-
-        });
-
-    }
-
-
-
-    function handleQuiz() {
-
-        const quizContainer = document.getElementById('quiz-container');
-
-        const submitBtn = document.getElementById('submit-quiz-btn');
-
-        const resultsEl = document.getElementById('quiz-results');
-
-        if (!quizContainer || !submitBtn || !resultsEl) return;
-
-
-
-        const quizData = [
-
-            { question: "根據夏農極限定理 \\(C = B \\log_{2}(1 + S/N)\\)，假設其他條件不變，將頻寬 (B) 加倍，對通道容量 (C) 的影響，與將訊號功率 (S) 加倍相比，哪個影響更大？", options: [ { text: "將功率加倍的影響更大。", isCorrect: false }, { text: "將頻寬加倍的影響更大。", isCorrect: true }, { text: "兩者影響相同。", isCorrect: false }, { text: "無法比較，取決於初始的 S/N 值。", isCorrect: false } ] },
-
-            { question: "在 QAM 調變技術中，從 64-QAM 升級到 256-QAM 主要意味著什麼？", options: [ { text: "傳輸距離變得更遠。", isCorrect: false }, { text: "對訊號雜訊比 (SNR) 的要求降低了。", isCorrect: false }, { text: "每個符號 (symbol) 能攜帶更多位元 (bits) 的資訊。", isCorrect: true }, { text: "訊號的抗干擾能力變得更強。", isCorrect: false } ] },
-
-            { question: "報告中用「像玩俄羅斯方塊」來比喻哪一種多重接取技術？", options: [ { text: "FDMA", isCorrect: false }, { text: "TDMA", isCorrect: false }, { text: "CDMA", isCorrect: false }, { text: "OFDMA", isCorrect: true } ] }
-
-        ];
-
-
-
-        // Populate quiz questions
-
-        quizContainer.innerHTML = quizData.map((item, index) => {
-
-            const optionsHtml = item.options.map((opt, optIndex) => `
-
-                <label class="flex items-center p-2 rounded-md cursor-pointer quiz-option">
-
-                    <input type="radio" name="q${index}" value="${optIndex}" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500">
-
-                    <span class="ml-3 text-slate-700">${opt.text}</span>
-
-                </label>`).join('');
-
-            return `<div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">${index + 1}. ${item.question}</p><div class="space-y-2">${optionsHtml}</div></div>`;
-
-        }).join('');
-
-
-
-        // Re-render MathJax for the quiz questions
-
-        if (window.MathJax) {
-
-            MathJax.typesetPromise();
-
-        }
-
-
-
-        // Handle submission
-
-        submitBtn.addEventListener('click', () => {
-
-            let score = 0;
-
-            const totalQuestions = quizData.length;
-
-            let answeredQuestions = 0;
-
-
-
-            quizData.forEach((item, index) => {
-
-                const userAnswer = document.querySelector(`input[name="q${index}"]:checked`);
-
-                if (userAnswer) {
-
-                    answeredQuestions++;
-
-                    if (item.options[userAnswer.value].isCorrect) {
-
-                        score++;
-
-                    }
-
-                }
-
-            });
-
-
-
-            if (answeredQuestions < totalQuestions) {
-
-                resultsEl.textContent = '請回答所有問題後再提交！';
-
-                resultsEl.className = 'mt-6 text-center text-lg font-semibold text-red-600';
-
-                return;
-
-            }
-
-
-
-            let resultMessage = `您答對了 ${score} / ${totalQuestions} 題！`;
-
-            let resultColor = 'text-slate-800';
-
-            if (score === totalQuestions) { resultMessage += " 👍 太棒了，完全正確！"; resultColor = 'text-green-600'; }
-
-            else if (score >= Math.ceil(totalQuestions / 2)) { resultMessage += " 😊 還不錯喔！"; resultColor = 'text-yellow-600'; }
-
-            else { resultMessage += " 😅 再加加油！"; resultColor = 'text-red-600'; }
-
-
-
-            resultsEl.textContent = resultMessage;
-
-            resultsEl.className = `mt-6 text-center text-lg font-semibold ${resultColor}`;
-
-        });
-
-    }
-
-
-
-    // Initialize all components
-
-    initEulerVisualizer();
-
-    initFourierCharts();
-
-    initQamSnrChart();
-
-    initShannonCalculator();
-
-    initAccessTech();
-
-    initTw5gSpectrumChart();
-
-    handleQuiz();
-
-    
-
-    // Set initial state
-
-    changeNavOnScroll();
-
+    // --- Navigation Logic ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            hamburgerIconOpen.classList.remove('hidden');
+            hamburgerIconClose.classList.add('hidden');
+        });
+    });
+    
+    // --- Chart and Interactive Elements Initialization ---
+    
+    function initEulerVisualizer() {
+        const ctx = document.getElementById('eulerVisualizer')?.getContext('2d');
+        if (!ctx) return;
+        let angle = 0;
+        function draw() {
+            const width = ctx.canvas.width;
+            const height = ctx.canvas.height;
+            const radius = height / 3.5;
+            const centerX = width / 4;
+            const centerY = height / 2;
+            ctx.clearRect(0, 0, width, height);
+            ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(0, centerY); ctx.lineTo(width, centerY); ctx.moveTo(centerX, 0); ctx.lineTo(centerX, height); ctx.stroke();
+            ctx.beginPath(); ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI); ctx.stroke();
+            const x = centerX + radius * Math.cos(angle); const y = centerY - radius * Math.sin(angle);
+            ctx.beginPath(); ctx.moveTo(centerX, centerY); ctx.lineTo(x, y); ctx.strokeStyle = '#0284c7'; ctx.lineWidth = 2; ctx.stroke();
+            ctx.beginPath(); ctx.arc(x, y, 5, 0, 2 * Math.PI); ctx.fillStyle = '#0284c7'; ctx.fill();
+            const waveX = width / 2;
+            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(waveX, y); ctx.setLineDash([4, 4]); ctx.strokeStyle = '#f87171'; ctx.lineWidth = 1.5; ctx.stroke(); ctx.setLineDash([]);
+            ctx.beginPath();
+            for (let i = 0; i < width / 2; i++) {
+                const waveAngle = angle - (i / (width / 2)) * 4 * Math.PI; const waveY = centerY - radius * Math.sin(waveAngle);
+                if (i === 0) ctx.moveTo(waveX + i, waveY); else ctx.lineTo(waveX + i, waveY);
+            }
+            ctx.strokeStyle = '#f87171'; ctx.lineWidth = 2; ctx.stroke();
+            angle += 0.02; requestAnimationFrame(draw);
+        }
+        draw();
+    }
+
+    function initFourierCharts() {
+        const timeCtx = document.getElementById('timeDomainChart')?.getContext('2d');
+        const freqCtx = document.getElementById('freqDomainChart')?.getContext('2d');
+        if (!timeCtx || !freqCtx) return;
+        
+        const timeLabels = Array.from({length: 128}, (_, i) => i);
+        const chartOptions = (title) => ({ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: false } }, scales: { x: { title: { display: true, text: title } }, y: { beginAtZero: true } } });
+        
+        const timeDomainChart = new Chart(timeCtx, { type: 'line', options: chartOptions('時間') });
+        const freqDomainChart = new Chart(freqCtx, { type: 'bar', options: chartOptions('頻率') });
+        
+        const updateFourier = (freqs) => {
+            const timeData = timeLabels.map(t => freqs.reduce((sum, f) => sum + Math.sin(f * t * 2 * Math.PI / 128), 0));
+            const freqData = Array(32).fill(0);
+            freqs.forEach(f => { if(f-1 < 32) freqData[f-1] = 1; });
+            timeDomainChart.data = { labels: timeLabels, datasets: [{ data: timeData, borderColor: '#0ea5e9', tension: 0.1, pointRadius: 0 }] };
+            freqDomainChart.data = { labels: Array.from({length: 32}, (_, i) => i + 1), datasets: [{ data: freqData, backgroundColor: '#0ea5e9' }] };
+            timeDomainChart.update(); freqDomainChart.update();
+        };
+
+        document.getElementById('ft-btn-1')?.addEventListener('click', () => updateFourier([5]));
+        document.getElementById('ft-btn-2')?.addEventListener('click', () => updateFourier([3, 10]));
+        document.getElementById('ft-btn-3')?.addEventListener('click', () => updateFourier([1, 3, 5, 7, 9, 11]));
+        updateFourier([5]);
+    }
+
+    function initQamSnrChart() {
+        const ctx = document.getElementById('qamSnrChart')?.getContext('2d');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['QPSK', '16-QAM', '64-QAM', '256-QAM', '1024-QAM'],
+                datasets: [{ label: '典型所需 SNR (dB)', data: [13, 19, 25, 31, 37], backgroundColor: ['#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9', '#0284c7'], borderColor: '#ffffff', borderWidth: 1 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: '訊號雜訊比 (SNR) in dB' } }, x: { title: { display: true, text: '調變方案' } } } }
+        });
+    }
+
+    function initShannonCalculator() {
+        const bwSlider = document.getElementById('bandwidth');
+        const snrSlider = document.getElementById('snr');
+        const bwValue = document.getElementById('bwValue');
+        const snrValue = document.getElementById('snrValue');
+        const capacityValue = document.getElementById('capacityValue');
+        if (!bwSlider || !snrSlider) return;
+
+        function calculate() {
+            const B = parseFloat(bwSlider.value);
+            const SNR_dB = parseFloat(snrSlider.value);
+            const SNR_linear = Math.pow(10, SNR_dB / 10);
+            const C = B * Math.log2(1 + SNR_linear);
+            bwValue.textContent = B; snrValue.textContent = SNR_dB; capacityValue.textContent = C.toFixed(1);
+        }
+        bwSlider.addEventListener('input', calculate); snrSlider.addEventListener('input', calculate);
+        calculate();
+    }
+    
+    function initAccessTech() {
+        const container = document.getElementById('access-tech-container');
+        if (!container) return;
+        const techs = [
+            { name: 'FDMA', analogy: '多車道高速公路，每輛車有專屬車道。', gen: '1G' },
+            { name: 'TDMA', analogy: '單線道公路，由交通號誌控制車輛輪流通行。', gen: '2G' },
+            { name: 'CDMA', analogy: '派對上多對人用不同語言交談，只聽得懂自己的語言。', gen: '3G' },
+            { name: 'OFDMA', analogy: '像玩俄羅斯方塊一樣，將不同大小的資源塊動態地分配給不同用戶。', gen: '4G/5G' }
+        ];
+        container.innerHTML = techs.map(tech => `
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 interactive-card cursor-pointer">
+                <div class="flex justify-between items-center mb-2">
+                    <h5 class="text-xl font-bold text-sky-600">${tech.name}</h5>
+                    <span class="text-sm font-semibold bg-sky-100 text-sky-800 px-2 py-1 rounded-full">${tech.gen}</span>
+                </div><p class="text-slate-600 text-sm">${tech.analogy}</p>
+            </div>`).join('');
+    }
+
+    function initTw5gSpectrumChart() {
+        const ctx = document.getElementById('tw5gSpectrumChart')?.getContext('2d');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['中華電信', '台灣大哥大', '遠傳電信'],
+                datasets: [
+                    { label: '3.5 GHz頻寬 (MHz)', data: [90, 60, 80], backgroundColor: '#38bdf8' },
+                    { label: '28 GHz 頻寬 (MHz)', data: [600, 200, 400], backgroundColor: '#075985' }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: '頻寬 (MHz)' } }, x: { title: { display: true, text: '電信商' } } }, plugins: { tooltip: { mode: 'index', intersect: false } } }
+        });
+    }
+
+    function handleQuiz() {
+        const quizContainer = document.getElementById('quiz-container');
+        const submitBtn = document.getElementById('submit-quiz-btn');
+        const resultsEl = document.getElementById('quiz-results');
+        if (!quizContainer || !submitBtn || !resultsEl) return;
+
+        const quizData = [
+            { question: "根據夏農極限定理 $C = B \\log_{2}(1 + S/N)$，假設其他條件不變，將頻寬 (B) 加倍，對通道容量 (C) 的影響，與將訊號功率 (S) 加倍相比，哪個影響更大？", options: [ { text: "將功率加倍的影響更大。", isCorrect: false }, { text: "將頻寬加倍的影響更大。", isCorrect: true }, { text: "兩者影響相同。", isCorrect: false }, { text: "無法比較，取決於初始的 S/N 值。", isCorrect: false } ] },
+            { question: "在 QAM 調變技術中，從 64-QAM 升級到 256-QAM 主要意味著什麼？", options: [ { text: "傳輸距離變得更遠。", isCorrect: false }, { text: "對訊號雜訊比 (SNR) 的要求降低了。", isCorrect: false }, { text: "每個符號 (symbol) 能攜帶更多位元 (bits) 的資訊。", isCorrect: true }, { text: "訊號的抗干擾能力變得更強。", isCorrect: false } ] },
+            { question: "報告中用「像玩俄羅斯方塊」來比喻哪一種多重接取技術？", options: [ { text: "FDMA", isCorrect: false }, { text: "TDMA", isCorrect: false }, { text: "CDMA", isCorrect: false }, { text: "OFDMA", isCorrect: true } ] }
+        ];
+
+        // Populate quiz questions
+        quizContainer.innerHTML = quizData.map((item, index) => {
+            const optionsHtml = item.options.map((opt, optIndex) => `
+                <label class="flex items-center p-2 rounded-md cursor-pointer quiz-option">
+                    <input type="radio" name="q${index}" value="${optIndex}" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500">
+                    <span class="ml-3 text-slate-700">${opt.text}</span>
+                </label>`).join('');
+            return `<div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">${index + 1}. ${item.question}</p><div class="space-y-2">${optionsHtml}</div></div>`;
+        }).join('');
+
+        // Handle submission
+        submitBtn.addEventListener('click', () => {
+            let score = 0;
+            const totalQuestions = quizData.length;
+            let answeredQuestions = 0;
+
+            quizData.forEach((item, index) => {
+                const userAnswer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (userAnswer) {
+                    answeredQuestions++;
+                    if (item.options[userAnswer.value].isCorrect) {
+                        score++;
+                    }
+                }
+            });
+
+            if (answeredQuestions < totalQuestions) {
+                resultsEl.textContent = '請回答所有問題後再提交！';
+                resultsEl.className = 'mt-6 text-center text-lg font-semibold text-red-600';
+                return;
+            }
+
+            let resultMessage = `您答對了 ${score} / ${totalQuestions} 題！`;
+            let resultColor = 'text-slate-800';
+            if (score === totalQuestions) { resultMessage += " 👍 太棒了，完全正確！"; resultColor = 'text-green-600'; }
+            else if (score >= Math.ceil(totalQuestions / 2)) { resultMessage += " 😊 還不錯喔！"; resultColor = 'text-yellow-600'; }
+            else { resultMessage += " 😅 再加加油！"; resultColor = 'text-red-600'; }
+
+            resultsEl.textContent = resultMessage;
+            resultsEl.className = `mt-6 text-center text-lg font-semibold ${resultColor}`;
+        });
+    }
+
+    // Initialize all components
+    initEulerVisualizer();
+    initFourierCharts();
+    initQamSnrChart();
+    initShannonCalculator();
+    initAccessTech();
+    initTw5gSpectrumChart();
+    handleQuiz();
+    
+    // Set initial state
+    changeNavOnScroll();
 });
-
 </script>
-
 </body>
-
 </html>
+
+
