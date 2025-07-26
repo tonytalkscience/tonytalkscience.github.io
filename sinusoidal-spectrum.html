@@ -14,7 +14,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>互動式無線通訊策略分析</title>
+    <title>Tony Talks Science</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -199,7 +199,7 @@
                 您的瀏覽器不支援音訊播放。
             </audio>
             <div class="mt-6 text-slate-600 space-y-3 text-sm">
-                <p>這段 12 分鐘的語音摘要，將帶領讀者理解構成所有無線訊號的基本單元。內容要點如下：</p>
+                <p>這段 12 分鐘的音訊摘要，將帶領聽眾理解構成所有無線訊號的基本單元。內容要點如下：</p>
                 <ul class="list-disc list-inside space-y-2 pl-2">
                     <li><strong>弦波的本質</strong>：探討為何簡單的弦波（正弦與餘弦）是通訊分析的核心。介紹其三大要素：振幅（Amplitude）、頻率（Frequency）和相位（Phase），並解釋它們如何分別對應到訊號的強度、音高（或資料速率）與時間偏移。</li>
                     <li><strong>從時域到頻域</strong>：闡述傅立葉分析的直觀概念，即任何複雜的波形（如語音、音樂或數據訊號）都可以被拆解為一系列不同頻率和振幅的簡單弦波的組合。這個從時間維度切換到頻率維度的視角，是理解頻譜的關鍵。</li>
@@ -327,19 +327,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const timeDomainChart = new Chart(timeCtx, { type: 'line', options: chartOptions('時間') });
         const freqDomainChart = new Chart(freqCtx, { type: 'bar', options: chartOptions('頻率') });
         
-        const updateFourier = (freqs) => {
-            const timeData = timeLabels.map(t => freqs.reduce((sum, f) => sum + Math.sin(f * t * 2 * Math.PI / 128), 0));
+        const updateFourier = (components) => {
+            const timeData = timeLabels.map(t => {
+                return components.reduce((sum, comp) => sum + comp.amp * Math.sin(comp.freq * t * 2 * Math.PI / 128), 0);
+            });
             const freqData = Array(32).fill(0);
-            freqs.forEach(f => { if(f-1 < 32) freqData[f-1] = 1; });
+            components.forEach(comp => {
+               if(comp.freq - 1 < 32) {
+                   freqData[comp.freq - 1] = comp.amp;
+               }
+            });
+            
             timeDomainChart.data = { labels: timeLabels, datasets: [{ data: timeData, borderColor: '#0ea5e9', tension: 0.1, pointRadius: 0 }] };
             freqDomainChart.data = { labels: Array.from({length: 32}, (_, i) => i + 1), datasets: [{ data: freqData, backgroundColor: '#0ea5e9' }] };
-            timeDomainChart.update(); freqDomainChart.update();
+            timeDomainChart.update(); 
+            freqDomainChart.update();
         };
 
-        document.getElementById('ft-btn-1')?.addEventListener('click', () => updateFourier([5]));
-        document.getElementById('ft-btn-2')?.addEventListener('click', () => updateFourier([3, 10]));
-        document.getElementById('ft-btn-3')?.addEventListener('click', () => updateFourier([1, 3, 5, 7, 9, 11]));
-        updateFourier([5]);
+        const squareWaveComponents = [1, 3, 5, 7, 9, 11, 13, 15].map(f => ({freq: f, amp: 1/f}));
+
+        document.getElementById('ft-btn-1')?.addEventListener('click', () => updateFourier([{freq: 5, amp: 1}]));
+        document.getElementById('ft-btn-2')?.addEventListener('click', () => updateFourier([{freq: 3, amp: 1}, {freq: 10, amp: 0.8}]));
+        document.getElementById('ft-btn-3')?.addEventListener('click', () => updateFourier(squareWaveComponents));
+        
+        // Set initial state
+        updateFourier([{freq: 5, amp: 1}]);
     }
 
     function initQamSnrChart() {
@@ -431,7 +443,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
 
         // Re-render MathJax for the quiz questions
-        MathJax.typesetPromise();
+        if (window.MathJax) {
+            MathJax.typesetPromise();
+        }
 
         // Handle submission
         submitBtn.addEventListener('click', () => {
