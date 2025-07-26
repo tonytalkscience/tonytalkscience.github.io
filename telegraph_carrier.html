@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>從電流到頻譜：電報多工技術的演進</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 400px; max-height: 50vh; }
+        @media (max-width: 768px) { .chart-container { height: 300px; } }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #0284c7; border-bottom-color: #0284c7; }
+        .mobile-nav-link:hover { background-color: #f0f9ff; }
+        
+        /* Original Custom Styles Adapted */
+        .timeline { position: relative; padding: 2rem 0; }
+        .timeline::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 3px; height: 100%; background-color: #94a3b8; }
+        .timeline-item { position: relative; width: 50%; padding: 1rem 2rem; box-sizing: border-box; }
+        .timeline-item:nth-child(odd) { left: 0; padding-right: 4rem; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; padding-left: 4rem; }
+        .timeline-content { padding: 1rem; background: #fff; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); border-left: 5px solid #fb923c; }
+        .timeline-item:nth-child(even) .timeline-content { border-left: none; border-right: 5px solid #4ade80; }
+        .timeline-dot { content: ''; position: absolute; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background-color: #f8fafc; border: 4px solid #94a3b8; z-index: 1; }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -10px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -10px; }
+
+        .interactive-diagram-item { cursor: pointer; transition: background-color 0.3s, color 0.3s, transform 0.2s; border: 2px solid #4ade80; }
+        .interactive-diagram-item:hover { background-color: #4ade80; color: white; transform: translateY(-2px); }
+        
+        .modal { transition: opacity 0.3s ease; }
+        
+        .quiz-option { transition: background-color 0.2s; }
+        .quiz-option:hover { background-color: #f0f9ff; }
+        .quiz-option-correct { background-color: #d1fae5 !important; border-color: #6ee7b7 !important; }
+        .quiz-option-incorrect { background-color: #fee2e2 !important; border-color: #fca5a5 !important; }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-600">電報多工技術的演進</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="#intro" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">緣起</a>
+                    <a href="#era1" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">機電時代</a>
+                    <a href="#era2" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">電子時代</a>
+                    <a href="#era3" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">數位時代</a>
+                    <a href="#comparison" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">綜合比較</a>
+                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">音檔摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">隨堂測驗</a>
+                    <a href="#legacy" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">歷史遺產</a>
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#intro" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">緣起</a>
+            <a href="#era1" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">機電時代</a>
+            <a href="#era2" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">電子時代</a>
+            <a href="#era3" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">數位時代</a>
+            <a href="#comparison" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">綜合比較</a>
+            <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">音檔摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">隨堂測驗</a>
+            <a href="#legacy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">歷史遺產</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <section id="intro" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">一切的起點：飽和的線路</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">十九世紀，電報網絡的成功帶來了自身難以承受的負擔。線路迅速飽和，而鋪設新線路的成本高昂得令人卻步。這場由經濟壓力催生的技術競賽，目標只有一個：如何在單一導線上，傳輸更多的訊息？這便是「多工技術」誕生的舞台。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+             <div class="timeline max-w-4xl mx-auto"></div>
+        </div>
+    </section>
+
+    <section id="era1" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第一幕：機電時代的巔峰 - 四工電報</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">愛迪生的四工電報是機電工程的傑作。它並非憑空發明，而是巧妙地將「雙工」（雙向通訊）與「雙路疊加」（單向傳輸兩路訊息）結合，其核心在於對直流電的兩種物理屬性——方向（極性）與大小（振幅）——進行同時編碼。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+             <h3 class="text-xl font-bold text-center mb-4 text-slate-800">互動式系統圖解</h3>
+             <p class="text-center text-slate-500 mb-6">點擊下方元件，了解它們在四工系統中的神奇作用。</p>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center max-w-3xl mx-auto">
+                 <div class="interactive-diagram-item p-4 rounded-lg" data-key="polarized_relay">
+                     <h4 class="font-bold text-lg">極化繼電器</h4><p>偵測電流「方向」</p>
+                 </div>
+                 <div class="interactive-diagram-item p-4 rounded-lg" data-key="neutral_relay">
+                     <h4 class="font-bold text-lg">中性繼電器</h4><p>偵測電流「強度」</p>
+                 </div>
+                 <div class="interactive-diagram-item p-4 rounded-lg" data-key="artificial_line">
+                     <h4 class="font-bold text-lg">人工線路</h4><p>平衡電路的「鏡像」</p>
+                 </div>
+             </div>
+             <div class="mt-8 p-6 bg-red-50 border-l-4 border-red-400 rounded-r-lg max-w-3xl mx-auto">
+                  <h4 class="font-bold text-xl text-red-800">系統的阿基里斯之踵：「分裂訊號」</h4>
+                  <p class="text-red-700 mt-2">當「極性通道」反轉電流方向時，電流會瞬間歸零，導致對「強度」敏感的中性繼電器短暫失效，產生一個虛假訊號。這個被稱為「Bug」的內在缺陷，展現了此系統脆弱的一面，也催生了被稱為「Bug Trap」的巧妙解決方案。</p>
+             </div>
+        </div>
+    </section>
+
+    <section id="era2" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第二幕：電子時代的革命 - 載波多工 (FDM)</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">頻分多工（FDM）是一次徹底的典範轉移。工程師們不再操控單一電流，而是將導線視為一個寬頻管道，把不同的訊息「搬到」各自專屬的頻率通道上。這場革命的成功，離不開兩項關鍵技術：能克服訊號衰減的「真空管放大器」，以及能精確分離各通道的「石英晶體濾波器」。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+             <h3 class="text-xl font-bold text-center mb-4 text-slate-800">容量的飛躍</h3>
+             <p class="text-center text-slate-500 mb-6">FDM技術的出現，極大地提升了單線的通道容量，其可擴展性是四工電報無法比擬的。</p>
+             <div class="chart-container"><canvas id="capacityChart"></canvas></div>
+        </div>
+    </section>
+
+    <section id="era3" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第三幕：數位時代的黎明 - 數位多工 (TDM)</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">如果說FDM是分割「頻譜」，那麼時分多工（TDM）就是分割「時間」。通過將類比訊號轉換為數位脈衝（PCM），TDM開啟了現代通訊的大門。其最根本的優勢在於「數位再生」——徹底擺脫了類比系統中噪聲不斷累積的噩夢。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+             <h3 class="text-xl font-bold text-center mb-6 text-slate-800">類比放大 vs. 數位再生</h3>
+             <p class="text-center text-slate-500 mb-6 -mt-4">觀察兩種技術在長距離傳輸中如何對抗噪聲。類比系統的訊號品質隨距離下降，而數位系統則能完美重生。</p>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div>
+                     <h4 class="text-lg font-semibold text-center mb-2 text-slate-700">類比放大 (FDM)</h4>
+                     <canvas id="analogCanvas" class="bg-slate-50 rounded-lg shadow-inner w-full h-48"></canvas>
+                     <p class="text-center text-sm mt-2 text-red-600">噪聲不斷累積，訊號逐漸失真。</p>
+                 </div>
+                 <div>
+                     <h4 class="text-lg font-semibold text-center mb-2 text-slate-700">數位再生 (TDM)</h4>
+                     <canvas id="digitalCanvas" class="bg-slate-50 rounded-lg shadow-inner w-full h-48"></canvas>
+                      <p class="text-center text-sm mt-2 text-green-600">在每一站都重生為完美的訊號。</p>
+                 </div>
+             </div>
+             <div class="text-center mt-6">
+                 <button id="runAnimationBtn" class="bg-sky-600 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-700 transition-colors">運行模擬</button>
+             </div>
+        </div>
+    </section>
+
+    <section id="comparison" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">權威性綜合比較</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">下表濃縮了各個技術時代的關鍵指標，提供了一個全面的對比視角。點擊表頭可高亮對應列，以便比較。</p>
+        <div class="overflow-x-auto bg-white p-4 rounded-xl shadow-lg">
+             <table id="comparisonTable" class="w-full text-left border-collapse text-sm">
+                 <thead>
+                     <tr class="bg-slate-100">
+                         <th class="p-3 font-bold cursor-pointer">特性</th>
+                         <th class="p-3 font-bold cursor-pointer">四工電報</th>
+                         <th class="p-3 font-bold cursor-pointer">聲頻載波 FDM</th>
+                         <th class="p-3 font-bold cursor-pointer">高頻載波 FDM</th>
+                         <th class="p-3 font-bold cursor-pointer">T1 數位 TDM</th>
+                     </tr>
+                 </thead>
+                 <tbody></tbody>
+             </table>
+        </div>
+    </section>
+    
+    <section id="audio-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">音檔精華摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">不想閱讀文字嗎？點擊下方播放器，聆聽本報告的重點內容摘要，快速掌握通訊革命的核心概念。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">穿越百年通訊革命</h3>
+            <audio controls preload="auto" class="w-full mb-4" src="telegraph_carrier_13min31.mp3">您的瀏覽器不支援音訊播放。</audio>
+            <div class="text-slate-700 space-y-4 text-sm sm:text-base leading-relaxed">
+                <p>這段音頻深入探討了「多工技術」的演進，也就是如何在單一通訊線路上傳輸多個訊號。故事始於19世紀飽和的電報線路，催生了第一代解決方案：<strong>愛迪生的四工電報</strong>。這套機電系統巧妙地利用直流電的「方向（極性）」和「強度（振幅）」，將一條線路的容量提升了四倍。</p>
+                <p>隨後，典範轉移至<strong>頻分多工（FDM）</strong>，不再操控單一電流，而是將導線視為一個寬頻管道。每路訊息被調變到不同的載波頻率上，如同各自擁有專屬的廣播頻道。這項技術的實現有賴於「真空管放大器」以克服訊號衰減，以及「高精度濾波器」（特別是石英晶體濾波器）來精準分離各個通道。</p>
+                <p>最終，數位革命帶來了<strong>時分多工（TDM）</strong>。TDM並非分割頻譜，而是分割「時間」，為每個通道分配極短且重複的時間片段。其核心優勢，源於將訊號數位化（PCM），從而實現了<strong>「數位再生」</strong>。與類比訊號在每次放大時都會累積雜訊不同，數位訊號能在每個中繼站被完美地重新生成，徹底解決了長距離傳輸的失真問題。這一基本原則奠定了從T1線路到今日網際網路與5G等所有現代通訊技術的基石。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對本頁內容的理解程度！完成下面的小測驗，看看您掌握了多少知識。</p>
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+            <div id="quiz-container" class="space-y-6"></div>
+            <div class="mt-8 text-center"><button id="submit-quiz-btn" class="bg-sky-600 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-700 transition-colors disabled:bg-slate-400">提交答案</button></div>
+            <div id="quiz-results" class="mt-6 text-center text-lg font-semibold"></div>
+        </div>
+    </section>
+
+    <section id="legacy" class="scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">不朽的歷史遺產</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600">從操控電流，到分割頻譜，再到分割時間，多工技術的演進是一部從具體到抽象的工程史詩。這些早期的設計思想，如同遺傳密碼，深刻地融入了我們今天所依賴的每一項通訊技術中，從Wi-Fi、5G到網際網路，其背後驅動的，仍然是那個永恆的指令：更快、更可靠地發送更多的資訊。</p>
+    </section>
+</main>
+
+<div id="modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 pointer-events-none z-50">
+    <div class="bg-white rounded-lg shadow-xl max-w-lg w-full p-6 relative transform scale-95 transition-transform" id="modal-content-box">
+        <button id="closeModal" class="absolute top-3 right-3 text-slate-500 hover:text-slate-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <h3 id="modalTitle" class="text-xl font-bold mb-4 text-slate-800"></h3>
+        <p id="modalContent" class="text-slate-600"></p>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Data Objects ---
+    const contentData = {
+        polarized_relay: { title: '極化繼電器 (Polarized Relay)', content: '此繼電器內部含有一個永久磁鐵，使其對電流的方向（正向或負向）極為敏感，而對電流的強度不敏感。它的作用是解碼出基於「極性」變化的訊號通道。' },
+        neutral_relay: { title: '中性繼電器 (Neutral Relay)', content: '這是一個標準的電磁繼電器，但其彈簧張力經過精密調整，只有當電流強度超過一個預設的閾值時，它才會動作。它的作用是解碼出基於「振幅」變化的訊號通道。' },
+        artificial_line: { title: '人工線路 (Artificial Line)', content: '這是一個由可調電阻和電容構成的電路，其目的是精確模擬真實長途線路的電氣特性。在差動雙工系統中，它能平衡電橋，抵銷本地發送的訊號，從而讓本地接收器只對遠端訊號有反應。' }
+    };
+    const timelineData = [
+        { year: 1874, event: 'Thomas Edison 完成並出售四工電報', importance: '機電多工技術的巔峰。' },
+        { year: 1918, event: '貝爾實驗室正式引入 FDM 概念', importance: '為頻域多工奠定理論基礎。' },
+        { year: 1929, event: 'Walter P. Mason 開發出石英晶體濾波器', importance: '使高密度FDM成為可能的關鍵技術。' },
+        { year: 1962, event: '貝爾實驗室開發出 T1 數位載波系統', importance: '開啟了數位通訊時代。' },
+    ];
+    const comparisonData = [
+        { "特性": "時代", "四工電報": "約 1874-1920年代", "聲頻載波 FDM": "約 1920-1940年代", "高頻載波 FDM": "約 1930-1960年代", "T1 數位 TDM": "約 1962年至今" },
+        { "特性": "訊號分離依據", "四工電報": "電流極性與振幅", "聲頻載波 FDM": "頻域濾波", "高頻載波 FDM": "頻域濾波", "T1 數位 TDM": "時域時隙分配" },
+        { "特性": "通道容量", "四工電報": "固定4通道", "聲頻載波 FDM": "10-12 通道", "高頻載波 FDM": "10+ 通道(速率更高)", "T1 數位 TDM": "24路語音級通道" },
+        { "特性": "抗噪聲能力", "四工電報": "差；高度敏感", "聲頻載波 FDM": "好；可濾波", "高頻載波 FDM": "很好", "T1 數位 TDM": "極佳；數位再生" },
+        { "特性": "關鍵技術", "四工電報": "差動/極化繼電器", "聲頻載波 FDM": "真空管、LC濾波器", "高頻載波 FDM": "石英晶體濾波器", "T1 數位 TDM": "電晶體、PCM" },
+    ];
+    const quizData = [
+        { question: "愛迪生的四工電報 (Quadruplex Telegraph) 是如何在一條電線上同時傳輸四路訊號的？", options: ["快速切換四個不同的頻道 (TDM)", "將訊號調變到四個不同的載波頻率 (FDM)", "同時利用電流的「方向(極性)」和「強度(振幅)」", "使用四條獨立的絕緣銅線捆綁在一起"], answer: "同時利用電流的「方向(極性)」和「強度(振幅)」" },
+        { question: "頻分多工 (FDM) 技術成功的關鍵是什麼？", options: ["人工線路和中性繼電器", "數位再生中繼器和脈衝編碼調變 (PCM)", "真空管放大器和高精度濾波器", "雷射光束和光纖電纜"], answer: "真空管放大器和高精度濾波器" },
+        { question: "與類比的 FDM 相比，數位時分多工 (TDM) 最根本的優勢是什麼？", options: ["設備成本更低廉", "能夠傳輸更長的摩斯密碼", "利用「數位再生」能力，可以無損地重建訊號，消除雜訊累積", "不需要實體線路，可以進行無線傳輸"], answer: "利用「數位再生」能力，可以無損地重建訊號，消除雜訊累積" }
+    ];
+
+    // --- Navigation ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('section');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[href="#${sections[index]?.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+    }
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            }
+        });
+    });
+    window.addEventListener('scroll', changeNavOnScroll);
+
+    // --- Timeline Generation ---
+    const timelineContainer = document.querySelector('.timeline');
+    if(timelineContainer){
+        timelineData.forEach(item => {
+            const timelineItem = document.createElement('div');
+            timelineItem.className = 'timeline-item';
+            timelineItem.innerHTML = `<div class="timeline-dot"></div><div class="timeline-content"><h3 class="font-bold text-lg text-slate-800">${item.year}</h3><p class="text-md font-semibold text-sky-700">${item.event}</p><p class="text-sm text-slate-500 mt-1">${item.importance}</p></div>`;
+            timelineContainer.appendChild(timelineItem);
+        });
+    }
+
+    // --- Interactive Diagram Modal ---
+    const modal = document.getElementById('modal');
+    const modalContentBox = document.getElementById('modal-content-box');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    const closeModal = document.getElementById('closeModal');
+    
+    document.querySelectorAll('.interactive-diagram-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const data = contentData[item.dataset.key];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalContent.textContent = data.content;
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modalContentBox.classList.remove('scale-95');
+            }
+        });
+    });
+
+    const hideModal = () => {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modalContentBox.classList.add('scale-95');
+    };
+    closeModal.addEventListener('click', hideModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) hideModal();
+    });
+
+    // --- Charts ---
+    const capacityCtx = document.getElementById('capacityChart');
+    if (capacityCtx) {
+        new Chart(capacityCtx.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['四工電報', '聲頻載波 FDM', 'T1 數位 TDM'],
+                datasets: [{
+                    label: '單線通道容量',
+                    data: [4, 12, 24],
+                    backgroundColor: ['rgba(251, 146, 60, 0.7)', 'rgba(74, 222, 128, 0.7)', 'rgba(56, 189, 248, 0.7)'],
+                    borderColor: ['rgb(251, 146, 60)', 'rgb(74, 222, 128)', 'rgb(56, 189, 248)'],
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: '通道數量' } } } }
+        });
+    }
+
+    // --- Comparison Table ---
+    const comparisonTableBody = document.querySelector('#comparisonTable tbody');
+    if(comparisonTableBody){
+        const headers = Object.keys(comparisonData[0]);
+        comparisonData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.className = 'border-b border-slate-200 hover:bg-slate-50';
+            headers.forEach(header => {
+                const td = document.createElement('td');
+                td.className = 'p-3';
+                if (header === '特性') td.classList.add('font-semibold', 'text-slate-700');
+                td.textContent = row[header];
+                tr.appendChild(td);
+            });
+            comparisonTableBody.appendChild(tr);
+        });
+        document.querySelectorAll('#comparisonTable th').forEach((th, index) => {
+            th.addEventListener('click', () => {
+                document.querySelectorAll('#comparisonTable th, #comparisonTable td').forEach(cell => cell.classList.remove('bg-sky-100'));
+                document.querySelectorAll(`#comparisonTable tr`).forEach(row => row.children[index].classList.add('bg-sky-100'));
+            });
+        });
+    }
+
+    // --- Signal Animation ---
+    const analogCanvas = document.getElementById('analogCanvas');
+    const digitalCanvas = document.getElementById('digitalCanvas');
+    const runAnimationBtn = document.getElementById('runAnimationBtn');
+    let animationFrameId;
+
+    function drawSignal(canvas, data, color) {
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const { width, height } = canvas;
+        ctx.clearRect(0, 0, width, height);
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = color;
+        const sliceWidth = width / data.length;
+        for (let i = 0; i < data.length; i++) {
+            const y = (data[i] / 2 * -1 * (height * 0.8)) + height / 2;
+            i === 0 ? ctx.moveTo(i * sliceWidth, y) : ctx.lineTo(i * sliceWidth, y);
+        }
+        ctx.stroke();
+    }
+    
+    function runAnimation() {
+        if (!analogCanvas || !digitalCanvas) return;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        let originalSignal = Array.from({length: analogCanvas.width}, (_, i) => Math.sin(i * 0.05));
+        let analogSignal = [...originalSignal];
+        let digitalSignal = [...originalSignal];
+        let step = 0;
+        
+        function animate() {
+            if (step++ > 200) { // Limit animation duration
+                 drawSignal(analogCanvas, analogSignal, '#ef4444');
+                 // Final perfect digital signal
+                 drawSignal(digitalCanvas, originalSignal.map(v => Math.sign(v)), '#22c55e');
+                 return;
+            }
+            // Add noise to analog signal continuously
+            analogSignal = analogSignal.map(v => v + (Math.random() - 0.5) * 0.03);
+            
+            // Add noise and regenerate digital signal
+            if (step % 20 === 0) {
+                 const noisyDigital = digitalSignal.map(v => v + (Math.random() - 0.5) * 0.4);
+                 digitalSignal = noisyDigital.map(v => Math.sign(v)); // Perfect regeneration
+            }
+
+            drawSignal(analogCanvas, analogSignal, '#ef4444');
+            drawSignal(digitalCanvas, digitalSignal, '#22c55e');
+            animationFrameId = requestAnimationFrame(animate);
+        }
+        animate();
+    }
+    if(runAnimationBtn) runAnimationBtn.addEventListener('click', runAnimation);
+    
+    // --- Quiz ---
+    const quizContainer = document.getElementById('quiz-container');
+    const submitBtn = document.getElementById('submit-quiz-btn');
+    const resultsContainer = document.getElementById('quiz-results');
+
+    if (quizContainer && submitBtn) {
+        quizData.forEach((item, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.innerHTML = `<p class="font-semibold text-slate-800 mb-2">${index + 1}. ${item.question}</p>`;
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'space-y-2';
+            item.options.forEach(optionText => {
+                optionsDiv.innerHTML += `<label class="quiz-option flex items-center p-3 border-2 border-slate-200 rounded-lg cursor-pointer"><input type="radio" name="q${index}" value="${optionText}" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">${optionText}</span></label>`;
+            });
+            questionDiv.appendChild(optionsDiv);
+            quizContainer.appendChild(questionDiv);
+        });
+
+        submitBtn.addEventListener('click', () => {
+            let score = 0;
+            quizData.forEach((item, index) => {
+                const selected = quizContainer.querySelector(`input[name="q${index}"]:checked`);
+                const optionLabels = quizContainer.querySelectorAll(`input[name="q${index}"]`);
+
+                optionLabels.forEach(radio => {
+                    radio.disabled = true;
+                    const label = radio.parentElement;
+                    label.style.cursor = 'default';
+                    label.classList.remove('hover:bg-f0f9ff');
+                    if (radio.value === item.answer) {
+                        label.classList.add('quiz-option-correct');
+                    }
+                });
+
+                if (selected) {
+                    if (selected.value === item.answer) {
+                        score++;
+                    } else {
+                        selected.parentElement.classList.add('quiz-option-incorrect');
+                    }
+                }
+            });
+            resultsContainer.textContent = `您答對了 ${score} / ${quizData.length} 題！`;
+            resultsContainer.style.color = score === quizData.length ? '#166534' : '#991b1b';
+            if (score === quizData.length) resultsContainer.textContent += ' 🎉 太棒了！';
+            submitBtn.disabled = true;
+            submitBtn.textContent = '已完成';
+        });
+    }
+    
+    // --- Initial Calls ---
+    changeNavOnScroll();
+    runAnimation();
+});
+</script>
+</body>
+</html> 
