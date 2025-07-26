@@ -2,8 +2,7 @@
 <html lang="zh-TW" class="scroll-smooth">
 <head>
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -18,10 +17,23 @@
     <title>Tony Talks Science</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
@@ -51,9 +63,8 @@
                     <a href="#future_tech" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">未來前沿</a>
                     <a href="#audio_summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
                     <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
-  <a href="index.html">回到首頁</a>
-  <a href=" autodrive-tamsui.html">下一篇</a>
-
+                    <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">回到首頁</a>
+                    <a href="autodrive-tamsui.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">下一篇</a>
                 </div>
             </div>
             <div class="md:hidden flex items-center">
@@ -72,9 +83,8 @@
             <a href="#future_tech" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來前沿</a>
             <a href="#audio_summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
             <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
-  <a href="index.html">回到首頁</a>
-  <a href=" autodrive-tamsui.html">下一篇</a>
-
+            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">回到首頁</a>
+            <a href="autodrive-tamsui.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">下一篇</a>
         </div>
     </nav>
 </header>
@@ -82,7 +92,7 @@
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
     <section id="overview" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">從弦波到5G的宇宙</h2>
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本文將帶您穿越無線通訊的宏偉景觀。我們將從構成所有訊號的數學「原子」出發，探索如何建立全球通訊系統，並展望由AI與感知技術定義的未來。請捲動頁面或點擊上方的導覽列，開始您的探索之旅。</p>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">本篇文章將帶您穿越無線通訊的宏偉景觀。我們將從構成所有訊號的數學「原子」出發，探索如何建立全球通訊系統，並展望由AI與感知技術定義的未來。請捲動頁面或點擊上方的導覽列，開始您的探索之旅。</p>
     </section>
 
     <section id="signals" class="mb-16 scroll-mt-20">
@@ -91,7 +101,7 @@
         <div class="space-y-8">
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h4 class="text-xl font-bold mb-4 text-slate-800">尤拉公式的旋轉之美</h4>
-                <p class="mb-4 text-slate-600">工程師偏愛使用尤拉公式 $e^{j\theta} = \cos(\theta) + j\sin(\theta)$ 來描述弦波，因其將複雜的三角運算轉為簡潔的代數，並提供了一個直觀的「旋轉」物理模型。下方的視覺化展示了一個點在複數平面上旋轉，其在實數軸上的投影，就完美地構成了一個餘弦波。這個視角是理解頻率與相位的關鍵。</p>
+                <p class="mb-4 text-slate-600">工程師偏愛使用尤拉公式 \(e^{j\theta} = \cos(\theta) + j\sin(\theta)\) 來描述弦波，因其將複雜的三角運算轉為簡潔的代數，並提供了一個直觀的「旋轉」物理模型。下方的視覺化展示了一個點在複數平面上旋轉，其在虛數軸上的投影（即垂直高度），就完美地構成了一個餘弦波。這個視角是理解頻率與相位的關鍵。</p>
                 <div class="chart-container h-64"><canvas id="eulerVisualizer"></canvas></div>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-lg">
@@ -112,7 +122,7 @@
 
     <section id="systems" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題二：打造通訊系統</h2>
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">將從物理原理轉向工程系統。我們將探討如何將資訊編碼於電波之上、通訊的理論極限，以及使這一切成為可能的數位處理技術。</p>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">從物理原理轉向工程系統。我們將探討如何將資訊編碼於電波之上、通訊的理論極限，以及使這一切成為可能的數位處理技術。</p>
         <div class="space-y-8">
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h4 class="text-xl font-bold mb-4 text-slate-800">速度的代價：QAM調變與訊號品質</h4>
@@ -121,7 +131,7 @@
             </div>
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h4 class="text-xl font-bold mb-4 text-slate-800">夏農極限計算機</h4>
-                <p class="mb-4 text-slate-600">克勞德·夏農定義了任何通道的理論最大傳輸速率，即通道容量 $C = B \log_{2}(1 + S/N)$。此公式揭示了頻寬(B)和功率(S/N)與速度的根本關係。請拖動下方的滑桿，親身體驗增加頻寬或功率對通道容量的不同影響。您會發現，頻寬是遠比功率更「強大」的資源。</p>
+                <p class="mb-4 text-slate-600">克勞德·夏農定義了任何通道的理論最大傳輸速率，即通道容量 \(C = B \log_{2}(1 + S/N)\)。此公式揭示了頻寬(B)和功率(S/N)與速度的根本關係。請拖動下方的滑桿，親身體驗增加頻寬或功率對通道容量的不同影響。您會發現，頻寬是遠比功率更「強大」的資源。</p>
                 <div class="space-y-4">
                     <div><label for="bandwidth" class="font-medium">頻寬 (B): <span id="bwValue">10</span> MHz</label><input type="range" id="bandwidth" min="1" max="100" value="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"></div>
                     <div><label for="snr" class="font-medium">訊號雜訊比 (S/N): <span id="snrValue">20</span> dB</label><input type="range" id="snr" min="0" max="40" value="20" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"></div>
@@ -150,7 +160,7 @@
 
     <section id="future_tech" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">主題四：通往未來的前沿</h2>
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">將探討定義5G獨特能力的尖端技術，並展望6G的未來，探索我們將如何更智慧地利用頻譜，以及哪些新的應用將成為可能。</p>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">探討定義5G獨特能力的尖端技術，並展望6G的未來，探索我們將如何更智慧地利用頻譜，以及哪些新的應用將成為可能。</p>
         <div class="space-y-8">
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="bg-white p-6 rounded-xl shadow-lg">
@@ -189,7 +199,7 @@
                 您的瀏覽器不支援音訊播放。
             </audio>
             <div class="mt-6 text-slate-600 space-y-3 text-sm">
-                <p>這段 12 分鐘的音訊摘要，將帶領讀者理解構成所有無線訊號的基本單元。內容要點如下：</p>
+                <p>這段 12 分鐘的語音摘要，將帶領聽眾理解構成所有無線訊號的基本單元。內容要點如下：</p>
                 <ul class="list-disc list-inside space-y-2 pl-2">
                     <li><strong>弦波的本質</strong>：探討為何簡單的弦波（正弦與餘弦）是通訊分析的核心。介紹其三大要素：振幅（Amplitude）、頻率（Frequency）和相位（Phase），並解釋它們如何分別對應到訊號的強度、音高（或資料速率）與時間偏移。</li>
                     <li><strong>從時域到頻域</strong>：闡述傅立葉分析的直觀概念，即任何複雜的波形（如語音、音樂或數據訊號）都可以被拆解為一系列不同頻率和振幅的簡單弦波的組合。這個從時間維度切換到頻率維度的視角，是理解頻譜的關鍵。</li>
@@ -203,7 +213,7 @@
 
     <section id="quiz" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
-        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">根據本文內容，測試一下您的理解程度吧！完成下面的小測驗，看看您掌握了多少知識。</p>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">根據本頁內容，測試一下您的理解程度吧！完成下面的小測驗，看看您掌握了多少知識。</p>
         <div class="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto">
             <div id="quiz-container" class="space-y-6">
                 </div>
@@ -221,23 +231,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('main section[id]');
     
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
+        const targetId = link.getAttribute('href');
+        // Only add smooth scroll for internal links
+        if (targetId && targetId.startsWith('#')) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
     });
 
     function changeNavOnScroll() {
         let index = sections.length;
         while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
-        document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
-        const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
+        
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            if(link.getAttribute('href').startsWith('#')){
+               link.classList.remove('active');
+            }
+        });
+        
+        if (index >= 0 && sections[index]) {
+            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
         }
     }
     window.addEventListener('scroll', changeNavOnScroll);
@@ -254,11 +275,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('.mobile-nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            hamburgerIconOpen.classList.remove('hidden');
-            hamburgerIconClose.classList.add('hidden');
-        });
+        if (link.getAttribute('href').startsWith('#')) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            });
+        }
     });
     
     // --- Chart and Interactive Elements Initialization ---
@@ -277,14 +300,25 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
             ctx.beginPath(); ctx.moveTo(0, centerY); ctx.lineTo(width, centerY); ctx.moveTo(centerX, 0); ctx.lineTo(centerX, height); ctx.stroke();
             ctx.beginPath(); ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI); ctx.stroke();
-            const x = centerX + radius * Math.cos(angle); const y = centerY - radius * Math.sin(angle);
+            
+            // Corrected: Point rotates on a circle (x=cos, y=sin)
+            const x = centerX + radius * Math.cos(angle); 
+            const y = centerY - radius * Math.sin(angle); 
+            
             ctx.beginPath(); ctx.moveTo(centerX, centerY); ctx.lineTo(x, y); ctx.strokeStyle = '#0284c7'; ctx.lineWidth = 2; ctx.stroke();
             ctx.beginPath(); ctx.arc(x, y, 5, 0, 2 * Math.PI); ctx.fillStyle = '#0284c7'; ctx.fill();
             const waveX = width / 2;
-            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(waveX, y); ctx.setLineDash([4, 4]); ctx.strokeStyle = '#f87171'; ctx.lineWidth = 1.5; ctx.stroke(); ctx.setLineDash([]);
+            
+            // Corrected: The wave is now a COSINE wave, matching the text.
+            // The connecting line links the point's vertical position (sine) to the start of the cosine wave.
+            // Let's create a NEW reference 'y' for the wave that follows COSINE.
+            const y_cosine_for_wave = centerY - radius * Math.cos(angle);
+            ctx.beginPath(); ctx.moveTo(x, y_cosine_for_wave); ctx.lineTo(waveX, y_cosine_for_wave); ctx.setLineDash([4, 4]); ctx.strokeStyle = '#f87171'; ctx.lineWidth = 1.5; ctx.stroke(); ctx.setLineDash([]);
+            
             ctx.beginPath();
             for (let i = 0; i < width / 2; i++) {
-                const waveAngle = angle - (i / (width / 2)) * 4 * Math.PI; const waveY = centerY - radius * Math.sin(waveAngle);
+                const waveAngle = angle - (i / (width / 2)) * 4 * Math.PI; 
+                const waveY = centerY - radius * Math.cos(waveAngle); // Wave is a cosine
                 if (i === 0) ctx.moveTo(waveX + i, waveY); else ctx.lineTo(waveX + i, waveY);
             }
             ctx.strokeStyle = '#f87171'; ctx.lineWidth = 2; ctx.stroke();
@@ -304,19 +338,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const timeDomainChart = new Chart(timeCtx, { type: 'line', options: chartOptions('時間') });
         const freqDomainChart = new Chart(freqCtx, { type: 'bar', options: chartOptions('頻率') });
         
-        const updateFourier = (freqs) => {
-            const timeData = timeLabels.map(t => freqs.reduce((sum, f) => sum + Math.sin(f * t * 2 * Math.PI / 128), 0));
+        const updateFourier = (components) => {
+            const timeData = timeLabels.map(t => {
+                return components.reduce((sum, comp) => sum + comp.amp * Math.sin(comp.freq * t * 2 * Math.PI / 128), 0);
+            });
             const freqData = Array(32).fill(0);
-            freqs.forEach(f => { if(f-1 < 32) freqData[f-1] = 1; });
+            components.forEach(comp => {
+               if(comp.freq - 1 < 32) {
+                   freqData[comp.freq - 1] = comp.amp;
+               }
+            });
+            
             timeDomainChart.data = { labels: timeLabels, datasets: [{ data: timeData, borderColor: '#0ea5e9', tension: 0.1, pointRadius: 0 }] };
             freqDomainChart.data = { labels: Array.from({length: 32}, (_, i) => i + 1), datasets: [{ data: freqData, backgroundColor: '#0ea5e9' }] };
-            timeDomainChart.update(); freqDomainChart.update();
+            timeDomainChart.update(); 
+            freqDomainChart.update();
         };
 
-        document.getElementById('ft-btn-1')?.addEventListener('click', () => updateFourier([5]));
-        document.getElementById('ft-btn-2')?.addEventListener('click', () => updateFourier([3, 10]));
-        document.getElementById('ft-btn-3')?.addEventListener('click', () => updateFourier([1, 3, 5, 7, 9, 11]));
-        updateFourier([5]);
+        const squareWaveComponents = [1, 3, 5, 7, 9, 11, 13, 15].map(f => ({freq: f, amp: 1/f}));
+
+        document.getElementById('ft-btn-1')?.addEventListener('click', () => updateFourier([{freq: 5, amp: 1}]));
+        document.getElementById('ft-btn-2')?.addEventListener('click', () => updateFourier([{freq: 3, amp: 1}, {freq: 10, amp: 0.8}]));
+        document.getElementById('ft-btn-3')?.addEventListener('click', () => updateFourier(squareWaveComponents));
+        
+        // Set initial state
+        updateFourier([{freq: 5, amp: 1}]);
     }
 
     function initQamSnrChart() {
@@ -392,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!quizContainer || !submitBtn || !resultsEl) return;
 
         const quizData = [
-            { question: "根據夏農極限定理 $C = B \\log_{2}(1 + S/N)$，假設其他條件不變，將頻寬 (B) 加倍，對通道容量 (C) 的影響，與將訊號功率 (S) 加倍相比，哪個影響更大？", options: [ { text: "將功率加倍的影響更大。", isCorrect: false }, { text: "將頻寬加倍的影響更大。", isCorrect: true }, { text: "兩者影響相同。", isCorrect: false }, { text: "無法比較，取決於初始的 S/N 值。", isCorrect: false } ] },
+            { question: "根據夏農極限定理 \\(C = B \\log_{2}(1 + S/N)\\)，假設其他條件不變，將頻寬 (B) 加倍，對通道容量 (C) 的影響，與將訊號功率 (S) 加倍相比，哪個影響更大？", options: [ { text: "將功率加倍的影響更大。", isCorrect: false }, { text: "將頻寬加倍的影響更大。", isCorrect: true }, { text: "兩者影響相同。", isCorrect: false }, { text: "無法比較，取決於初始的 S/N 值。", isCorrect: false } ] },
             { question: "在 QAM 調變技術中，從 64-QAM 升級到 256-QAM 主要意味著什麼？", options: [ { text: "傳輸距離變得更遠。", isCorrect: false }, { text: "對訊號雜訊比 (SNR) 的要求降低了。", isCorrect: false }, { text: "每個符號 (symbol) 能攜帶更多位元 (bits) 的資訊。", isCorrect: true }, { text: "訊號的抗干擾能力變得更強。", isCorrect: false } ] },
             { question: "報告中用「像玩俄羅斯方塊」來比喻哪一種多重接取技術？", options: [ { text: "FDMA", isCorrect: false }, { text: "TDMA", isCorrect: false }, { text: "CDMA", isCorrect: false }, { text: "OFDMA", isCorrect: true } ] }
         ];
@@ -406,6 +452,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </label>`).join('');
             return `<div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">${index + 1}. ${item.question}</p><div class="space-y-2">${optionsHtml}</div></div>`;
         }).join('');
+
+        // Re-render MathJax for the quiz questions
+        if (window.MathJax) {
+            MathJax.typesetPromise();
+        }
 
         // Handle submission
         submitBtn.addEventListener('click', () => {
@@ -455,5 +506,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
-
