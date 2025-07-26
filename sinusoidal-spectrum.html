@@ -2,8 +2,7 @@
 <html lang="zh-TW" class="scroll-smooth">
 <head>
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -18,10 +17,23 @@
     <title>互動式無線通訊策略分析</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
@@ -51,9 +63,8 @@
                     <a href="#future_tech" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">未來前沿</a>
                     <a href="#audio_summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
                     <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
-  <a href="index.html">回到首頁</a>
-  <a href=" autodrive-tamsui.html">下一篇</a>
-
+                    <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">回到首頁</a>
+                    <a href="autodrive-tamsui.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">下一篇</a>
                 </div>
             </div>
             <div class="md:hidden flex items-center">
@@ -72,9 +83,8 @@
             <a href="#future_tech" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來前沿</a>
             <a href="#audio_summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
             <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
-  <a href="index.html">回到首頁</a>
-  <a href=" autodrive-tamsui.html">下一篇</a>
-
+            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">回到首頁</a>
+            <a href="autodrive-tamsui.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">下一篇</a>
         </div>
     </nav>
 </header>
@@ -91,7 +101,7 @@
         <div class="space-y-8">
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h4 class="text-xl font-bold mb-4 text-slate-800">尤拉公式的旋轉之美</h4>
-                <p class="mb-4 text-slate-600">工程師偏愛使用尤拉公式 $e^{j\theta} = \cos(\theta) + j\sin(\theta)$ 來描述弦波，因其將複雜的三角運算轉為簡潔的代數，並提供了一個直觀的「旋轉」物理模型。下方的視覺化展示了一個點在複數平面上旋轉，其在實數軸上的投影，就完美地構成了一個餘弦波。這個視角是理解頻率與相位的關鍵。</p>
+                <p class="mb-4 text-slate-600">工程師偏愛使用尤拉公式 \(e^{j\theta} = \cos(\theta) + j\sin(\theta)\) 來描述弦波，因其將複雜的三角運算轉為簡潔的代數，並提供了一個直觀的「旋轉」物理模型。下方的視覺化展示了一個點在複數平面上旋轉，其在實數軸上的投影，就完美地構成了一個餘弦波。這個視角是理解頻率與相位的關鍵。</p>
                 <div class="chart-container h-64"><canvas id="eulerVisualizer"></canvas></div>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-lg">
@@ -121,7 +131,7 @@
             </div>
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h4 class="text-xl font-bold mb-4 text-slate-800">夏農極限計算機</h4>
-                <p class="mb-4 text-slate-600">克勞德·夏農定義了任何通道的理論最大傳輸速率，即通道容量 $C = B \log_{2}(1 + S/N)$。此公式揭示了頻寬(B)和功率(S/N)與速度的根本關係。請拖動下方的滑桿，親身體驗增加頻寬或功率對通道容量的不同影響。您會發現，頻寬是遠比功率更「強大」的資源。</p>
+                <p class="mb-4 text-slate-600">克勞德·夏農定義了任何通道的理論最大傳輸速率，即通道容量 \(C = B \log_{2}(1 + S/N)\)。此公式揭示了頻寬(B)和功率(S/N)與速度的根本關係。請拖動下方的滑桿，親身體驗增加頻寬或功率對通道容量的不同影響。您會發現，頻寬是遠比功率更「強大」的資源。</p>
                 <div class="space-y-4">
                     <div><label for="bandwidth" class="font-medium">頻寬 (B): <span id="bwValue">10</span> MHz</label><input type="range" id="bandwidth" min="1" max="100" value="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"></div>
                     <div><label for="snr" class="font-medium">訊號雜訊比 (S/N): <span id="snrValue">20</span> dB</label><input type="range" id="snr" min="0" max="40" value="20" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"></div>
@@ -221,23 +231,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('main section[id]');
     
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
+        const targetId = link.getAttribute('href');
+        // Only add smooth scroll for internal links
+        if (targetId && targetId.startsWith('#')) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
     });
 
     function changeNavOnScroll() {
         let index = sections.length;
         while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
-        document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
-        const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
+        
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            if(link.getAttribute('href').startsWith('#')){
+               link.classList.remove('active');
+            }
+        });
+        
+        if (index >= 0 && sections[index]) {
+            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
         }
     }
     window.addEventListener('scroll', changeNavOnScroll);
@@ -254,11 +275,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('.mobile-nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            hamburgerIconOpen.classList.remove('hidden');
-            hamburgerIconClose.classList.add('hidden');
-        });
+        if (link.getAttribute('href').startsWith('#')) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            });
+        }
     });
     
     // --- Chart and Interactive Elements Initialization ---
@@ -392,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!quizContainer || !submitBtn || !resultsEl) return;
 
         const quizData = [
-            { question: "根據夏農極限定理 $C = B \\log_{2}(1 + S/N)$，假設其他條件不變，將頻寬 (B) 加倍，對通道容量 (C) 的影響，與將訊號功率 (S) 加倍相比，哪個影響更大？", options: [ { text: "將功率加倍的影響更大。", isCorrect: false }, { text: "將頻寬加倍的影響更大。", isCorrect: true }, { text: "兩者影響相同。", isCorrect: false }, { text: "無法比較，取決於初始的 S/N 值。", isCorrect: false } ] },
+            { question: "根據夏農極限定理 \\(C = B \\log_{2}(1 + S/N)\\)，假設其他條件不變，將頻寬 (B) 加倍，對通道容量 (C) 的影響，與將訊號功率 (S) 加倍相比，哪個影響更大？", options: [ { text: "將功率加倍的影響更大。", isCorrect: false }, { text: "將頻寬加倍的影響更大。", isCorrect: true }, { text: "兩者影響相同。", isCorrect: false }, { text: "無法比較，取決於初始的 S/N 值。", isCorrect: false } ] },
             { question: "在 QAM 調變技術中，從 64-QAM 升級到 256-QAM 主要意味著什麼？", options: [ { text: "傳輸距離變得更遠。", isCorrect: false }, { text: "對訊號雜訊比 (SNR) 的要求降低了。", isCorrect: false }, { text: "每個符號 (symbol) 能攜帶更多位元 (bits) 的資訊。", isCorrect: true }, { text: "訊號的抗干擾能力變得更強。", isCorrect: false } ] },
             { question: "報告中用「像玩俄羅斯方塊」來比喻哪一種多重接取技術？", options: [ { text: "FDMA", isCorrect: false }, { text: "TDMA", isCorrect: false }, { text: "CDMA", isCorrect: false }, { text: "OFDMA", isCorrect: true } ] }
         ];
@@ -406,6 +429,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </label>`).join('');
             return `<div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">${index + 1}. ${item.question}</p><div class="space-y-2">${optionsHtml}</div></div>`;
         }).join('');
+
+        // Re-render MathJax for the quiz questions
+        MathJax.typesetPromise();
 
         // Handle submission
         submitBtn.addEventListener('click', () => {
@@ -455,5 +481,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
-
