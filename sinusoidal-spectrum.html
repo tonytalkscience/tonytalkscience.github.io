@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initEulerVisualizer() {
         const ctx = document.getElementById('eulerVisualizer')?.getContext('2d');
         if (!ctx) return;
-        let angle = Math.PI/2;
+        let angle = 0;
         function draw() {
             const width = ctx.canvas.width;
             const height = ctx.canvas.height;
