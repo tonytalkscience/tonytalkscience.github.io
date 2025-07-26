@@ -101,7 +101,7 @@
         <div class="space-y-8">
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h4 class="text-xl font-bold mb-4 text-slate-800">尤拉公式的旋轉之美</h4>
-                <p class="mb-4 text-slate-600">工程師偏愛使用尤拉公式 \(e^{j\theta} = \cos(\theta) + j\sin(\theta)\) 來描述弦波，因其將複雜的三角運算轉為簡潔的代數，並提供了一個直觀的「旋轉」物理模型。下方的視覺化展示了一個點在複數平面上旋轉，其在虛數軸上的投影（即垂直高度），就完美地構成了一個餘弦波。這個視角是理解頻率與相位的關鍵。</p>
+                <p class="mb-4 text-slate-600">工程師偏愛使用尤拉公式 \(e^{j\theta} = \cos(\theta) + j\sin(\theta)\) 來描述弦波，因其將複雜的三角運算轉為簡潔的代數，並提供了一個直觀的「旋轉」物理模型。下方的視覺化展示了一個點在複數平面上旋轉，其在實數軸上的投影，就完美地構成了一個餘弦波。</p>
                 <div class="chart-container h-64"><canvas id="eulerVisualizer"></canvas></div>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-lg">
@@ -232,7 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     navLinks.forEach(link => {
         const targetId = link.getAttribute('href');
-        // Only add smooth scroll for internal links
         if (targetId && targetId.startsWith('#')) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -247,13 +246,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function changeNavOnScroll() {
         let index = sections.length;
         while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
-        
         document.querySelectorAll('.nav-link').forEach((link) => {
             if(link.getAttribute('href').startsWith('#')){
                link.classList.remove('active');
             }
         });
-        
         if (index >= 0 && sections[index]) {
             const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
             if (activeLink) {
@@ -301,7 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.beginPath(); ctx.moveTo(0, centerY); ctx.lineTo(width, centerY); ctx.moveTo(centerX, 0); ctx.lineTo(centerX, height); ctx.stroke();
             ctx.beginPath(); ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI); ctx.stroke();
             
-            // Corrected: Point rotates on a circle (x=cos, y=sin)
             const x = centerX + radius * Math.cos(angle); 
             const y = centerY - radius * Math.sin(angle); 
             
@@ -309,16 +305,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.beginPath(); ctx.arc(x, y, 5, 0, 2 * Math.PI); ctx.fillStyle = '#0284c7'; ctx.fill();
             const waveX = width / 2;
             
-            // Corrected: The wave is now a COSINE wave, matching the text.
-            // The connecting line links the point's vertical position (sine) to the start of the cosine wave.
-            // Let's create a NEW reference 'y' for the wave that follows COSINE.
-            const y_cosine_for_wave = centerY - radius * Math.cos(angle);
-            ctx.beginPath(); ctx.moveTo(x, y_cosine_for_wave); ctx.lineTo(waveX, y_cosine_for_wave); ctx.setLineDash([4, 4]); ctx.strokeStyle = '#f87171'; ctx.lineWidth = 1.5; ctx.stroke(); ctx.setLineDash([]);
+            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(waveX, y); ctx.setLineDash([4, 4]); ctx.strokeStyle = '#f87171'; ctx.lineWidth = 1.5; ctx.stroke(); ctx.setLineDash([]);
             
             ctx.beginPath();
             for (let i = 0; i < width / 2; i++) {
                 const waveAngle = angle - (i / (width / 2)) * 4 * Math.PI; 
-                const waveY = centerY - radius * Math.cos(waveAngle); // Wave is a cosine
+                const waveY = centerY - radius * Math.sin(waveAngle); // Wave is a SINE
                 if (i === 0) ctx.moveTo(waveX + i, waveY); else ctx.lineTo(waveX + i, waveY);
             }
             ctx.strokeStyle = '#f87171'; ctx.lineWidth = 2; ctx.stroke();
@@ -361,7 +353,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('ft-btn-2')?.addEventListener('click', () => updateFourier([{freq: 3, amp: 1}, {freq: 10, amp: 0.8}]));
         document.getElementById('ft-btn-3')?.addEventListener('click', () => updateFourier(squareWaveComponents));
         
-        // Set initial state
         updateFourier([{freq: 5, amp: 1}]);
     }
 
