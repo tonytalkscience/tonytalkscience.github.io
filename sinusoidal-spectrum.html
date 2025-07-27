@@ -107,11 +107,10 @@
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <h4 class="text-xl font-bold mb-4 text-slate-800">傅立葉分析：解構訊號的指紋</h4>
                 <p class="mb-4 text-slate-600">任何複雜的訊號，都可以被看作是多個簡單弦波的疊加。傅立葉分析讓我們能從「時域」（訊號隨時間的變化）切換到「頻域」（構成訊號的頻率成分），看到訊號獨特的「指紋」。請點擊按鈕，觀察不同弦波組合在時域與頻域中的樣貌。</p>
-                <div class="flex flex-wrap justify-center gap-2 mb-4">
-                    <button id="ft-btn-1" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">弦波</button>
-                    <button id="ft-btn-2" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">雙弦波</button>
+                <div class="flex justify-center space-x-2 mb-4">
+                    <button id="ft-btn-1" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">單一頻率</button>
+                    <button id="ft-btn-2" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">雙頻率組合</button>
                     <button id="ft-btn-3" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">方波近似</button>
-                    <button id="ft-btn-4" class="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition">鋸齒波近似</button>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div><h5 class="text-center font-semibold mb-2">時域圖</h5><div class="chart-container h-64"><canvas id="timeDomainChart"></canvas></div></div>
@@ -200,7 +199,7 @@
                 您的瀏覽器不支援音訊播放。
             </audio>
             <div class="mt-6 text-slate-600 space-y-3 text-sm">
-                <p>這段 12 分鐘的語音摘要，將帶領聽眾理解構成所有無線訊號的基本單元。內容要點如下：</p>
+                <p>這段 12 分鐘的語音摘要，將帶領讀者理解構成所有無線訊號的基本單元。內容要點如下：</p>
                 <ul class="list-disc list-inside space-y-2 pl-2">
                     <li><strong>弦波的本質</strong>：探討為何簡單的弦波（正弦與餘弦）是通訊分析的核心。介紹其三大要素：振幅（Amplitude）、頻率（Frequency）和相位（Phase），並解釋它們如何分別對應到訊號的強度、音高（或資料速率）與時間偏移。</li>
                     <li><strong>從時域到頻域</strong>：闡述傅立葉分析的直觀概念，即任何複雜的波形（如語音、音樂或數據訊號）都可以被拆解為一系列不同頻率和振幅的簡單弦波的組合。這個從時間維度切換到頻率維度的視角，是理解頻譜的關鍵。</li>
@@ -215,9 +214,11 @@
     <section id="quiz" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">根據本頁內容，測試一下您的理解程度吧！完成下面的小測驗，看看您掌握了多少知識。</p>
-        <div class="max-w-2xl mx-auto">
-            <div id="quiz-container" class="space-y-8">
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto">
+            <div id="quiz-container" class="space-y-6">
                 </div>
+            <div class="mt-8 text-center"><button id="submit-quiz-btn" class="bg-sky-600 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-700 transition-colors">提交答案</button></div>
+            <div id="quiz-results" class="mt-6 text-center text-lg font-semibold"></div>
         </div>
     </section>
 
@@ -309,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.beginPath();
             for (let i = 0; i < width / 2; i++) {
                 const waveAngle = angle - (i / (width / 2)) * 4 * Math.PI; 
-                const waveY = centerY - radius * Math.sin(waveAngle);
+                const waveY = centerY - radius * Math.sin(waveAngle); // Wave is a SINE
                 if (i === 0) ctx.moveTo(waveX + i, waveY); else ctx.lineTo(waveX + i, waveY);
             }
             ctx.strokeStyle = '#f87171'; ctx.lineWidth = 2; ctx.stroke();
@@ -347,12 +348,10 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const squareWaveComponents = [1, 3, 5, 7, 9, 11, 13, 15].map(f => ({freq: f, amp: 1/f}));
-        const sawtoothWaveComponents = Array.from({length: 10}, (_, i) => i + 1).map(f => ({freq: f, amp: 2 * Math.pow(-1, f + 1) / f}));
 
         document.getElementById('ft-btn-1')?.addEventListener('click', () => updateFourier([{freq: 5, amp: 1}]));
         document.getElementById('ft-btn-2')?.addEventListener('click', () => updateFourier([{freq: 3, amp: 1}, {freq: 10, amp: 0.8}]));
         document.getElementById('ft-btn-3')?.addEventListener('click', () => updateFourier(squareWaveComponents));
-        document.getElementById('ft-btn-4')?.addEventListener('click', () => updateFourier(sawtoothWaveComponents));
         
         updateFourier([{freq: 5, amp: 1}]);
     }
@@ -389,57 +388,45 @@ document.addEventListener('DOMContentLoaded', () => {
         calculate();
     }
     
-    let tw5gSpectrumChartInstance = null; 
+    function initAccessTech() {
+        const container = document.getElementById('access-tech-container');
+        if (!container) return;
+        const techs = [
+            { name: 'FDMA', analogy: '多車道高速公路，每輛車有專屬車道。', gen: '1G' },
+            { name: 'TDMA', analogy: '單線道公路，由交通號誌控制車輛輪流通行。', gen: '2G' },
+            { name: 'CDMA', analogy: '派對上多對人用不同語言交談，只聽得懂自己的語言。', gen: '3G' },
+            { name: 'OFDMA', analogy: '像玩俄羅斯方塊一樣，將不同大小的資源塊動態地分配給不同用戶。', gen: '4G/5G' }
+        ];
+        container.innerHTML = techs.map(tech => `
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 interactive-card cursor-pointer">
+                <div class="flex justify-between items-center mb-2">
+                    <h5 class="text-xl font-bold text-sky-600">${tech.name}</h5>
+                    <span class="text-sm font-semibold bg-sky-100 text-sky-800 px-2 py-1 rounded-full">${tech.gen}</span>
+                </div><p class="text-slate-600 text-sm">${tech.analogy}</p>
+            </div>`).join('');
+    }
+
     function initTw5gSpectrumChart() {
         const ctx = document.getElementById('tw5gSpectrumChart')?.getContext('2d');
         if (!ctx) return;
-
-        function renderChart() {
-            if (tw5gSpectrumChartInstance) {
-                tw5gSpectrumChartInstance.destroy();
-            }
-            const isMobile = window.innerWidth < 640;
-            const chartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: true, title: { display: true, text: '頻寬 (MHz)' } },
-                    x: { title: { display: true, text: '電信商' } }
-                },
-                plugins: { tooltip: { mode: 'index', intersect: false } }
-            };
-
-            if (isMobile) {
-                chartOptions.scales.x.ticks = {
-                    maxRotation: 45,
-                    minRotation: 45,
-                    font: { size: 10 }
-                };
-            }
-
-            tw5gSpectrumChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['中華電信', '台灣大哥大', '遠傳電信'],
-                    datasets: [
-                        { label: '3.5 GHz頻寬 (MHz)', data: [90, 60, 80], backgroundColor: '#38bdf8' },
-                        { label: '28 GHz 頻寬 (MHz)', data: [600, 200, 400], backgroundColor: '#075985' }
-                    ]
-                },
-                options: chartOptions
-            });
-        }
-        renderChart();
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(renderChart, 250);
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['中華電信', '台灣大哥大', '遠傳電信'],
+                datasets: [
+                    { label: '3.5 GHz頻寬 (MHz)', data: [90, 60, 80], backgroundColor: '#38bdf8' },
+                    { label: '28 GHz 頻寬 (MHz)', data: [600, 200, 400], backgroundColor: '#075985' }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: '頻寬 (MHz)' } }, x: { title: { display: true, text: '電信商' } } }, plugins: { tooltip: { mode: 'index', intersect: false } } }
         });
     }
 
     function handleQuiz() {
         const quizContainer = document.getElementById('quiz-container');
-        if (!quizContainer) return;
+        const submitBtn = document.getElementById('submit-quiz-btn');
+        const resultsEl = document.getElementById('quiz-results');
+        if (!quizContainer || !submitBtn || !resultsEl) return;
 
         const quizData = [
             { question: "根據夏農極限定理 \\(C = B \\log_{2}(1 + S/N)\\)，假設其他條件不變，將頻寬 (B) 加倍，對通道容量 (C) 的影響，與將訊號功率 (S) 加倍相比，哪個影響更大？", options: [ { text: "將功率加倍的影響更大。", isCorrect: false }, { text: "將頻寬加倍的影響更大。", isCorrect: true }, { text: "兩者影響相同。", isCorrect: false }, { text: "無法比較，取決於初始的 S/N 值。", isCorrect: false } ] },
@@ -447,68 +434,52 @@ document.addEventListener('DOMContentLoaded', () => {
             { question: "報告中用「像玩俄羅斯方塊」來比喻哪一種多重接取技術？", options: [ { text: "FDMA", isCorrect: false }, { text: "TDMA", isCorrect: false }, { text: "CDMA", isCorrect: false }, { text: "OFDMA", isCorrect: true } ] }
         ];
 
-        quizData.forEach((item, index) => {
-            const questionId = `question-${index}`;
-            const questionElement = document.createElement('div');
-            questionElement.className = 'bg-white p-6 rounded-xl shadow-lg';
-            
-            let optionsHtml = item.options.map((opt, optIndex) => `
-                <div class="quiz-option border border-slate-300 p-3 rounded-lg cursor-pointer hover:bg-sky-50" data-index="${optIndex}">
-                    ${opt.text}
-                </div>
-            `).join('');
+        // Populate quiz questions
+        quizContainer.innerHTML = quizData.map((item, index) => {
+            const optionsHtml = item.options.map((opt, optIndex) => `
+                <label class="flex items-center p-2 rounded-md cursor-pointer quiz-option">
+                    <input type="radio" name="q${index}" value="${optIndex}" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500">
+                    <span class="ml-3 text-slate-700">${opt.text}</span>
+                </label>`).join('');
+            return `<div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">${index + 1}. ${item.question}</p><div class="space-y-2">${optionsHtml}</div></div>`;
+        }).join('');
 
-            questionElement.innerHTML = `
-                <h4 class="text-lg font-semibold mb-4 text-slate-800">問題 ${index + 1}：${item.question}</h4>
-                <div class="space-y-3" id="${questionId}">
-                   ${optionsHtml}
-                </div>
-                <div class="mt-4">
-                    <button class="submit-answer-btn bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition" disabled>提交答案</button>
-                </div>
-                <div class="quiz-feedback"></div>
-            `;
-
-            quizContainer.appendChild(questionElement);
-
-            const optionElements = questionElement.querySelectorAll('.quiz-option');
-            const submitBtn = questionElement.querySelector('.submit-answer-btn');
-            
-            let selectedOption = null;
-
-            optionElements.forEach(opt => {
-                opt.addEventListener('click', () => {
-                    optionElements.forEach(o => o.classList.remove('selected', 'border-sky-600'));
-                    opt.classList.add('selected', 'border-sky-600');
-                    selectedOption = opt.dataset.index;
-                    submitBtn.disabled = false;
-                });
-            });
-
-            submitBtn.addEventListener('click', () => {
-                if (selectedOption === null) return;
-                
-                const isCorrect = item.options[selectedOption].isCorrect;
-                const feedbackEl = questionElement.querySelector('.quiz-feedback');
-                
-                feedbackEl.innerHTML = isCorrect ? '<strong>正確！</strong> 您答對了。' : '<strong>不正確。</strong> 再想一想報告中的內容。';
-                feedbackEl.className = `quiz-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
-                
-                submitBtn.disabled = true;
-                optionElements.forEach(opt => {
-                    opt.style.pointerEvents = 'none';
-                    if (item.options[opt.dataset.index].isCorrect) {
-                        opt.classList.add('bg-green-100', 'border-green-500');
-                    } else if (opt.dataset.index === selectedOption) {
-                        opt.classList.add('bg-red-100', 'border-red-500');
-                    }
-                });
-            });
-        });
-        
+        // Re-render MathJax for the quiz questions
         if (window.MathJax) {
             MathJax.typesetPromise();
         }
+
+        // Handle submission
+        submitBtn.addEventListener('click', () => {
+            let score = 0;
+            const totalQuestions = quizData.length;
+            let answeredQuestions = 0;
+
+            quizData.forEach((item, index) => {
+                const userAnswer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (userAnswer) {
+                    answeredQuestions++;
+                    if (item.options[userAnswer.value].isCorrect) {
+                        score++;
+                    }
+                }
+            });
+
+            if (answeredQuestions < totalQuestions) {
+                resultsEl.textContent = '請回答所有問題後再提交！';
+                resultsEl.className = 'mt-6 text-center text-lg font-semibold text-red-600';
+                return;
+            }
+
+            let resultMessage = `您答對了 ${score} / ${totalQuestions} 題！`;
+            let resultColor = 'text-slate-800';
+            if (score === totalQuestions) { resultMessage += " 👍 太棒了，完全正確！"; resultColor = 'text-green-600'; }
+            else if (score >= Math.ceil(totalQuestions / 2)) { resultMessage += " 😊 還不錯喔！"; resultColor = 'text-yellow-600'; }
+            else { resultMessage += " 😅 再加加油！"; resultColor = 'text-red-600'; }
+
+            resultsEl.textContent = resultMessage;
+            resultsEl.className = `mt-6 text-center text-lg font-semibold ${resultColor}`;
+        });
     }
 
     // Initialize all components
@@ -526,4 +497,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-" 在 頻譜共享的未來：CBRS模型 中, 將 "美國海軍等" 改成 "美國海軍雷達"
