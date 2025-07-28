@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互動式報告：通訊與控制的融合</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #F8F7F4;
+            color: #334155;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                 height: 400px;
+                 max-height: 500px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #0d9488;
+            border-bottom-color: #0d9488;
+        }
+        .btn-active {
+            background-color: #14B8A6 !important;
+            color: white !important;
+            transform: scale(1.05);
+        }
+        .quiz-option:hover {
+            background-color: #f0fdfa; /* teal-50 */
+        }
+        .quiz-option.selected {
+            background-color: #ccfbf1; /* teal-200 */
+            border-color: #14b8a6; /* teal-600 */
+        }
+        .quiz-option.correct {
+            background-color: #dcfce7; /* green-200 */
+            border-color: #22c55e; /* green-500 */
+        }
+        .quiz-option.incorrect {
+            background-color: #fee2e2; /* red-200 */
+            border-color: #ef4444; /* red-500 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="main-header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-teal-700">通訊與控制的融合</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#history" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">歷史軌跡</a>
+                        <a href="#applications" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">應用前沿</a>
+                        <a href="#future" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">未來展望</a>
+                        <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">音訊摘要</a>
+                        <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">知識小測驗</a>
+                        <a href="#impact" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">影響與策略</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-teal-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#history" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">歷史軌跡</a>
+                <a href="#applications" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">應用前沿</a>
+                <a href="#future" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">未來展望</a>
+                <a href="#summary" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">音訊摘要</a>
+                <a href="#quiz" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">知識小測驗</a>
+                <a href="#impact" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">影響與策略</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 bg-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-800 leading-tight">世界的共生</h2>
+                <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">探索通訊與控制系統如何從各自獨立的領域，走向深度融合的必然道路，共同構築一個能感知、理解並與物理世界互動的智慧未來。</p>
+            </div>
+        </section>
+
+        <section id="history" class="py-16 lg:py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">歷史軌跡：從理論到體現</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">本節追溯通訊與控制融合的思想根源與技術演進。從奠定基礎的控制論與資訊理論，到將概念化為現實的網路化控制系統(NCS)與數實體系統(CPS)，我們將一同見證這條從抽象理論走向具體技術實現的發展路徑。</p>
+                </div>
+                
+                <div class="relative mt-12">
+                    <div class="absolute left-1/2 -ml-0.5 w-1 bg-teal-200 h-full"></div>
+                    <div class="space-y-12">
+                        <div class="timeline-item flex md:justify-end md:pr-8">
+                            <div class="md:w-5/12">
+                                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-500">
+                                    <h3 class="text-xl font-bold text-slate-800">1948年：理論奠基</h3>
+                                    <p class="mt-2 text-slate-600">諾伯特·維納提出「控制論」，將控制與通訊視為一體。克勞德·夏農發表「資訊理論」，為可靠通訊提供了數學基礎。這兩大理論共同構成了融合的哲學與數學基石。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item flex md:justify-start md:pl-8">
+                             <div class="md:w-5/12">
+                                <div class="bg-white p-6 rounded-lg shadow-md border-r-4 md:border-r-0 md:border-l-4 border-teal-500">
+                                    <h3 class="text-xl font-bold text-slate-800">1990s - 2000s：網路化控制系統 (NCS)</h3>
+                                    <p class="mt-2 text-slate-600">控制迴路首次透過通訊網路閉合。設計焦點在於克服網路帶來的延遲、封包遺失等缺陷，以維持系統穩定。網路在此階段被視為一個「不完美的通道」。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item flex md:justify-end md:pr-8">
+                            <div class="md:w-5/12">
+                                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-500">
+                                    <h3 class="text-xl font-bold text-slate-800">2000s - 至今：數實體系統 (CPS)</h3>
+                                    <p class="mt-2 text-slate-600">計算與物理過程被共同設計，實現深度整合。設計焦點轉向利用計算能力創造自主性、適應性等新功能。網路成為一個豐富的計算環境，而不僅僅是通道。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item flex md:justify-start md:pl-8">
+                            <div class="md:w-5/12">
+                                <div class="bg-white p-6 rounded-lg shadow-md border-r-4 md:border-r-0 md:border-l-4 border-teal-500">
+                                    <h3 class="text-xl font-bold text-slate-800">2010s - 至今：數位孿生 (Digital Twin)</h3>
+                                    <p class="mt-2 text-slate-600">作為CPS的核心技術，數位孿生為物理實體創建了一個即時同步的虛擬模型。它代表了CPS的「內在世界模型」，使預測性維護和流程優化成為可能，是通訊與控制融合的終極體現。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </section>
+
+        <section id="applications" class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">應用前沿：挑戰極限的融合實踐</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">本節聚焦於三個將通訊與控制融合推向極致的高風險應用領域。從車水馬龍的道路到分秒必爭的手術室，這些應用不僅展示了融合技術的巨大潛力，也揭示了其面臨的嚴苛性能挑戰。請點擊下方按鈕，探索不同應用的性能要求。</p>
+                </div>
+
+                <div class="flex justify-center space-x-2 sm:space-x-4 mb-8">
+                    <button data-app="v2x" class="app-btn px-4 py-2 text-sm sm:text-base bg-slate-200 text-slate-700 rounded-full shadow-sm hover:bg-teal-100 transition-all duration-300">V2X協同駕駛</button>
+                    <button data-app="grid" class="app-btn px-4 py-2 text-sm sm:text-base bg-slate-200 text-slate-700 rounded-full shadow-sm hover:bg-teal-100 transition-all duration-300">智慧電網控制</button>
+                    <button data-app="surgery" class="app-btn px-4 py-2 text-sm sm:text-base bg-slate-200 text-slate-700 rounded-full shadow-sm hover:bg-teal-100 transition-all duration-300">遠端機器人手術</button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <div class="chart-container">
+                        <canvas id="appRadarChart"></canvas>
+                    </div>
+                    <div id="app-info" class="bg-slate-50 p-6 rounded-lg">
+                        <h3 id="app-title" class="text-2xl font-bold text-slate-800 mb-2"></h3>
+                        <p id="app-description" class="text-slate-600 mb-4"></p>
+                        <div class="border-t border-slate-200 pt-4">
+                            <h4 class="font-semibold text-slate-700">關鍵挑戰：</h4>
+                            <p id="app-challenge" class="mt-1 text-slate-600"></p>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </section>
+
+        <section id="future" class="py-16 lg:py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">未來展望：重塑邊界的新興技術</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">通訊與控制的融合之旅遠未結束。本節將目光投向未來，探討那些有望從根本上重新定義兩者關係的前沿技術。這些技術將推動系統從目前的深度整合，邁向一個更智慧、更安全、更自主的新紀元。</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl text-teal-600 mb-4">📡</div>
+                        <h3 class="text-xl font-bold text-slate-800">6G ISAC：網路即感測器</h3>
+                        <p class="mt-2 text-slate-600">6G中的整合通訊與感知(ISAC)技術，讓通訊網路本身成為一個巨大的分散式感測器。網路不再僅是傳輸數據的通道，它能主動感知物理環境，為數位孿生提供養料，開創全新的感知服務模式。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl text-teal-600 mb-4">💡</div>
+                        <h3 class="text-xl font-bold text-slate-800">生成式AI：創造性的設計引擎</h3>
+                        <p class="mt-2 text-slate-600">生成式AI正在改變控制系統的設計方式。它不再僅僅是系統內部的一個組件，而是成為設計系統本身的工具，能夠自動探索廣闊的設計空間，生成人類工程師難以構思的新穎控制策略與系統架構。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl text-teal-600 mb-4">⚛️</div>
+                        <h3 class="text-xl font-bold text-slate-800">量子技術：不可破解的連結</h3>
+                        <p class="mt-2 text-slate-600">量子通訊(QKD)為關鍵系統提供了基於物理定律的終極安全保障。同時，量子計算有望解決傳統電腦難以處理的複雜優化問題，為控制系統找到真正的最優解，釋放前所未有的效率。</p>
+                    </div>
+                </div>
+           </div>
+        </section>
+        
+        <section id="summary" class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">音訊摘要</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">聆聽本報告的核心內容，快速掌握通訊與控制融合的關鍵概念與未來趨勢。</p>
+                </div>
+                <div class="max-w-2xl mx-auto bg-slate-50 p-6 rounded-lg shadow-md">
+                    <audio controls class="w-full">
+                        <source src="communication-control-fusion-13min35sNotebookLM.mp3" type="audio/mpeg">
+                        您的瀏覽器不支援音訊播放。
+                    </audio>
+                </div>
+            </div>
+        </section>
+        
+        <section id="quiz" class="py-16 lg:py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">知識小測驗</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">測試您對本報告內容的理解程度。請回答以下問題：</p>
+                </div>
+                <div id="quiz-container" class="max-w-2xl mx-auto space-y-8">
+                    </div>
+                <div class="text-center mt-8">
+                    <button id="submit-quiz-btn" class="px-6 py-3 bg-teal-600 text-white font-bold rounded-lg shadow-md hover:bg-teal-700 transition-colors">提交答案</button>
+                    <p id="quiz-result" class="mt-4 text-xl font-bold"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">影響與策略：駕馭更廣泛的變革</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">技術的融合不僅帶來機遇，也引發了關於安全、經濟、勞動力和政策的深刻變革。本節將探討這些更廣泛的社會維度，並為不同領域的利益相關者提供應對未來挑戰的戰略性建議。</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                     <div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">關鍵安全框架比較</h3>
+                        <div class="bg-slate-50 rounded-lg p-6">
+                            <div class="flex border-b border-slate-200">
+                                <button id="tab-nist" class="tab-btn flex-1 py-2 text-center font-medium text-slate-500 border-b-2 border-transparent">NIST CSF</button>
+                                <button id="tab-iec" class="tab-btn flex-1 py-2 text-center font-medium text-slate-500 border-b-2 border-transparent">ISA/IEC 62443</button>
+                            </div>
+                            <div id="tab-content" class="mt-4">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">對利益相關者的策略建議</h3>
+                        <div id="accordion" class="space-y-2">
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center text-slate-400">
+            <p>互動式報告：通訊與控制的融合</p>
+            <p class="text-sm mt-2">基於綜合分析報告生成</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const appData = {
+                v2x: {
+                    title: 'V2X協同駕駛',
+                    description: '車輛透過網路互相通訊(V2X)，實現超越單車感知的協同駕駛，如編隊行駛、協同換道等，以提升交通安全與效率。',
+                    challenge: '需要在高度動態、快速移動的環境中，確保極低的延遲和極高的訊息可靠性，任何一個訊息的遺失都可能導致連鎖事故。',
+                    metrics: { latency: 2, reliability: 2, bandwidth: 3, security: 4, consequence: 4 }
+                },
+                grid: {
+                    title: '智慧電網控制',
+                    description: '透過即時監控電網負載，智慧地調配電力資源，如動態平衡電動車充電負載，以確保電網穩定，避免大規模停電。',
+                    challenge: '需要管理大量分散的終端（如充電樁），並在保證系統整體穩定性的前提下，盡可能滿足個體用戶的需求，是一個大規模分散式協調問題。',
+                    metrics: { latency: 4, reliability: 3, bandwidth: 4, security: 3, consequence: 3 }
+                },
+                surgery: {
+                    title: '遠端機器人手術',
+                    description: '外科醫生透過網路遠端操控手術機器人，為偏遠地區的病患提供高品質醫療服務，是通訊與控制融合的終極考驗。',
+                    challenge: '對網路性能的要求極其嚴苛。任何微小的延遲、抖動或封包遺失都可能直接轉化為手術刀的失誤，導致災難性的物理後果。',
+                    metrics: { latency: 1, reliability: 1, bandwidth: 1, security: 1, consequence: 1 }
+                }
+            };
+            
+            const securityData = {
+                nist: {
+                    title: 'NIST 網路安全框架 (CSF)',
+                    content: `
+                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                            <li><strong>主要焦點：</strong>任何組織的風險管理，特別是關鍵基礎設施。</li>
+                            <li><strong>方法：</strong>高層次、靈活、基於成果（做什麼）。按功能組織：識別、保護、偵測、回應、復原。</li>
+                            <li><strong>性質：</strong>在美國對大多數私營部門是自願的。</li>
+                            <li><strong>目標受眾：</strong>C級高管、風險管理人員、資訊安全長。</li>
+                        </ul>`
+                },
+                iec: {
+                    title: 'ISA/IEC 62443',
+                    content: `
+                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                            <li><strong>主要焦點：</strong>工業自動化和控制系統(IACS)的安全性。</li>
+                            <li><strong>方法：</strong>規定性、詳細（如何做）。基於風險評估、縱深防禦、安全等級(SL)。</li>
+                            <li><strong>性質：</strong>由行業採用的國際標準，用於認證和合規。</li>
+                            <li><strong>目標受眾：</strong>控制工程師、系統整合商、產品製造商。</li>
+                        </ul>`
+                }
+            };
+
+            const recommendationsData = [
+                {
+                    title: '對研究人員',
+                    content: '促進跨學科研究，專注於可驗證和安全的AI，開發針對不確定網路條件的穩健演算法，並探索量子前沿技術。'
+                },
+                {
+                    title: '對行業領導者',
+                    content: '採納「系統思維」進行協同設計，投資於勞動力再培訓，將安全視為競爭優勢，並積極探索基於數據的新商業模式。'
+                },
+                {
+                    title: '對政策制定者',
+                    content: '建立公私合作夥伴關係解決技能差距，發展敏捷的監管框架，推動國際標準合作，並增加對基礎研究的公共投資。'
+                }
+            ];
+
+            // ***** 知識小測驗資料 *****
+            // 題目來自使用者提供的檔案
+            const quizData = [
+                {
+                    "question": "在比較NCS和CPS時，哪一個系統更強調計算與物理過程的深度整合與共同設計，而不僅僅是克服網路缺陷？",
+                    "options": [
+                        "NCS，因為它專注於維持網路穩定性",
+                        "CPS，因為其設計理念是計算與物理過程的協同設計",
+                        "兩者都同樣強調，只是應用的領域不同",
+                        "數位孿生，因為它是最終的表現形式"
+                    ],
+                    "answer": "CPS，因為其設計理念是計算與物理過程的協同設計"
+                },
+                {
+                    "question": "報告中提到，哪一項新興技術有望將通訊網路本身變成一個巨大的分散式感測器？",
+                    "options": [
+                        "量子計算",
+                        "生成式AI",
+                        "6G中的整合通訊與感知 (ISAC)",
+                        "邊緣計算"
+                    ],
+                    "answer": "6G中的整合通訊與感知 (ISAC)"
+                },
+                {
+                    "question": "在探討對不同利益相關者的策略建議時，報告建議「行業領導者」應該採取什麼樣的思維方式？",
+                    "options": [
+                        "專注於單一技術的深度研發",
+                        "採納「系統思維」進行協同設計",
+                        "等待國際標準成熟後再行動",
+                        "優先考慮降低短期營運成本"
+                    ],
+                    "answer": "採納「系統思維」進行協同設計"
+                }
+            ];
+
+            const radarCtx = document.getElementById('appRadarChart').getContext('2d');
+            let radarChart;
+
+            function createRadarChart(data) {
+                if (radarChart) {
+                    radarChart.destroy();
+                }
+                radarChart = new Chart(radarCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['低延遲', '高可靠性', '高帶寬', '高安全性', '高失敗後果'],
+                        datasets: [{
+                            label: '性能要求嚴苛度 (1為最嚴苛)',
+                            data: Object.values(data),
+                            backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                            borderColor: 'rgba(13, 148, 136, 1)',
+                            pointBackgroundColor: 'rgba(13, 148, 136, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(13, 148, 136, 1)'
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                                grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                                pointLabels: { font: { size: 12 }, color: '#334155' },
+                                ticks: {
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: 5,
+                                    stepSize: 1,
+                                    backdropColor: 'rgba(255, 255, 255, 0.75)',
+                                    callback: function(value) {
+                                        const labels = ['', '極高', '高', '中', '低', ''];
+                                        return labels[value];
+                                    }
+                                },
+                                reverse: true
+                            }
+                        },
+                        plugins: {
+                            legend: { position: 'top' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) { label += ': '; }
+                                        const value = context.raw;
+                                        const labels = ['', '極高', '高', '中', '低', ''];
+                                        label += labels[value];
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function updateAppInfo(appKey) {
+                const data = appData[appKey];
+                document.getElementById('app-title').textContent = data.title;
+                document.getElementById('app-description').textContent = data.description;
+                document.getElementById('app-challenge').textContent = data.challenge;
+                createRadarChart(data.metrics);
+                
+                document.querySelectorAll('.app-btn').forEach(btn => {
+                    btn.classList.remove('btn-active');
+                    if(btn.dataset.app === appKey) {
+                        btn.classList.add('btn-active');
+                    }
+                });
+            }
+
+            document.querySelectorAll('.app-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    updateAppInfo(button.dataset.app);
+                });
+            });
+
+            updateAppInfo('v2x');
+
+            const tabNist = document.getElementById('tab-nist');
+            const tabIec = document.getElementById('tab-iec');
+            const tabContent = document.getElementById('tab-content');
+
+            function updateSecurityTab(tabKey) {
+                const data = securityData[tabKey];
+                tabContent.innerHTML = data.content;
+                
+                tabNist.classList.remove('text-teal-600', 'border-teal-600');
+                tabIec.classList.remove('text-teal-600', 'border-teal-600');
+                
+                if(tabKey === 'nist') {
+                    tabNist.classList.add('text-teal-600', 'border-teal-600');
+                } else {
+                    tabIec.classList.add('text-teal-600', 'border-teal-600');
+                }
+            }
+
+            tabNist.addEventListener('click', () => updateSecurityTab('nist'));
+            tabIec.addEventListener('click', () => updateSecurityTab('iec'));
+            
+            updateSecurityTab('nist');
+
+            const accordionContainer = document.getElementById('accordion');
+            recommendationsData.forEach((item, index) => {
+                const accordionItem = document.createElement('div');
+                accordionItem.classList.add('bg-slate-50', 'rounded-lg');
+                accordionItem.innerHTML = `
+                    <button class="accordion-toggle w-full flex justify-between items-center text-left p-4 font-semibold text-slate-700">
+                        <span>${item.title}</span>
+                        <span class="accordion-icon transform transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content hidden p-4 pt-0 text-slate-600">
+                        ${item.content}
+                    </div>
+                `;
+                accordionContainer.appendChild(accordionItem);
+            });
+
+            document.querySelectorAll('.accordion-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+
+            // ***** 知識小測驗邏輯 *****
+            const quizContainer = document.getElementById('quiz-container');
+            const submitQuizBtn = document.getElementById('submit-quiz-btn');
+            const quizResult = document.getElementById('quiz-result');
+
+            function loadQuiz() {
+                // 使用已定義的 quizData
+                const selectedQuestions = quizData;
+
+                selectedQuestions.forEach((q, index) => {
+                    const questionElement = document.createElement('div');
+                    questionElement.classList.add('bg-white', 'p-6', 'rounded-lg', 'shadow-md');
+                    
+                    let optionsHTML = '';
+                    // 隨機排列選項
+                    const shuffledOptions = q.options.sort(() => 0.5 - Math.random());
+                    shuffledOptions.forEach(option => {
+                        optionsHTML += `
+                            <label class="quiz-option block p-3 mt-2 border-2 border-slate-200 rounded-lg cursor-pointer transition-colors">
+                                <input type="radio" name="question${index}" value="${option}" class="hidden">
+                                <span>${option}</span>
+                            </label>
+                        `;
+                    });
+
+                    questionElement.innerHTML = `
+                        <p class="font-bold text-lg text-slate-800">${index + 1}. ${q.question}</p>
+                        <div class="mt-4" data-answer="${q.answer}">${optionsHTML}</div>
+                    `;
+                    quizContainer.appendChild(questionElement);
+                });
+
+                document.querySelectorAll('.quiz-option').forEach(optionLabel => {
+                    optionLabel.addEventListener('click', () => {
+                        // 清除同問題的其他選項樣式
+                        const parent = optionLabel.parentElement;
+                        parent.querySelectorAll('.quiz-option').forEach(other => other.classList.remove('selected'));
+                        // 設定選中樣式
+                        optionLabel.classList.add('selected');
+                    });
+                });
+            }
+
+            submitQuizBtn.addEventListener('click', () => {
+                let score = 0;
+                const questions = quizContainer.querySelectorAll('.bg-white');
+                questions.forEach((questionElement, index) => {
+                    const selected = questionElement.querySelector('input:checked');
+                    const correctAnswer = questionElement.querySelector('div').dataset.answer;
+                    const options = questionElement.querySelectorAll('.quiz-option');
+
+                    options.forEach(optionLabel => {
+                        const input = optionLabel.querySelector('input');
+                        optionLabel.classList.remove('selected'); // 清除選中樣式
+                        
+                        if (input.value === correctAnswer) {
+                           optionLabel.classList.add('correct');
+                        }
+
+                        if (selected && input.value === selected.value && selected.value !== correctAnswer) {
+                           optionLabel.classList.add('incorrect');
+                        }
+                    });
+
+                    if (selected && selected.value === correctAnswer) {
+                        score++;
+                    }
+                });
+                quizResult.textContent = `您答對了 ${score} / ${questions.length} 題！`;
+                quizResult.classList.remove('hidden');
+                submitQuizBtn.disabled = true;
+                submitQuizBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+
+
+            loadQuiz();
+            // ***** End 知識小測驗邏輯 *****
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section[id]');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 80) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
