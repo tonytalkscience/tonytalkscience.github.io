@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互動式報告：協同演化的三位一體</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .quiz-option:hover { background-color: #f0f9ff; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+
+        /* Styles from original document adapted to new theme */
+        .era-button.active { background-color: #0c4a6e; color: #f8fafc; }
+        .tech-card { cursor: pointer; }
+        .comparison-table th, .comparison-table td { border-color: #e2e8f0; }
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">協同演化的三位一體</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">核心概念</a>
+                    <a href="#timeline" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">演進時間軸</a>
+                    <a href="#comparison" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">技術比較</a>
+                    <a href="#future" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">未來展望</a>
+                    <a href="#conclusion" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">結論</a>
+                    <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" sinusoidal-spectrum.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">核心概念</a>
+            <a href="#timeline" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">演進時間軸</a>
+            <a href="#comparison" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">技術比較</a>
+            <a href="#future" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來展望</a>
+            <a href="#conclusion" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">結論</a>
+            <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" sinusoidal-spectrum.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    
+    <section id="home" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">挑戰「協議中心論」的統一框架</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+            資訊與通訊技術(ICT)的演進，並非由任何單一因素主導，而是由「協議」、「網路架構」與「信號處理」三者構成的「三位一體」共同演化、相互塑造的結果。本互動報告將帶您探索這三股力量如何共舞，譜寫出通訊技術的宏偉史詩。
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
+            <div id="trinity-vis" class="w-full h-72 md:h-80 relative">
+                <canvas id="trinityCanvas"></canvas>
+                <div id="trinity-protocol" class="absolute text-center text-sm md:text-base font-semibold text-slate-800">協議</div>
+                <div id="trinity-architecture" class="absolute text-center text-sm md:text-base font-semibold text-slate-800">網路架構</div>
+                <div id="trinity-signal" class="absolute text-center text-sm md:text-base font-semibold text-slate-800">信號處理</div>
+            </div>
+            <div id="trinity-info" class="mt-4 text-center text-slate-600 font-medium h-12">將滑鼠懸停在元素上以查看定義。</div>
+        </div>
+    </section>
+
+    <section id="timeline" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">技術演進時間軸</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">從電報的滴答聲到 5G 的超高速串流，點擊下方的時代按鈕，探索關鍵技術如何體現三位一體的協同演化。</p>
+        <div id="era-buttons" class="flex flex-wrap gap-2 justify-center mb-8"></div>
+        <div id="tech-cards-container"></div>
+        <div id="tech-detail-view" class="mt-8"></div>
+    </section>
+
+    <section id="comparison" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">核心技術比較分析</h2>
+        <div class="space-y-12">
+            <div>
+                <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">行動通訊世代演進 (1G - 5G)</h3>
+                <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">行動通訊的每一代躍遷，都不是單一技術的進步，而是整個三位一體系統的再平衡與再創造。點擊下方按鈕瀏覽各世代的關鍵特性。</p>
+                <div id="mobile-gen-comparison" class="relative max-w-4xl mx-auto"></div>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">物聯網技術對比：LoRaWAN vs. NB-IoT</h3>
+                <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">為物聯網設計的通訊系統，「輕量級」和「高能效」是最高原則。兩種主流LPWAN技術體現了不同的三位一體設計哲學。點擊表格中的特性維度以查看詳細說明。</p>
+                <div class="max-w-4xl mx-auto">
+                    <div id="iot-comparison" class="overflow-x-auto bg-white rounded-xl shadow-lg p-4"></div>
+                    <div id="iot-detail" class="mt-4 p-4 bg-sky-50 rounded-lg text-slate-700 min-h-[50px]"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="future" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">未來展望：智慧、語義與量子的新維度</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">通訊的演進永不停歇。未來的網路將更加智慧化，甚至能理解資訊的「意義」，而物理學定律將為其帶來終極的安全保障。</p>
+        <div id="future-content" class="space-y-8 max-w-4xl mx-auto"></div>
+    </section>
+
+    <section id="conclusion" class="mb-16 scroll-mt-20">
+         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">綜合與結論</h2>
+         <div id="conclusion-content" class="prose max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg text-slate-700"></div>
+    </section>
+
+    <section id="summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">語音摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">點擊下方播放器，聆聽關於「三位一體」協同演化框架的重點摘要。</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">🎧 核心論點摘要</h3>
+            <audio controls class="w-full" src="communication-protocal-network-signal-processing-9min24s.mp3">
+                您的瀏覽器不支援音訊播放元件。
+            </audio>
+            <div class="prose max-w-none text-slate-600 mt-4">
+                <p>本報告的核心論點是，通訊技術的發展由「通訊協議」、「網路架構」與「信號處理」三者協同演化，形成一個不可分割的「三位一體」。這段語音深入探討了此觀點，說明任何單一元素的創新，都會對其他兩者產生壓力並催生變革。</p>
+                <p>例如，電腦數據這種「突發性」信號，催生了高效率的「封包交換」架構，進而需要像 TCP/IP 這樣全新的「協議」來管理數據的傳輸與可靠性。同樣地，Wi-Fi 技術中，由於無線「信號」的物理限制使其無法有效偵測碰撞，因此發展出 CSMA/CA 這種「避免碰撞」的「協議」，這就是協議為適應信號處理局限性而做出的改變。從 1G 到 5G 的演進，更是這三股力量不斷再平衡、再創造的宏偉篇章。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對「三位一體」框架的理解程度吧！</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+            <div id="quiz-container" class="space-y-8">
+                </div>
+            <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Navigation Logic ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            if(link.getAttribute('href').startsWith('#')){
+                link.classList.remove('active');
+             }
+        });
+        if (index >= 0 && sections[index]) {
+            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        if (link.getAttribute('href').startsWith('#')) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            });
+        }
+    });
+
+    // --- Content Data and Rendering Functions ---
+    const data = {
+        trinity: {
+            protocol: '通訊的「法律與秩序」。定義了「誰說、何時說、說什麼」的規則集合。',
+            architecture: '通訊的「骨架與拓撲」。描述了系統的物理與邏輯結構，決定了資源共享方式。',
+            signal: '通訊的「物理學與工程學」。負責在物理媒介上有效地表示、傳輸及還原資訊。'
+        },
+        timeline: [
+             {
+                era: '電信的黎明',
+                technologies: [
+                    { id: 'telegraph', name: '電報系統', icon: '📠', summary: '代碼、電纜與電流的交響曲，展現了最基礎的三位一體耦合。', details: { protocol: '<h4>協議：摩斯電碼</h4><p>史上第一個大規模數位通訊協議，不僅定義了編碼，更關鍵的是定義了嚴格的時序規則，以適應信號處理的局限性。</p>', architecture: '<h4>網路架構：點對點/共享匯流排</h4><p>極簡的物理架構，克服「距離的暴政」需要鋪設海底電纜等巨大工程，是協議運作的絕對前提。</p>', signal: '<h4>信號處理：直流電控制與中繼器</h4><p>基礎的開/關電流信號。為解決長距離衰減問題，發明了中繼器（Repeater）來放大信號，是基礎但至關重要的創新。</p>' } },
+                    { id: 'telephone', name: '電話網路', icon: '☎️', summary: '為傳遞連續語音信號，迫使網路架構與協議發生革命性變化。', details: { protocol: '<h4>協議：電路交換 (Circuit Switching)</h4><p>為類比語音建立穩定通路的規則體系。其「連接導向」特性，是為滿足語音信號穩定性，以及管理交換機架構資源的必然選擇。</p>', architecture: '<h4>網路架構：交換機與階層式網路</h4><p>為服務對穩定性要求高的類比信號而生。史端喬自動交換機以機械方式，將撥號脈衝（協議）轉化為物理連接（架構）。</p>', signal: '<h4>信號處理：類比語音信號</h4><p>與數位脈衝不同，人聲是連續的類比波形，對延遲和抖動極其敏感，要求通訊路徑必須穩定連續。</p>' } }
+                ]
+            },
+            {
+                era: '數位革命',
+                technologies: [
+                    { id: 'arpanet', name: 'ARPANET 與封包交換', icon: '🌐', summary: '為突發性數據流與網路生存性而生，奠定了現代網際網路的架構基石。', details: { protocol: '<h4>協議：儲存並轉發 (Store-and-Forward)</h4><p>將數據切割成帶有位址的「封包」，由路由器儲存、檢查位址再轉發。最初的NCP協議為後來的TCP/IP埋下伏筆。</p>', architecture: '<h4>架構革命：封包交換 (Packet Switching)</h4><p>去中心化的網狀拓撲，核心是IMP（現代路由器的前身）。通過統計多工提高鏈路利用率，並具備極高的穩健性。</p>', signal: '<h4>信號：突發性數位數據</h4><p>電腦數據是離散的、可分割的，對時間連續性要求不嚴，這使得「儲存並轉發」成為可能。</p>' } },
+                    { id: 'tcpip', name: 'TCP/IP 協議族', icon: '📜', summary: '透過分層模型實現解耦，是封包交換理念最成功的工程實現。', details: { protocol: '<h4>協議：TCP 與 UDP</h4><p>TCP提供可靠的、面向連接的服務（如網頁）；UDP提供低延遲、不可靠的服務（如串流）。兩者並存，體現了對不同應用需求的深刻適應性。</p>', architecture: '<h4>架構（由IP定義）：全球邏輯定址</h4><p>IP協議定義了全球唯一的IP位址，並提供「盡最大努力」的無連接服務，遵循「端到端原則」，簡化了網路核心。</p>', signal: '<h4>信號（面向應用）：可靠性 vs. 即時性</h4><p>傳輸層協議的設計，是為了滿足上層應用對數據「信號」的不同要求，是在統一IP架構上提供差異化服務的典範。</p>' } },
+                    { id: 'ethernet', name: '乙太網路', icon: '🔌', summary: '共享媒介上的競爭協議，展現了架構演進如何改變協議的必要性。', details: { protocol: '<h4>協議：CSMA/CD</h4><p>「先聽後說，邊說邊聽」。一個優雅的、去中心化的競爭協議，完美適應匯流排架構。當架構演進為交換式後，其碰撞偵測功能不再必要。</p>', architecture: '<h4>架構：共享匯流排 ->星狀拓撲</h4><p>從共享同軸電纜的匯流排，演進為使用交換器的星狀拓撲。交換器為每個端口創建獨立碰撞域，從根本上消除了碰撞。</p>', signal: '<h4>信號處理：碰撞偵測 (Collision Detection)</h4><p>網路介面卡在發送同時監測電纜電壓，若電壓異常則意味著發生碰撞。這是CSMA/CD協議的物理基礎。</p>' } },
+                    { id: 'www', name: '全球資訊網 (WWW)', icon: '🌍', summary: '引爆網路潛能的「殺手級應用」，對三位一體所有支柱施加壓力，引發協同創新。', details: { protocol: '<h4>協議演進：HTTP</h4><p>從HTTP/1.0到HTTP/2，透過引入持續連接、管線化、多路復用等機制，不斷優化以解決多資源頁面的加載效率問題。</p>', architecture: '<h4>架構演進：CDN</h4><p>為解決全球用戶訪問的延遲問題，內容分發網路(CDN)應運而生，將內容快取到靠近用戶的邊緣伺服器，是純粹的架構層創新。</p>', signal: '<h4>信號處理演進：影像壓縮</h4><p>Web對圖片的巨大需求，極大推動了JPEG、WebP等影像壓縮技術發展，以在保證視覺品質下減小文件大小。</p>' } }
+                ]
+            },
+            {
+                era: '無線時代',
+                technologies: [
+                    { id: 'wifi', name: 'Wi-Fi', icon: '📶', summary: '在共享頻譜的混沌中追求秩序，協議設計是對無線環境缺陷的直接回應。', details: { protocol: '<h4>協議：CSMA/CA</h4><p>「避免碰撞」而非「偵測碰撞」。依賴強制確認(ACK)和可選的RTS/CTS機制來解決隱藏節點問題，是用協議彌補物理層感知能力的不足。</p>', architecture: '<h4>架構：共享廣播媒介</h4><p>無線環境是開放、不穩定的共享媒介，帶來了無法實現碰撞偵測和隱藏節點兩大根本性問題。</p>', signal: '<h4>信號處理：無法碰撞偵測</h4><p>由於發射功率遠大於接收功率，無線網卡無法在發送同時有效監聽信道，使得乙太網路的碰撞偵測機制在技術上不可行。</p>' } },
+                    { id: 'mobile', name: '行動通訊 (1G-5G)', icon: '📱', summary: '世代更迭是三位一體系統再平衡與再創造的最宏大舞台。', details: { protocol: '<h4>協議：從語音信令到複雜協議棧</h4><p>從1G的類比語音信令，到2G的SMS，再到4G/5G為管理無線資源、行動性、QoS而設計的複雜協議棧，協議功能日益強大。</p>', architecture: '<h4>架構：從電路交換到全IP與網路切片</h4><p>1G/2G是電路交換，3G兩域並存，4G實現了全IP架構革命，5G引入網路切片，實現了「按需定製」的架構靈活性。</p>', signal: '<h4>信號處理：從類比到數位與MIMO</h4><p>1G到2G是類比到數位的躍遷。後續世代不斷引入更高效的調變與多址技術（WCDMA, OFDMA）以及天線技術（MIMO）來提升速率。</p>' } },
+                    { id: 'streaming', name: '影音串流', icon: '🎬', summary: '對現代網路三位一體的壓力測試，催生了新一輪的協同創新。', details: { protocol: '<h4>協議：自適應碼率串流 (ABR)</h4><p>如HLS和MPEG-DASH，客戶端播放器持續監測網路頻寬，智慧請求最合適碼率的影音片段，將適應性責任轉移到應用層。</p>', architecture: '<h4>架構：為視訊優化的CDN</h4><p>將影音片段快取在CDN邊緣節點，對降低啟動延遲、防止緩衝至關重要。ABR協議的設計也為了能無縫利用現有CDN架構。</p>', signal: '<h4>信號處理：視訊編解碼器 (Codec)</h4><p>ABR的前提是必須有高效的編解碼器（如H.265, AV1）來製作多個碼率版本的內容，以在給定碼率下最大化視覺品質。</p>' } }
+                ]
+            }
+        ],
+        comparison: {
+            mobile: [
+                { gen: '1G', tech: '類比 (FDMA)', arch: '電路交換', proto: '類比語音信令', goal: '行動語音' },
+                { gen: '2G', tech: '數位 (TDMA, CDMA)', arch: '電路交換', proto: '數位語音、簡訊(SMS)', goal: '安全數位語音、文字訊息' },
+                { gen: '3G', tech: 'WCDMA', arch: '電路交換 + 封包交換', proto: '更高速數據、基礎行動網頁', goal: '行動網際網路接取' },
+                { gen: '4G (LTE)', tech: 'OFDMA, MIMO', arch: '全IP封包交換 (EPC)', proto: '高速數據、VoIP、QoS', goal: '行動寬頻、影音串流' },
+                { gen: '5G', tech: 'OFDMA, mmWave, Massive MIMO', arch: '服務化、雲原生、網路切片', proto: '彈性參數集、URLLC、mMTC', goal: '多樣化服務 (eMBB, URLLC, mMTC)' }
+            ],
+            iot: [
+                { feature: '頻譜', lorawan: '未授權ISM頻段', nbiot: '授權蜂巢式頻段', analysis: '成本/彈性 vs. 服務品質/可控性' },
+                { feature: '網路拓撲', lorawan: '星型中的星型 (可私有部署)', nbiot: '蜂巢式 (依賴營運商)', analysis: '用戶控制/資本支出 vs. 託管服務/營運支出' },
+                { feature: '調變技術', lorawan: '啁啾展頻 (CSS)', nbiot: '正交相移鍵控 (QPSK)', analysis: '低速率下的穩健性/距離 vs. 頻譜效率/較高速率' },
+                { feature: '數據速率', lorawan: '約 0.3 - 50 kbps', nbiot: '約 20 - 200 kbps', analysis: '最大化電池壽命 vs. 支援更豐富的數據' },
+                { feature: '協議棧', lorawan: '輕量級LoRaWAN MAC層', nbiot: '3GPP蜂巢式協議棧', analysis: '簡單/低開銷 vs. 穩健/功能豐富' },
+                { feature: '功耗', lorawan: '極低 (電池壽命可達數年)', nbiot: '低 (但高於LoRaWAN)', analysis: '為靜態感測器優化 vs. 在複雜網路中利用節電模式' }
+            ]
+        },
+        future: [
+            { id: 'ai-native', title: '5G-Advanced與6G：AI原生的三位一體', icon: '🤖', content: 'AI將從外部管理工具，轉變為深度嵌入網路肌理的「原生」能力。<strong>協議</strong>將是能自主學習的智慧體；<strong>架構</strong>本身將包含分佈式AI算力；<strong>信號處理</strong>過程將由AI模型即時優化。這是一個能自我感知、自我優化、自我演進的閉環系統。' },
+            { id: 'semantic', title: '語義通訊：超越夏農範式的革命', icon: '🧠', content: '通訊目標從「準確複製比特流」轉變為「傳輸與任務相關的意義」。<strong>信號處理</strong>的核心是「語義提取」（如用LLM從影像中提取事件描述）；<strong>協議</strong>傳輸的是緊湊的語義表徵；接收端<strong>架構</strong>則是利用語義「生成」內容。這將通訊的焦點從「如何傳輸」提升到了「為何傳輸」。' },
+            { id: 'quantum', title: '量子飛躍：當物理定律定義三位一體', icon: '⚛️', content: '量子通訊將三位一體的關係推向極致，其安全性直接根植於物理定律。<strong>協議</strong>（如BB84）的安全性由「測不準原理」保證；<strong>信號處理</strong>的基礎是量子位元（Qubit）；而<strong>架構</strong>則需要量子記憶體、量子中繼器等全新組件，以克服量子態不可複製和易退相干的挑戰。' }
+        ],
+        conclusion: {
+            summary: `<p>本報告從「三位一體」的整合視角，系統性地重審了ICT的演進史。分析表明，將「協議」視為通訊世界的「憲法」是深刻的，但一部憲法的誕生與實施，離不開它所治理的疆域（網路架構），以及它所必須遵循的物理規律（信號處理）。</p>
+            <ul class="list-disc list-inside space-y-2 mt-4">
+                <li>在<b>電信的黎明</b>，我們看到協議如何適應信號處理的局限性，並與交換式架構完美適配。</li>
+                <li>在<b>網際網路的誕生</b>中，我們看到突發性數據「信號」如何催生封包交換的「架構」革命，而TCP/IP「協議」又如何為此架構提供擴展性。</li>
+                <li>在<b>無線與行動時代</b>，我們看到Wi-Fi協議如何為克服無線架構的缺陷而做出改良，而1G到5G的演進則展現了三位一體愈發複雜的協同變革。</li>
+                <li><b>應用驅動的演進</b>中，WWW和影音串流的案例揭示了用戶需求如何成為強大催化劑，同時對三位一体的所有支柱施加壓力，引發協同創新。</li>
+                <li><b>展望未來</b>，從6G的AI原生網路、語義通訊，到量子通訊，三位一體的整合與融合趨勢只會愈發強化。</li>
+            </ul>`,
+            implications: `
+            <h3 class="text-2xl font-bold mt-8 mb-4">對未來創新的啟示</h3>
+            <p>三位一體框架不僅是歷史的解釋工具，更是未來創新的指南。它深刻地揭示，未來最具突破性的技術進展，將源於跨越協議、架構和信號處理三個領域的、深度且同步的協同設計。這需要跨學科的團隊與具備系統級思維的工程師。單點的、孤立的創新將面臨瓶頸，而系統性的、跨層的協同創新將是釋放未來網路潛能的關鍵。</p>
+            <h3 class="text-2xl font-bold mt-8 mb-4">最終視角：技術與意圖的永恆共舞</h3>
+            <p>ICT的演進史是一場由三方共同演繹的舞蹈。「協議」是舞步編排，「網路架構」是舞台，而「信號處理」則是舞者的技巧。驅動這場舞蹈不斷變換的，始終是人類的意圖——從傳遞聲音，到共享知識，再到體驗虛擬世界。掌握這部三方共舞的演進邏輯，我們才能真正掌握理解過去、把握現在、洞見未來通訊技術發展的關鍵鑰匙。</p>`
+        },
+        quiz: {
+            questions: [
+                { question: "根據「三位一體」框架，哪一項最貼切地描述了「通訊協議」的角色？", options: ["通訊系統的物理拓撲與骨架", "在物理媒介上傳輸資訊的工程方法", "定義通訊『規則與秩序』的法律體系", "資訊內容的壓縮與編碼技術"], answer: 2 },
+                { question: "Wi-Fi 使用的 CSMA/CA 協議是為了解決什麼核心問題？", options: ["全球IP位址不足", "類比信號的失真", "網際網路的傳輸延遲", "無線信號無法有效進行「碰撞偵測」"], answer: 3 },
+                { question: "從 3G 到 4G (LTE) 的一個關鍵「架構」演進是什麼？", options: ["從類比完全轉變為數位", "引入了簡訊 (SMS) 功能", "從混合架構演進為「全IP封包交換」", "首次實現了全球漫遊"], answer: 2 },
+                { question: "為了解決 WWW 帶來的全球訪問延遲問題，業界發展出了哪種關鍵的「網路架構」創新？", options: ["TCP/IP 協議", "內容分發網路 (CDN)", "H.264 視訊編碼", "乙太網路交換器"], answer: 1 },
+                { question: "在三位一體中，「信號處理」主要關注什麼？", options: ["定義資料封包的格式", "決定封包要走哪條路徑", "有效地在物理媒介上表示與還原資訊", "確保網路的去中心化"], answer: 2 },
+                { question: "電話網路時代，為了保證連續語音信號的穩定性，主要採用了哪種協議/架構模式？", options: ["封包交換", "電路交換", "CSMA/CD", "數據報 (Datagram)"], answer: 1 }
+            ]
+        }
+    };
+
+    const state = {
+        activeEra: data.timeline[0].era,
+        activeTech: null,
+        quizQuestions: []
+    };
+    
+    function initTrinityVis() {
+        const canvas = document.getElementById('trinityCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const container = document.getElementById('trinity-vis');
+        const protocolDiv = document.getElementById('trinity-protocol');
+        const archDiv = document.getElementById('trinity-architecture');
+        const signalDiv = document.getElementById('trinity-signal');
+        const infoDiv = document.getElementById('trinity-info');
+        let animationFrameId;
+
+        const resizeHandler = () => {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            let width = container.clientWidth;
+            let height = container.clientHeight;
+            canvas.width = width;
+            canvas.height = height;
+            
+            let angle = 0;
+            const center = { x: width / 2, y: height / 2 };
+            const radius = Math.min(width, height) / 3.5;
+            const dotRadius = Math.min(width, height) / 12;
+
+            const elements = [
+                { div: protocolDiv, angle: 0, color: '#7dd3fc', info: data.trinity.protocol },
+                { div: archDiv, angle: 2 * Math.PI / 3, color: '#38bdf8', info: data.trinity.architecture },
+                { div: signalDiv, angle: 4 * Math.PI / 3, color: '#0ea5e9', info: data.trinity.signal }
+            ];
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                angle += 0.005;
+
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([3, 5]);
+
+                const p1 = { x: center.x + radius * Math.cos(elements[0].angle + angle), y: center.y + radius * Math.sin(elements[0].angle + angle) };
+                const p2 = { x: center.x + radius * Math.cos(elements[1].angle + angle), y: center.y + radius * Math.sin(elements[1].angle + angle) };
+                const p3 = { x: center.x + radius * Math.cos(elements[2].angle + angle), y: center.y + radius * Math.sin(elements[2].angle + angle) };
+
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.lineTo(p3.x, p3.y);
+                ctx.closePath();
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                elements.forEach((el) => {
+                    const pos = { x: center.x + radius * Math.cos(el.angle + angle), y: center.y + radius * Math.sin(el.angle + angle) };
+                    ctx.beginPath();
+                    ctx.arc(pos.x, pos.y, dotRadius, 0, 2 * Math.PI);
+                    ctx.fillStyle = el.color;
+                    ctx.fill();
+                    el.div.style.left = `${pos.x - el.div.clientWidth / 2}px`;
+                    el.div.style.top = `${pos.y - el.div.clientHeight / 2}px`;
+                });
+                animationFrameId = requestAnimationFrame(animate);
+            }
+            animate();
+
+            elements.forEach(el => {
+                el.div.addEventListener('mouseover', () => { infoDiv.textContent = el.info; });
+                el.div.addEventListener('mouseout', () => { infoDiv.textContent = '將滑鼠懸停在元素上以查看定義。'; });
+            });
+        };
+        resizeHandler();
+        window.addEventListener('resize', resizeHandler);
+    }
+
+    function renderTimeline() {
+        const eraButtonsContainer = document.getElementById('era-buttons');
+        const techCardsContainer = document.getElementById('tech-cards-container');
+        
+        data.timeline.forEach(era => {
+            const button = document.createElement('button');
+            button.className = 'era-button px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-slate-200 text-slate-700 hover:bg-slate-300';
+            button.textContent = era.era;
+            button.onclick = () => {
+                state.activeEra = era.era;
+                state.activeTech = null;
+                updateTimelineView();
+            };
+            eraButtonsContainer.appendChild(button);
+        });
+
+        const updateTimelineView = () => {
+            eraButtonsContainer.querySelectorAll('.era-button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === state.activeEra);
+            });
+            const currentEraData = data.timeline.find(e => e.era === state.activeEra);
+            techCardsContainer.innerHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    ${currentEraData.technologies.map(tech => `
+                        <div class="tech-card interactive-card bg-white p-6 rounded-xl shadow-lg" data-tech-id="${tech.id}">
+                            <div class="text-4xl mb-4">${tech.icon}</div>
+                            <h4 class="text-xl font-bold text-slate-800 mb-2">${tech.name}</h4>
+                            <p class="text-sm text-slate-600">${tech.summary}</p>
+                        </div>
+                    `).join('')}
+                </div>`;
+            
+            techCardsContainer.querySelectorAll('.tech-card').forEach(card => {
+                card.onclick = () => {
+                    state.activeTech = card.dataset.techId;
+                    renderTechDetail();
+                    const detailView = document.getElementById('tech-detail-view');
+                    if(detailView) detailView.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                };
+            });
+            renderTechDetail();
+        };
+
+        updateTimelineView();
+    }
+
+    function renderTechDetail() {
+        const techDetailView = document.getElementById('tech-detail-view');
+        if (!state.activeTech) {
+            techDetailView.innerHTML = '';
+            return;
+        }
+        const currentEraData = data.timeline.find(e => e.era === state.activeEra);
+        const techData = currentEraData.technologies.find(t => t.id === state.activeTech);
+        techDetailView.innerHTML = `
+            <div class="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-lg mt-8 ring-2 ring-sky-500">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6 text-slate-900">${techData.icon} ${techData.name}</h3>
+                <div class="grid md:grid-cols-3 gap-8 prose max-w-none text-slate-600">
+                    <div>${techData.details.protocol}</div>
+                    <div>${techData.details.architecture}</div>
+                    <div>${techData.details.signal}</div>
+                </div>
+            </div>`;
+    }
+
+    function renderComparison() {
+        renderMobileGen();
+        renderIotTable();
+    }
+
+    function renderMobileGen() {
+        const container = document.getElementById('mobile-gen-comparison');
+        if (!container) return;
+        let currentIndex = data.comparison.mobile.length - 1;
+        function updateContent() {
+            const item = data.comparison.mobile[currentIndex];
+            container.innerHTML = `
+                <div class="bg-white p-6 rounded-xl shadow-lg min-h-[300px] flex flex-col justify-center transition-all duration-300">
+                    <div class="text-center">
+                        <h4 class="text-5xl font-bold text-sky-500">${item.gen}</h4>
+                        <p class="text-lg font-semibold text-slate-700 mt-2">${item.goal}</p>
+                    </div>
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div><p class="text-sm font-bold text-slate-500">信號處理</p><p class="font-medium text-slate-800">${item.tech}</p></div>
+                        <div><p class="text-sm font-bold text-slate-500">網路架構</p><p class="font-medium text-slate-800">${item.arch}</p></div>
+                        <div><p class="text-sm font-bold text-slate-500">協議/服務</p><p class="font-medium text-slate-800">${item.proto}</p></div>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center mt-4 gap-4">
+                    <button id="prevBtn" class="px-4 py-2 bg-slate-200 rounded-full font-bold text-slate-700 disabled:opacity-50 transition hover:bg-slate-300">◀</button>
+                    <div class="flex gap-2">${data.comparison.mobile.map((_, i) => `<button class="dot w-3 h-3 rounded-full transition ${i === currentIndex ? 'bg-sky-600' : 'bg-slate-300'}" data-index="${i}"></button>`).join('')}</div>
+                    <button id="nextBtn" class="px-4 py-2 bg-slate-200 rounded-full font-bold text-slate-700 disabled:opacity-50 transition hover:bg-slate-300">▶</button>
+                </div>`;
+            
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === data.comparison.mobile.length - 1;
+            prevBtn.onclick = () => { if (currentIndex > 0) { currentIndex--; updateContent(); } };
+            nextBtn.onclick = () => { if (currentIndex < data.comparison.mobile.length - 1) { currentIndex++; updateContent(); } };
+            container.querySelectorAll('.dot').forEach(dot => {
+                dot.onclick = () => { currentIndex = parseInt(dot.dataset.index); updateContent(); }
+            });
+        }
+        updateContent();
+    }
+
+    function renderIotTable() {
+        const container = document.getElementById('iot-comparison');
+        const detailDiv = document.getElementById('iot-detail');
+        if (!container) return;
+        const table = document.createElement('table');
+        table.className = 'w-full text-left border-collapse comparison-table';
+        table.innerHTML = `
+            <thead>
+                <tr class="bg-slate-100">
+                    <th class="p-3 font-bold uppercase text-slate-600 text-sm border-b-2">特性維度</th>
+                    <th class="p-3 font-bold uppercase text-slate-600 text-sm border-b-2">LoRaWAN</th>
+                    <th class="p-3 font-bold uppercase text-slate-600 text-sm border-b-2">NB-IoT</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${data.comparison.iot.map(row => `
+                    <tr class="hover:bg-sky-50 cursor-pointer" data-analysis="${row.analysis}">
+                        <td class="p-3 font-bold text-slate-800 border-b">${row.feature}</td>
+                        <td class="p-3 text-slate-600 border-b">${row.lorawan}</td>
+                        <td class="p-3 text-slate-600 border-b">${row.nbiot}</td>
+                    </tr>`).join('')}
+            </tbody>`;
+        container.appendChild(table);
+        container.querySelectorAll('tbody tr').forEach(row => {
+            row.onclick = () => {
+                detailDiv.innerHTML = `<strong>設計權衡分析：</strong> ${row.dataset.analysis}`;
+                container.querySelectorAll('tbody tr').forEach(r => r.classList.remove('bg-sky-200'));
+                row.classList.add('bg-sky-200');
+            }
+        });
+        detailDiv.innerHTML = '點擊上方表格任一列以查看其設計權衡分析。';
+    }
+    
+    function renderFuture() {
+        const container = document.getElementById('future-content');
+        if(!container) return;
+        container.innerHTML = data.future.map(item => `
+            <div class="bg-white p-6 rounded-xl shadow-lg flex items-start gap-6 interactive-card">
+                <div class="text-5xl">${item.icon}</div>
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-2">${item.title}</h3>
+                    <p class="text-lg text-slate-600">${item.content}</p>
+                </div>
+            </div>`).join('');
+    }
+
+    function renderConclusion() {
+        const container = document.getElementById('conclusion-content');
+        if(!container) return;
+        container.innerHTML = data.conclusion.summary + data.conclusion.implications;
+    }
+
+    function initQuiz() {
+        const quizContainer = document.getElementById('quiz-container');
+        const submitBtn = document.getElementById('submit-quiz-btn');
+        const resultsDiv = document.getElementById('quiz-results');
+        if (!quizContainer || !submitBtn || !resultsDiv) return;
+
+        state.quizQuestions = data.quiz.questions.sort(() => 0.5 - Math.random()).slice(0, 3);
+        quizContainer.innerHTML = state.quizQuestions.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map((option, i) => `
+                        <label class="flex items-center p-2 rounded-md hover:bg-sky-50 cursor-pointer">
+                            <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2"></div>
+            </div>`).join('');
+
+        submitBtn.onclick = () => {
+            let score = 0;
+            state.quizQuestions.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                container.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                if (!selected) {
+                    feedbackDiv.textContent = '請選擇一個答案。';
+                    container.classList.add('incorrect');
+                    return;
+                }
+                const userAnswer = parseInt(selected.value);
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                }
+            });
+
+            resultsDiv.textContent = `您的得分: ${score} / ${state.quizQuestions.length}`;
+            if(score === state.quizQuestions.length) {
+                resultsDiv.className = 'mt-6 text-xl font-bold text-green-600';
+            } else {
+                resultsDiv.className = 'mt-6 text-xl font-bold text-amber-600';
+            }
+            submitBtn.disabled = true;
+        };
+    }
+
+    // --- Initialize all components ---
+    initTrinityVis();
+    renderTimeline();
+    renderComparison();
+    renderFuture();
+    renderConclusion();
+    initQuiz();
+    
+    // Set initial state
+    changeNavOnScroll();
+});
+</script>
+
+</body>
+</html>
