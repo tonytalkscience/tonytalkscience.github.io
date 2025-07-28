@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不變的羅盤：控制技術的演進</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 45vh; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .quiz-option.selected { background-color: #e0f2fe; border-color: #0284c7; }
+        .quiz-option.correct { background-color: #dcfce7; border-color: #16a34a; }
+        .quiz-option.incorrect { background-color: #fee2e2; border-color: #dc2626; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-600">不變的羅盤</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#intro" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">總覽</a>
+                    <a href="#evolution" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">模型演化</a>
+                    <a href="#pillars" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">三大支柱</a>
+                    <a href="#mpc" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">MPC剖析</a>
+                    <a href="#timeline" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">發展里程碑</a>
+                    <a href="#audio_summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
+                    <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#intro" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">總覽</a>
+            <a href="#evolution" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">模型演化</a>
+            <a href="#pillars" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">三大支柱</a>
+            <a href="#mpc" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">MPC剖析</a>
+            <a href="#timeline" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">發展里程碑</a>
+            <a href="#audio_summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
+            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+    <section id="intro" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">控制技術的「三位一體」核心</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">如同「協議」是通訊的基石，控制工程的演進也圍繞著三大核心支柱。這個恆定的框架，是我們理解從古代水鐘到現代AI所有自動化系統的鑰匙。</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center interactive-card border-t-4" style="border-color: #2A9D8F;">
+                <div class="text-5xl mb-3">📡</div>
+                <h3 class="text-2xl font-bold" style="color: #2A9D8F;">回饋 (Feedback)</h3>
+                <p class="mt-2 text-slate-600">控制的靈魂：感知誤差，實現自我調節的根本機制。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center interactive-card border-t-4" style="border-color: #E9C46A;">
+                <div class="text-5xl mb-3">🧠</div>
+                <h3 class="text-2xl font-bold" style="color: #E9C46A;">系統模型 (Model)</h3>
+                <p class="mt-2 text-slate-600">控制的心智：描述世界，進行預測與設計的理性藍圖。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center interactive-card border-t-4" style="border-color: #F4A261;">
+                <div class="text-5xl mb-3">🎯</div>
+                <h3 class="text-2xl font-bold" style="color: #F4A261;">最佳化 (Optimization)</h3>
+                <p class="mt-2 text-slate-600">控制的抱負：追求極致，從「可行」到「最好」的終極目標。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="evolution" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">模型的演化：從描述到預測</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">系統模型的演進是控制技術從「技」走向「學」的關鍵。我們描述與預測世界的能力實現了質的飛躍，使得控制系統能駕馭的複雜度呈指數級增長。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
+            <div class="chart-container"><canvas id="evolutionChart"></canvas></div>
+        </div>
+    </section>
+    
+    <section id="pillars" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">支柱詳解：回饋與策略</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">深入剖析回饋的構成，並比較不同控制策略對三大支柱的依賴程度。</p>
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-4 text-center" style="color: #2A9D8F;">回饋迴路：控制的閉環</h3>
+                <p class="text-slate-600 mb-4 text-center text-sm">任何回饋控制系統都包含四個基本要素，構成一個不斷測量、比較和修正的循環。</p>
+                <div class="chart-container h-72"><canvas id="feedbackChart"></canvas></div>
+            </div>
+            <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-4 text-center" style="color: #264653;">現代控制策略光譜</h3>
+                <p class="text-slate-600 mb-4 text-center text-sm">PID簡單直接，而MPC則是在模型基礎上進行複雜的最佳化，兩者對三大支柱的依賴各有側重。</p>
+                <div class="chart-container h-72"><canvas id="strategyRadarChart"></canvas></div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="mpc" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">最佳化的藝術：模型預測控制 (MPC)</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">MPC是三大支柱高度融合的典範。它在每個時刻，都基於最新的回饋，利用系統模型進行滾動的最佳化，從而實現了卓越的控制性能與處理複雜約束的能力。</p>
+        <div class="bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-5 items-center gap-4 text-center">
+                 <div class="flowchart-step p-4 border-2 rounded-lg" style="border-color: #2A9D8F;"><div class="text-3xl mb-2">📡</div><span class="font-bold" style="color: #2A9D8F;">1. 回饋</span><p class="text-sm font-normal text-slate-500 mt-1">測量當前狀態</p></div>
+                 <div class="text-4xl font-bold text-slate-300 transform md:rotate-0 rotate-90">→</div>
+                 <div class="flowchart-step p-4 border-2 rounded-lg" style="border-color: #E9C46A;"><div class="text-3xl mb-2">🧠</div><span class="font-bold" style="color: #E9C46A;">2. 模型</span><p class="text-sm font-normal text-slate-500 mt-1">預測未來軌跡</p></div>
+                 <div class="text-4xl font-bold text-slate-300 transform md:rotate-0 rotate-90">→</div>
+                 <div class="flowchart-step p-4 border-2 rounded-lg" style="border-color: #F4A261;"><div class="text-3xl mb-2">🎯</div><span class="font-bold" style="color: #F4A261;">3. 最佳化</span><p class="text-sm font-normal text-slate-500 mt-1">計算最優控制</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">控制思想的演進里程碑</h2>
+        <div class="relative timeline-container max-w-3xl mx-auto py-4">
+             <div class="timeline-block">
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                     <span class="font-bold text-md" style="color: #2A9D8F;">1788年</span>
+                     <h3 class="text-lg font-bold mt-1">比例回饋</h3>
+                     <p class="mt-2 text-sm text-slate-600">瓦特的離心式調速器成功商業化，展現了比例回饋控制的巨大威力，開啟了工業自動化時代。</p>
+                 </div>
+             </div>
+             <div class="timeline-block md:timeline-block-right">
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                     <span class="font-bold text-md" style="color: #2A9D8F;">1868年</span>
+                     <h3 class="text-lg font-bold mt-1">數學覺醒</h3>
+                     <p class="mt-2 text-sm text-slate-600">馬克士威發表《論調速器》，首次使用微分方程為控制器建立數學模型，將控制從工藝變為科學。</p>
+                 </div>
+             </div>
+             <div class="timeline-block">
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                     <span class="font-bold text-md" style="color: #E9C46A;">1932年</span>
+                     <h3 class="text-lg font-bold mt-1">頻域分析</h3>
+                     <p class="mt-2 text-sm text-slate-600">奈奎斯特提出基於頻率響應的穩定判據，奠定了古典控制理論中頻域分析法的基礎。</p>
+                 </div>
+             </div>
+             <div class="timeline-block md:timeline-block-right">
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                     <span class="font-bold text-md" style="color: #E9C46A;">1960年</span>
+                     <h3 class="text-lg font-bold mt-1">現代控制</h3>
+                     <p class="mt-2 text-sm text-slate-600">卡爾曼引入狀態空間方法並提出卡爾曼濾波，開啟了現代控制理論時代，並為航太工程提供了關鍵技術。</p>
+                 </div>
+             </div>
+              <div class="timeline-block">
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                     <span class="font-bold text-md" style="color: #F4A261;">1980s-至今</span>
+                     <h3 class="text-lg font-bold mt-1">最佳化與AI</h3>
+                     <p class="mt-2 text-sm text-slate-600">MPC、強健控制、適應性控制以及增強式學習等技術蓬勃發展，將最佳化與學習推向控制設計的核心。</p>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <section id="audio_summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">語音重點摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">此摘要濃縮了控制工程恆久不變的「三位一體」框架，這個框架貫穿了從古典到現代的所有控制系統。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
+            <div class="text-slate-600 space-y-4">
+                 <p>控制工程的歷史就是一部圍繞三大支柱不斷深化的歷史。無論技術如何演進，其本質都是在這三個支柱上深化與擴展：</p>
+                 <ul class="list-disc list-inside space-y-3 pl-4">
+                     <li><strong style="color: #2A9D8F;">回饋 (Feedback) 是根本：</strong> 這是控制的起點與靈魂，核心在於「處理不確定性」。透過不斷測量誤差並修正，系統才能在真實世界中穩定運作。</li>
+                     <li><strong style="color: #E9C46A;">模型 (Model) 是核心：</strong> 這是系統的「大腦」，讓我們從「試誤」走向「設計」。透過數學描述，我們得以分析、預測並設計出更精確的控制器。</li>
+                     <li><strong style="color: #F4A261;">最佳化 (Optimization) 是目標：</strong> 如果回饋讓我們「站穩」，模型讓我們「看遠」，那最佳化則讓我們「走好」。它回答了「在所有可行策略中，哪個是最好的？」這個問題。</li>
+                 </ul>
+                 <p class="pt-4">總結來說，這個「三位一體」的羅盤，始終為我們指引著自動化技術前進的方向。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對控制理論核心概念的理解程度吧！</p>
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+            <div id="quiz-container" class="space-y-6"></div>
+            <div class="mt-8 text-center">
+                <button id="check-quiz-btn" class="bg-sky-600 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-700 transition-colors shadow hover:shadow-md">檢查答案</button>
+            </div>
+            <div id="quiz-results" class="mt-6 text-center text-lg font-semibold"></div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Generic Navigation Logic (from template) ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Custom offset logic for sticky header
+                    const headerOffset = 80; // height of sticky header + some space
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        }
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 85 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            if(link.getAttribute('href').startsWith('#')){
+               link.classList.remove('active');
+            }
+        });
+        if (index >= 0 && sections[index]) {
+             const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+             if (activeLink) {
+                activeLink.classList.add('active');
+             }
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        if (link.getAttribute('href').startsWith('#')) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            });
+        }
+    });
+    
+    // --- Chart and Interactive Elements Initialization ---
+    
+    // Palette from source file
+    const PALETTE = {
+        teal: '#2A9D8F',
+        darkTeal: '#264653',
+        saffron: '#E9C46A',
+        sandyBrown: '#F4A261',
+        burntSienna: '#E76F51',
+    };
+    
+    function initEvolutionChart() {
+        const ctx = document.getElementById('evolutionChart')?.getContext('2d');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['古典控制 (頻域)', '現代控制 (時域)', '數據驅動/AI控制'],
+                datasets: [{
+                    label: '可處理的系統複雜度',
+                    data: [20, 60, 95],
+                    borderColor: PALETTE.teal,
+                    backgroundColor: 'rgba(42, 157, 143, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: PALETTE.teal,
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: '複雜度指標 (相對值)' } },
+                    x: { title: { display: true, text: '技術時代' } }
+                }
+            }
+        });
+    }
+
+    function initFeedbackChart() {
+        const ctx = document.getElementById('feedbackChart')?.getContext('2d');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['感測器 (Sensor)', '控制器 (Controller)', '致動器 (Actuator)', '受控對象 (Plant)'],
+                datasets: [{
+                    data: [25, 25, 25, 25],
+                    backgroundColor: [PALETTE.teal, PALETTE.saffron, PALETTE.sandyBrown, PALETTE.burntSienna],
+                    borderColor: '#f8fafc',
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    }
+
+    function initStrategyRadarChart() {
+        const ctx = document.getElementById('strategyRadarChart')?.getContext('2d');
+        if (!ctx) return;
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['模型依賴度', '最佳化程度', '強健性', '實現簡易度', '回饋依賴度'],
+                datasets: [{
+                    label: 'PID 控制', data: [2, 1, 4, 9, 8],
+                    borderColor: PALETTE.teal,
+                    backgroundColor: 'rgba(42, 157, 143, 0.2)',
+                    pointBackgroundColor: PALETTE.teal,
+                }, {
+                    label: 'MPC 控制', data: [9, 9, 7, 3, 9],
+                    borderColor: PALETTE.sandyBrown,
+                    backgroundColor: 'rgba(244, 162, 97, 0.2)',
+                    pointBackgroundColor: PALETTE.sandyBrown,
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { r: { suggestedMin: 0, suggestedMax: 10 } }
+            }
+        });
+    }
+
+    function handleQuiz() {
+        const quizContainer = document.getElementById('quiz-container');
+        const checkBtn = document.getElementById('check-quiz-btn');
+        const resultsContainer = document.getElementById('quiz-results');
+        if (!quizContainer || !checkBtn || !resultsContainer) return;
+
+        const allQuestions = [
+            { question: "控制理論的三大核心支柱是什麼？", options: ["感測、致動、計算", "回饋、模型、最佳化", "輸入、輸出、狀態", "穩定、快速、準確"], answer: "回饋、模型、最佳化" },
+            { question: "誰首次使用微分方程為控制器建立數學模型，將控制從「工藝」變為「科學」？", options: ["瓦特 (Watt)", "牛頓 (Newton)", "馬克士威 (Maxwell)", "卡爾曼 (Kalman)"], answer: "馬克士威 (Maxwell)" },
+            { question: "哪種現代控制策略被譽為是三大支柱高度融合的典範？", options: ["PID 控制", "模型預測控制 (MPC)", "模糊邏輯控制", "強健控制"], answer: "模型預測控制 (MPC)" },
+            { question: "在瓦特的離心式調速器中，主要體現了控制的哪個核心概念？", options: ["最佳化", "系統模型", "比例回饋", "數位控制"], answer: "比例回饋" },
+            { question: "卡爾曼濾波的提出，標誌著哪個控制理論時代的開啟？", options: ["古典控制理論", "現代控制理論", "後現代控制理論", "AI 控制理論"], answer: "現代控制理論" }
+        ];
+
+        let selectedQuestions = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function renderQuiz() {
+            shuffleArray(allQuestions);
+            selectedQuestions = allQuestions.slice(0, 3);
+            
+            quizContainer.innerHTML = selectedQuestions.map((q, index) => {
+                const shuffledOptions = [...q.options];
+                shuffleArray(shuffledOptions);
+                const optionsHtml = shuffledOptions.map(option => `
+                    <label class="quiz-option flex items-center p-3 border-2 border-slate-200 rounded-lg cursor-pointer transition-all duration-200 hover:bg-sky-50">
+                        <input type="radio" name="question-${index}" value="${option}" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500">
+                        <span class="ml-3 text-slate-700">${option}</span>
+                    </label>`).join('');
+                return `<div class="question-block" data-question-index="${index}">
+                            <p class="font-semibold text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                            <div class="space-y-2">${optionsHtml}</div>
+                        </div>`;
+            }).join('');
+            addOptionListeners();
+        }
+        
+        function addOptionListeners() {
+            quizContainer.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const name = this.querySelector('input').name;
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                        radio.parentElement.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    this.querySelector('input').checked = true;
+                });
+            });
+        }
+
+        checkBtn.addEventListener('click', function() {
+            let score = 0;
+            let allAnswered = true;
+
+            selectedQuestions.forEach((q, index) => {
+                const questionBlock = document.querySelector(`.question-block[data-question-index="${index}"]`);
+                const selectedRadio = questionBlock.querySelector(`input[name="question-${index}"]:checked`);
+
+                if (!selectedRadio) { allAnswered = false; return; }
+                
+                const userAnswer = selectedRadio.value;
+                const correctAnswer = q.answer;
+                const options = questionBlock.querySelectorAll('.quiz-option');
+
+                options.forEach(opt => {
+                    const optInput = opt.querySelector('input');
+                    opt.classList.remove('selected'); 
+                    if (optInput.value === correctAnswer) {
+                        opt.classList.add('correct');
+                    } else if (optInput.checked) {
+                        opt.classList.add('incorrect');
+                    }
+                    opt.style.pointerEvents = 'none';
+                });
+
+                if (userAnswer === correctAnswer) { score++; }
+            });
+
+            if (!allAnswered) {
+                resultsContainer.textContent = "請回答所有問題！";
+                resultsContainer.className = 'mt-6 text-center text-lg font-semibold text-red-600';
+                return;
+            }
+
+            resultsContainer.textContent = `您的得分: ${score} / 3`;
+            resultsContainer.className = `mt-6 text-center text-lg font-bold ${score === 3 ? 'text-green-600' : 'text-sky-800'}`;
+            
+            checkBtn.textContent = '重新測驗';
+            checkBtn.onclick = function() {
+                checkBtn.textContent = '檢查答案';
+                resultsContainer.textContent = '';
+                renderQuiz();
+                checkBtn.onclick = arguments.callee; 
+            };
+        });
+        
+        renderQuiz();
+    }
+
+    // Initialize all components
+    initEvolutionChart();
+    initFeedbackChart();
+    initStrategyRadarChart();
+    handleQuiz();
+    
+    // Set initial state for navigation
+    changeNavOnScroll();
+});
+</script>
+
+</body>
+</html>
