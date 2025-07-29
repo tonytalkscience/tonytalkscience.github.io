@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-B417SX4GTY');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電氣時代：重塑世界的無形之力</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+        .prose { max-width: 65ch; margin-left: auto; margin-right: auto; }
+        .prose h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.75; }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">電氣時代</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-2 flex-wrap justify-end">
+                    <a href="#intro" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">簡介</a>
+                    <a href="#history" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">歷史演進</a>
+                    <a href="#impact" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">社會衝擊</a>
+                    <a href="#culture" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">文化啟發</a>
+                    <a href="#costs" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">隱藏成本</a>
+                    <a href="#future" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">未來展望</a>
+                    <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href="telegraph_carrier.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#intro" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">簡介</a>
+            <a href="#history" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">歷史演進</a>
+            <a href="#impact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">社會衝擊</a>
+            <a href="#culture" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">文化啟發</a>
+            <a href="#costs" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">隱藏成本</a>
+            <a href="#future" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來展望</a>
+            <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href="telegraph_carrier.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    
+    <section id="intro" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">重塑世界的無形之力</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+            從琥珀的微弱靜電到驅動全球文明的龐大電網，電力不僅是技術的進步，更是重塑社會、經濟與文化的根本力量。這份資訊圖表將帶您探索這場永恆的革命——它的輝煌成就、隱藏的代價，以及我們共同邁向的智慧與永續的未來。
+        </p>
+    </section>
+
+    <section id="history" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第一部：馴服閃電的奧德賽</h2>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">通訊方式的演進</h3>
+            <p class="text-center text-slate-600 mb-8">電力首次打破了資訊傳播的物理速度限制，將人類帶入光速通訊時代，最終實現全球的瞬時連接。</p>
+            <div class="flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 md:space-x-4">
+                <div class="text-center p-4 rounded-lg bg-slate-100 w-full md:w-1/4 interactive-card">
+                    <div class="text-4xl mb-2">🐎</div>
+                    <h4 class="font-bold text-lg text-slate-800">物理速度</h4>
+                    <p class="text-sm text-slate-500">驛馬快信</p>
+                </div>
+                <div class="text-sky-600 text-2xl font-bold transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="text-center p-4 rounded-lg bg-slate-100 w-full md:w-1/4 interactive-card">
+                    <div class="text-4xl mb-2">⚡️</div>
+                    <h4 class="font-bold text-lg text-slate-800">光的速度</h4>
+                    <p class="text-sm text-slate-500">電報</p>
+                </div>
+                <div class="text-sky-600 text-2xl font-bold transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="text-center p-4 rounded-lg bg-slate-100 w-full md:w-1/4 interactive-card">
+                    <div class="text-4xl mb-2">🌐</div>
+                    <h4 class="font-bold text-lg text-slate-800">瞬時連接</h4>
+                    <p class="text-sm text-slate-500">全球光纖網絡</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第二部：電力文明的誕生</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">都市形態的重塑</h3>
+                <p class="text-center text-slate-600 mb-6">電力同時推動了城市的垂直增長（電梯）與水平擴張（電氣化交通），塑造了現代大都會的核心-輻射結構。</p>
+                <div class="w-full h-80"><canvas id="urbanGrowthChart"></canvas></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">工業生產革命</h3>
+                <p class="text-center text-slate-600 mb-6">電力驅動的「單元驅動」模式，解放了工廠佈局，催生了福特 T 型車的移動裝配線，使其組裝時間大幅縮短。</p>
+                <div class="flex justify-around items-end h-64">
+                    <div class="text-center">
+                        <p class="text-slate-500">之前</p>
+                        <div class="bg-sky-300 rounded-t-lg mx-auto" style="height: 200px; width: 60px;"></div>
+                        <p class="mt-2 font-bold text-xl text-slate-800">12.5 小時</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-500">之後</p>
+                        <div class="bg-sky-600 rounded-t-lg mx-auto" style="height: 26px; width: 60px;"></div>
+                        <p class="mt-2 font-bold text-xl text-slate-800">93 分鐘</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="culture" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第三部：電氣繆斯的啟發</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">三點光照法</h3>
+                <p class="text-center text-slate-600 mb-6">電力驅動的燈光系統賦予電影創作者前所未有的光影控制權。點擊按鈕查看效果。</p>
+                <div class="relative w-48 h-48 mx-auto mb-4">
+                    <div id="light-subject" class="w-full h-full rounded-full bg-slate-400 transition-all duration-300 border-4 border-transparent"></div>
+                </div>
+                <div class="flex justify-center space-x-2">
+                    <button id="key-btn" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg font-semibold hover:bg-slate-300">主光</button>
+                    <button id="fill-btn" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg font-semibold hover:bg-slate-300">補光</button>
+                    <button id="back-btn" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg font-semibold hover:bg-slate-300">背光</button>
+                    <button id="reset-btn" class="px-4 py-2 bg-slate-500 text-white rounded-lg font-semibold hover:bg-slate-600">重置</button>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">藝術家角色的演變</h3>
+                <p class="text-center text-slate-600 mb-6">在電力與計算時代，藝術家的角色從直接創作者，演變為「過程的設計師」。</p>
+                <div class="space-y-6">
+                    <div class="p-4 rounded-lg bg-slate-100">
+                        <h4 class="font-bold text-lg text-sky-700">生成式藝術</h4>
+                        <p class="text-sm text-slate-600">藝術家設定演算法，由電腦自主生成作品，如《電子羊》項目。</p>
+                    </div>
+                    <div class="text-center text-2xl text-slate-400">&darr;</div>
+                    <div class="p-4 rounded-lg bg-slate-100">
+                        <h4 class="font-bold text-lg text-sky-700">互動藝術</h4>
+                        <p class="text-sm text-slate-600">藝術家創造能回應觀眾的沉浸式環境，觀眾成為作品的一部分。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="costs" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第四部：電網的陰影</h2>
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8 interactive-card">
+            <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">全球與台灣電力結構比較</h3>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-6">儘管再生能源興起，化石燃料仍是全球電力的主要來源。台灣對其依賴程度尤其顯著，凸顯能源轉型的挑戰。</p>
+            <div class="w-full h-80"><canvas id="powerStructureChart"></canvas></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center interactive-card">
+                <h3 class="text-2xl font-bold mb-4 text-slate-800">能源貧窮</h3>
+                <p class="mb-4 text-slate-600">全球仍有數億人口生活在沒有穩定電力供應的狀態下。</p>
+                <div class="text-5xl font-bold text-sky-600">~7.7億</div>
+                <p class="text-slate-500">人</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg text-center interactive-card">
+                <h3 class="text-2xl font-bold mb-4 text-slate-800">關鍵礦物供應鏈</h3>
+                <p class="mb-4 text-slate-600">中國在全球稀土元素精煉加工中佔據主導地位，引發地緣政治風險。</p>
+                <div class="text-5xl font-bold text-sky-600">>90%</div>
+                <p class="text-slate-500">市佔率</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="future" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第五部：下一股電流</h2>
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8 interactive-card">
+            <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">長時儲能技術比較</h3>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-6">為了解決再生能源的間歇性，大規模、長時程的儲能技術至關重要。</p>
+            <div class="w-full h-96"><canvas id="storageTechChart"></canvas></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-2xl font-bold mb-4 text-slate-800">公正轉型 (Just Transition)</h3>
+                <p class="text-slate-600">能源轉型不僅是技術問題，更是社會問題。公正轉型的核心是確保在淘汰化石燃料的過程中，不讓傳統能源產業的工人與社區被拋下，為其提供再培訓與經濟支持。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-2xl font-bold mb-4 text-slate-800">設計隱私 (Privacy by Design)</h3>
+                <p class="text-slate-600">智慧電網帶來便利，也引發數據隱私擔憂。「設計隱私」原則要求在技術設計之初就將隱私保護作為核心要素，而非事後補救，以堅守人性價值與尊嚴。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">語音摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">點擊下方播放器，聆聽關於「電氣時代」如何重塑世界的重點摘要。</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">🎧 The Electric Age: Reshaping Our World</h3>
+            <audio controls class="w-full mb-4" src="v2_The_Electric_Age_Reshaping_Our_World_9min42s_notebookLM.mp3">您的瀏覽器不支援音訊播放。</audio>
+            <div class="prose max-w-none text-slate-600 mt-4">
+                <p>這份摘要闡述了電力如何從根本上重塑人類文明。開頭從通訊革命講起，電力如何打破物理限制，實現了全球的即時通聯。接著，探討電力如何催生現代都市樣貌，透過電梯和電氣化交通，同時推動了城市的垂直與水平擴張，並引發了以福特移動裝配線為代表的工業生產革命。</p>
+                <p>摘要也觸及電力對文化的啟發，例如電影工業中的「三點光照法」以及藝術家角色如何從創作者演變為「過程的設計師」。然而，內容並未迴避電力的陰暗面，點出了全球對化石燃料的依賴、能源貧窮問題，以及關鍵礦物供應鏈的地緣政治風險。</p>
+                <p>最後，摘要展望未來，探討了為解決再生能源間歇性問題所需的長時儲能技術，並強調了「公正轉型」與「設計隱私」這兩個核心概念，主張在邁向電氣化未來的同時，必須兼顧社會公平與個人尊嚴。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對「電氣時代」的理解程度吧！</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+            <div id="quiz-container" class="space-y-8"></div>
+            <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="text-center p-8 mt-4 border-t border-slate-200">
+    <p class="text-slate-500">&copy; 2025 電氣時代資訊圖表。基於《電氣時代：重塑世界並定義其未來的無形之力》報告製作。</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Navigation Logic ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            if(link.getAttribute('href').startsWith('#')){
+                link.classList.remove('active');
+            }
+        });
+        if (index >= 0 && sections[index]) {
+             const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+             if (activeLink) {
+                activeLink.classList.add('active');
+             }
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+    changeNavOnScroll(); // Initial check
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        if (link.getAttribute('href').startsWith('#')) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            });
+        }
+    });
+
+    // --- Chart.js and Interactive Elements Logic ---
+    const FONT_COLOR = '#334155'; // slate-700
+    const GRID_COLOR = '#e2e8f0'; // slate-200
+    
+    const commonChartOptions = {
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { labels: { color: FONT_COLOR } }
+        },
+        scales: {
+            y: {
+                ticks: { color: FONT_COLOR },
+                grid: { color: GRID_COLOR }
+            },
+            x: {
+                ticks: { color: FONT_COLOR },
+                grid: { color: GRID_COLOR }
+            }
+        }
+    };
+    
+    // Chart 1: Urban Growth
+    if (document.getElementById('urbanGrowthChart')) {
+        new Chart(document.getElementById('urbanGrowthChart'), {
+            type: 'bar',
+            data: {
+                labels: ['垂直增長 (摩天大樓)', '水平擴張 (郊區)'],
+                datasets: [{
+                    label: '電梯 & 電動水泵',
+                    data: [100, 20],
+                    backgroundColor: 'rgba(56, 189, 248, 0.7)', // sky-400
+                }, {
+                    label: '電氣化公共交通',
+                    data: [30, 90],
+                    backgroundColor: 'rgba(14, 165, 233, 0.7)', // sky-600
+                }]
+            },
+            options: { ...commonChartOptions, scales: { x: { stacked: true }, y: { stacked: true } } }
+        });
+    }
+
+    // Chart 2: Power Structure
+    if (document.getElementById('powerStructureChart')) {
+        new Chart(document.getElementById('powerStructureChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['化石燃料', '核能', '再生能源'],
+                datasets: [{
+                    label: '全球 (2024)',
+                    data: [60.5, 9, 30.5],
+                    backgroundColor: ['#ef4444', '#f59e0b', '#22c55e'], // red-500, amber-500, green-500
+                }, {
+                    label: '台灣 (2023)',
+                    data: [81.7, 6.3, 9.5],
+                    backgroundColor: ['#ef4444', '#f59e0b', '#22c55e'],
+                }]
+            },
+            options: { ...commonChartOptions, scales: { y: { display: false }, x: { display: false } } }
+        });
+    }
+
+    // Chart 3: Storage Tech
+    if (document.getElementById('storageTechChart')) {
+        new Chart(document.getElementById('storageTechChart'), {
+            type: 'radar',
+            data: {
+                labels: ['技術成熟度', '往返效率', '儲存時長', '成本效益', '地理限制'],
+                datasets: [
+                    { label: '鋰離子電池', data: [9, 9, 2, 4, 9], backgroundColor: 'rgba(56, 189, 248, 0.5)', borderColor: '#0ea5e9', pointBackgroundColor: '#0ea5e9'},
+                    { label: '綠色氫能', data: [7, 3, 9, 2, 8], backgroundColor: 'rgba(34, 197, 94, 0.5)', borderColor: '#16a34a', pointBackgroundColor: '#16a34a'},
+                    { label: '液態空氣儲能', data: [7.5, 6, 7, 5, 9], backgroundColor: 'rgba(245, 158, 11, 0.5)', borderColor: '#d97706', pointBackgroundColor: '#d97706'}
+                ]
+            },
+            options: { ...commonChartOptions, scales: { r: { angleLines: { color: GRID_COLOR }, grid: { color: GRID_COLOR }, pointLabels: { color: FONT_COLOR, font: { size: 12 } }, ticks: { color: FONT_COLOR, backdropColor: 'rgba(255,255,255,0.75)' } } } }
+        });
+    }
+
+    // Three-point Lighting Interactive
+    const lightSubject = document.getElementById('light-subject');
+    if (lightSubject) {
+        let keyOn = false, fillOn = false, backOn = false;
+        const updateLighting = () => {
+            let boxShadows = [];
+            if (keyOn) boxShadows.push('inset 10px 10px 20px rgba(0,0,0,0.15)');
+            if (fillOn) boxShadows.push('inset -10px 10px 20px rgba(0,0,0,0.1)');
+            lightSubject.style.boxShadow = boxShadows.join(', ');
+            lightSubject.style.borderColor = backOn ? '#fb923c' : 'transparent'; // amber-400
+        };
+        document.getElementById('key-btn').addEventListener('click', () => { keyOn = !keyOn; updateLighting(); });
+        document.getElementById('fill-btn').addEventListener('click', () => { fillOn = !fillOn; updateLighting(); });
+        document.getElementById('back-btn').addEventListener('click', () => { backOn = !backOn; updateLighting(); });
+        document.getElementById('reset-btn').addEventListener('click', () => { keyOn = false; fillOn = false; backOn = false; updateLighting(); });
+    }
+
+    // --- Quiz Logic ---
+    const quizData = [
+        { 
+            question: "「全電動醫院」(All-Electric Hospital) 的概念旨在解決什麼核心問題？",
+            options: ["降低醫院的運營成本。", "減少醫院對備用柴油發電機的依賴，並降低其在災難期間的碳排放和空氣污染。", "讓所有醫療設備都使用無線充電。", "為醫護人員提供電動車充電樁。"],
+            answer: 1 
+        },
+        { 
+            question: "「分散式發電」(Distributed Generation) 的概念是指什麼？",
+            options: ["將大型發電廠分散到全國各地。", "每個家庭都使用獨立的發電機。", "由中央政府統一控制所有發電設施。", "指在用戶端或靠近用戶端配置的小型發電設施，如屋頂太陽能。"],
+            answer: 3
+        },
+        { 
+            question: "德國在推動「公正轉型」(Just Transition) 過程中的關鍵政策工具是什麼，以協助受能源轉型影響的煤炭產區？",
+            options: ["對所有公民發放「能源補貼金」。", "成立國家級委員會，並通過《結構調整法案》提供數百億歐元的聯邦資金。", "將所有燃煤電廠改建為太陽能發電廠。", "強制所有煤礦工人轉業至IT產業。"],
+            answer: 1
+        }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+    const submitBtn = document.getElementById('submit-quiz-btn');
+    const resultsDiv = document.getElementById('quiz-results');
+    
+    if (quizContainer && submitBtn) {
+        quizContainer.innerHTML = quizData.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map((option, i) => `
+                        <label class="flex items-center p-2 rounded-md hover:bg-sky-50 cursor-pointer">
+                            <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2"></div>
+            </div>`).join('');
+
+        submitBtn.onclick = () => {
+            let score = 0;
+            quizData.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                container.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+
+                if (!selected) {
+                    feedbackDiv.textContent = '請選擇一個答案。';
+                    container.classList.add('incorrect');
+                    return;
+                }
+
+                const userAnswer = parseInt(selected.value);
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                }
+            });
+
+            resultsDiv.textContent = `您的得分: ${score} / ${quizData.length}`;
+            if(score === quizData.length) {
+                resultsDiv.className = 'text-xl font-bold text-green-600';
+            } else {
+                resultsDiv.className = 'text-xl font-bold text-amber-600';
+            }
+            submitBtn.disabled = true;
+        };
+    }
+});
+</script>
+
+</body>
+</html>
+
