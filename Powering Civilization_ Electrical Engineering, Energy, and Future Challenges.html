@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電力時代與永續未來：一場互動式分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin: auto; height: 45vh; max-height: 450px; }
+        .flow-card { border-left-width: 4px; }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">電力時代與永續未來</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="#acceleration" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">大加速</a>
+                    <a href="#engine" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">電的文明</a>
+                    <a href="#consequence" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">挑戰</a>
+                    <a href="#solution" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">解決方案</a>
+                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
+
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#acceleration" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">大加速</a>
+            <a href="#engine" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">電的文明</a>
+            <a href="#consequence" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">挑戰</a>
+            <a href="#solution" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">解決方案</a>
+            <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    
+    <section id="acceleration" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">文明的躍遷：一場指數級的大加速</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">自工業革命以來，人類社會經歷了前所未有的變革。隨著電力技術的普及，全球人口與能源消耗同步進入了爆炸性增長階段，這場「大加速」徹底重塑了我們的世界，也帶來了嚴峻的挑戰。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-slate-800 text-center mb-4">全球人口與能源消耗趨勢 (公元元年至今)</h3>
+            <div class="chart-container" style="height: 50vh; max-height: 500px;">
+                <canvas id="populationEnergyChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section id="engine" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">變革的引擎：電的文明</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">從掌握火種到駕馭電力，是人類文明史上最關鍵的飛躍。電機工程作為核心驅動力，其影響力滲透到現代社會的每一個角落，從根本上定義了我們的生活、工作與娛樂方式。</p>
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-xl font-bold text-center mb-4 text-slate-800">文明的演進之路</h3>
+                <div class="relative pl-4">
+                    <div class="absolute left-0 top-0 h-full w-0.5 bg-slate-200"></div>
+                    <div class="space-y-8">
+                        <div class="relative pl-8"><div class="absolute left-[-9px] top-1 h-4 w-4 rounded-full bg-cyan-400"></div><p class="font-bold">水的文明</p><p class="text-sm text-slate-500">依水而居，農業與貿易萌芽</p></div>
+                        <div class="relative pl-8"><div class="absolute left-[-9px] top-1 h-4 w-4 rounded-full bg-orange-400"></div><p class="font-bold">火的文明</p><p class="text-sm text-slate-500">工具革新，金屬冶煉與社會進步</p></div>
+                        <div class="relative pl-8"><div class="absolute left-[-9px] top-1 h-4 w-4 rounded-full bg-amber-400"></div><p class="font-bold">電的文明</p><p class="text-sm text-slate-500">工業革命，城市化與全球互聯</p></div>
+                        <div class="relative pl-8"><div class="absolute left-[-9px] top-1 h-4 w-4 rounded-full bg-sky-500"></div><p class="font-bold">信息的文明</p><p class="text-sm text-slate-500">數位浪潮，數據成為新生產力</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-xl font-bold text-center mb-4 text-slate-800">電機工程的輻射影響力</h3>
+                 <p class="text-center text-sm text-slate-500 mb-2">點擊按鈕查看不同領域的影響力</p>
+                <div id="radar-controls" class="flex justify-center flex-wrap gap-2 mb-4"></div>
+                <div class="chart-container" style="height: 40vh; max-height: 380px;">
+                    <canvas id="impactRadarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="consequence" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">文明的代價：氣候變遷的挑戰</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">我們對能源的巨大渴求，主要依賴燃燒化石燃料來滿足。這導致溫室氣體大量排放，加劇了全球暖化。數據顯示，我們的能源結構亟待轉型，以應對日益嚴峻的氣候危機。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-xl font-bold text-center mb-2 text-slate-800">全球一次能源結構</h3>
+                <p class="text-center text-sm text-slate-500 mb-4">化石燃料仍是當今世界的主導能源</p>
+                <div class="chart-container"><canvas id="energyMixChart"></canvas></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h3 class="text-xl font-bold text-center mb-2 text-slate-800">全球主要碳排放國 (2023)</h3>
+                <p class="text-center text-sm text-slate-500 mb-4">少數國家的排放量佔據了全球的大部分</p>
+                <div class="chart-container"><canvas id="carbonEmittersChart"></canvas></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">永續之路：擁抱再生能源革命</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">面對挑戰，再生能源為我們提供了清晰的出路。太陽能與風能等清潔能源的技術不斷成熟，成本持續下降，正以前所未有的速度改變著全球能源版圖，為實現碳中和目標帶來希望。</p>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+            <div class="md:col-span-3 bg-white p-6 rounded-xl shadow-lg interactive-card">
+                 <h3 class="text-xl font-bold text-center mb-2 text-slate-800">全球電力結構轉型預測</h3>
+                 <p class="text-center text-sm text-slate-500 mb-4">再生能源發電佔比正快速攀升</p>
+                <div class="chart-container"><canvas id="renewableGrowthChart"></canvas></div>
+            </div>
+            <div class="md:col-span-2 flex flex-col justify-center space-y-4">
+                <div class="flow-card bg-white p-4 rounded-lg shadow-lg interactive-card border-l-orange-400">
+                   <h4 class="font-bold text-lg text-orange-600 flex items-center justify-center"><span class="text-2xl mr-2">☀️</span>太陽能</h4>
+                   <p class="text-sm text-slate-600 mt-1">地球每小時接收的太陽能，足以滿足全球一年的能源需求。</p>
+                </div>
+                <div class="flow-card bg-white p-4 rounded-lg shadow-lg interactive-card border-l-teal-400">
+                   <h4 class="font-bold text-lg text-teal-600 flex items-center justify-center"><span class="text-2xl mr-2">💨</span>風能</h4>
+                   <p class="text-sm text-slate-600 mt-1">陸上與離岸風電技術日益成熟，成為主要的再生電力來源。</p>
+                </div>
+                <div class="flow-card bg-white p-4 rounded-lg shadow-lg interactive-card border-l-sky-400">
+                   <h4 class="font-bold text-lg text-sky-600 flex items-center justify-center"><span class="text-2xl mr-2">🔋</span>能源儲存</h4>
+                   <p class="text-sm text-slate-600 mt-1">電池與氫能等技術是解決再生能源間歇性的關鍵。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="audio-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">語音摘要：驅動文明的力量</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">此摘要提煉自音檔 "Powering Civilization: Electrical Engineering, Energy, and Future Challenges"，深入探討電機工程如何成為現代文明的基石。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+             <div class="prose max-w-none text-slate-700">
+                <p>電機工程不僅僅是關於電路和設備的學問，它是塑造我們世界的根本力量。從點亮城市的龐大電網，到掌中手機的微小晶片，電力無所不在，驅動著通訊、醫療、交通及娛樂的每一次革新。</p>
+                <p>然而，這份便利也伴隨著巨大的挑戰。隨著全球能源需求的激增，我們正處於一個關鍵的十字路口。音檔內容強調，我們當前面臨的核心課題，是如何從依賴化石燃料的現狀，過渡到一個以再生能源為主導的永續未來。</p>
+                <p>這不僅僅是技術的挑戰，更涉及經濟模式、政策制定和全球合作。未來的電機工程師不僅需要設計更高效的太陽能板或更智能的電網，還必須思考如何整合這些技術，創建一個既能滿足人類發展需求，又與地球環境和諧共存的能源系統。這是一項艱鉅但極其重要的使命，關乎文明的下一個篇章。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">來測試一下您對電力與永續能源的了解程度吧！</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+            <div id="quiz-container" class="space-y-8"></div>
+            <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-slate-800 text-slate-300 text-center p-6">
+    <p>資料來源：電機工程概論課程教材綜合分析</p>
+    <p class="text-sm mt-1">&copy; 2025 互動式數據報告</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Color Palette and Global Settings ---
+    const FONT_COLOR = '#1e293b';
+    const THEME_COLORS = {
+        primary: '#0ea5e9', // sky-500
+        secondary: '#67e8f9', // cyan-300
+        accent1: '#facc15', // yellow-400
+        accent2: '#fb923c', // orange-400
+        accent3: '#f87171', // red-400
+        grid: '#e2e8f0'
+    };
+
+    // --- Data for all dynamic content ---
+    const pageData = {
+        charts: {
+            populationEnergy: {
+                labels: ['1', '1000', '1800', '1950', '2000', '2022', '2050 (est)'],
+                datasets: [
+                    { label: '全球人口 (十億)', data: [0.3, 0.31, 1, 2.52, 6.14, 7.9, 9.7], yAxisID: 'y_population' },
+                    { label: '全球能源消耗 (EJ)', data: [3, 3.2, 20, 75, 420, 600, 800], yAxisID: 'y_energy' }
+                ]
+            },
+            radar: {
+                labels: ['計算能力', '系統整合', '核心技術', '終端應用', '數據處理', '倫理規範'],
+                datasets: {
+                    'AI & 機器人': [90, 80, 70, 60, 85, 75], '交通': [70, 95, 85, 50, 60, 40], '能源': [80, 85, 95, 70, 90, 50],
+                    '醫療': [85, 60, 75, 95, 70, 80], '環保': [75, 70, 90, 80, 95, 65]
+                }
+            },
+            energyMix: {
+                labels: ['化石燃料 (煤/油/氣)', '核能', '再生能源'],
+                data: [80, 5, 15]
+            },
+            carbonEmitters: {
+                labels: ['中國', '美國', '印度', '加拿大(含森林大火)'],
+                data: [31, 14, 8, 5]
+            },
+            renewableGrowth: {
+                labels: ['2010', '2015', '2020', '2025 (proj.)', '2030 (proj.)'],
+                data: [20, 23, 29, 38, 45]
+            }
+        },
+        quiz: {
+            questions: [
+                { question: "根據圖表，目前全球最主要的能源來源是什麼？", options: ["再生能源", "核能", "化石燃料", "水力發電"], answer: 2 },
+                { question: "下列哪一項是為了解決再生能源（如太陽能、風能）間歇性問題的關鍵技術？", options: ["提高化石燃料效率", "能源儲存（如電池）", "建造更高的煙囪", "減少全球人口"], answer: 1 },
+                { question: "圖表顯示，在工業革命（約1800年）後，哪兩項指標呈現了爆炸性的「大加速」增長？", options: ["全球人口與土地面積", "全球人口與能源消耗", "能源消耗與海洋溫度", "碳排放與森林覆蓋率"], answer: 1 }
+            ]
+        }
+    };
+    
+    // --- Navigation Logic (Desktop & Mobile) ---
+    function initNavigation() {
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        const sections = document.querySelectorAll('main section[id]');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+        const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+        function changeNavOnScroll() {
+            let index = sections.length;
+            while (--index && window.scrollY + 81 < sections[index].offsetTop) {} // 80px offset for sticky header
+            document.querySelectorAll('.nav-link').forEach((link) => {
+                if (link.getAttribute('href').startsWith('#')) link.classList.remove('active');
+            });
+            if (index >= 0 && sections[index]) {
+                const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+        }
+        window.addEventListener('scroll', changeNavOnScroll);
+        changeNavOnScroll(); // Initial check
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            if (link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIconOpen.classList.remove('hidden');
+                    hamburgerIconClose.classList.add('hidden');
+                });
+            }
+        });
+    }
+
+    // --- Chart Rendering Functions ---
+    const chartDefaultPlugins = {
+        legend: { labels: { color: FONT_COLOR, font: { size: 12 } } },
+        tooltip: { bodyFont: { size: 12 }, titleFont: { size: 14, weight: 'bold' } }
+    };
+
+    function renderPopulationEnergyChart() {
+        const ctx = document.getElementById('populationEnergyChart');
+        if (!ctx) return;
+        const data = pageData.charts.populationEnergy;
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [
+                    { ...data.datasets[0], borderColor: THEME_COLORS.primary, backgroundColor: THEME_COLORS.primary + '33', tension: 0.1 },
+                    { ...data.datasets[1], borderColor: THEME_COLORS.accent3, backgroundColor: THEME_COLORS.accent3 + '33', tension: 0.1 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, plugins: chartDefaultPlugins,
+                scales: {
+                    x: { ticks: { color: FONT_COLOR }, grid: { display: false } },
+                    y_population: { type: 'linear', display: true, position: 'left', title: { display: true, text: '人口 (十億)', color: FONT_COLOR }, ticks: { color: FONT_COLOR }, grid: { color: THEME_COLORS.grid } },
+                    y_energy: { type: 'linear', display: true, position: 'right', title: { display: true, text: '能源消耗 (EJ)', color: FONT_COLOR }, ticks: { color: FONT_COLOR }, grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    function renderRadarChart() {
+        const ctx = document.getElementById('impactRadarChart');
+        const controlsContainer = document.getElementById('radar-controls');
+        if (!ctx || !controlsContainer) return;
+        
+        const data = pageData.charts.radar;
+        const chart = new Chart(ctx, {
+            type: 'radar',
+            data: { labels: data.labels, datasets: [] },
+            options: {
+                responsive: true, maintainAspectRatio: false, plugins: chartDefaultPlugins,
+                scales: {
+                    r: {
+                        angleLines: { color: THEME_COLORS.grid }, grid: { color: THEME_COLORS.grid },
+                        pointLabels: { font: { size: 12 }, color: FONT_COLOR },
+                        ticks: { display: false }, min: 0, max: 100
+                    }
+                }
+            }
+        });
+
+        function updateChart(field) {
+            chart.data.datasets = [{
+                label: `${field}影響力`, data: data.datasets[field],
+                backgroundColor: THEME_COLORS.secondary + '80', borderColor: THEME_COLORS.secondary,
+                borderWidth: 2, pointBackgroundColor: THEME_COLORS.secondary
+            }];
+            chart.update();
+        }
+
+        Object.keys(data.datasets).forEach((field, index) => {
+            const button = document.createElement('button');
+            button.textContent = field;
+            button.className = 'px-3 py-1 rounded-lg text-sm font-medium transition-colors bg-slate-200 text-slate-700 hover:bg-slate-300';
+            button.onclick = () => {
+                updateChart(field);
+                controlsContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('bg-sky-600', 'text-white'));
+                button.classList.add('bg-sky-600', 'text-white');
+            };
+            controlsContainer.appendChild(button);
+            if (index === 0) button.click();
+        });
+    }
+
+    function renderEnergyMixChart() {
+        const ctx = document.getElementById('energyMixChart');
+        if (!ctx) return;
+        const data = pageData.charts.energyMix;
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: data.labels,
+                datasets: [{ data: data.data, backgroundColor: [THEME_COLORS.accent3, THEME_COLORS.accent2, THEME_COLORS.primary], borderColor: '#ffffff', borderWidth: 4 }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { color: FONT_COLOR, padding: 20 } }, tooltip: chartDefaultPlugins.tooltip }
+            }
+        });
+    }
+
+    function renderCarbonEmittersChart() {
+        const ctx = document.getElementById('carbonEmittersChart');
+        if (!ctx) return;
+        const data = pageData.charts.carbonEmitters;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{ label: '2023年碳排放佔比(示意)', data: data.data, backgroundColor: [THEME_COLORS.primary, THEME_COLORS.secondary, THEME_COLORS.accent2, THEME_COLORS.accent3], borderRadius: 4 }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                plugins: { legend: { display: false }, tooltip: chartDefaultPlugins.tooltip },
+                scales: {
+                    x: { ticks: { color: FONT_COLOR, callback: value => value + '%' }, grid: { color: THEME_COLORS.grid } },
+                    y: { ticks: { color: FONT_COLOR }, grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    function renderRenewableGrowthChart() {
+        const ctx = document.getElementById('renewableGrowthChart');
+        if (!ctx) return;
+        const data = pageData.charts.renewableGrowth;
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [{ label: '再生能源發電佔比', data: data.data, borderColor: THEME_COLORS.primary, backgroundColor: THEME_COLORS.primary + '33', fill: true, tension: 0.3 }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, plugins: chartDefaultPlugins,
+                scales: {
+                    x: { ticks: { color: FONT_COLOR }, grid: { display: false } },
+                    y: { ticks: { color: FONT_COLOR, callback: value => value + '%' }, grid: { color: THEME_COLORS.grid }, min: 0, max: 50 }
+                }
+            }
+        });
+    }
+
+    // --- Quiz Logic ---
+    function initQuiz() {
+        const quizContainer = document.getElementById('quiz-container');
+        const submitBtn = document.getElementById('submit-quiz-btn');
+        const resultsDiv = document.getElementById('quiz-results');
+        if (!quizContainer || !submitBtn || !resultsDiv) return;
+
+        const quizQuestions = pageData.quiz.questions;
+        quizContainer.innerHTML = quizQuestions.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map((option, i) => `
+                        <label class="flex items-center p-2 rounded-md hover:bg-sky-50 cursor-pointer">
+                            <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-semibold mt-2"></div>
+            </div>`).join('');
+
+        submitBtn.onclick = () => {
+            let score = 0;
+            quizQuestions.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                container.classList.remove('correct', 'incorrect');
+                if (!selected) {
+                    feedbackDiv.innerHTML = `<span class="text-red-600">請選擇一個答案。</span>`;
+                    return;
+                }
+                const userAnswer = parseInt(selected.value);
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = `<span class="text-green-600">✔️ 正確</span>`;
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                }
+            });
+
+            resultsDiv.textContent = `您的得分: ${score} / ${quizQuestions.length}`;
+            submitBtn.disabled = true;
+        };
+    }
+    
+    // --- Initialize all components ---
+    initNavigation();
+    renderPopulationEnergyChart();
+    renderRadarChart();
+    renderEnergyMixChart();
+    renderCarbonEmittersChart();
+    renderRenewableGrowthChart();
+    initQuiz();
+});
+</script>
+
+</body>
+</html>
+
