@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互聯網的雙重影響：互動式分析應用</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #0284c7; border-bottom-color: #0284c7; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+
+        /* Adapted Styles */
+        .toggle-btn { transition: background-color 0.3s, color 0.3s; }
+        .toggle-btn.active { background-color: #0c4a6e; color: #f8fafc; }
+        .toggle-btn:not(.active) { background-color: #e2e8f0; color: #1e293b; }
+        
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+        .quiz-option-label:hover { background-color: #f0f9ff; }
+        .content-pane { display: none; }
+        .content-pane.active { display: block; }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+        }
+        @media (max-width: 768px) {
+            .chart-container { height: 300px; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">數位時代的放大鏡</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">總覽</a>
+                    <a href="#politics" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">政治衝擊</a>
+                    <a href="#economy" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">經濟轉型</a>
+                    <a href="#society" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">社會變遷</a>
+                    <a href="#future" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">未來路徑</a>
+                    <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 border-b-2 border-transparent">知識測驗</a>
+
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">總覽</a>
+            <a href="#politics" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">政治衝擊</a>
+            <a href="#economy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">經濟轉型</a>
+            <a href="#society" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">社會變遷</a>
+            <a href="#future" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來路徑</a>
+            <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
+
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+    <section id="overview" class="text-center mb-16 scroll-mt-20">
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">互聯網的雙刃劍</h2>
+        <p class="max-w-3xl mx-auto text-lg text-slate-600">互聯網作為一個強大的「放大器」，以前所未有的方式放大了人類社會的趨勢、人性的光明與黑暗。本應用程式將帶您深入探索這場仍在進行中的數位革命，揭示其在各個領域帶來的機遇與挑戰。</p>
+        
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <p class="text-5xl font-bold text-sky-600">59.5%</p>
+                <p class="mt-2 font-semibold text-slate-800">全球網路普及率</p>
+                <p class="text-sm text-slate-500 mt-1">超過49億活躍使用者，數位已成生活基石。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <p class="text-5xl font-bold text-sky-600">14年</p>
+                <p class="mt-2 font-semibold text-slate-800">全球網路自由度連續下降</p>
+                <p class="text-sm text-slate-500 mt-1">威權擴張與選舉干預成為嚴峻挑戰。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <p class="text-5xl font-bold text-sky-600">70%</p>
+                <p class="mt-2 font-semibold text-slate-800">假新聞轉發可能性更高</p>
+                <p class="text-sm text-slate-500 mt-1">演算法偏好情緒化內容，侵蝕真相基礎。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="politics" class="py-16 scroll-mt-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900">政治衝擊：民主的新戰場</h2>
+            <p class="max-w-2xl mx-auto mt-2 text-slate-600">互聯網徹底改變了政治權力結構與公民參與模式，它既是民主化的強大動能，也為威權統治與民粹主義開闢了新疆域。請點擊下方按鈕，探索其雙重影響。</p>
+        </div>
+
+        <div class="flex justify-center mb-8">
+            <div class="rounded-full p-1 bg-slate-200 flex">
+                <button class="toggle-btn active px-6 py-2 rounded-full text-sm font-medium" data-target="politics-positive">賦權與動員</button>
+                <button class="toggle-btn px-6 py-2 rounded-full text-sm font-medium" data-target="politics-negative">極化與監控</button>
+            </div>
+        </div>
+
+        <div id="politics-positive" class="content-pane active">
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">解放技術與公民崛起</h3>
+                    <p class="text-slate-600 mb-4">互聯網打破了傳統資訊壟斷，賦予公民前所未有的發聲權利。從「阿拉伯之春」到「#MeToo」，數位平台成為組織抗議、突破封鎖、設定全球議程的關鍵工具，實現了資訊生產的民主化。</p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><span class="text-lg mr-2">📢</span><div class="text-slate-700"><strong>公民記者：</strong>人人皆可記錄與傳播真相，挑戰官方敘事。</div></li>
+                        <li class="flex items-start"><span class="text-lg mr-2">🌐</span><div class="text-slate-700"><strong>全球串連：</strong>跨國界動員，將地方議題轉化為全球關注的社會運動。</div></li>
+                        <li class="flex items-start"><span class="text-lg mr-2">💡</span><div class="text-slate-700"><strong>降低門檻：</strong>大幅降低組織與動員成本，讓更多元群體得以參與公共事務。</div></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">全球網路自由趨勢</h3>
+                    <p class="text-slate-600 mb-4">儘管有賦權潛力，但全球網路自由度正持續下降。下圖顯示了《自由之家》報告中，各區域的網路自由度評分，分數越低代表越不自由，反映出全球民主面臨的數位挑戰。</p>
+                    <div class="chart-container">
+                        <canvas id="freedomChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="politics-negative" class="content-pane">
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">認知牢籠：過濾氣泡與迴聲室</h3>
+                    <p class="text-slate-600 mb-4">演算法為了最大化用戶參與度，持續推送用戶偏好的內容，將我們困在無形的「過濾氣泡」中，並在同溫層社群形成「迴聲室」，最終導致共同事實的瓦解與社會極化。</p>
+                    <div class="border-t-2 border-dashed border-slate-300 pt-4">
+                        <p class="text-center font-semibold text-slate-700">演算法策展流程</p>
+                        <div class="flex items-center justify-center space-x-2 text-xs mt-2">
+                            <span class="bg-red-100 text-red-800 p-2 rounded-lg">用戶行為</span>
+                            <span class="font-bold text-slate-500">→</span>
+                            <span class="bg-yellow-100 text-yellow-800 p-2 rounded-lg">個人化推薦</span>
+                            <span class="font-bold text-slate-500">→</span>
+                            <span class="bg-red-100 text-red-800 p-2 rounded-lg">觀點強化</span>
+                            <span class="font-bold text-slate-500">→</span>
+                            <span class="bg-yellow-100 text-yellow-800 p-2 rounded-lg">隔絕異議</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">數位威權主義的三大支柱</h3>
+                    <p class="text-slate-600 mb-4">威權國家已學會利用互聯網鞏固統治，形成「數位威權主義」。其核心是透過審查、宣傳與監控，打造一個數位化的「大型敞視監獄」，從根本上瓦解反抗的可能。</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center"><div class="w-8 h-8 rounded-full bg-sky-800 text-white flex items-center justify-center mr-3 font-bold">1</div><div class="text-slate-700"><strong>審查與封鎖：</strong>建立防火牆，過濾敏感資訊，阻擋外部網站。</div></li>
+                        <li class="flex items-center"><div class="w-8 h-8 rounded-full bg-sky-800 text-white flex items-center justify-center mr-3 font-bold">2</div><div class="text-slate-700"><strong>宣傳與引導：</strong>利用網軍製造虛假民意，淹沒、攻擊批評聲音。</div></li>
+                        <li class="flex items-center"><div class="w-8 h-8 rounded-full bg-sky-800 text-white flex items-center justify-center mr-3 font-bold">3</div><div class="text-slate-700"><strong>大規模監控：</strong>透過臉部辨識、社會信用體系等，實現全面監控。</div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="economy" class="py-16 bg-slate-100 rounded-2xl scroll-mt-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900">經濟轉型：從原子到位元</h2>
+            <p class="max-w-2xl mx-auto mt-2 text-slate-600">互聯網催生了全新的數位經濟模式，重塑了全球產業結構。它在帶來巨大效率與創新的同時，也引發了新的壟斷形式與勞動剝削。請點擊探索其雙重影響。</p>
+        </div>
+        
+        <div class="flex justify-center mb-8">
+            <div class="rounded-full p-1 bg-white flex shadow-inner">
+                <button class="toggle-btn active px-6 py-2 rounded-full text-sm font-medium" data-target="economy-positive">創新與效率</button>
+                <button class="toggle-btn px-6 py-2 rounded-full text-sm font-medium" data-target="economy-negative">剝削與不均</button>
+            </div>
+        </div>
+
+        <div id="economy-positive" class="content-pane active">
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">新經濟模式的崛起</h3>
+                    <p class="text-slate-600 mb-4">互聯網極大降低了交易成本，催生了以平台為核心的商業模式，如電子商務、平台經濟與長尾經濟，促進了市場的創新與多樣性。</p>
+                    <div class="chart-container">
+                        <canvas id="gigEconomyChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">未來技能需求轉變</h3>
+                    <p class="text-slate-600 mb-4">自動化浪潮下，市場對技能的需求正從常規性技能轉向更具「人性」的軟技能與技術駕馭能力。下圖預測了到2030年不同技能需求的增長趨勢。</p>
+                    <div class="chart-container">
+                        <canvas id="skillDemandChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="economy-negative" class="content-pane">
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">監控資本主義的邏輯</h3>
+                    <p class="text-slate-600 mb-4">「如果你沒有付費，你就是產品。」科技公司提供免費服務以大規模攫取用戶行為數據，製造出能預測甚至影響用戶行為的「預測產品」，並銷售給廣告商等客戶。</p>
+                    <div class="text-center text-sm space-y-2">
+                        <div class="p-2 bg-slate-100 rounded text-slate-700">1. 數據攫取 (免費服務)</div>
+                        <div class="text-2xl text-slate-400">↓</div>
+                        <div class="p-2 bg-slate-100 rounded text-slate-700">2. 分析行為剩餘價值</div>
+                        <div class="text-2xl text-slate-400">↓</div>
+                        <div class="p-2 bg-slate-100 rounded text-slate-700">3. 製造預測產品 (AI模型)</div>
+                        <div class="text-2xl text-slate-400">↓</div>
+                        <div class="p-2 bg-slate-100 rounded text-slate-700">4. 銷售確定性 (行為期貨市場)</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">零工經濟的困境</h3>
+                    <p class="text-slate-600 mb-4">平台將商業風險與法律責任外部化到個體勞動者身上，透過將勞工歸類為「獨立承包商」來規避傳統勞動權益保障，並利用演算法瓦解勞工的集體議價能力。</p>
+                    <ul class="space-y-2 text-sm text-red-700">
+                        <li class="flex items-start"><span class="text-lg mr-2">❗</span><div><strong>風險外部化：</strong>勞工承擔設備、保險、需求波動等風險。</div></li>
+                        <li class="flex items-start"><span class="text-lg mr-2">❗</span><div><strong>權益缺失：</strong>缺乏最低工資、健康保險、退休金等保障。</div></li>
+                        <li class="flex items-start"><span class="text-lg mr-2">❗</span><div><strong>議價力弱化：</strong>演算法管理使勞工原子化，難以集體行動。</div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="society" class="py-16 scroll-mt-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900">社會變遷：連結與孤獨</h2>
+            <p class="max-w-2xl mx-auto mt-2 text-slate-600">互聯網重塑了人類的社交關係與社群歸屬感。它既能帶來跨越時空的溫暖社群，也可能導致原子化的孤獨與關係的淺薄化。請點擊探索其雙重影響。</p>
+        </div>
+
+        <div class="flex justify-center mb-8">
+            <div class="rounded-full p-1 bg-slate-200 flex">
+                <button class="toggle-btn active px-6 py-2 rounded-full text-sm font-medium" data-target="society-positive">虛擬社群與弱連結</button>
+                <button class="toggle-btn px-6 py-2 rounded-full text-sm font-medium" data-target="society-negative">孤獨與焦慮</button>
+            </div>
+        </div>
+
+        <div id="society-positive" class="content-pane active">
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">虛擬社群的誕生</h3>
+                    <p class="text-slate-600">人們可基於共同興趣或身份認同，形成不受地理限制的社群。對於現實生活中的邊緣群體，這種虛擬社群提供了至關重要的歸屬感、情感支持和資訊交流。</p>
+                    <div class="mt-4 p-4 bg-green-50 border-l-4 border-green-500 text-green-800 rounded-r-lg">
+                        <p class="font-bold">案例：罕病患者社群</p>
+                        <p class="text-sm">一位居住在偏鄉的罕病患者，可以透過網路找到遍布全球的病友，分享治療經驗和心路歷程，獲得在現實中難以企及的支持。</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">弱連結的價值</h3>
+                    <p class="text-slate-600">互聯網極大強化了「弱連結」的價值。社會學研究指出，來自不同社交圈的弱連結，在獲取新資訊、新觀點和新機會（尤其是工作）方面，比家人、密友等「強連結」更為重要。</p>
+                    <div class="chart-container">
+                        <canvas id="tiesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="society-negative" class="content-pane">
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">「在一起孤獨」的悖論</h3>
+                    <p class="text-slate-600 mb-4">社會學家雪莉·特克指出，我們前所未有地緊密連結，卻也前所未有地感到孤獨。網路連結的「廣度」是以犧牲關係的「深度」為代價，我們用大量的「連結」來逃避真正的「對話」。</p>
+                    <div class="mt-4 flex justify-around text-center">
+                        <div>
+                            <p class="text-4xl font-bold text-red-500">↑</p>
+                            <p class="font-semibold mt-1 text-slate-700">連結數量 (弱)</p>
+                        </div>
+                        <div>
+                            <p class="text-4xl font-bold text-red-500">↓</p>
+                            <p class="font-semibold mt-1 text-slate-700">關係深度 (強)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl mb-3 text-slate-800">精心策展的自我與社會比較</h3>
+                    <p class="text-slate-600 mb-4">社群媒體是一個巨大的「前台」，我們在上面呈現的是經過精心策展的理想化自我。當我們不斷將自己平凡的「後台生活」與他人光鮮的「前台表演」比較時，極易產生挫敗感、嫉妒和焦慮。</p>
+                    <div class="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 rounded-r-lg">
+                        <p class="font-bold">青少年心理健康警訊</p>
+                        <p class="text-sm">研究顯示，社群媒體的成癮性使用，與青少年自殺意念風險顯著相關。這不僅因為平台內容，更因其取代了發展心理韌性所必需的線下活動。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="future" class="py-16 text-center scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">未來路徑：在數位十字路口的抉擇</h2>
+        <p class="max-w-3xl mx-auto text-slate-600 mb-12">互聯網的未來並非命中注定，而是取決於我們集體的選擇與行動。面對挑戰，我們需要從個人、企業到公共治理，建立一個多層次的應對框架。</p>
+        <div class="grid md:grid-cols-3 gap-8 text-left max-w-6xl mx-auto">
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center mr-4 text-2xl">👤</div>
+                    <h3 class="text-xl font-bold text-slate-800">個人的覺醒與素養</h3>
+                </div>
+                <p class="text-slate-600">提升「數位公民素養」，培養批判性思維，有意識地管理注意力，平衡線上與線下生活，是抵禦數位時代負面影響的根本防線。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center mr-4 text-2xl">🏢</div>
+                    <h3 class="text-xl font-bold text-slate-800">企業的責任與倫理</h3>
+                </div>
+                <p class="text-slate-600">科技巨頭需承擔社會責任，在演算法設計上更透明，賦予用戶更多數據控制權，將商業倫理融入產品設計核心，而非僅作為公關辭令。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center mr-4 text-2xl">🏛️</div>
+                    <h3 class="text-xl font-bold text-slate-800">公共的治理與法規</h3>
+                </div>
+                <p class="text-slate-600">更新法律與治理框架，制定強有力的隱私保護、反壟斷及勞工權益法規，並透過國際合作應對跨國網路威脅，在創新與保護間尋求平衡。</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="summary" class="py-16 bg-slate-100 rounded-2xl scroll-mt-20">
+        <div class="text-center mb-8 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-slate-900">語音摘要：互聯網作為社會未來的放大器</h2>
+        </div>
+        <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+             <audio controlsList="nodownload" controls preload="auto" class="w-full mb-4" src="v2 The Internet-Amplifier of Society's Future 7min24s v2.mp3">您的瀏覽器不支援音訊播放。</audio>
+            <div class="prose max-w-none text-slate-600 mt-4">
+                <p>本摘要闡述了互聯網作為一個強大的「放大器」，如何同時加劇社會的光明面與黑暗面。一方面，它以前所未有的方式賦予個人權力、促進全球連結、催生經濟創新，並為邊緣社群提供支持。另一方面，它也導致了社會極化、假新聞氾濫、監控資本主義興起，以及新型態的勞動剝削。演算法驅動的「過濾氣泡」和「迴聲室」現象，加深了觀點的同質化，侵蝕了社會信任的基礎。總體而言，互聯網的影響是深遠且矛盾的，它放大了我們既有的社會趨勢，無論是合作與創造，還是分裂與控制。未來的挑戰在於如何建立數位素養、企業倫理和健全的法規，以駕馭這股強大的力量，確保其發展能真正增進人類的福祉。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="py-16 scroll-mt-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900">知識小測驗：檢驗您的數位洞察力</h2>
+            <p class="max-w-2xl mx-auto mt-2 text-slate-600">完成以上閱讀後，透過這個簡短的測驗，檢視您對互聯網雙重影響的理解程度。</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+            <div id="quiz-container" class="space-y-8">
+                </div>
+            <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-slate-800 text-white mt-16">
+    <div class="container mx-auto py-6 px-4 text-center text-sm">
+        <p>&copy; 2025 數位時代的放大鏡。本應用程式內容根據多份研究報告綜合分析而成。</p>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Navigation Logic ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu on click
+                    if(link.classList.contains('mobile-nav-link')) {
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                        document.getElementById('hamburger-icon-open').classList.remove('hidden');
+                        document.getElementById('hamburger-icon-close').classList.add('hidden');
+                    }
+                }
+            });
+        }
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+        
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            if(link.getAttribute('href').startsWith('#')){
+                link.classList.remove('active');
+            }
+        });
+
+        if (index >= 0 && sections[index]) {
+            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+    changeNavOnScroll(); // Initial check
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    // --- Content Toggle Logic ---
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const parent = button.closest('.flex.justify-center');
+            const container = parent.closest('section');
+            const targetId = button.dataset.target;
+
+            parent.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            container.querySelectorAll('.content-pane').forEach(pane => {
+                pane.classList.remove('active');
+                if (pane.id === targetId) {
+                    pane.classList.add('active');
+                }
+            });
+        });
+    });
+
+    // --- Chart.js Logic ---
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        return Array.isArray(label) ? label.join(' ') : label;
+    };
+    
+    const commonChartOptions = () => ({
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: { title: tooltipTitleCallback },
+                backgroundColor: '#1e293b',
+                titleColor: '#f8fafc',
+                bodyColor: '#f8fafc',
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: { color: '#e2e8f0' },
+                ticks: { color: '#475569' }
+            },
+            x: {
+                grid: { display: false },
+                ticks: { color: '#475569' }
+            }
+        }
+    });
+
+    // Chart 1: Freedom Chart
+    const freedomCtx = document.getElementById('freedomChart')?.getContext('2d');
+    if (freedomCtx) {
+        new Chart(freedomCtx, {
+            type: 'bar',
+            data: {
+                labels: ['亞洲', '美洲', '歐洲', '中東/北非', '撒哈拉以南非洲'],
+                datasets: [{
+                    label: '網路自由度評分 (0-100)',
+                    data: [42, 60, 75, 35, 50],
+                    backgroundColor: '#7dd3fc',
+                }]
+            },
+            options: commonChartOptions()
+        });
+    }
+
+    // Chart 2: Gig Economy Chart
+    const gigEconomyCtx = document.getElementById('gigEconomyChart')?.getContext('2d');
+    if (gigEconomyCtx) {
+        new Chart(gigEconomyCtx, {
+            type: 'line',
+            data: {
+                labels: ['2024', '2027', '2030', '2033'],
+                datasets: [{
+                    label: '全球市場規模 (兆美元)',
+                    data: [0.56, 0.95, 1.55, 2.14],
+                    borderColor: '#0ea5e9',
+                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: commonChartOptions()
+        });
+    }
+    
+    // Chart 3: Skill Demand Chart
+    const skillDemandCtx = document.getElementById('skillDemandChart')?.getContext('2d');
+    if (skillDemandCtx) {
+        new Chart(skillDemandCtx, {
+            type: 'bar',
+            data: {
+                labels: ['技術技能', ['社交與', '情感技能'], ['創造性', '思維'], ['基礎認知', '技能']],
+                datasets: [{
+                    label: '需求變化百分比',
+                    data: [27, 12, 12, -14],
+                    backgroundColor: (context) => context.raw >= 0 ? '#38bdf8' : '#fb923c',
+                }]
+            },
+            options: commonChartOptions()
+        });
+    }
+
+    // Chart 4: Ties Chart
+    const tiesCtx = document.getElementById('tiesChart')?.getContext('2d');
+    if (tiesCtx) {
+        new Chart(tiesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['獲取新資訊/機會 (弱連結貢獻)', '情感支持 (強連結貢獻)'],
+                datasets: [{
+                    data: [70, 30],
+                    backgroundColor: ['#0ea5e9', '#cbd5e1'],
+                    borderColor: '#f8fafc',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#475569' } },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback },
+                        backgroundColor: '#1e293b',
+                        titleColor: '#f8fafc',
+                    }
+                }
+            }
+        });
+    }
+
+    // --- Quiz Logic ---
+    const quizData = [
+        { 
+            question: "根據內容，「過濾氣泡」(Filter Bubble) 現象最主要導致了什麼負面後果？",
+            options: ["增加了用戶接收新資訊的機會", "加劇社會觀點的極化與對立", "提升了公民記者的可信度", "促進了零工經濟的勞工權益"],
+            answer: 1 
+        },
+        { 
+            question: "所謂的「監控資本主義」(Surveillance Capitalism) 其核心商業模式是基於什麼？",
+            options: ["向用戶直接銷售高階軟體服務", "透過群眾募資支持創新專案", "將用戶行為數據轉化為可銷售的預測產品", "建立付費訂閱制的無廣告社群平台"],
+            answer: 2 
+        },
+        { 
+            question: "報告中提到，應對互聯網挑戰需要多層次的框架，請問下列何者不屬於被提及的層面？",
+            options: ["個人的數位素養與批判性思維", "企業的倫理責任與演算法透明度", "政府的公共治理與法律規範", "完全回歸到沒有互聯網的傳統生活"],
+            answer: 3 
+        }
+    ];
+
+    function initQuiz() {
+        const quizContainer = document.getElementById('quiz-container');
+        const submitBtn = document.getElementById('submit-quiz-btn');
+        const resultsDiv = document.getElementById('quiz-results');
+        if (!quizContainer || !submitBtn || !resultsDiv) return;
+
+        quizContainer.innerHTML = quizData.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map((option, i) => `
+                        <label class="quiz-option-label flex items-center p-2 rounded-md cursor-pointer">
+                            <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2"></div>
+            </div>`).join('');
+
+        submitBtn.onclick = () => {
+            let score = 0;
+            let allAnswered = true;
+
+            quizData.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                container.classList.remove('correct', 'incorrect');
+                feedbackDiv.innerHTML = '';
+
+                if (!selected) {
+                    allAnswered = false;
+                    feedbackDiv.innerHTML = '<span class="text-red-600">請選擇一個答案。</span>';
+                    container.classList.add('incorrect');
+                    return;
+                }
+
+                const userAnswer = parseInt(selected.value);
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600 font-normal">正確答案是：「${q.options[q.answer]}」</span>`;
+                }
+                
+                // Disable all radio buttons for this question after answering
+                document.querySelectorAll(`input[name="question-${index}"]`).forEach(input => {
+                    input.disabled = true;
+                });
+            });
+
+            if (allAnswered) {
+                resultsDiv.textContent = `您的得分: ${score} / ${quizData.length}`;
+                 if(score === quizData.length) {
+                    resultsDiv.className = 'text-xl font-bold text-green-600';
+                } else {
+                    resultsDiv.className = 'text-xl font-bold text-amber-600';
+                }
+                submitBtn.disabled = true;
+            }
+        };
+    }
+
+    initQuiz();
+});
+</script>
+
+</body>
+</html>
+
