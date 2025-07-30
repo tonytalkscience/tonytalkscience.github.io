@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tony Talks Science | 現代性的原動力</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body { font-family: 'Noto Sans TC', 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; font-weight: 600; }
+        .quiz-option-label:hover { background-color: #f0f9ff; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+        
+        /* Chart container styles from original */
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">現代性的原動力：電動機</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#revolution" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">動力革命</a>
+                    <a href="#impact" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">社會衝擊</a>
+                    <a href="#challenges" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">雙面刃</a>
+                    <a href="#future" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">未來展望</a>
+                    <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
+                    <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#revolution" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">動力革命</a>
+            <a href="#impact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">社會衝擊</a>
+            <a href="#challenges" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">雙面刃</a>
+            <a href="#future" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來展望</a>
+            <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
+            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    
+    <section id="revolution" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">1. 動力革命：從集中到分散</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">電動機的誕生，宣告了工業動力的典範轉移。它將動力從笨重、集中且受地理限制的蒸汽機，解放為靈活、高效、可隨處部署的「單元驅動」模式，為現代化生產奠定了基礎。</p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="border rounded-lg p-4 bg-slate-50">
+                    <h3 class="text-xl font-semibold text-center mb-4 text-slate-800">蒸汽時代：組驅動 (Group Drive)</h3>
+                    <div class="flex flex-col items-center space-y-3 text-center">
+                        <div class="text-4xl" title="Steam Engine">🏭</div>
+                        <div class="font-medium">中央蒸汽機</div>
+                        <div class="text-2xl text-slate-400">⬇</div>
+                        <div class="w-full h-1.5 bg-slate-400 rounded-full" title="Main Shaft"></div>
+                        <div class="font-medium">主傳動軸與皮帶系統</div>
+                        <div class="flex justify-around w-full">
+                            <div class="text-2xl text-slate-400">⬇</div>
+                            <div class="text-2xl text-slate-400">⬇</div>
+                        </div>
+                        <div class="flex justify-around w-full">
+                            <div class="text-3xl" title="Machine">🛠️</div>
+                            <div class="text-3xl" title="Machine">🛠️</div>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-2">缺點：佈局僵硬、危險、效率低、受地理限制。</p>
+                    </div>
+                </div>
+                <div class="border border-sky-200 rounded-lg p-4 bg-sky-50">
+                    <h3 class="text-xl font-semibold text-center mb-4 text-sky-800">電力時代：單元驅動 (Unit Drive)</h3>
+                    <div class="flex flex-col items-center space-y-3 text-center">
+                        <div class="text-4xl" title="Electric Grid">⚡</div>
+                        <div class="font-medium text-sky-700">電網</div>
+                        <div class="text-2xl text-sky-400">⬇</div>
+                         <div class="flex justify-around w-full">
+                            <div class="text-2xl text-sky-400">↘</div>
+                            <div class="text-2xl text-sky-400">↙</div>
+                        </div>
+                        <div class="flex justify-around w-full">
+                            <div class="text-center">
+                                <div class="text-3xl" title="Electric Motor">💡</div>
+                                <div class="font-medium text-sky-700 text-sm">獨立馬達</div>
+                           </div>
+                            <div class="text-center">
+                                <div class="text-3xl" title="Electric Motor">💡</div>
+                                <div class="font-medium text-sky-700 text-sm">獨立馬達</div>
+                           </div>
+                        </div>
+                        <p class="text-sm text-slate-500 mt-2">優點：佈局靈活、安全、高效，催生了現代流水線。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">2. 社會衝擊：生產與生活的巨變</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">單元驅動釋放的巨大潛力，不僅引爆了生產力革命，更滲透到家庭的每個角落，從根本上重塑了現代社會的經濟結構與生活樣貌。</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 interactive-card">
+                <h3 class="text-xl font-semibold text-center mb-2 text-slate-800">工業生產力的指數級增長</h3>
+                <p class="text-sm text-slate-500 text-center mb-4">電動機的普及使大規模、高效率的生產成為可能，是工業社會財富積累的核心引擎。</p>
+                <div class="chart-container">
+                    <canvas id="productivityChart"></canvas>
+                </div>
+            </div>
+             <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 interactive-card">
+                <h3 class="text-xl font-semibold text-center mb-2 text-slate-800">家庭勞動的革命</h3>
+                <p class="text-sm text-slate-500 text-center mb-4">微型馬達將動力帶入家庭，大幅縮減了家務勞動時間，深刻影響了社會分工。</p>
+                <div class="chart-container">
+                    <canvas id="householdLaborChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="challenges" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">3. 進步的雙面刃：環境與地緣政治挑戰</h2>
+         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">電動機帶來的巨大便利並非沒有代價。總體能源消耗的激增，以及對特定戰略資源的依賴，成為現代文明必須面對的嚴峻課題。</p>
+         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+             <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 interactive-card">
+                <h3 class="text-xl font-semibold text-center mb-2 text-slate-800">傑文斯悖論：效率與總消耗的矛盾</h3>
+                <p class="text-sm text-slate-500 text-center mb-4">單一設備效率提升，反而刺激更廣泛的應用，導致總體能源消耗量級躍升。</p>
+                <div class="chart-container">
+                    <canvas id="energyConsumptionChart"></canvas>
+                </div>
+            </div>
+             <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 interactive-card">
+                <h3 class="text-xl font-semibold text-center mb-2 text-slate-800">關鍵資源的枷鎖：稀土供應鏈風險</h3>
+                <p class="text-sm text-slate-500 text-center mb-4">高性能永磁馬達依賴稀土，其供應鏈高度集中，已成為全球性的地緣政治風險點。</p>
+                <div class="chart-container">
+                    <canvas id="rareEarthChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="future" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">4. 未來展望：邁向智慧與永續</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">面對挑戰，電動機技術並未停滯。與AI、IoT的融合，以及新材料、新技術的突破，正引領我們進入一個更智能、更高效、更永續的電力新時代。</p>
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div>
+                    <h3 class="text-xl font-semibold text-center mb-4 text-slate-800">智慧馬達生態系統</h3>
+                     <div class="border rounded-lg p-4 bg-slate-50 space-y-4">
+                         <div class="flex items-center space-x-3">
+                             <div class="text-2xl">💡</div>
+                             <div class="font-semibold">智慧馬達 + IoT感測器</div>
+                         </div>
+                         <div class="pl-8 text-2xl text-slate-400">⬇</div>
+                         <div class="flex items-center space-x-3">
+                             <div class="text-2xl">☁️</div>
+                             <div class="font-semibold">雲端AI分析平台</div>
+                         </div>
+                         <div class="pl-8 text-2xl text-slate-400">⬇</div>
+                         <div class="flex items-center space-x-3">
+                              <div class="text-2xl">📈</div>
+                             <div>
+                                 <div class="font-semibold">實現價值</div>
+                                 <ul class="list-disc list-inside text-sm text-slate-600">
+                                     <li>預測性維護，避免停機</li>
+                                     <li>實時能源效率優化</li>
+                                     <li>遠程監控與資產管理</li>
+                                </ul>
+                            </div>
+                         </div>
+                     </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-center mb-4 text-slate-800">新興馬達技術</h3>
+                     <div class="overflow-x-auto border rounded-lg">
+                         <table class="w-full text-sm">
+                             <thead class="bg-slate-100">
+                                 <tr>
+                                     <th class="p-3 text-left font-semibold">技術</th>
+                                     <th class="p-3 text-left font-semibold">核心優勢</th>
+                                 </tr>
+                             </thead>
+                             <tbody class="divide-y">
+                                 <tr class="hover:bg-slate-50">
+                                     <td class="p-3 font-medium">軸向磁通馬達</td>
+                                     <td class="p-3 text-slate-600">極高功率密度，外形扁平，適用於電動車。</td>
+                                 </tr>
+                                 <tr class="hover:bg-slate-50">
+                                     <td class="p-3 font-medium">開關磁阻馬達</td>
+                                     <td class="p-3 text-slate-600">不使用稀土，結構堅固，成本與供應鏈優勢。</td>
+                                 </tr>
+                                 <tr class="hover:bg-slate-50">
+                                     <td class="p-3 font-medium">AI輔助設計</td>
+                                     <td class="p-3 text-slate-600">優化拓撲結構，在降低稀土用量的同時提升效能。</td>
+                                 </tr>
+                             </tbody>
+                         </table>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">語音摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">點擊下方播放器，聆聽關於電動機如何驅動現代文明，以及其面臨挑戰的重點摘要。</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">🎧 動力文明的演進與挑戰</h3>
+            <audio controlsList="nodownload" controls preload="auto" class="w-full mb-4" src="Electric Motors-Powering Modern Civilization's Evolution and Challenges 8min26s notebookLM.mp3">您的瀏覽器不支援音訊播放。</audio>
+            <div class="prose max-w-none text-slate-600 mt-4">
+                <p>本音頻深入探討了電動機如何從一項關鍵的工業發明，演變為驅動現代文明的基石。內容涵蓋了從工廠的「單元驅動」革命，到進入家庭的微型馬達，分析了其對生產力與社會生活的巨大影響。同時，音頻也觸及了這場無聲革命背後的代價，包括「傑文斯悖論」所揭示的能源消耗問題，以及對稀土等關鍵資源的地緣政治依賴。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對電動機世界的理解程度吧！</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+            <div id="quiz-container" class="space-y-8">
+                </div>
+            <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Navigation Logic ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+           link.addEventListener('click', function(e) {
+               e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                   targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+           });
+        }
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => {
+           if(link.getAttribute('href').startsWith('#')){
+                link.classList.remove('active');
+             }
+        });
+        if (index >= 0 && sections[index]) {
+             const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+             if (activeLink) {
+                activeLink.classList.add('active');
+             }
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+         if (link.getAttribute('href').startsWith('#')) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            });
+        }
+    });
+
+    // --- Chart.js Initialization ---
+    const chartSkyBlue = '#0284c7'; // New theme color
+    const chartLightSkyBlue = 'rgba(2, 132, 199, 0.2)';
+    const chartSlateGray = '#64748b'; // New theme color
+    
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { padding: 20 }
+            },
+        },
+        scales: {
+            x: { grid: { display: false } },
+            y: { 
+                grid: { color: '#e2e8f0' }, // Lighter grid lines
+                ticks: { color: '#475569' } // Slate color for ticks
+            }
+        }
+    };
+
+    if (document.getElementById('productivityChart')) {
+        new Chart(document.getElementById('productivityChart'), {
+            type: 'line',
+            data: {
+                labels: ['1870', '1900', '1930', '1960', '1990'],
+                datasets: [{
+                    label: '工業生產力指數 (示意)',
+                    data: [10, 25, 150, 450, 800],
+                    borderColor: chartSkyBlue,
+                    backgroundColor: chartLightSkyBlue,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: { ...chartOptions, plugins: { ...chartOptions.plugins, legend: {display: false} } }
+        });
+    }
+
+    if (document.getElementById('householdLaborChart')) {
+        new Chart(document.getElementById('householdLaborChart'), {
+            type: 'bar',
+            data: {
+                labels: ['洗衣', '清潔', '食物準備'],
+                datasets: [
+                    {
+                        label: '家電普及前 (小時/週)',
+                        data: [11, 10, 20],
+                        backgroundColor: chartSlateGray,
+                    },
+                    {
+                        label: '家電普及後 (小時/週)',
+                        data: [4, 3, 9],
+                        backgroundColor: chartSkyBlue,
+                    }
+                ]
+            },
+            options: chartOptions
+        });
+    }
+    
+    if (document.getElementById('energyConsumptionChart')) {
+        new Chart(document.getElementById('energyConsumptionChart'), {
+            type: 'line',
+            data: {
+                labels: ['農業時代', '工業時代', '資訊時代'],
+                datasets: [{
+                    label: '全球文明功耗 (瓦)',
+                    data: [1e12, 1e13, 1.8e13],
+                    borderColor: chartSkyBlue,
+                    backgroundColor: chartLightSkyBlue,
+                    fill: true,
+                }]
+            },
+            options: { 
+                ...chartOptions, 
+                plugins: { ...chartOptions.plugins, legend: {display: false} },
+                scales: {
+                    y: {
+                        type: 'logarithmic',
+                        grid: { color: '#e2e8f0' },
+                        ticks: { color: '#475569' },
+                        title: { display: true, text: '功耗 (瓦) - 對數標度', color: '#475569' }
+                    },
+                    x: { ...chartOptions.scales.x, ticks: { color: '#475569' } }
+                }
+            }
+        });
+    }
+
+    if (document.getElementById('rareEarthChart')) {
+        new Chart(document.getElementById('rareEarthChart'), {
+            type: 'bar',
+            data: {
+                labels: ['中國', '越南', '巴西', '俄羅斯', '其他'],
+                datasets: [{
+                    label: '全球稀土產量佔比 (%)',
+                    data: [70, 6, 5, 2, 17],
+                    backgroundColor: chartSkyBlue,
+                }]
+            },
+            options: {
+                ...chartOptions, 
+                indexAxis: 'y',
+                plugins: { ...chartOptions.plugins, legend: {display: false} },
+                scales: {
+                     x: { 
+                        grid: { display: false },
+                        ticks: { color: '#475569' },
+                        title: { display: true, text: '產量佔比 (%)', color: '#475569' }
+                    },
+                    y: { grid: { display: false }, ticks: { color: '#475569' } }
+                }
+            }
+        });
+    }
+
+    // --- Quiz Logic ---
+    const quizData = {
+        questions: [
+            { question: "從「組驅動」到「單元驅動」的轉變，最大的優勢是什麼？", options: ["機器變得更重", "工廠佈局更靈活、安全", "需要更多人力", "只能使用蒸汽"], answer: 1 },
+            { question: "「傑文斯悖論」描述了什麼現象？", options: ["效率提升必然導致總消耗下降", "效率提升可能刺激更廣泛應用，導致總消耗上升", "新技術總是很昂貴", "能源消耗和經濟增長無關"], answer: 1 },
+            { question: "哪種新興馬達技術的主要優勢是不需要使用稀土？", options: ["軸向磁通馬達", "開關磁阻馬達", "永磁同步馬達", "傳統直流馬達"], answer: 1 },
+            { question: "根據圖表，哪項家務勞動在電器普及後節省的時間最多？", options: ["洗衣", "清潔", "食物準備", "無法判斷"], answer: 2 },
+            { question: "高性能永磁馬達目前高度依賴哪種關鍵資源？", options: ["石油", "煤炭", "鐵礦石", "稀土"], answer: 3 }
+        ]
+    };
+    
+    const state = {
+        quizQuestions: []
+    };
+
+    function initQuiz() {
+        const quizContainer = document.getElementById('quiz-container');
+        const submitBtn = document.getElementById('submit-quiz-btn');
+        const resultsDiv = document.getElementById('quiz-results');
+        if (!quizContainer || !submitBtn || !resultsDiv) return;
+
+        state.quizQuestions = quizData.questions.sort(() => 0.5 - Math.random()).slice(0, 3);
+        quizContainer.innerHTML = state.quizQuestions.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg bg-slate-50">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                   ${q.options.map((option, i) => `
+                        <label class="quiz-option-label flex items-center p-3 rounded-md hover:bg-sky-100 cursor-pointer border border-slate-200">
+                            <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2 h-5"></div>
+            </div>`).join('');
+
+        submitBtn.onclick = () => {
+            let score = 0;
+            let allAnswered = true;
+            state.quizQuestions.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                container.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+
+                if (!selected) {
+                    feedbackDiv.textContent = '請選擇一個答案。';
+                    container.classList.add('incorrect');
+                    allAnswered = false;
+                    return;
+                }
+
+                const userAnswer = parseInt(selected.value);
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                }
+            });
+            
+            if (!allAnswered) return;
+
+            resultsDiv.textContent = `您的得分: ${score} / ${state.quizQuestions.length}`;
+            if(score === state.quizQuestions.length) {
+                resultsDiv.className = 'text-xl font-bold text-green-600';
+            } else {
+                resultsDiv.className = 'text-xl font-bold text-amber-600';
+            }
+            submitBtn.disabled = true;
+        };
+    }
+    
+    initQuiz();
+    changeNavOnScroll(); // Set initial active link
+});
+</script>
+
+</body>
+</html>
+
