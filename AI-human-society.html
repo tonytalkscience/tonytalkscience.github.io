@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人工智慧革命：互動式全面分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .tab-button.active { background-color: #0c4a6e; color: #f8fafc; }
+        .pyramid-level { clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%); transition: all 0.3s ease-in-out; }
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+        .quiz-option:hover { background-color: #f0f9ff; }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">人工智慧革命：全面分析</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#demand" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">算力需求</a>
+                    <a href="#resources" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">資源瓶頸</a>
+                    <a href="#geopolitics" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">地緣政治</a>
+                    <a href="#impact" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">文明衝擊</a>
+                    <a href="#solutions" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">未來路徑</a>
+                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#demand" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">算力需求</a>
+            <a href="#resources" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">資源瓶頸</a>
+            <a href="#geopolitics" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">地緣政治</a>
+            <a href="#impact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">文明衝擊</a>
+            <a href="#solutions" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來路徑</a>
+            <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    
+    <header class="text-center my-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-sky-800 mb-3 break-words">人工智慧革命：互動式全面分析</h1>
+        <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">從指數級的技術擴張到文明的十字路口，一份關於機遇、風險與未來的互動指南。</p>
+    </header>
+
+    <div class="space-y-16">
+        <section id="demand" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">指數級的算力渴求</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">AI革命的引擎是其對運算能力近乎無限的渴求。頂尖模型的訓練計算量正以每6個月翻一倍的速度增長，遠超傳統硬體發展的摩爾定律，為整個技術生態帶來了前所未有的壓力。</p>
+            <div class="bg-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+                <div class="chart-container">
+                    <canvas id="computeDemandChart"></canvas>
+                </div>
+                <p class="text-center mt-4 text-sm text-slate-500">圖表展示了前沿AI模型訓練計算需求的爆炸性增長趨勢。點擊圖例可切換顯示。</p>
+            </div>
+        </section>
+        
+        <section id="resources" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">物理世界的資源瓶頸</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">AI的虛擬智慧必須建立在實體資源之上。然而，從晶片製造到電力供應，物理資源的增長速度遠遠落後於AI的需求，形成了發展道路上最嚴峻的瓶頸。</p>
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+                <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-center mb-4 text-slate-800">AI需求 vs. 資源供應年增長率</h3>
+                    <div class="chart-container h-[50vh] max-h-[500px]">
+                        <canvas id="resourceGapChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center text-center space-y-8">
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-slate-800">全球資料中心電力消耗預測</h3>
+                        <p class="text-sm text-slate-500 mb-4">AI運算正成為全球電網的主要負擔。</p>
+                    </div>
+                    <div class="flex items-center justify-around w-full">
+                        <div class="w-2/5">
+                            <p class="text-slate-500">2022年</p>
+                            <p class="text-3xl md:text-4xl font-bold text-sky-600">460</p>
+                            <p class="font-semibold">TWh</p>
+                        </div>
+                        <div class="text-3xl text-slate-400">&rarr;</div>
+                        <div class="w-2/5">
+                            <p class="text-slate-500">2030年</p>
+                            <p class="text-3xl md:text-4xl font-bold text-red-600">~950</p>
+                            <p class="font-semibold">TWh</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="geopolitics" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">地緣政治：晶片戰爭</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">對先進半導體的控制權已成為國家實力的核心。一場圍繞AI算力基礎的全球競賽正在升級，技術與國家安全前所未有地緊密捆綁。</p>
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center justify-around text-center">
+                    <div class="w-full md:w-2/5 p-4">
+                        <h3 class="text-2xl font-bold text-sky-700 mb-2">美國及盟友</h3>
+                        <p class="text-slate-600">利用技術優勢，透過出口管制和產業補貼（如晶片法案），限制對手獲取先進晶片與製造設備，構建「技術壁壘」。</p>
+                    </div>
+                    <div class="text-4xl font-bold text-slate-300 my-4 md:my-0">⚔️</div>
+                    <div class="w-full md:w-2/5 p-4">
+                        <h3 class="text-2xl font-bold text-red-700 mb-2">中國</h3>
+                        <p class="text-slate-600">採取「舉國體制」，投入巨資推動技術自主，力求在半導體設計、製造等「卡脖子」領域實現突破，確保供應鏈安全。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="impact" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">文明的衝擊與存在的詰問</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">AI不僅是技術工具，更是文明的變革力量。它在重塑社會結構的同時，也引發了其創造者對人類未來的深層憂慮。</p>
+            <div class="bg-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+                <div class="flex justify-center mb-6 border-b border-slate-200">
+                    <button id="societalBtn" class="tab-button px-4 py-2 font-semibold transition-colors active">社會影響</button>
+                    <button id="existentialBtn" class="tab-button px-4 py-2 font-semibold transition-colors">存在風險</button>
+                </div>
+                <div id="societalContent">
+                    <p class="text-center mb-4 text-slate-600">AI正全面滲透社會，帶來效率提升的同時，也引發了關於公平、隱私和工作價值的深刻討論。</p>
+                    <div class="chart-container h-[50vh] max-h-[500px]">
+                        <canvas id="socialImpactChart"></canvas>
+                    </div>
+                </div>
+                <div id="existentialContent" class="hidden">
+                     <p class="text-center mb-4 text-slate-600">「AI教父」辛頓警告，我們需要嚴肅對待超級智慧超越人類控制的可能性，這是一個從社會問題上升到物種存續的風險階梯。</p>
+                     <div class="relative w-full max-w-md mx-auto flex flex-col items-center justify-center space-y-1 h-96">
+                        <div class="pyramid-level bg-red-700 w-full h-1/4 flex items-center justify-center text-white text-center p-2 rounded-t-lg shadow-lg">
+                            <h4 class="font-bold">生存風險 (失控的超級智慧)</h4>
+                        </div>
+                        <div class="pyramid-level bg-amber-500 w-11/12 h-1/4 flex items-center justify-center text-slate-800 text-center p-2 shadow-md">
+                             <h4 class="font-bold">自主武器</h4>
+                        </div>
+                        <div class="pyramid-level bg-sky-600 w-10/12 h-1/4 flex items-center justify-center text-white text-center p-2 shadow">
+                             <h4 class="font-bold">假訊息與社會操控</h4>
+                        </div>
+                        <div class="pyramid-level bg-slate-400 w-9/12 h-1/4 flex items-center justify-center text-white text-center p-2 rounded-b-lg shadow-inner">
+                             <h4 class="font-bold">大規模失業</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="solutions" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">導航未來：治理與創新的路徑</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">面對這股不可逆轉的力量，人類社會需要以智慧和遠見，透過技術創新、有效治理和國際合作，引導AI朝向有益於全人類的未來發展。</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-6 text-center rounded-xl shadow-lg interactive-card">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-800">技術創新路徑</h3>
+                    <p class="text-slate-600">探索神經形態運算等低功耗計算典範，從根本上緩解能源危機，並鼓勵開源模型發展，以促進技術普及與安全。</p>
+                </div>
+                <div class="bg-white p-6 text-center rounded-xl shadow-lg interactive-card">
+                    <div class="text-4xl mb-4">⚖️</div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-800">有效治理框架</h3>
+                    <p class="text-slate-600">實施如歐盟《AI法案》的風險分級監管，並建立「全球計算透明度登錄中心」，對超大規模訓練進行申報與管理。</p>
+                </div>
+                <div class="bg-white p-6 text-center rounded-xl shadow-lg interactive-card">
+                    <div class="text-4xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-800">國際合作機制</h3>
+                    <p class="text-slate-600">建立跨國對話平台，共同制定AI倫理與安全標準，避免惡性軍備競賽，並合作應對AI帶來的全球性挑戰。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="audio-summary" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">語音摘要</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">點擊下方播放器，聆聽關於AI與人類社會未來的重點摘要。</p>
+            <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+                 <h3 class="text-xl font-bold text-center mb-4 text-slate-800">🎧 AI與人類社會的未來</h3>
+                 <audio controls class="w-full mb-4" src="AI-human-society_9min38s.mp3">您的瀏覽器不支援音訊播放。</audio>
+                 <div class="prose max-w-none text-slate-600 mt-4">
+                     <p>這段音訊深入探討了人工智慧發展與人類社會結構之間的複雜互動。內容不僅分析了AI技術如何重塑就業市場、挑戰傳統道德倫理，更進一步探討了在超級智慧的曙光下，人類應如何定位自身，並規劃一個與AI共存、共榮的未來。摘要強調了建立全球性對話、制定前瞻性政策以及普及AI素養的重要性，以應對這場史無前例的文明變革。</p>
+                 </div>
+            </div>
+        </section>
+
+        <section id="quiz" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對AI革命核心議題的理解程度吧！</p>
+            <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+                <div id="quiz-container" class="space-y-8">
+                    </div>
+                <div class="mt-8 flex items-center gap-6">
+                    <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                    <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="text-center mt-16 pt-8 border-t border-slate-200">
+        <p class="text-sm text-slate-500">此互動式應用程式的內容綜合分析了多份2023-2025年間關於人工智慧的學術報告與產業分析。</p>
+        <p class="text-xs text-slate-400 mt-2">生成於 2025年7月21日</p>
+    </footer>
+
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Navigation Logic ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+        const link = document.querySelector(`.nav-link[href="#${section.id}"], .mobile-nav-link[href="#${section.id}"]`);
+        if (link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // For mobile, also close the menu
+                if (link.classList.contains('mobile-nav-link')) {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIconOpen.classList.remove('hidden');
+                    hamburgerIconClose.classList.add('hidden');
+                }
+            });
+        }
+    });
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    // --- Chart and Interactive Content Logic ---
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        return Array.isArray(label) ? label.join(' ') : label;
+    };
+
+    const wrapLabel = (label, maxLength = 16) => {
+        if (label.length <= maxLength) return label;
+        const words = label.split(' ');
+        let lines = [];
+        let currentLine = '';
+        words.forEach(word => {
+            if ((currentLine + word).length > maxLength) {
+                lines.push(currentLine.trim());
+                currentLine = word + ' ';
+            } else {
+                currentLine += word + ' ';
+            }
+        });
+        lines.push(currentLine.trim());
+        return lines.filter(line => line.length > 0);
+    };
+
+    // Chart 1: Compute Demand
+    const computeDemandCtx = document.getElementById('computeDemandChart')?.getContext('2d');
+    if (computeDemandCtx) {
+        new Chart(computeDemandCtx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2020', '2022', '2024', '2026(E)'],
+                datasets: [
+                    {
+                        label: 'AI訓練計算需求 (指數增長)',
+                        data: [1, 64, 4096, 262144, 16777216],
+                        borderColor: '#dc2626',
+                        backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: '摩爾定律 (線性增長)',
+                        data: [1, 4, 16, 64, 256],
+                        borderColor: '#0284c7',
+                        backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                        fill: true,
+                        borderDash: [5, 5]
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { type: 'logarithmic', title: { display: true, text: '相對計算量 (對數尺度)', color: '#475569' }, grid: { color: '#e2e8f0' } },
+                    x: { title: { display: true, text: '年份', color: '#475569' }, grid: { color: '#e2e8f0' } }
+                },
+                plugins: { tooltip: { callbacks: { title: tooltipTitleCallback } } }
+            }
+        });
+    }
+
+    // Chart 2: Resource Gap
+    const resourceGapCtx = document.getElementById('resourceGapChart')?.getContext('2d');
+    if (resourceGapCtx) {
+        const resourceLabels = ['AI訓練需求', 'GPU效能', '晶片製造產能', '全球電力供應'];
+        new Chart(resourceGapCtx, {
+            type: 'bar',
+            data: {
+                labels: resourceLabels,
+                datasets: [{
+                    label: '年均增長率 (%)',
+                    data: [350, 30, 20, 10],
+                    backgroundColor: ['#dc2626', '#f59e0b', '#0284c7', '#94a3b8']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: { title: { display: true, text: '年均增長率 (%)', color: '#475569' }, grid: { color: '#e2e8f0' } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // Chart 3: Social Impact
+    const socialImpactCtx = document.getElementById('socialImpactChart')?.getContext('2d');
+    if (socialImpactCtx) {
+        const impactLabels = ['勞動市場衝擊', '演算法偏見', '數據隱私', '社會操控風險', '自主武器倫理'];
+        new Chart(socialImpactCtx, {
+            type: 'radar',
+            data: {
+                labels: impactLabels.map(l => wrapLabel(l)),
+                datasets: [{
+                    label: '社會衝擊關注度',
+                    data: [9, 7, 8, 8, 6],
+                    backgroundColor: 'rgba(2, 132, 199, 0.2)',
+                    borderColor: '#0284c7',
+                    pointBackgroundColor: '#0284c7'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#d1d5db' },
+                        grid: { color: '#e5e7eb' },
+                        pointLabels: { font: { size: 12 }, color: '#1e293b'},
+                        suggestedMin: 0,
+                        suggestedMax: 10
+                    }
+                }
+            }
+        });
+    }
+    
+    // Tab Logic
+    const societalBtn = document.getElementById('societalBtn');
+    const existentialBtn = document.getElementById('existentialBtn');
+    const societalContent = document.getElementById('societalContent');
+    const existentialContent = document.getElementById('existentialContent');
+
+    if (societalBtn && existentialBtn && societalContent && existentialContent) {
+        societalBtn.addEventListener('click', () => {
+            societalBtn.classList.add('active');
+            existentialBtn.classList.remove('active');
+            societalContent.classList.remove('hidden');
+            existentialContent.classList.add('hidden');
+        });
+
+        existentialBtn.addEventListener('click', () => {
+            existentialBtn.classList.add('active');
+            societalBtn.classList.remove('active');
+            existentialContent.classList.remove('hidden');
+            societalContent.classList.add('hidden');
+        });
+    }
+
+    // --- Quiz Logic ---
+    const quizData = {
+        questions: [
+            { question: "根據網頁內容，頂尖AI模型的訓練計算量增長速度與傳統的摩爾定律相比，呈現何種關係？", options: ["AI增長速度遠快於摩爾定律", "兩者增長速度大致相同", "摩爾定律的增長速度遠快於AI", "兩者沒有可比性"], answer: 0 },
+            { question: "網頁中提到的AI發展所面臨的最主要「物理資源瓶頸」不包含下列何者？", options: ["先進晶片的製造產能", "資料中心的電力供應", "軟體演算法的創新速度", "全球電力供應的增長"], answer: 2 },
+            { question: "在「文明的衝擊」章節中，哪一項被視為最高層級的「存在風險」？", options: ["大規模失業", "假訊息與社會操控", "自主武器", "失控的超級智慧"], answer: 3 }
+        ]
+    };
+
+    const quizContainer = document.getElementById('quiz-container');
+    const submitBtn = document.getElementById('submit-quiz-btn');
+    const resultsDiv = document.getElementById('quiz-results');
+
+    if (quizContainer && submitBtn && resultsDiv) {
+        quizContainer.innerHTML = quizData.questions.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map((option, i) => `
+                        <label class="flex items-center p-2 rounded-md hover:bg-sky-50 cursor-pointer quiz-option">
+                            <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2"></div>
+            </div>`).join('');
+
+        submitBtn.onclick = () => {
+            let score = 0;
+            quizData.questions.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                container.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                
+                if (!selected) {
+                    feedbackDiv.innerHTML = '<span class="text-red-600">請選擇一個答案。</span>';
+                    container.classList.add('incorrect');
+                    return;
+                }
+                
+                const userAnswer = parseInt(selected.value);
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                }
+                
+                // Disable all radio buttons for this question after answering
+                document.querySelectorAll(`input[name="question-${index}"]`).forEach(input => input.disabled = true);
+            });
+
+            resultsDiv.textContent = `您的得分: ${score} / ${quizData.questions.length}`;
+            if (score === quizData.questions.length) {
+                resultsDiv.className = 'text-xl font-bold text-green-600';
+            } else {
+                resultsDiv.className = 'text-xl font-bold text-amber-600';
+            }
+            submitBtn.disabled = true;
+        };
+    }
+});
+</script>
+
+</body>
+</html>
