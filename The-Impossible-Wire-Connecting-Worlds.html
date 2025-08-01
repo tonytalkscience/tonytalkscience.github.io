@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看不見的導體：單線接地返路電報的互動歷史</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+         .nav-link { transition: color 0.3s, border-color 0.3s; }
+         .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+         .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+
+        /* Custom styles for this page, adapted from the new theme */
+        .atlantic-tab.active { background-color: #0c4a6e; color: #f8fafc; }
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+        .quiz-option:hover { background-color: #f0f9ff; }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">看不見的導體</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#intro" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">簡介</a>
+                    <a href="#pioneers" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">先驅</a>
+                    <a href="#atlantic" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">挑戰大西洋</a>
+                    <a href="#physics" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">物理學</a>
+                    <a href="#impact" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">全球影響</a>
+                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#intro" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">簡介</a>
+            <a href="#pioneers" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">先驅</a>
+            <a href="#atlantic" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">挑戰大西洋</a>
+            <a href="#physics" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">物理學</a>
+            <a href="#impact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">全球影響</a>
+            <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+    <section id="intro" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">一條線，連結世界</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+            19世紀，一項革命性的發現徹底改變了人類通訊的方式。工程師們意識到，他們不需要兩條昂貴的電線來發送電報，因為他們腳下就躺著一條現成的、無限大的導體——地球本身。這個被稱為「單線接地返路」(SWER) 的設計，將電報線路的成本直接減半，催生了全球通訊網絡的爆炸性成長，並最終使橫跨大西洋的即時通訊成為可能。本頁將帶您探索這段從經濟需求到科學突破，再到全球影響的非凡旅程。
+        </p>
+    </section>
+
+    <section id="pioneers" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">關鍵的先驅們</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">「接地返路」的原理並非一蹴可幾，而是由幾位橫跨世紀的科學家與發明家，在不斷的探索、失敗與偶然的頓悟中逐漸揭示的。點擊下方的卡片，了解他們各自的關鍵貢獻。</p>
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div class="interactive-card bg-white p-6 rounded-xl shadow-lg text-center">
+                <h3 class="text-2xl font-bold mb-2 text-sky-700">威廉·華生爵士</h3>
+                <p class="font-bold text-slate-500">1747年</p>
+                <p class="mt-4 text-slate-600">在電報發明前近一個世紀，他已證明大地可以作為電流回路。但他當時的目標是測量電流速度，而非通訊，其發現因此被後人遺忘。</p>
+            </div>
+            <div class="interactive-card bg-white p-6 rounded-xl shadow-lg text-center">
+                <h3 class="text-2xl font-bold mb-2 text-sky-700">哈里森·格雷·戴爾</h3>
+                <p class="font-bold text-slate-500">1828年</p>
+                <p class="mt-4 text-slate-600">獨立開發出利用接地返路的電化學電報，但因商業失敗與技術限制，他的貢獻未能普及，概念需要被「再次發明」。</p>
+            </div>
+            <div class="interactive-card bg-white p-6 rounded-xl shadow-lg text-center">
+                <h3 class="text-2xl font-bold mb-2 text-sky-700">卡爾·馮·施泰因海爾</h3>
+                <p class="font-bold text-slate-500">1838年</p>
+                <p class="mt-4 text-slate-600">在一次失敗的鐵軌電報實驗中，意外發現大地是絕佳導體，從而設計出首個實用的單線接地返路系統，並無私地將其公開。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="atlantic" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">終極挑戰：征服大西洋</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">將單線原理應用於史上最艱鉅的工程——跨大西洋電纜，是一場科學與毅力的史詩。1858年的災難性失敗，為1866年的輝煌成功鋪平了道路。下方的互動卡片將為您比較這兩次嘗試的關鍵差異。</p>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden max-w-5xl mx-auto">
+            <div class="flex border-b border-slate-200">
+                <div id="tab-1858" class="atlantic-tab flex-1 p-4 text-center font-bold text-lg cursor-pointer transition-colors">1858年：災難性的首次嘗試</div>
+                <div id="tab-1866" class="atlantic-tab flex-1 p-4 text-center font-bold text-lg cursor-pointer transition-colors active">1866年：歷史性的成功</div>
+            </div>
+            <div id="content-1858" class="p-6 md:p-8 hidden">
+                <h3 class="text-2xl font-bold text-red-600 mb-4">經驗主義的代價</h3>
+                <ul class="list-disc list-inside space-y-2 text-lg text-slate-700">
+                    <li><strong>核心理論：</strong>由電工懷特豪斯主導，他認為需要極高電壓（~2000伏特）才能「強行」將信號打過大西洋。</li>
+                    <li><strong>導體規格：</strong>較細的銅導體 (每海里107磅)。</li>
+                    <li><strong>絕緣處理：</strong>馬來樹膠絕緣層品質不佳，製造與儲存過程受損。</li>
+                    <li><strong>接收儀器：</strong>標準的電報繼電器，靈敏度不足。</li>
+                    <li><strong>最終結果：</strong><span class="font-bold">高壓電擊穿了脆弱的絕緣層，電纜在運作三週後永久失效。</span></li>
+                </ul>
+            </div>
+            <div id="content-1866" class="p-6 md:p-8">
+                 <h3 class="text-2xl font-bold text-green-600 mb-4">科學理論的勝利</h3>
+                <ul class="list-disc list-inside space-y-2 text-lg text-slate-700">
+                    <li><strong>核心理論：</strong>由物理學家威廉·湯姆森（克耳文勳爵）主導，他預測信號會極度衰減，需要極靈敏的儀器和低電壓。</li>
+                    <li><strong>導體規格：</strong><span class="font-bold">更粗的高純度銅導體 (每海里300磅)</span>，以降低電阻。</li>
+                    <li><strong>絕緣處理：</strong>多層馬來樹膠與查特頓化合物，確保絕緣完美。</li>
+                    <li><strong>接收儀器：</strong>湯姆森發明的<span class="font-bold">反射鏡檢流計</span>，靈敏度極高，能偵測最微弱的電流。</li>
+                    <li><strong>最終結果：</strong><span class="font-bold">電纜成功鋪設並持久運作數十年，開啟了洲際即時通訊時代。</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section id="physics" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">返路徑的物理學</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">為何龐大的地球或海洋，其導電性竟能勝過一根專用的銅線？答案在於物理學的基本原理和介質的特性。下圖比較了不同返路徑介質的相對導電能力，揭示了為何海水是跨大西洋電纜最理想的「超級高速公路」。</p>
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg h-[400px]">
+                <canvas id="conductivityChart"></canvas>
+            </div>
+             <div class="max-w-4xl mx-auto mt-8 text-center text-md bg-white p-6 rounded-xl shadow-lg text-slate-700">
+                <p>電阻公式為 $R = \rho (L/A)$，其中 $\rho$ 是電阻率，$L$ 是長度，$A$ 是橫截面積。雖然銅的電阻率極低，但其截面積很小。相比之下，**地球或海洋的截面積 $A$ 幾乎是無限大的**，這極大地降低了總電阻 $R$。此外，海水中富含的導電離子（如 $Na^+$ 和 $Cl^-$），使其導電性遠優於主要由矽酸鹽構成的海床。因此，電流會選擇電阻最小的路徑——廣闊的海水。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">單線革命的全球影響</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">單線電報與跨大西洋電纜的成功，其影響遠不止於技術本身。它深刻地重塑了全球經濟、政治格局，催生了國際標準化組織，但也帶來了一場被遺忘的環境危機。</p>
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div class="interactive-card bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-3 text-sky-700">經濟全球化</h3>
+                <p class="text-slate-600">即時通訊整合了全球的金融與商品市場，降低了商業成本，並將新聞傳播從運輸速度中解放出來，世界以前所未有的方式緊密相連。</p>
+            </div>
+            <div class="interactive-card bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-3 text-sky-700">國際標準的誕生</h3>
+                <p class="text-slate-600">為解決各國電報系統不兼容的問題，1865年成立了國際電報聯盟 (ITU)，這是世界上第一個現代國際標準組織，它統一了摩斯電碼，確保了全球網絡的無縫對接。</p>
+            </div>
+            <div class="interactive-card bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-3 text-sky-700">馬來樹膠悲劇</h3>
+                <p class="text-slate-600">海底電纜的絕緣完全依賴馬來樹膠。需求的爆炸導致東南亞雨林被毀滅性砍伐（一條電纜約需25萬棵樹），這是19世紀技術輝煌背後，一段黑暗的殖民與環境代價。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="audio-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">語音摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">點擊下方播放器，聆聽關於單線電報歷史的重點摘要。</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">🎧 連結世界的隱形線</h3>
+            <audio controlsList="nodownload" controls preload="auto" class="w-full mb-4" src="The-Impossible-Wire-Connecting-Worlds 8min47s notebookLM.mp3">您的瀏覽器不支援音訊播放。</audio>
+            <div class="prose max-w-none text-slate-600 mt-4">
+                <p>這段8分47秒的語音摘要深入探討了「單線接地返路」技術的歷史與科學。內容從19世紀中葉的經濟壓力開始，闡述了高昂的銅線成本如何成為通訊發展的瓶頸。接著，故事轉向關鍵人物，如意外發現大地導電性的卡爾·馮·施泰因海爾，以及將此理論付諸實踐的工程師們。</p>
+                <p>核心部分聚焦於跨大西洋電纜的鋪設，對比了1858年因錯誤的高壓理論而導致的災難性失敗，與1866年基於威廉·湯姆森精確物理計算而取得的歷史性成功。語音不僅解釋了技術細節，如導體尺寸和絕緣材料的重要性，更生動地描繪了當時科學家與資本家之間的緊張合作關係。</p>
+                <p>最後，摘要總結了這項技術如何永久改變世界，它不僅是全球化的催化劑，也催生了國際標準組織，同時也揭示了其背後不為人知的環境代價——對馬來樹膠林的毀滅性開採。這條「不可能的電線」最終證明，最偉大的工程突破，往往源於對自然基本法則的深刻理解。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對本主題的理解程度吧！</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+            <div id="quiz-container" class="space-y-8">
+                </div>
+            <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
+    <p class="text-slate-500">&copy; 2025 本網頁內容根據「看不見的導體」報告創建。</p>
+    <p class="text-slate-500">本內容的生成部分借助 Google Gemini，發布者應對最終內容的準確性負責。</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Navigation Logic ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => {
+           if(link.getAttribute('href').startsWith('#')){
+               link.classList.remove('active');
+            }
+        });
+        if (index >= 0 && sections[index]) {
+            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        if (link.getAttribute('href').startsWith('#')) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            });
+        }
+    });
+
+    // --- Atlantic Cable Tabs ---
+    const tab1858 = document.getElementById('tab-1858');
+    const tab1866 = document.getElementById('tab-1866');
+    const content1858 = document.getElementById('content-1858');
+    const content1866 = document.getElementById('content-1866');
+
+    function switchTab(activeTab, inactiveTab, activeContent, inactiveContent) {
+        activeTab.classList.add('active');
+        inactiveTab.classList.remove('active');
+        activeContent.classList.remove('hidden');
+        inactiveContent.classList.add('hidden');
+    }
+
+    if(tab1858 && tab1866) {
+        tab1858.addEventListener('click', () => switchTab(tab1858, tab1866, content1858, content1866));
+        tab1866.addEventListener('click', () => switchTab(tab1866, tab1858, content1866, content1858));
+    }
+
+    // --- Conductivity Chart ---
+    const ctx = document.getElementById('conductivityChart')?.getContext('2d');
+    if (ctx) {
+        const conductivityData = {
+            labels: ['銅線 (返路)', '海水', '海床', '濕潤土壤'],
+            datasets: [{
+                label: '相對導電能力 (S/m, 西門子/米) - 對數尺度',
+                data: [5.96e7, 4, 1, 0.01],
+                backgroundColor: [
+                    '#f59e0b', // Amber 500
+                    '#0ea5e9', // Sky 500
+                    '#a16207', // Amber 700
+                    '#65a30d'  // Lime 600
+                ],
+                borderColor: '#64748b', // Slate 500
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: conductivityData,
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        title: {
+                            display: true,
+                            text: '電導率 (S/m) - 注意這是對數尺度',
+                            font: { size: 14, family: 'Noto Sans TC' },
+                            color: '#1e293b'
+                        },
+                         ticks: {
+                             color: '#475569',
+                             callback: function(value) {
+                                if (value >= 1e6) return (value / 1e6) + 'M';
+                                if (value >= 1e3) return (value / 1e3) + 'k';
+                                return value;
+                            }
+                        }
+                    },
+                    y: {
+                        ticks: { 
+                            font: { size: 14, family: 'Noto Sans TC' },
+                            color: '#1e293b'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed.x !== null) {
+                                    label += context.parsed.x.toExponential(2) + ' S/m';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // --- Quiz Logic ---
+    const quizData = {
+        questions: [
+            { question: "1866年成功的跨大西洋電纜，其核心科學理論的主要貢獻者是誰？", options: ["電工懷特豪斯", "物理學家威廉·湯姆森", "發明家戴爾", "科學家華生爵士"], answer: 1 },
+            { question: "為何海洋（或大地）能作為比銅線更有效的長距離電流返路？", options: ["因為海水的電阻率比銅更低", "因為海水的橫截面積巨大，極大降低了總電阻", "因為電流在水中傳播速度更快", "因為大地是天然的磁體"], answer: 1 },
+            { question: "1858年首次嘗試鋪設跨大西洋電纜失敗的主要技術原因是？", options: ["使用了過於靈敏的接收儀器", "電纜不夠長，無法到達對岸", "使用了過高的電壓，擊穿了品質不佳的絕緣層", "船隻在風暴中沉沒"], answer: 2 }
+        ]
+    };
+
+    const quizContainer = document.getElementById('quiz-container');
+    const submitBtn = document.getElementById('submit-quiz-btn');
+    const resultsDiv = document.getElementById('quiz-results');
+
+    if (quizContainer && submitBtn && resultsDiv) {
+        quizContainer.innerHTML = quizData.questions.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map((option, i) => `
+                        <label class="flex items-center p-2 rounded-md quiz-option cursor-pointer">
+                            <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2"></div>
+            </div>`).join('');
+
+        submitBtn.onclick = () => {
+            let score = 0;
+            quizData.questions.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                container.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+
+                if (!selected) {
+                    feedbackDiv.innerHTML = '<span class="text-red-600">請選擇一個答案。</span>';
+                    container.classList.add('incorrect');
+                    return;
+                }
+
+                const userAnswer = parseInt(selected.value);
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                }
+            });
+
+            resultsDiv.textContent = `您的得分: ${score} / ${quizData.questions.length}`;
+             if(score === quizData.questions.length) {
+                resultsDiv.className = 'text-xl font-bold text-green-600';
+            } else {
+                resultsDiv.className = 'text-xl font-bold text-amber-600';
+            }
+            submitBtn.disabled = true;
+        };
+    }
+    
+    // Set initial state
+    changeNavOnScroll();
+});
+</script>
+
+</body>
+</html>
+
