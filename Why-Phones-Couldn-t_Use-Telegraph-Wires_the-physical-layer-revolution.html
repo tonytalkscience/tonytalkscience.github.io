@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看不見的革命：從電報到電話的線路變革</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+        .test-fail { @apply bg-red-100 border-red-500 text-red-800; }
+        .test-success { @apply bg-green-100 border-green-500 text-green-800; }
+
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">看不見的革命</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="#hero" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">開端</a>
+                    <a href="#two-worlds" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">兩種世界</a>
+                    <a href="#the-divide" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">巨大鴻溝</a>
+                    <a href="#solutions" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">優雅對策</a>
+                    <a href="#the-test" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">終極測試</a>
+                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識測驗</a>
+                    <a href="#legacy" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">不朽遺產</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+             <a href="#hero" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">開端</a>
+             <a href="#two-worlds" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">兩種世界</a>
+             <a href="#the-divide" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">巨大鴻溝</a>
+             <a href="#solutions" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">優雅對策</a>
+             <a href="#the-test" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">終極測試</a>
+             <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
+             <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識測驗</a>
+             <a href="#legacy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">不朽遺產</a>
+  <a href="index.html">回到首頁</a>
+  <a href=" autodrive-tamsui.html">下一篇</a>
+
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <section id="hero" class="text-center mb-16 scroll-mt-20">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">這不是升級，而是一場革命。</h2>
+        <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-600">
+            人們普遍認為電話只是電報的自然演進。然而，真相是：為了傳遞人類的聲音，構成通訊網路基礎的「線路」本身，必須被徹底重新發明。
+        </p>
+    </section>
+
+    <section id="two-worlds" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">兩種世界，兩種哲學</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-12">
+            電報線路為傳遞「有無」的數位脈衝而生，追求的是成本效益與覆蓋範圍。電話線路則為保護精細的類比波形而設計，追求的是信號的純淨與保真。這兩種截然不同的目標，催生了兩種完全不同的物理實體。
+        </p>
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h4 class="text-2xl font-bold mb-4 text-center text-sky-700"><span class="text-5xl mx-auto mb-4 block">⚡</span>電報：務實的骨架</h4>
+                <div class="space-y-3">
+                    <div class="flex items-start space-x-3"><span class="w-5 h-5 mt-1 flex-shrink-0">🔧</span><p><strong>結構:</strong> 單線接地返路 (SWER) — 使用大地作為返迴路徑，將成本減半。</p></div>
+                    <div class="flex items-start space-x-3"><span class="w-5 h-5 mt-1 flex-shrink-0">🔩</span><p><strong>材料:</strong> 鐵或鋼 — 堅固且廉價，但電阻高。</p></div>
+                    <div class="flex items-start space-x-3"><span class="w-5 h-5 mt-1 flex-shrink-0">📶</span><p><strong>信號:</strong> 直流數位脈衝 (開/關) —強健、簡單，不關心波形。</p></div>
+                    <div class="flex items-start space-x-3"><span class="w-5 h-5 mt-1 flex-shrink-0">🎯</span><p><strong>目標:</strong> 克服**信號衰減** — 確保遠端能偵測到電流即可。</p></div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <h4 class="text-2xl font-bold mb-4 text-center text-cyan-700"><span class="text-5xl mx-auto mb-4 block">🗣️</span>電話：高保真的神經系統</h4>
+                 <div class="space-y-3">
+                    <div class="flex items-start space-x-3"><span class="w-5 h-5 mt-1 flex-shrink-0">🧬</span><p><strong>結構:</strong> 平衡式雙線金屬電路 — 兩條專用導線，與大地完全隔離。</p></div>
+                    <div class="flex items-start space-x-3"><span class="w-5 h-5 mt-1 flex-shrink-0">🥉</span><p><strong>材料:</strong> 硬抽銅 — 電阻極低，能保護微弱信號。</p></div>
+                    <div class="flex items-start space-x-3"><span class="w-5 h-5 mt-1 flex-shrink-0">〰️</span><p><strong>信號:</strong> 類比語音波形 (300-3400Hz) — 精細、脆弱，形狀即是資訊。</p></div>
+                    <div class="flex items-start space-x-3"><span class="w-5 h-5 mt-1 flex-shrink-0">🛡️</span><p><strong>目標:</strong> 對抗**信號污染** — 最大化信噪比 (SNR)，保護波形純淨。</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="the-divide" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">巨大鴻溝：被噪音淹沒的聲音</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-12">
+            為什麼不能直接將電話機接在電報線上？因為電報的單線結構就像一根巨大的天線，會吸收來自周遭環境的一切電氣噪音。這些噪音對類比語音信號是致命的。點擊下方按鈕，親眼見證這個過程。
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
+            <div style="position: relative; height:300px; max-height:40vh; width:100%;">
+                <canvas id="noiseChart"></canvas>
+            </div>
+            <div class="text-center mt-6">
+                <button id="noiseButton" class="px-6 py-2 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors">
+                    模擬將語音信號接入電報線路
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="solutions" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">優雅的對策：設計勝於蠻力</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-12">
+            面對噪音的挑戰，工程師們沒有選擇「阻擋」，而是發明了兩種巧妙的物理技巧，讓噪音能夠「自我抵銷」。這兩項發明奠定了此後一百多年高性能有線通訊的基礎。
+        </p>
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl mb-4 bg-green-100 text-green-700 font-bold">①</div>
+                <h4 class="text-xl font-bold mb-2 text-slate-800">平衡電路：共模抑制</h4>
+                <p class="text-slate-600">
+                    使用兩條線，發送一正一反兩個信號。外部噪音會在這兩條線上感應出相同的「共模噪音」。接收端只放大兩線的「電壓差」，從而使信號加倍，同時讓共模噪音相互抵銷歸零。
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl mb-4 bg-blue-100 text-blue-700 font-bold">②</div>
+                <h4 class="text-xl font-bold mb-2 text-slate-800">雙絞線：馴服串音</h4>
+                <p class="text-slate-600">
+                   將兩條導線規律地絞合在一起。這能確保兩條線平均地暴露在來自相鄰線路的干擾中，將原本的「差模」串音轉化為可被平衡電路輕鬆抑制的「共模」噪音。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="the-test" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">終極測試：不對稱的互用性</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-12">
+            這兩種線路能否互用？這個問題的答案最終揭示了它們之間的技術鴻溝。點擊下方的測試，看看會發生什麼。
+        </p>
+        <div class="space-y-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">測試一：電話能否使用電報線路？</h4>
+                    <button id="test1" class="w-full px-6 py-3 text-lg font-bold rounded-lg transition-all duration-300 ease-in-out bg-slate-200 hover:bg-slate-300">開始測試</button>
+                    <div id="result1" class="mt-4 p-4 rounded-lg text-left hidden"></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">測試二：電報能否使用電話線路？</h4>
+                    <button id="test2" class="w-full px-6 py-3 text-lg font-bold rounded-lg transition-all duration-300 ease-in-out bg-slate-200 hover:bg-slate-300">開始測試</button>
+                    <div id="result2" class="mt-4 p-4 rounded-lg text-left hidden"></div>
+                </div>
+            </div>
+             <div class="pt-8">
+                <h3 class="text-2xl font-bold text-center mb-4 text-slate-800">頻寬需求：天壤之別</h3>
+                <p class="text-lg text-center text-slate-600 mb-8 max-w-3xl mx-auto">
+                    除了抗噪能力，兩種技術對頻寬的需求也完全不同。電報僅需傳遞極低頻的直流脈衝，而電話則需要一個能容納人類語音頻譜的通道。
+                </p>
+                <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
+                    <div style="position: relative; height: 250px; width: 100%;">
+                        <canvas id="bandwidthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="audio-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">語音重點摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-12">
+            透過這段 8 分鐘的語音，深入了解為何看似簡單的「線路」問題，是阻礙電話取代電報的巨大鴻溝，以及工程師如何透過物理層的革命性創新來克服挑戰。
+        </p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">🎧 Why Phones Couldn't Use Telegraph Wires</h3>
+            <audio controls class="w-full mb-4">
+                <source src="Why-Phones-Couldn-t_Use-Telegraph-Wires_the-physical-layer-revolution 8min32s.mp3" type="audio/mpeg">
+                您的瀏覽器不支援音訊播放。
+            </audio>
+            <div class="prose max-w-none text-slate-600 mt-4">
+                <p><strong>核心摘要：</strong>本音檔的核心在於闡述電話通訊的成功，並非僅僅是發明了話機，而是奠基於對「物理線路」的徹底改造。它解釋了電報所使用的「單線接地返路」(SWER) 線路，雖然成本低廉，但其設計卻是電話類比信號的天敵。</p>
+                <p>該線路會引入大量電氣噪聲，徹底污染需要高保真度的語音波形。因此，為了讓電話普及，必須發展出如「平衡電路」與「雙絞線」等新技術，它們能有效抵銷噪聲、對抗串音，保護信號純淨。這場發生在物理層的革命，才是現代通訊網路的真正基石。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-12">
+             您已了解兩種技術的根本差異，現在就來測試一下您的新知識吧！選擇所有答案後提交。
+        </p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+             <div id="quiz-container" class="space-y-8"></div>
+             <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="legacy" class="scroll-mt-20 text-center">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">不朽的遺產</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-12">
+            從電報到電話的物理層革命，其原則並未過時。平衡線路、差分信號、共模抑制、雙絞線... 這些在一個多世紀前為傳遞語音而完善的技術，如今正以更高的頻率，承載著我們的網際網路流量、高清音視頻和無數數據流，隱藏在我們身邊的每一條乙太網路線中。
+        </p>
+        <div class="text-6xl text-slate-400">🔌</div>
+    </section>
+</main>
+
+<footer class="text-center p-8 mt-12 border-t border-slate-200 text-sm">
+    <p class="text-slate-500">基於《電報與電話線路之電性與結構深度剖析》報告內容製作的互動式網頁。</p>
+    <p class="text-slate-500 mt-2">&copy; 2025 互動式資訊呈現</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Navigation Logic ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                });
+            }
+        });
+    }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
+
+    sections.forEach(section => observer.observe(section));
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                 if(mobileMenu.classList.contains('hidden') === false){
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIconOpen.classList.remove('hidden');
+                    hamburgerIconClose.classList.add('hidden');
+                 }
+            }
+        });
+    });
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
+    });
+
+    // --- Charting and Interaction Logic ---
+    const cleanSignal = Array.from({ length: 100 }, (_, i) => Math.sin(i * 0.2) * 20 + 25);
+    let noiseChart;
+
+    function createNoiseChart(data) {
+        const ctx = document.getElementById('noiseChart').getContext('2d');
+        if (noiseChart) noiseChart.destroy();
+        noiseChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Array.from({ length: 100 }, (_, i) => i),
+                datasets: [{
+                    label: '語音信號', data, borderColor: '#0ea5e9',
+                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                    borderWidth: 3, pointRadius: 0, tension: 0.4, fill: true
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { display: false }, x: { display: false } },
+                plugins: { legend: { display: false }, tooltip: { enabled: false } }
+            }
+        });
+    }
+    createNoiseChart(cleanSignal);
+
+    document.getElementById('noiseButton').addEventListener('click', () => {
+        const noisySignal = cleanSignal.map(p => p + (Math.random() - 0.5) * 30);
+        createNoiseChart(noisySignal);
+        const button = document.getElementById('noiseButton');
+        button.textContent = '噪音已淹沒信號！';
+        button.classList.remove('bg-sky-600', 'hover:bg-sky-700');
+        button.classList.add('bg-red-600', 'cursor-not-allowed');
+        button.disabled = true;
+        setTimeout(() => {
+            createNoiseChart(cleanSignal);
+            button.textContent = '模擬將語音信號接入電報線路';
+            button.classList.add('bg-sky-600', 'hover:bg-sky-700');
+            button.classList.remove('bg-red-600', 'cursor-not-allowed');
+            button.disabled = false;
+        }, 3000);
+    });
+    
+    const bandwidthCtx = document.getElementById('bandwidthChart').getContext('2d');
+    new Chart(bandwidthCtx, {
+        type: 'bar',
+        data: {
+            labels: ['電報 (手動鍵控)', '電話 (語音頻段)'],
+            datasets: [{
+                label: '所需頻寬 (Hz)', data: [20, 3100],
+                backgroundColor: ['rgba(59, 130, 246, 0.6)', 'rgba(14, 165, 233, 0.6)'],
+                borderColor: ['rgba(59, 130, 246, 1)', 'rgba(14, 165, 233, 1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+            scales: { x: { type: 'logarithmic', title: { display: true, text: '頻寬 (Hz) - 對數座標' } } },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: (c) => `${c.dataset.label || ''}: ${c.parsed.x.toLocaleString()} Hz`
+                    }
+                }
+            }
+        }
+    });
+
+    document.getElementById('test1').addEventListener('click', () => {
+        const resultDiv = document.getElementById('result1');
+        resultDiv.innerHTML = `
+            <h5 class="font-bold">測試結果：完全失敗</h5>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
+                <li><strong>噪音淹沒:</strong> SWER線路如同天線，巨大的電氣噪音會徹底淹沒脆弱的語音信號。</li>
+                <li><strong>頻率失真:</strong> 線路未對語音頻段優化，會導致聲音嚴重失真，無法辨認。</li>
+                <li><strong>信號脆弱:</strong> 語音信號的價值在於其精確的「形狀」，電報線路無法保護它。</li>
+            </ul>`;
+        resultDiv.className = 'mt-4 p-4 rounded-lg text-left test-fail';
+    });
+
+    document.getElementById('test2').addEventListener('click', () => {
+        const resultDiv = document.getElementById('result2');
+        resultDiv.innerHTML = `
+            <h5 class="font-bold">測試結果：完美運行</h5>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
+                <li><strong>通道卓越:</strong> 電話線路是低噪音、低電阻的高性能傳輸媒介，對電報信號而言是「過度設計」。</li>
+                <li><strong>噪音免疫:</strong> 平衡電路能完美抑制外部干擾，確保直流脈衝清晰到達。</li>
+                <li><strong>信號強健:</strong> 電報信號的「開/關」本質非常強健，不要求高品質通道。</li>
+            </ul>`;
+        resultDiv.className = 'mt-4 p-4 rounded-lg text-left test-success';
+    });
+
+    // --- Quiz Logic ---
+    const quizData = [
+        {
+            question: "電報線路主要採用何種結構以最大化成本效益？",
+            options: ["平衡式雙線電路", "單線接地返路 (SWER)", "光纖電纜", "同軸電纜"],
+            answer: 1, explanation: "單線接地返路 (SWER) 使用大地作為回路，省下了一半的線材成本，是早期電報網路最具成本效益的選擇。"
+        },
+        {
+            question: "電話線路發明「平衡電路」主要是為了解決什麼問題？",
+            options: ["信號衰減", "線路成本", "電氣噪音與干擾", "傳輸速度"],
+            answer: 2, explanation: "平衡電路透過發送一對大小相等、方向相反的信號，讓接收端能透過差動放大來抑制兩條線上感應到的相同噪聲(共模噪聲)。"
+        },
+        {
+            question: "將電話線路中的導線規律地絞合在一起（雙絞線），其主要目的是？",
+            options: ["減少線材用量", "增加線路強度", "讓線路更容易被識別", "對抗來自相鄰線路的「串音」干擾"],
+            answer: 3, explanation: "雙絞線能確保兩條導線平均暴露於外部磁場，將有害的差模串音轉化為可被平衡電路輕鬆濾除的共模噪聲。"
+        }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+    const submitBtn = document.getElementById('submit-quiz-btn');
+    const resultsDiv = document.getElementById('quiz-results');
+
+    quizContainer.innerHTML = quizData.map((q, index) => `
+        <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
+            <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+            <div class="space-y-2">
+                ${q.options.map((option, i) => `
+                    <label class="flex items-center p-2 rounded-md hover:bg-sky-50 cursor-pointer">
+                        <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                        <span class="text-slate-700">${option}</span>
+                    </label>`).join('')}
+            </div>
+            <div id="feedback-${index}" class="text-sm font-semibold mt-2"></div>
+        </div>`).join('');
+    
+    submitBtn.addEventListener('click', () => {
+        let score = 0;
+        quizData.forEach((q, index) => {
+            const container = document.getElementById(`question-${index}`);
+            const feedbackDiv = document.getElementById(`feedback-${index}`);
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            
+            if (selected) {
+                const userAnswer = parseInt(selected.value);
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = `<span class="text-green-600">✔️ 正確</span>`;
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                }
+            } else {
+                 container.classList.add('incorrect');
+                 feedbackDiv.innerHTML = `<span class="text-red-600">請選擇一個答案。</span>`;
+            }
+        });
+        
+        resultsDiv.textContent = `您的得分: ${score} / ${quizData.length}`;
+        submitBtn.disabled = true;
+    });
+});
+</script>
+
+</body>
+</html>
+
