@@ -272,25 +272,29 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (sections.length > 0) {
         const observer = new IntersectionObserver((entries) => {
-            let activeId = null;
+             let intersectingSections = [];
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    activeId = entry.target.id;
+                    intersectingSections.push(entry.target);
                 }
             });
 
-            if (activeId) {
-                 document.querySelectorAll('.nav-link').forEach(link => {
+            if (intersectingSections.length > 0) {
+                intersectingSections.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+                const id = intersectingSections[0].getAttribute('id');
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${activeId}`) {
+                    if (link.getAttribute('href') === `#${id}`) {
                         link.classList.add('active');
                     }
                 });
             }
-        }, { rootMargin: "-50% 0px -50% 0px", threshold: 0.5 });
+        }, { rootMargin: "-50% 0px -50% 0px", threshold: [0.1, 0.9] });
 
         sections.forEach(section => observer.observe(section));
     }
+    
 
     // --- Charting and Interaction Logic ---
     const cleanSignal = Array.from({ length: 100 }, (_, i) => Math.sin(i * 0.2) * 20 + 25);
