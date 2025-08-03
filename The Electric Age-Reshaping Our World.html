@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-B417SX4GTY');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
     </script>
     
     <meta charset="UTF-8">
@@ -18,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
@@ -76,14 +75,14 @@
 
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
     
-    <section id="intro" class="mb-16 scroll-mt-20">
+    <section id="acceleration" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">重塑世界的無形之力</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
             從琥珀的微弱靜電到驅動全球文明的龐大電網，電力不僅是技術的進步，更是重塑社會、經濟與文化的根本力量。本文將帶您探索這場永恆的革命——它的輝煌成就、隱藏的代價，以及我們共同邁向的智慧與永續的未來。
         </p>
     </section>
 
-    <section id="history" class="mb-16 scroll-mt-20">
+    <section id="engine" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第一幕：馴服閃電的奧德賽</h2>
         <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
             <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">通訊方式的演進</h3>
@@ -110,7 +109,7 @@
         </div>
     </section>
 
-    <section id="impact" class="mb-16 scroll-mt-20">
+    <section id="consequence" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第二幕：電力文明的誕生</h2>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
@@ -137,7 +136,7 @@
         </div>
     </section>
     
-    <section id="culture" class="mb-16 scroll-mt-20">
+    <section id="solution" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第三幕：電氣繆斯的啟發</h2>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
@@ -171,49 +170,7 @@
         </div>
     </section>
 
-    <section id="costs" class="mb-16 scroll-mt-20">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第四幕：電網的陰影</h2>
-        <div class="bg-white p-6 rounded-xl shadow-lg mb-8 interactive-card">
-            <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">全球與台灣電力結構比較</h3>
-            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-6">儘管再生能源興起，化石燃料仍是全球電力的主要來源。台灣對其依賴程度尤其顯著，凸顯能源轉型的挑戰。</p>
-            <div class="w-full h-80"><canvas id="powerStructureChart"></canvas></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-lg text-center interactive-card">
-                <h3 class="text-2xl font-bold mb-4 text-slate-800">能源貧窮</h3>
-                <p class="mb-4 text-slate-600">全球仍有數億人口生活在沒有穩定電力供應的狀態下。</p>
-                <div class="text-5xl font-bold text-sky-600">~7.7億</div>
-                <p class="text-slate-500">人</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg text-center interactive-card">
-                <h3 class="text-2xl font-bold mb-4 text-slate-800">關鍵礦物供應鏈</h3>
-                <p class="mb-4 text-slate-600">中國在全球稀土元素精煉加工中佔據主導地位，引發地緣政治風險。</p>
-                <div class="text-5xl font-bold text-sky-600">>90%</div>
-                <p class="text-slate-500">市佔率</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="future" class="mb-16 scroll-mt-20">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">第五幕：下一股電流</h2>
-        <div class="bg-white p-6 rounded-xl shadow-lg mb-8 interactive-card">
-            <h3 class="text-2xl font-bold mb-4 text-center text-slate-800">長時儲能技術比較</h3>
-            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-6">為了解決再生能源的間歇性，大規模、長時程的儲能技術至關重要。</p>
-            <div class="w-full h-96"><canvas id="storageTechChart"></canvas></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
-                <h3 class="text-2xl font-bold mb-4 text-slate-800">公正轉型 (Just Transition)</h3>
-                <p class="text-slate-600">能源轉型不僅是技術問題，更是社會問題。公正轉型的核心是確保在淘汰化石燃料的過程中，不讓傳統能源產業的工人與社區被拋下，為其提供再培訓與經濟支持。</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg interactive-card">
-                <h3 class="text-2xl font-bold mb-4 text-slate-800">設計隱私 (Privacy by Design)</h3>
-                <p class="text-slate-600">智慧電網帶來便利，也引發數據隱私擔憂。「設計隱私」原則要求在技術設計之初就將隱私保護作為核心要素，而非事後補救，以堅守人性價值與尊嚴。</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="summary" class="mb-16 scroll-mt-20">
+    <section id="audio-summary" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">語音摘要</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">點擊下方播放器，聆聽關於「電氣時代」如何重塑世界的重點摘要。</p>
         <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
@@ -222,7 +179,7 @@
             <div class="prose max-w-none text-slate-600 mt-4">
                 <p>這份語音摘要闡述了電力如何從根本上重塑人類文明。開頭從通訊革命講起，電力如何打破物理限制，實現了全球的即時通聯。接著，探討電力如何催生現代都市樣貌，透過電梯和電氣化交通，同時推動了城市的垂直與水平擴張，並引發了以福特移動裝配線為代表的工業生產革命。</p>
                 <p>摘要也觸及電力的陰暗面，點出了全球對化石燃料的依賴、能源貧窮問題，以及關鍵礦物供應鏈的地緣政治風險。
-                最後，展望未來，摘要探討了為解決再生能源間歇性問題所需的長時儲能技術，並強調了「公正轉型」與「設計隱私」這兩個核心概念，主張在邁向電氣化未來的同時，必須兼顧社會公平與個人尊嚴。</p>
+                 最後，展望未來，摘要探討了為解決再生能源間歇性問題所需的長時儲能技術，並強調了「公正轉型」與「設計隱私」這兩個核心概念，主張在邁向電氣化未來的同時，必須兼顧社會公平與個人尊嚴。</p>
             </div>
         </div>
     </section>
@@ -254,58 +211,54 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Navigation Logic ---
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     const sections = document.querySelectorAll('main section[id]');
-    
-    navLinks.forEach(link => {
-        const targetId = link.getAttribute('href');
-        if (targetId && targetId.startsWith('#')) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        }
-    });
-
-    function changeNavOnScroll() {
-        let index = sections.length;
-        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
-        document.querySelectorAll('.nav-link').forEach((link) => {
-            if(link.getAttribute('href').startsWith('#')){
-                link.classList.remove('active');
-            }
-        });
-        if (index >= 0 && sections[index]) {
-             const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-             if (activeLink) {
-                activeLink.classList.add('active');
-             }
-        }
-    }
-    window.addEventListener('scroll', changeNavOnScroll);
-    changeNavOnScroll(); // Initial check
-
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
     const hamburgerIconClose = document.getElementById('hamburger-icon-close');
 
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
+    if(mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+        });
+    }
 
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-        if (link.getAttribute('href').startsWith('#')) {
-            link.addEventListener('click', () => {
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
                 hamburgerIconOpen.classList.remove('hidden');
                 hamburgerIconClose.classList.add('hidden');
-            });
-        }
+            }
+        });
     });
+    
+    if (sections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+             let intersectingSections = [];
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    intersectingSections.push(entry.target);
+                }
+            });
+
+            if (intersectingSections.length > 0) {
+                intersectingSections.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+                const id = intersectingSections[0].getAttribute('id');
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }, { rootMargin: "-50% 0px -50% 0px", threshold: [0.1, 0.9] });
+
+        sections.forEach(section => observer.observe(section));
+    }
+
 
     // --- Chart.js and Interactive Elements Logic ---
     const FONT_COLOR = '#334155'; // slate-700
@@ -451,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!selected) {
                     feedbackDiv.textContent = '請選擇一個答案。';
                     container.classList.add('incorrect');
-                    return;
+                    return; // Stop this iteration, but continue the loop
                 }
 
                 const userAnswer = parseInt(selected.value);
@@ -479,4 +432,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-
+" 之前的這個版本看來確實是正確的
