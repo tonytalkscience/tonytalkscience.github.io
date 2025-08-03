@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
           body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
@@ -67,19 +68,12 @@
             <a href="#impact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🌍<span class="ml-3">全球影響</span></a>
             <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🎧<span class="ml-3">語音摘要</span></a>
             <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🧠<span class="ml-3">知識小測驗</span></a>
-            
-            <!-- 測試：把外部連結改成按鈕形式 -->
-            <button onclick="window.location.href='index.html'" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🏠<span class="ml-3">回到首頁 (按鈕版)</span></button>
-            <button onclick="window.location.href='sinusoidal-spectrum.html'" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">➡️<span class="ml-3">下一篇 (按鈕版)</span></button>
-            
-            <!-- 保留原來的連結作為對比 -->
-            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🏠<span class="ml-3">回到首頁 (連結版)</span></a>
-            <a href="sinusoidal-spectrum.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">➡️<span class="ml-3">下一篇 (連結版)</span></a>
+            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🏠<span class="ml-3">回到首頁</span></a>
+            <a href="sinusoidal-spectrum.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">➡️<span class="ml-3">下一篇</span></a>
         </div>
     </nav>
 </header>
     
-
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
     <section id="intro" class="mb-16 scroll-mt-20">
@@ -231,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const desktopNavLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('main section[id]');
 
-    // 1. Mobile Menu Toggle Button
     if (mobileMenuButton) {
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
@@ -240,24 +233,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Close Mobile Menu when internal links are clicked
     mobileNavLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        
-        // 只對內部錨點連結添加事件監聽器
-        if (href && href.startsWith('#')) {
-            link.addEventListener('click', () => {
-                if (mobileMenu) {
-                    mobileMenu.classList.add('hidden');
-                    hamburgerIconOpen.classList.remove('hidden');
-                    hamburgerIconClose.classList.add('hidden');
-                }
-            });
-        }
-        // 對外部連結完全不添加任何事件監聽器
+        link.addEventListener('click', () => {
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            }
+        });
     });
 
-    // 3. Active link highlighting on scroll
     if (sections.length > 0 && desktopNavLinks.length > 0) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -278,7 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Atlantic Cable Tabs ---
+    // --- Page Specific Logic ---
+
     const tab1858 = document.getElementById('tab-1858');
     const tab1866 = document.getElementById('tab-1866');
     const content1858 = document.getElementById('content-1858');
@@ -298,7 +284,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tab1866.addEventListener('click', () => switchTab(tab1866, tab1858, content1866, content1858));
     }
 
-    // --- Conductivity Chart ---
     const ctx = document.getElementById('conductivityChart')?.getContext('2d');
     if (ctx) {
         const conductivityData = {
@@ -306,13 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
                 label: '相對導電能力 (S/m, 西門子/米) - 對數尺度',
                 data: [5.96e7, 4, 1, 0.01],
-                backgroundColor: [
-                    '#f59e0b', // Amber 500
-                    '#0ea5e9', // Sky 500
-                    '#a16207', // Amber 700
-                    '#65a30d'  // Lime 600
-                ],
-                borderColor: '#64748b', // Slate 500
+                backgroundColor: ['#f59e0b','#0ea5e9','#a16207','#65a30d'],
+                borderColor: '#64748b',
                 borderWidth: 1
             }]
         };
@@ -327,48 +307,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 scales: {
                     x: {
                         type: 'logarithmic',
-                        title: {
-                            display: true,
-                            text: '電導率 (S/m) - 注意這是對數尺度',
-                            font: { size: 14, family: 'Noto Sans TC' },
-                            color: '#1e293b'
-                        },
-                        ticks: {
-                            color: '#475569',
-                            callback: function(value) {
-                                if (value >= 1e6) return (value / 1e6) + 'M';
-                                if (value >= 1e3) return (value / 1e3) + 'k';
-                                return value;
-                            }
-                        }
+                        title: { display: true, text: '電導率 (S/m) - 注意這是對數尺度', font: { size: 14, family: 'Noto Sans TC' }, color: '#1e293b' },
+                        ticks: { color: '#475569', callback: function(value) { if (value >= 1e6) return (value / 1e6) + 'M'; if (value >= 1e3) return (value / 1e3) + 'k'; return value; } }
                     },
-                    y: {
-                        ticks: { 
-                            font: { size: 14, family: 'Noto Sans TC' },
-                            color: '#1e293b'
-                        }
-                    }
+                    y: { ticks: { font: { size: 14, family: 'Noto Sans TC' }, color: '#1e293b' } }
                 },
                 plugins: {
                     legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) { label += ': '; }
-                                if (context.parsed.x !== null) {
-                                    label += context.parsed.x.toExponential(2) + ' S/m';
-                                }
-                                return label;
-                            }
-                        }
-                    }
+                    tooltip: { callbacks: { label: function(context) { let label = context.dataset.label || ''; if (label) { label += ': '; } if (context.parsed.x !== null) { label += context.parsed.x.toExponential(2) + ' S/m'; } return label; } } }
                 }
             }
         });
     }
 
-    // --- Quiz Logic ---
     const quizData = {
         questions: [
             { question: "1866年成功的跨大西洋電纜，其核心科學理論的主要貢獻者是誰？", options: ["電工懷特豪斯", "物理學家威廉·湯姆森", "發明家戴爾", "科學家華生爵士"], answer: 1 },
@@ -434,4 +385,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html>
+</html>"
