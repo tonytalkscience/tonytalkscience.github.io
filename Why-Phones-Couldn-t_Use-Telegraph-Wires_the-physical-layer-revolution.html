@@ -1,21 +1,13 @@
-
-
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-B417SX4GTY');
-</script>
-
-
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
@@ -35,9 +27,8 @@
         .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
         .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
         .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
-        .test-fail { @apply bg-red-100 border-red-500 text-red-800; }
-        .test-success { @apply bg-green-100 border-green-500 text-green-800; }
-
+        .test-fail { background-color: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+        .test-success { background-color: #dcfce7; border-color: #86efac; color: #166534; }
     </style>
 </head>
 <body class="antialiased">
@@ -155,7 +146,7 @@
                 <div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl mb-4 bg-blue-100 text-blue-700 font-bold">②</div>
                 <h4 class="text-xl font-bold mb-2 text-slate-800">雙絞線：馴服串音</h4>
                 <p class="text-slate-600">
-                   將兩條導線規律地絞合在一起。這能確保兩條線平均地暴露在來自相鄰線路的干擾中，將原本的「差模」串音轉化為可被平衡電路輕鬆抑制的「共模」噪音。
+                    將兩條導線規律地絞合在一起。這能確保兩條線平均地暴露在來自相鄰線路的干擾中，將原本的「差模」串音轉化為可被平衡電路輕鬆抑制的「共模」噪音。
                 </p>
             </div>
         </div>
@@ -211,20 +202,15 @@
         </div>
     </section>
 
-
-          <section id="video-summary" class="mb-16 scroll-mt-20">
-    <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
-    <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以快速掌握電話通訊的成功，並非僅僅是發明了話機，而是奠基於對「物理線路」的徹底改造。</p>
-          <div class="text-center mt-4">
-            <a href="https://youtu.be/zEp0k3nZj_Y" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
-                點擊以觀看影片摘要(on Youtube)
-            </a>
-         </div>
-    </div>
-</section>
-
-    
-
+    <section id="video-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以快速掌握電話通訊的成功，並非僅僅是發明了話機，而是奠基於對「物理線路」的徹底改造。</p>
+            <div class="text-center mt-4">
+                <a href="https://youtu.be/zEp0k3nZj_Y" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
+                    點擊以觀看影片摘要(on Youtube)
+                </a>
+           </div>
+    </section>
     
     <section id="quiz" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">知識小測驗</h2>
@@ -250,7 +236,7 @@
 </main>
 
     <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
-    <p class="text-slate-500">&copy; 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
+    <p class="text-slate-500">© 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
     <p class="text-slate-500">網頁內容中所引用的部分數據、圖表及觀點，其版權歸原作者或發布機構所有，僅為分析與說明之目的引用，不在此CC授權範圍內。</p>
     <p class="text-slate-500">本內容的生成部分借助 Google Gemini和ChatGPT等模型，發布者應對最終內容的準確性負責。</p>
 </footer>
@@ -261,52 +247,61 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Navigation Logic ---
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     const sections = document.querySelectorAll('main section[id]');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
-                });
-            }
-        });
-    }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
-
-    sections.forEach(section => observer.observe(section));
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                 if(mobileMenu.classList.contains('hidden') === false){
-                    mobileMenu.classList.add('hidden');
-                    hamburgerIconOpen.classList.remove('hidden');
-                    hamburgerIconClose.classList.add('hidden');
-                 }
-            }
-        });
-    });
-
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
     const hamburgerIconClose = document.getElementById('hamburger-icon-close');
 
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
+    if(mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+        });
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            }
+        });
     });
+    
+    if (sections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+             let intersectingSections = [];
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    intersectingSections.push(entry.target);
+                }
+            });
+
+            if (intersectingSections.length > 0) {
+                intersectingSections.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+                const id = intersectingSections[0].getAttribute('id');
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }, { rootMargin: "-50% 0px -50% 0px", threshold: [0.1, 0.9] });
+
+        sections.forEach(section => observer.observe(section));
+    }
 
     // --- Charting and Interaction Logic ---
     const cleanSignal = Array.from({ length: 100 }, (_, i) => Math.sin(i * 0.2) * 20 + 25);
     let noiseChart;
 
     function createNoiseChart(data) {
-        const ctx = document.getElementById('noiseChart').getContext('2d');
+        const ctx = document.getElementById('noiseChart')?.getContext('2d');
+        if (!ctx) return;
         if (noiseChart) noiseChart.destroy();
         noiseChart = new Chart(ctx, {
             type: 'line',
@@ -327,72 +322,83 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     createNoiseChart(cleanSignal);
 
-    document.getElementById('noiseButton').addEventListener('click', () => {
-        const noisySignal = cleanSignal.map(p => p + (Math.random() - 0.5) * 30);
-        createNoiseChart(noisySignal);
-        const button = document.getElementById('noiseButton');
-        button.textContent = '噪音已淹沒信號！';
-        button.classList.remove('bg-sky-600', 'hover:bg-sky-700');
-        button.classList.add('bg-red-600', 'cursor-not-allowed');
-        button.disabled = true;
-        setTimeout(() => {
-            createNoiseChart(cleanSignal);
-            button.textContent = '模擬將語音信號接入電報線路';
-            button.classList.add('bg-sky-600', 'hover:bg-sky-700');
-            button.classList.remove('bg-red-600', 'cursor-not-allowed');
-            button.disabled = false;
-        }, 3000);
-    });
+    const noiseButton = document.getElementById('noiseButton');
+    if (noiseButton) {
+        noiseButton.addEventListener('click', () => {
+            const noisySignal = cleanSignal.map(p => p + (Math.random() - 0.5) * 30);
+            createNoiseChart(noisySignal);
+            noiseButton.textContent = '噪音已淹沒信號！';
+            noiseButton.classList.remove('bg-sky-600', 'hover:bg-sky-700');
+            noiseButton.classList.add('bg-red-600', 'cursor-not-allowed');
+            noiseButton.disabled = true;
+            setTimeout(() => {
+                createNoiseChart(cleanSignal);
+                noiseButton.textContent = '模擬將語音信號接入電報線路';
+                noiseButton.classList.add('bg-sky-600', 'hover:bg-sky-700');
+                noiseButton.classList.remove('bg-red-600', 'cursor-not-allowed');
+                noiseButton.disabled = false;
+            }, 3000);
+        });
+    }
     
-    const bandwidthCtx = document.getElementById('bandwidthChart').getContext('2d');
-    new Chart(bandwidthCtx, {
-        type: 'bar',
-        data: {
-            labels: ['電報 (手動鍵控)', '電話 (語音頻段)'],
-            datasets: [{
-                label: '所需頻寬 (Hz)', data: [20, 3100],
-                backgroundColor: ['rgba(59, 130, 246, 0.6)', 'rgba(14, 165, 233, 0.6)'],
-                borderColor: ['rgba(59, 130, 246, 1)', 'rgba(14, 165, 233, 1)'],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-            scales: { x: { type: 'logarithmic', title: { display: true, text: '頻寬 (Hz) - 對數座標' } } },
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    callbacks: {
-                        label: (c) => `${c.dataset.label || ''}: ${c.parsed.x.toLocaleString()} Hz`
+    const bandwidthCtx = document.getElementById('bandwidthChart')?.getContext('2d');
+    if(bandwidthCtx) {
+        new Chart(bandwidthCtx, {
+            type: 'bar',
+            data: {
+                labels: ['電報 (手動鍵控)', '電話 (語音頻段)'],
+                datasets: [{
+                    label: '所需頻寬 (Hz)', data: [20, 3100],
+                    backgroundColor: ['rgba(59, 130, 246, 0.6)', 'rgba(14, 165, 233, 0.6)'],
+                    borderColor: ['rgba(59, 130, 246, 1)', 'rgba(14, 165, 233, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                scales: { x: { type: 'logarithmic', title: { display: true, text: '頻寬 (Hz) - 對數座標' } } },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => `${c.dataset.label || ''}: ${c.parsed.x.toLocaleString()} Hz`
+                        }
                     }
                 }
             }
-        }
-    });
+        });
+    }
 
-    document.getElementById('test1').addEventListener('click', () => {
-        const resultDiv = document.getElementById('result1');
-        resultDiv.innerHTML = `
-            <h5 class="font-bold">測試結果：完全失敗</h5>
-            <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                <li><strong>噪音淹沒:</strong> SWER線路如同天線，巨大的電氣噪音會徹底淹沒脆弱的語音信號。</li>
-                <li><strong>頻率失真:</strong> 線路未對語音頻段優化，會導致聲音嚴重失真，無法辨認。</li>
-                <li><strong>信號脆弱:</strong> 語音信號的價值在於其精確的「形狀」，電報線路無法保護它。</li>
-            </ul>`;
-        resultDiv.className = 'mt-4 p-4 rounded-lg text-left test-fail';
-    });
+    const test1Btn = document.getElementById('test1');
+    const result1Div = document.getElementById('result1');
+    if(test1Btn && result1Div) {
+        test1Btn.addEventListener('click', () => {
+            result1Div.innerHTML = `
+                <h5 class="font-bold">測試結果：完全失敗</h5>
+                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
+                    <li><strong>噪音淹沒:</strong> SWER線路如同天線，巨大的電氣噪音會徹底淹沒脆弱的語音信號。</li>
+                    <li><strong>頻率失真:</strong> 線路未對語音頻段優化，會導致聲音嚴重失真，無法辨認。</li>
+                    <li><strong>信號脆弱:</strong> 語音信號的價值在於其精確的「形狀」，電報線路無法保護它。</li>
+                </ul>`;
+            result1Div.className = 'mt-4 p-4 rounded-lg text-left test-fail border';
+        });
+    }
 
-    document.getElementById('test2').addEventListener('click', () => {
-        const resultDiv = document.getElementById('result2');
-        resultDiv.innerHTML = `
-            <h5 class="font-bold">測試結果：完美運行</h5>
-            <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                <li><strong>通道卓越:</strong> 電話線路是低噪音、低電阻的高性能傳輸媒介，對電報信號而言是「過度設計」。</li>
-                <li><strong>噪音免疫:</strong> 平衡電路能完美抑制外部干擾，確保直流脈衝清晰到達。</li>
-                <li><strong>信號強健:</strong> 電報信號的「開/關」本質非常強健，不要求高品質通道。</li>
-            </ul>`;
-        resultDiv.className = 'mt-4 p-4 rounded-lg text-left test-success';
-    });
+    const test2Btn = document.getElementById('test2');
+    const result2Div = document.getElementById('result2');
+    if(test2Btn && result2Div) {
+        test2Btn.addEventListener('click', () => {
+            result2Div.innerHTML = `
+                <h5 class="font-bold">測試結果：完美運行</h5>
+                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
+                    <li><strong>通道卓越:</strong> 電話線路是低噪音、低電阻的高性能傳輸媒介，對電報信號而言是「過度設計」。</li>
+                    <li><strong>噪音免疫:</strong> 平衡電路能完美抑制外部干擾，確保直流脈衝清晰到達。</li>
+                    <li><strong>信號強健:</strong> 電報信號的「開/關」本質非常強健，不要求高品質通道。</li>
+                </ul>`;
+            result2Div.className = 'mt-4 p-4 rounded-lg text-left test-success border';
+        });
+    }
+
 
     // --- Quiz Logic ---
     const quizData = [
@@ -417,7 +423,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-quiz-btn');
     const resultsDiv = document.getElementById('quiz-results');
 
-    quizContainer.innerHTML = quizData.map((q, index) => `
+    if(quizContainer && submitBtn && resultsDiv){
+        quizContainer.innerHTML = quizData.map((q, index) => `
         <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
             <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
             <div class="space-y-2">
@@ -430,35 +437,36 @@ document.addEventListener('DOMContentLoaded', () => {
             <div id="feedback-${index}" class="text-sm font-semibold mt-2"></div>
         </div>`).join('');
     
-    submitBtn.addEventListener('click', () => {
-        let score = 0;
-        quizData.forEach((q, index) => {
-            const container = document.getElementById(`question-${index}`);
-            const feedbackDiv = document.getElementById(`feedback-${index}`);
-            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
-            
-            if (selected) {
-                const userAnswer = parseInt(selected.value);
-                if (userAnswer === q.answer) {
-                    score++;
-                    container.classList.add('correct');
-                    feedbackDiv.innerHTML = `<span class="text-green-600">✔️ 正確</span>`;
+        submitBtn.addEventListener('click', () => {
+            let score = 0;
+            quizData.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                if (selected) {
+                    const userAnswer = parseInt(selected.value);
+                    if (userAnswer === q.answer) {
+                        score++;
+                        container.classList.add('correct');
+                        feedbackDiv.innerHTML = `<span class="text-green-600">✔️ 正確</span>`;
+                    } else {
+                        container.classList.add('incorrect');
+                        feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">${q.explanation}</span>`;
+                    }
                 } else {
-                    container.classList.add('incorrect');
-                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                     container.classList.add('incorrect');
+                     feedbackDiv.innerHTML = `<span class="text-red-600">請選擇一個答案。</span>`;
                 }
-            } else {
-                 container.classList.add('incorrect');
-                 feedbackDiv.innerHTML = `<span class="text-red-600">請選擇一個答案。</span>`;
-            }
+            });
+            
+            resultsDiv.textContent = `您的得分: ${score} / ${quizData.length}`;
+            submitBtn.disabled = true;
         });
-        
-        resultsDiv.textContent = `您的得分: ${score} / ${quizData.length}`;
-        submitBtn.disabled = true;
-    });
+    }
 });
 </script>
 
 </body>
 </html>
-
+"
