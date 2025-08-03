@@ -20,10 +20,10 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
-         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
-         .nav-link { transition: color 0.3s, border-color 0.3s; }
-         .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
-         .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+          body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+          .nav-link { transition: color 0.3s, border-color 0.3s; }
+          .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+          .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
 
         /* Custom styles for this page, adapted from the new theme */
@@ -147,8 +147,8 @@
                 <canvas id="conductivityChart"></canvas>
             </div>
              <div class="max-w-4xl mx-auto mt-8 text-center text-md bg-white p-6 rounded-xl shadow-lg text-slate-700">
-                <p>電阻公式為 $R = \rho (L/A)$，其中 $\rho$ 是電阻率，$L$ 是長度，$A$ 是橫截面積。雖然銅的電阻率極低，但其截面積很小。相比之下，**地球或海洋的截面積 $A$ 幾乎是無限大的**，這極大地降低了總電阻 $R$。此外，海水中富含的導電離子（如 $Na^+$ 和 $Cl^-$），使其導電性遠優於主要由矽酸鹽構成的海床。因此，電流會選擇電阻最小的路徑——廣闊的海水。</p>
-            </div>
+                 <p>電阻公式為 $R = \rho (L/A)$，其中 $\rho$ 是電阻率，$L$ 是長度，$A$ 是橫截面積。雖然銅的電阻率極低，但其截面積很小。相比之下，**地球或海洋的截面積 $A$ 幾乎是無限大的**，這極大地降低了總電阻 $R$。此外，海水中富含的導電離子（如 $Na^+$ 和 $Cl^-$），使其導電性遠優於主要由矽酸鹽構成的海床。因此，電流會選擇電阻最小的路徑——廣闊的海水。</p>
+             </div>
         </div>
     </section>
 
@@ -186,18 +186,18 @@
     </section>
 
 
-          <section id="video-summary" class="mb-16 scroll-mt-20">
+        <section id="video-summary" class="mb-16 scroll-mt-20">
     <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
     <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以快速掌握「單線接地返路」技術的歷史與科學。</p>
-          <div class="text-center mt-4">
-            <a href="https://youtu.be/VVY7zoYiF0Y " target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
-                點擊以觀看影片摘要(on Youtube)
-            </a>
-         </div>
+            <div class="text-center mt-4">
+                <a href="https://youtu.be/VVY7zoYiF0Y " target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
+                    點擊以觀看影片摘要(on Youtube)
+                </a>
+           </div>
     </div>
 </section>
 
-   
+    
 
 
     
@@ -218,7 +218,7 @@
 </main>
 
 <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
-    <p class="text-slate-500">&copy; 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
+    <p class="text-slate-500">© 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
     <p class="text-slate-500">網頁內容中所引用的部分數據、圖表及觀點，其版權歸原作者或發布機構所有，僅為分析與說明之目的引用，不在此CC授權範圍內。</p>
     <p class="text-slate-500">本內容的生成部分借助 Google Gemini，發布者應對最終內容的準確性負責。</p>
 </footer>
@@ -226,91 +226,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Navigation Logic ---
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
-    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
-    const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
-    const desktopNavLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('main section[id]');
-
-    // 1. Mobile Menu Toggle Button
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
-
-    // 2. Close Mobile Menu when ANY link is clicked
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // This ensures the menu always closes, regardless of where the link goes.
-            mobileMenu.classList.add('hidden');
-            hamburgerIconOpen.classList.remove('hidden');
-            hamburgerIconClose.classList.add('hidden');
-        });
-    });
-
-    // 3. Active link highlighting on scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                desktopNavLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }, { threshold: 0.3, rootMargin: '-50% 0px -50% 0px' });
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-});
-</script>
-    
-
-    function changeNavOnScroll() {
-        let index = sections.length;
-        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
-        document.querySelectorAll('.nav-link').forEach((link) => {
-           if(link.getAttribute('href').startsWith('#')){
-               link.classList.remove('active');
-            }
-        });
-        if (index >= 0 && sections[index]) {
-            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
-        }
-    }
-    window.addEventListener('scroll', changeNavOnScroll);
-
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
-    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
-
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
-
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-        if (link.getAttribute('href').startsWith('#')) {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                hamburgerIconOpen.classList.remove('hidden');
-                hamburgerIconClose.classList.add('hidden');
-            });
-        }
-    });
 
     // --- Atlantic Cable Tabs ---
     const tab1858 = document.getElementById('tab-1858');
@@ -319,10 +234,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const content1866 = document.getElementById('content-1866');
 
     function switchTab(activeTab, inactiveTab, activeContent, inactiveContent) {
-        activeTab.classList.add('active');
-        inactiveTab.classList.remove('active');
-        activeContent.classList.remove('hidden');
-        inactiveContent.classList.add('hidden');
+        if(activeTab && inactiveTab && activeContent && inactiveContent) {
+            activeTab.classList.add('active');
+            inactiveTab.classList.remove('active');
+            activeContent.classList.remove('hidden');
+            inactiveContent.classList.add('hidden');
+        }
     }
 
     if(tab1858 && tab1866) {
@@ -365,9 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             font: { size: 14, family: 'Noto Sans TC' },
                             color: '#1e293b'
                         },
-                         ticks: {
-                             color: '#475569',
-                             callback: function(value) {
+                        ticks: {
+                            color: '#475569',
+                            callback: function(value) {
                                 if (value >= 1e6) return (value / 1e6) + 'M';
                                 if (value >= 1e3) return (value / 1e3) + 'k';
                                 return value;
@@ -456,19 +373,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             resultsDiv.textContent = `您的得分: ${score} / ${quizData.questions.length}`;
              if(score === quizData.questions.length) {
-                resultsDiv.className = 'text-xl font-bold text-green-600';
+                 resultsDiv.className = 'text-xl font-bold text-green-600';
             } else {
-                resultsDiv.className = 'text-xl font-bold text-amber-600';
+                 resultsDiv.className = 'text-xl font-bold text-amber-600';
             }
             submitBtn.disabled = true;
         };
     }
     
-    // Set initial state
-    changeNavOnScroll();
 });
 </script>
 
 </body>
-</html>
-
+</html>"
