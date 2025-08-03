@@ -2,7 +2,6 @@
 <html lang="zh-TW" class="scroll-smooth">
 <head>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -85,9 +84,9 @@
             <p class="text-center text-slate-500 mb-6">自動駕駛的核心是一個持續循環的決策過程。感知系統提供「回饋」，車輛「模型」基於回饋預測未來，而「最佳化」引擎則在所有約束下做出最佳決策。這個循環毫秒不停，確保行車安全與效率。</p>
             <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
                 <div class="text-center p-4 bg-sky-50 rounded-lg w-full md:w-1/3"><div class="text-4xl mb-2">📡</div><h4 class="font-bold text-sky-800">回饋 (Feedback)</h4><p class="text-sm text-sky-700">透過多感測器融合，準確感知車輛狀態與周圍環境。</p></div>
-                <div class="text-2xl font-bold text-slate-400 transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="text-2xl font-bold text-slate-400 transform md:rotate-0 rotate-90">→</div>
                 <div class="text-center p-4 bg-amber-50 rounded-lg w-full md:w-1/3"><div class="text-4xl mb-2">🧠</div><h4 class="font-bold text-amber-800">模型 (Model)</h4><p class="text-sm text-amber-700">利用動力學與環境模型，預測未來的可能軌跡。</p></div>
-                <div class="text-2xl font-bold text-slate-400 transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="text-2xl font-bold text-slate-400 transform md:rotate-0 rotate-90">→</div>
                 <div class="text-center p-4 bg-emerald-50 rounded-lg w-full md:w-1/3"><div class="text-4xl mb-2">⚙️</div><h4 class="font-bold text-emerald-800">最佳化 (Optimization)</h4><p class="text-sm text-emerald-700">在安全與物理約束下，計算出最佳的控制指令。</p></div>
             </div>
         </div>
@@ -159,12 +158,11 @@
   <section id="video-summary" class="mb-16 scroll-mt-20">
     <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
     <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以更生動地了解本次從淡水到永樂市場的模擬路程，以及控制系統在其中扮演的角色。</p>
-          <div class="text-center mt-4">
+        <div class="text-center mt-4">
             <a href="https://www.youtube.com/watch?v=TlpUO9YUY90" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
                 點擊以觀看影片摘要(on Youtube)
             </a>
-         </div>
-    </div>
+       </div>
 </section>
   
   
@@ -172,11 +170,7 @@
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">讀後小測驗</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對本文內容的理解程度！完成下面的小測驗，看看您掌握了多少知識。</p>
         <div class="bg-white p-6 rounded-xl shadow-lg max-w-2xl mx-auto">
-            <div id="quiz-container" class="space-y-6">
-                <div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">1. 在交通極為擁擠、充滿不確定性的市區，MPC 控制策略傾向於如何調整其「預測域 (N)」？</p><div class="space-y-2"><label class="flex items-center p-2 rounded-md cursor-pointer quiz-option"><input type="radio" name="q1" value="a" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">a) 大幅加長預測域，看得更遠</span></label><label class="flex items-center p-2 rounded-md cursor-pointer quiz-option"><input type="radio" name="q1" value="b" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">b) 縮短預測域，專注於短期安全反應</span></label><label class="flex items-center p-2 rounded-md cursor-pointer quiz-option"><input type="radio" name="q1" value="c" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">c) 預測域維持不變，只調整權重</span></label></div></div>
-                <div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">2. 哪一種感測器在雨天和霧天等惡劣天氣下，性能表現通常最為可靠？</p><div class="space-y-2"><label class="flex items-center p-2 rounded-md cursor-pointer quiz-option"><input type="radio" name="q2" value="a" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">a) 攝影機 (Camera)</span></label><label class="flex items-center p-2 rounded-md cursor-pointer quiz-option"><input type="radio" name="q2" value="b" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">b) 光達 (LiDAR)</span></label><label class="flex items-center p-2 rounded-md cursor-pointer quiz-option"><input type="radio" name="q2" value="c" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">c) 雷達 (Radar)</span></label></div></div>
-                <div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">3. 「只有當車輛實際狀態與預測偏離過大時，才觸發一次新的最佳化計算」是哪一種 MPC 技術的核心思想？</p><div class="space-y-2"><label class="flex items-center p-2 rounded-md cursor-pointer quiz-option"><input type="radio" name="q3" value="a" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">a) 基於學習的 MPC (LB-MPC)</span></label><label class="flex items-center p-2 rounded-md cursor-pointer quiz-option"><input type="radio" name="q3" value="b" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">b) 魯棒 MPC (Robust MPC)</span></label><label class="flex items-center p-2 rounded-md cursor-pointer quiz-option"><input type="radio" name="q3" value="c" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">c) 事件觸發 MPC (ET-MPC)</span></label></div></div>
-            </div>
+            <div id="quiz-container" class="space-y-6"></div>
             <div class="mt-8 text-center"><button id="submit-quiz-btn" class="bg-sky-600 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-700 transition-colors">提交答案</button></div>
             <div id="quiz-results" class="mt-6 text-center text-lg font-semibold"></div>
         </div>
@@ -195,51 +189,63 @@
 </main>
 
   <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
-    <p class="text-slate-500">&copy; 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
+    <p class="text-slate-500">© 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
     <p class="text-slate-500">網頁內容中所引用的部分數據、圖表及觀點，其版權歸原作者或發布機構所有，僅為分析與說明之目的引用，不在此CC授權範圍內。</p>
     <p class="text-slate-500">本內容的生成部分借助 Google Gemini和ChatGPT等模型，發布者應對最終內容的準確性負責。</p>
 </footer>
   
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Navigation Logic ---
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-    const sections = document.querySelectorAll('section');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-    function changeNavOnScroll() {
-        let index = sections.length;
-        while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
-        document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
-        const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
-        }
-    }
-    window.addEventListener('scroll', changeNavOnScroll);
+    const sections = document.querySelectorAll('main section[id]');
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
     const hamburgerIconClose = document.getElementById('hamburger-icon-close');
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+
+    if(mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+        });
+    }
+
+    navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            hamburgerIconOpen.classList.remove('hidden');
-            hamburgerIconClose.classList.add('hidden');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+            }
         });
     });
+    
+    if (sections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+             let activeId = null;
+            for (let i = entries.length - 1; i >= 0; i--) {
+                if (entries[i].isIntersecting) {
+                    activeId = entries[i].target.id;
+                    break;
+                }
+            }
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === `#${activeId}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+        }, { rootMargin: "0px 0px -75% 0px", threshold: 0 });
+        sections.forEach(section => observer.observe(section));
+    }
+
+    // --- Page Specific Logic ---
     const journeyData = [
         { title: "階段一：低速啟動與車道保持", challenge: "挑戰：住宅區巷弄狹窄，行人/機車多，靜態障礙物迴避。", description: "此階段首要任務是平穩起步並精確保持車道。MPC採用中等長度的預測域(N)，並對橫向位置誤差(Qy)和控制平順性(R)給予較高權重，以防止車輛突然前衝或轉向過於突兀。", params: { N: 15, Qy: 100, Qv: 80, Ra: 10, Rd: 20 } },
         { title: "階段二：幹道巡航與彎道處理", challenge: "挑戰：車速提升，彎道多，需要與前車安全跟馳。", description: "為應對彎道，預測域(N)加長以「看得更遠」。為確保跟車平順，對速度誤差(Qv)和加速度控制(Ra)的權重被提升。此階段需要在效率與舒適性之間取得平衡。", params: { N: 30, Qy: 80, Qv: 150, Ra: 20, Rd: 40 } },
@@ -255,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stageChallengeEl = document.getElementById('stage-challenge');
     const stageDescriptionEl = document.getElementById('stage-description');
     const stageButtons = document.querySelectorAll('.stage-button');
+
     function updateJourneyContent(stageIndex) {
         if (!stageTitleEl || !mpcChart) return;
         const data = journeyData[stageIndex];
@@ -265,6 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mpcChart.update();
         stageButtons.forEach((btn, index) => { btn.classList.toggle('active', index == stageIndex); });
     }
+
     function createMpcChart() {
         const ctx = document.getElementById('mpcChart');
         if (!ctx) return;
@@ -274,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
             options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: '情境自適應MPC參數變化' } }, scales: { x: { beginAtZero: true } } }
         });
     }
+
     function createSensorChart() {
         const ctx = document.getElementById('sensorChart');
         if (!ctx) return;
@@ -283,30 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: '感測器性能比較' }, tooltip: { callbacks: { label: function(context) { let label = context.dataset.label || ''; if (label) { label += ': '; } if (context.parsed.y !== null) { const value = context.parsed.y; const metric = document.getElementById('sensor-metric-selector').value; if (metric === 'cost') { if(value <= 1) label += '低'; else if (value <= 3) label += '中'; else label += '高'; } else { if(value <= 1) label += '差'; else if (value <= 3) label += '中'; else label += '高'; } } return label; } } } }, scales: { y: { beginAtZero: true, max: 5, ticks: { stepSize: 1, callback: function(value, index, values) { const metric = document.getElementById('sensor-metric-selector').value; const labels = metric === 'cost' ? ['','低','','中','','高'] : ['','差','','中','','高']; return labels[value]; } } } } }
         });
     }
-    function handleQuiz() {
-        const submitBtn = document.getElementById('submit-quiz-btn');
-        if (!submitBtn) return;
-        const resultsEl = document.getElementById('quiz-results');
-        const correctAnswers = { q1: 'b', q2: 'c', q3: 'c' };
-        submitBtn.addEventListener('click', () => {
-            let score = 0;
-            const userAnswers = { q1: document.querySelector('input[name="q1"]:checked'), q2: document.querySelector('input[name="q2"]:checked'), q3: document.querySelector('input[name="q3"]:checked') };
-            const totalQuestions = Object.keys(correctAnswers).length;
-            let answeredQuestions = 0;
-            for (const question in userAnswers) { if (userAnswers[question]) { answeredQuestions++; if (userAnswers[question].value === correctAnswers[question]) { score++; } } }
-            if (answeredQuestions < totalQuestions) { resultsEl.textContent = '請回答所有問題後再提交！'; resultsEl.className = 'mt-6 text-center text-lg font-semibold text-red-600'; return; }
-            let resultMessage = `您答對了 ${score} / ${totalQuestions} 題！`; let resultColor = 'text-slate-800';
-            if (score === totalQuestions) { resultMessage += " 👍 太棒了，完全正確！"; resultColor = 'text-green-600'; } else if (score >= totalQuestions / 2) { resultMessage += " 😊 還不錯喔！"; resultColor = 'text-yellow-600'; } else { resultMessage += " 😅 再加加油！"; resultColor = 'text-red-600'; }
-            resultsEl.textContent = resultMessage; resultsEl.className = `mt-6 text-center text-lg font-semibold ${resultColor}`;
-        });
-    }
-    if (document.querySelectorAll('.stage-button').length > 0) {
-        stageButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                updateJourneyContent(e.target.dataset.stage);
-            });
-        });
-    }
+    
     const sensorSelector = document.getElementById('sensor-metric-selector');
     if (sensorSelector) {
         sensorSelector.addEventListener('change', (e) => {
@@ -316,12 +302,80 @@ document.addEventListener('DOMContentLoaded', () => {
             sensorChart.update();
         });
     }
+    
+    if (document.querySelectorAll('.stage-button').length > 0) {
+        stageButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                updateJourneyContent(e.target.dataset.stage);
+            });
+        });
+    }
+
+    // --- Quiz Logic ---
+    const quizContainer = document.getElementById('quiz-container');
+    const submitBtn = document.getElementById('submit-quiz-btn');
+    const resultsEl = document.getElementById('quiz-results');
+    const quizData = [
+        { question: "1. 在交通極為擁擠、充滿不確定性的市區，MPC 控制策略傾向於如何調整其「預測域 (N)」？", options: ["a) 大幅加長預測域，看得更遠", "b) 縮短預測域，專注於短期安全反應", "c) 預測域維持不變，只調整權重"], answer: "b) 縮短預測域，專注於短期安全反應" },
+        { question: "2. 哪一種感測器在雨天和霧天等惡劣天氣下，性能表現通常最為可靠？", options: ["a) 攝影機 (Camera)", "b) 光達 (LiDAR)", "c) 雷達 (Radar)"], answer: "c) 雷達 (Radar)" },
+        { question: "3. 「只有當車輛實際狀態與預測偏離過大時，才觸發一次新的最佳化計算」是哪一種 MPC 技術的核心思想？", options: ["a) 基於學習的 MPC (LB-MPC)", "b) 魯棒 MPC (Robust MPC)", "c) 事件觸發 MPC (ET-MPC)"], answer: "c) 事件觸發 MPC (ET-MPC)" }
+    ];
+
+    if (quizContainer) {
+        quizContainer.innerHTML = quizData.map((q, index) => `
+            <div class="quiz-question">
+                <p class="font-semibold text-slate-800 mb-2">${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map(option => `
+                        <label class="flex items-center p-2 rounded-md cursor-pointer quiz-option border border-slate-200">
+                            <input type="radio" name="q${index}" value="${option}" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="ml-3 text-slate-700">${option}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    if (submitBtn) {
+        submitBtn.addEventListener('click', () => {
+            let score = 0;
+            quizData.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selectedOption && selectedOption.value === q.answer) {
+                    score++;
+                }
+            });
+            
+            const totalQuestions = quizData.length;
+            let resultMessage = `您答對了 ${score} / ${totalQuestions} 題！`;
+            let resultColor = 'text-slate-800';
+
+            if (score === totalQuestions) {
+                resultMessage += " 👍 太棒了，完全正確！";
+                resultColor = 'text-green-600';
+            } else if (score >= totalQuestions / 2) {
+                resultMessage += " 😊 還不錯喔！";
+                resultColor = 'text-amber-600';
+            } else {
+                resultMessage += " 😅 再加加油！";
+                resultColor = 'text-red-600';
+            }
+            
+            if (resultsEl) {
+                resultsEl.textContent = resultMessage;
+                resultsEl.className = `mt-6 text-center text-lg font-semibold ${resultColor}`;
+            }
+            submitBtn.disabled = true;
+        });
+    }
+
+    // --- Initializations ---
     createMpcChart();
     createSensorChart();
-    handleQuiz();
     updateJourneyContent(0);
-    changeNavOnScroll();
 });
 </script>
 </body>
 </html>
+" 請將這個版本修改, 使它能正常顯示回到首頁和下一篇等兩個選單, 其他主要內容不要更動
