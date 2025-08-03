@@ -246,40 +246,7 @@
 
 </main>
 
-   <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // --- 獲取選單相關的元素 ---
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
-    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
-    const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
 
-    // --- 定義一個「關閉選單」的共用功能 ---
-    const closeMobileMenu = () => {
-        mobileMenu.classList.add('hidden');
-        hamburgerIconOpen.classList.remove('hidden');
-        hamburgerIconClose.classList.add('hidden');
-    };
-
-    // --- 監聽「漢堡按鈕」的點擊事件 ---
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
-
-    // --- 監聽「選單中每一個連結」的點擊事件 ---
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // 當連結被點擊時，執行「關閉選單」的功能
-            closeMobileMenu();
-        });
-    });
-});
-</script>
-
-    
     
     <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
     <p class="text-slate-500">&copy; 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
