@@ -214,17 +214,18 @@
     <p class="text-slate-500">本內容的生成部分借助 Google Gemini，發布者應對最終內容的準確性負責。</p>
 </footer>
     
-<script>
+ <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Navigation Logic ---
+    // --- 僅保留最核心的導覽功能 ---
+
+    // 1. 獲取選單所需元素
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
     const hamburgerIconClose = document.getElementById('hamburger-icon-close');
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link'); // Combined selector for all nav links
-    const sections = document.querySelectorAll('main section[id]');
+    const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
 
-    // 1. Mobile Menu Toggle Button
+    // 2. 漢堡按鈕的開關功能
     if (mobileMenuButton) {
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
@@ -233,8 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Close Mobile Menu when ANY nav link is clicked
-    navLinks.forEach(link => {
+    // 3. 點擊任一選單連結後，關閉選單
+    //    這段程式碼不阻止連結的預設跳轉行為
+    mobileNavLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
@@ -243,74 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // 3. Active link highlighting on scroll
-    if (sections.length > 0) {
-        const observer = new IntersectionObserver((entries) => {
-            let intersectingSections = [];
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    intersectingSections.push(entry.target);
-                }
-            });
-
-            if (intersectingSections.length > 0) {
-                 // Find the one that is most visible (closest to the top)
-                intersectingSections.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
-                const id = intersectingSections[0].getAttribute('id');
-                
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        }, { threshold: [0.1, 0.5, 0.9], rootMargin: '0px 0px -50% 0px' });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    }
-    
-    // --- Page Specific Logic ---
-    const tab1858 = document.getElementById('tab-1858');
-    const tab1866 = document.getElementById('tab-1866');
-    const content1858 = document.getElementById('content-1858');
-    const content1866 = document.getElementById('content-1866');
-
-    function switchTab(activeTab, inactiveTab, activeContent, inactiveContent) {
-        if(activeTab && inactiveTab && activeContent && inactiveContent) {
-            activeTab.classList.add('active');
-            inactiveTab.classList.remove('active');
-            activeContent.classList.remove('hidden');
-            inactiveContent.classList.add('hidden');
-        }
-    }
-
-    if(tab1858 && tab1866) {
-        tab1858.addEventListener('click', () => switchTab(tab1858, tab1866, content1858, content1866));
-        tab1866.addEventListener('click', () => switchTab(tab1866, tab1858, content1866, content1858));
-    }
-
-    const ctx = document.getElementById('conductivityChart')?.getContext('2d');
-    if (ctx) {
-        // ... (Chart logic remains the same)
-    }
-
-    const quizData = {
-        // ... (Quiz data remains the same)
-    };
-
-    const quizContainer = document.getElementById('quiz-container');
-    const submitBtn = document.getElementById('submit-quiz-btn');
-    const resultsDiv = document.getElementById('quiz-results');
-
-    if (quizContainer && submitBtn && resultsDiv) {
-        // ... (Quiz logic remains the same)
-    }
 });
 </script>
-
+    
 </body>
 </html>
