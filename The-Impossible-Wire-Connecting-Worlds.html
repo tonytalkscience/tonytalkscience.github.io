@@ -236,20 +236,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Close Mobile Menu when internal links are clicked
     mobileNavLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            
-            // 只對內部錨點連結（以#開頭）關閉選單
-            // 對外部連結（.html檔案）不做任何處理，讓瀏覽器正常導航
-            if (href && href.startsWith('#')) {
+        const href = link.getAttribute('href');
+        
+        // 添加調試信息
+        console.log('處理連結:', href);
+        
+        // 只對內部錨點連結添加事件監聽器
+        if (href && href.startsWith('#')) {
+            link.addEventListener('click', () => {
+                console.log('內部連結被點擊:', href);
                 if (mobileMenu) {
                     mobileMenu.classList.add('hidden');
                     hamburgerIconOpen.classList.remove('hidden');
                     hamburgerIconClose.classList.add('hidden');
                 }
-            }
-            // 對於外部連結，完全不干擾，讓瀏覽器正常處理
-        });
+            });
+        } else {
+            // 對外部連結添加調試信息
+            link.addEventListener('click', (e) => {
+                console.log('外部連結被點擊:', href);
+                // 不阻止預設行為，讓瀏覽器正常導航
+            });
+        }
     });
 
     // 3. Active link highlighting on scroll
