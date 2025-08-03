@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
-    
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-B417SX4GTY');
-</script>
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,37 +17,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+
     <style>
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 50vh; }
-        @media (min-width: 768px) { .chart-container { height: 400px; } }
         .nav-link { transition: color 0.3s, border-color 0.3s; }
         .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
         .quiz-option:hover { background-color: #f0f9ff; }
         .flowchart-arrow { font-size: 2rem; color: #94a3b8; line-height: 1; align-self: center; transform: rotate(90deg); }
         @media (min-width: 768px) { .flowchart-arrow { transform: rotate(0deg); } }
-</style>
+    </style>
 </head>
 <body class="antialiased">
 
-
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
     <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div class="flex items-baseline justify-between h-16">
             <div class="flex-shrink-0">
-                <h1 class="text-lg sm:text-xl font-bold text-sky-600">從電報世界到網路世界</h1>
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">資通訊技術協同演化的三位一體</h1>
             </div>
             <div class="hidden md:block">
-                <div class="ml-10 flex items-baseline space-x-2 flex-wrap justify-end">
-                    <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🗺️總覽</a>
-                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🎧語音摘要</a>
-                    <a href="#telegraph" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">📠電報時代</a>
-                    <a href="#internet" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🌐數位宇宙</a>
-                    <a href="#comparison" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🔄世紀之變</a>
-                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🧠學習測驗</a>
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🎯核心概念</a>
+                    <a href="#timeline" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">⏳演進時間軸</a>
+                    <a href="#comparison" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">⚖️技術比較</a>
+                    <a href="#future" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🔭未來展望</a>
                     <a href="#conclusion" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🏁結論</a>
+                    <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🎧語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🧠知識小測驗</a>
                     <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🏠回到首頁</a>
-                    <a href="Telegraph-to-Telephone-The-Secret-Blueprint-Switching.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">➡️下一篇</a>
+                    <a href="control-trinity-feedback-modeling-optimization.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">➡️下一篇</a>
                 </div>
             </div>
             <div class="md:hidden flex items-center">
@@ -63,27 +58,26 @@
             </div>
         </div>
         <div id="mobile-menu" class="md:hidden hidden pb-4">
-            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🗺️<span class="ml-3">總覽</span></a>
-            <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🎧<span class="ml-3">語音摘要</span></a>
-            <a href="#telegraph" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">📠<span class="ml-3">電報時代</span></a>
-            <a href="#internet" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🌐<span class="ml-3">數位宇宙</span></a>
-            <a href="#comparison" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🔄<span class="ml-3">世紀之變</span></a>
-            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🧠<span class="ml-3">學習測驗</span></a>
+            <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🎯<span class="ml-3">核心概念</span></a>
+            <a href="#timeline" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">⏳<span class="ml-3">演進時間軸</span></a>
+            <a href="#comparison" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">⚖️<span class="ml-3">技術比較</span></a>
+            <a href="#future" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🔭<span class="ml-3">未來展望</span></a>
             <a href="#conclusion" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🏁<span class="ml-3">結論</span></a>
+            <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🎧<span class="ml-3">語音摘要</span></a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🧠<span class="ml-3">知識小測驗</span></a>
             <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🏠<span class="ml-3">回到首頁</span></a>
-            <a href="Telegraph-to-Telephone-The-Secret-Blueprint-Switching.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">➡️<span class="ml-3">下一篇</span></a>
+            <a href="control-trinity-feedback-modeling-optimization.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">➡️<span class="ml-3">下一篇</span></a>
         </div>
     </nav>
 </header>
     
-
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-    <section id="overview" class="mb-16 scroll-mt-20">
+    <section id="home" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">核心洞見：智慧的轉移</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">通訊網路的百年發展史，本質上是一個將昔日由人類報務員大腦執行的複雜邏輯功能——如路由決策——逐步抽象化、標準化，並最終以數十億倍的速度灌注到矽晶片與軟體協議中的過程。理解「維多利亞時代的網際網路」，是為我們當下所處的數位時代提供一個深刻的歷史參照。</p>
     </section>
 
-    <section id="audio-summary" class="mb-16 scroll-mt-20">
+    <section id="summary" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">語音摘要</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">請聆聽以下語音，了解電報網路與網際網路之間驚人的傳承關係，以及科技如何將人類的智慧轉移並規模化。</p>
         <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
@@ -102,21 +96,18 @@
             </div>
         </div>
     </section>
-
-
     
-  <section id="video-summary" class="mb-16 scroll-mt-20">
-    <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
-    <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以了解電報網路與網際網路之間驚人的傳承關係，以及科技如何將人類的智慧轉移並規模化。</p>
-          <div class="text-center mt-4">
+    <section id="video-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以了解電報網路與網際網路之間驚人的傳承關係，以及科技如何將人類的智慧轉移並規模化。</p>
+        <div class="text-center mt-4">
             <a href="https://youtu.be/W1QsoNb7btw" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
                 點擊以觀看影片摘要(on Youtube)
             </a>
-         </div>
-    </div>
-</section>
+       </div>
+    </section>
     
-    <section id="telegraph" class="mb-16 scroll-mt-20">
+    <section id="timeline" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第一部分：維多利亞時代的網際網路</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">1870年代的電報是一個以「儲存轉發」為核心、高度依賴人力技能的複雜社會技術系統。</p>
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg mb-8">
@@ -137,7 +128,7 @@
         </div>
     </section>
 
-    <section id="internet" class="mb-16 scroll-mt-20">
+    <section id="comparison" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第二部分：數位宇宙的誕生</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">現代網際網路建立在「封包交換」的哲學之上，將數據原子化，由一系列自動化協議和設備進行處理。</p>
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg mb-8">
@@ -158,7 +149,7 @@
         </div>
     </section>
 
-    <section id="comparison" class="mb-16 scroll-mt-20">
+    <section id="future" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第三部分：世紀之變</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">從電報到網際網路，核心邏輯一脈相承，但實現方式與效率卻是天壤之別。</p>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -171,11 +162,7 @@
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">學習成效測驗</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對本文內容的理解程度！完成下面的小測驗，看看您掌握了多少知識。</p>
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
-            <div id="quiz-container" class="space-y-6">
-                <div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">1. 1870年代電報系統的核心運作原則是什麼？</p><div class="space-y-2"><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="a" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">A) 封包交換 (Packet Switching)</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="b" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">B) 儲存轉發 (Store-and-Forward)</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q1" value="c" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">C) 動態路由 (Dynamic Routing)</span></label></div></div>
-                <div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">2. 在電報系統中，扮演「路由器」角色的是？</p><div class="space-y-2"><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="a" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">A) 發送電報的用戶</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="b" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">B) 中央電腦伺服器</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q2" value="c" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">C) 電報報務員 (Telegraph Operator)</span></label></div></div>
-                <div class="quiz-question"><p class="font-semibold text-slate-800 mb-2">3. 本文的核心論點是，通訊網路的發展史是一個什麼樣的過程？</p><div class="space-y-2"><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="a" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">A) 將人類智慧轉移並固化到技術系統中的過程</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="b" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">B) 完全拋棄舊有概念，從零開始創造新技術的過程</span></label><label class="flex items-center p-3 rounded-lg cursor-pointer quiz-option"><input type="radio" name="q3" value="c" class="h-4 w-4 text-sky-600 border-gray-300 focus:ring-sky-500"><span class="ml-3 text-slate-700">C) 讓網路速度變得越來越快的單純硬體升級過程</span></label></div></div>
-            </div>
+            <div id="quiz-container" class="space-y-6"></div>
             <div class="mt-8 text-center"><button id="submit-quiz-btn" class="bg-sky-600 text-white font-bold py-2 px-8 rounded-full hover:bg-sky-700 transition-colors">提交答案</button></div>
             <div id="quiz-results" class="mt-6 text-center text-lg font-semibold"></div>
         </div>
@@ -191,7 +178,7 @@
 </main>
 
 <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
-    <p class="text-slate-500">&copy; 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
+    <p class="text-slate-500">© 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
     <p class="text-slate-500">網頁內容中所引用的部分數據、圖表及觀點，其版權歸原作者或發布機構所有，僅為分析與說明之目的引用，不在此CC授權範圍內。</p>
     <p class="text-slate-500">本內容的生成部分借助 Google Gemini和ChatGPT等模型，發布者應對最終內容的準確性負責。</p>
 </footer>
@@ -199,45 +186,56 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Navigation Logic
+    // --- Navigation Logic ---
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-    const sections = document.querySelectorAll('section');
+    const sections = document.querySelectorAll('main section[id]');
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
     const hamburgerIconClose = document.getElementById('hamburger-icon-close');
 
+    if(mobileMenuButton){
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+        });
+    }
+
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                 if (mobileMenu.classList.contains('hidden') === false) {
-                    mobileMenu.classList.add('hidden');
-                    hamburgerIconOpen.classList.remove('hidden');
-                    hamburgerIconClose.classList.add('hidden');
-                }
+        link.addEventListener('click', () => {
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
             }
         });
     });
-
-    function changeNavOnScroll() {
-        let index = sections.length;
-        while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
-        document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
-        const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
-        }
-    }
     
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
+    if(sections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+             let activeId = null;
+            // Find the last intersecting element that is at least partially visible
+            for (let i = entries.length - 1; i >= 0; i--) {
+                if (entries[i].isIntersecting) {
+                    activeId = entries[i].target.id;
+                    break;
+                }
+            }
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === `#${activeId}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+        }, { rootMargin: "0px 0px -75% 0px", threshold: 0 });
+        sections.forEach(section => observer.observe(section));
+    }
+
 
     // Chart.js Global Config
     const sharedChartOptions = {
@@ -247,40 +245,32 @@ document.addEventListener('DOMContentLoaded', () => {
             legend: {
                 labels: {
                     color: '#334155', // slate-700
-                    font: {
-                        size: 14,
-                        family: "'Noto Sans TC', sans-serif"
-                    }
+                    font: { size: 14, family: "'Noto Sans TC', sans-serif" }
                 }
             },
             tooltip: {
-                backgroundColor: '#0c4a6e', // sky-900
-                titleColor: '#ffffff',
-                bodyColor: '#e0f2fe', // sky-100
+                backgroundColor: '#0c4a6e', titleColor: '#ffffff', bodyColor: '#e0f2fe',
                 titleFont: { family: "'Noto Sans TC', sans-serif", size: 14, weight: 'bold' },
                 bodyFont: { family: "'Noto Sans TC', sans-serif", size: 12 },
-                padding: 12,
-                cornerRadius: 4,
-                boxPadding: 4,
+                padding: 12, cornerRadius: 4, boxPadding: 4,
             }
         },
         scales: {
             x: {
                 ticks: { color: '#475569', font: { family: "'Noto Sans TC', sans-serif" } },
-                grid: { color: '#e2e8f0' } // slate-200
+                grid: { color: '#e2e8f0' }
             },
             y: {
                 ticks: { color: '#475569', font: { family: "'Noto Sans TC', sans-serif" } },
-                grid: { color: '#e2e8f0' } // slate-200
+                grid: { color: '#e2e8f0' }
             }
         }
     };
     
     // Chart 1: Operator Tasks
-    function createOperatorTasksChart() {
-        const ctx = document.getElementById('operatorTasksChart');
-        if (!ctx) return;
-        new Chart(ctx, {
+    const operatorCtx = document.getElementById('operatorTasksChart');
+    if (operatorCtx) {
+        new Chart(operatorCtx, {
             type: 'doughnut',
             data: {
                 labels: ['路由決策', '編碼/解碼', '錯誤校正', '其他管理'],
@@ -292,23 +282,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     borderWidth: 4
                 }]
             },
-            options: {
-                ...sharedChartOptions,
-                plugins: {
-                    ...sharedChartOptions.plugins,
-                    title: { display: true, text: '報務員任務佔比 (概念)', color: '#1e293b' },
-                    legend: { position: 'top' }
-                },
-                scales: { x: { display: false }, y: { display: false } }
-            }
+            options: { ...sharedChartOptions, plugins: { ...sharedChartOptions.plugins, title: { display: true, text: '報務員任務佔比 (概念)', color: '#1e293b' }, legend: { position: 'top' } }, scales: { x: { display: false }, y: { display: false } } }
         });
     }
 
     // Chart 2: Protocol Layers
-    function createProtocolLayersChart() {
-        const ctx = document.getElementById('protocolLayersChart');
-        if (!ctx) return;
-        new Chart(ctx, {
+    const protocolCtx = document.getElementById('protocolLayersChart');
+    if (protocolCtx) {
+        new Chart(protocolCtx, {
             type: 'bar',
             data: {
                 labels: ['應用層 (SMTP)', '傳輸層 (TCP)', '網路層 (IP)', '鏈路層 (Ethernet)'],
@@ -319,138 +300,97 @@ document.addEventListener('DOMContentLoaded', () => {
                     borderWidth: 0
                 }]
             },
-            options: {
-                ...sharedChartOptions,
-                indexAxis: 'y',
-                plugins: {
-                     ...sharedChartOptions.plugins,
-                     title: { display: true, text: '現代網路協議堆疊 (OSI簡化)', color: '#1e293b' },
-                     legend: { display: false }
-                },
-                scales: {
-                    x: { ...sharedChartOptions.scales.x, grid: { display: false }, ticks: { display: false } },
-                    y: { ...sharedChartOptions.scales.y, grid: { display: false } }
-                }
-            }
+            options: { ...sharedChartOptions, indexAxis: 'y', plugins: { ...sharedChartOptions.plugins, title: { display: true, text: '現代網路協議堆疊 (OSI簡化)', color: '#1e293b' }, legend: { display: false } }, scales: { x: { ...sharedChartOptions.scales.x, grid: { display: false }, ticks: { display: false } }, y: { ...sharedChartOptions.scales.y, grid: { display: false } } } }
         });
     }
 
     // Chart 3: Comparison
-    function createComparisonChart() {
-        const ctx = document.getElementById('comparisonChart');
-        if (!ctx) return;
-        new Chart(ctx, {
+    const comparisonCtx = document.getElementById('comparisonChart');
+    if(comparisonCtx) {
+        new Chart(comparisonCtx, {
             type: 'bar',
             data: {
                 labels: ['數據單元', '路由代理', '端到端延遲', '網路治理'],
                 datasets: [{
                     label: '1870年代電報',
                     data: [2, 4, 1, 4],
-                    backgroundColor: '#94a3b8', // slate-400
-                    barPercentage: 0.5,
-                    categoryPercentage: 0.5
+                    backgroundColor: '#94a3b8',
                 }, {
                     label: '現代網際網路',
                     data: [4, 1, 4, 1],
-                    backgroundColor: '#38bdf8', // sky-400
-                    barPercentage: 0.5,
-                    categoryPercentage: 0.5
+                    backgroundColor: '#38bdf8',
                 }]
             },
-            options: {
-                ...sharedChartOptions,
-                plugins: {
-                    ...sharedChartOptions.plugins,
-                    tooltip: {
-                        ...sharedChartOptions.plugins.tooltip,
-                        callbacks: {
-                             title: (tooltipItems) => tooltipItems[0].label,
-                             label: function(context) {
-                                const details = [
-                                    ['整份訊息 (不可分割)', '原子化封包 (可分割)'],
-                                    ['人類大腦 (手動)', '矽晶晶片 (自動)'],
-                                    ['高 (分鐘-小時)', '極低 (毫秒)'],
-                                    ['中央集權', '去中心化']
-                                ];
-                                let label = context.dataset.label || '';
-                                if (label) { label += ': '; }
-                                label += details[context.dataIndex][context.datasetIndex];
-                                return label;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: { ...sharedChartOptions.scales.x, grid: { display: false } },
-                    y: { ...sharedChartOptions.scales.y, ticks: { display: false } }
+            options: { ...sharedChartOptions, plugins: { ...sharedChartOptions.plugins, tooltip: { ...sharedChartOptions.plugins.tooltip, callbacks: {
+                title: (tooltipItems) => tooltipItems[0].label,
+                label: function(context) {
+                    const details = [
+                        ['整份訊息 (不可分割)', '原子化封包 (可分割)'],
+                        ['人類大腦 (手動)', '矽晶晶片 (自動)'],
+                        ['高 (分鐘-小時)', '極低 (毫秒)'],
+                        ['中央集權', '去中心化']
+                    ];
+                    let label = context.dataset.label || '';
+                    if (label) { label += ': '; }
+                    label += details[context.dataIndex][context.datasetIndex];
+                    return label;
                 }
-            }
+            }}}, scales: { x: { ...sharedChartOptions.scales.x, grid: { display: false } }, y: { ...sharedChartOptions.scales.y, ticks: { display: false } } } }
         });
     }
 
     // Chart 4: Intelligence Shift
-    function createIntelligenceShiftChart() {
-        const ctx = document.getElementById('intelligenceShiftChart');
-        if (!ctx) return;
-        new Chart(ctx, {
+    const intelligenceCtx = document.getElementById('intelligenceShiftChart');
+    if (intelligenceCtx) {
+        new Chart(intelligenceCtx, {
             type: 'line',
             data: {
                 labels: ['1870', '1900', '1930', '1960', '1990', '2020'],
                 datasets: [{
                     label: '人類智慧 (報務員)',
                     data: [80, 90, 70, 40, 10, 5],
-                    borderColor: '#94a3b8', // slate-400
+                    borderColor: '#94a3b8',
                     backgroundColor: 'rgba(148, 163, 184, 0.2)',
                     fill: true,
                     tension: 0.4
                 }, {
                     label: '矽晶智慧 (路由器/協議)',
                     data: [0, 0, 5, 15, 60, 95],
-                    borderColor: '#0ea5e9', // sky-500
+                    borderColor: '#0ea5e9',
                     backgroundColor: 'rgba(14, 165, 233, 0.2)',
                     fill: true,
                     tension: 0.4
                 }]
             },
-            options: {
-                ...sharedChartOptions,
-                scales: {
-                    ...sharedChartOptions.scales,
-                    y: {
-                        ...sharedChartOptions.scales.y,
-                        title: { display: true, text: '概念性網路智慧佔比 (%)', color: '#334155' }
-                    }
-                }
-            }
+            options: { ...sharedChartOptions, scales: { ...sharedChartOptions.scales, y: { ...sharedChartOptions.scales.y, title: { display: true, text: '概念性網路智慧佔比 (%)', color: '#334155' } } } }
         });
     }
 
     // Quiz Logic
-    function handleQuiz() {
-        const submitBtn = document.getElementById('submit-quiz-btn');
-        if (!submitBtn) return;
-        
-        const resultsEl = document.getElementById('quiz-results');
-        const correctAnswers = { q1: 'b', q2: 'c', q3: 'a' };
+    const quizContainer = document.getElementById('quiz-container');
+    const submitBtn = document.getElementById('submit-quiz-btn');
+    const resultsEl = document.getElementById('quiz-results');
+    const quizData = [
+        { answer: 'b' },
+        { answer: 'c' },
+        { answer: 'a' }
+    ];
 
+    if (quizContainer && submitBtn) {
         submitBtn.addEventListener('click', () => {
             let score = 0;
-            const userAnswers = {
-                q1: document.querySelector('input[name="q1"]:checked'),
-                q2: document.querySelector('input[name="q2"]:checked'),
-                q3: document.querySelector('input[name="q3"]:checked')
-            };
-            const totalQuestions = Object.keys(correctAnswers).length;
+            const totalQuestions = quizData.length;
             let answeredQuestions = 0;
 
-            for (const question in userAnswers) {
-                if (userAnswers[question]) {
+            quizData.forEach((item, index) => {
+                const selected = document.querySelector(`input[name="q${index+1}"]:checked`);
+                if (selected) {
                     answeredQuestions++;
-                    if (userAnswers[question].value === correctAnswers[question]) {
+                    if (selected.value === item.answer) {
                         score++;
                     }
                 }
-            }
+            });
 
             if (answeredQuestions < totalQuestions) {
                 resultsEl.textContent = '請回答所有問題後再提交！';
@@ -460,7 +400,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let resultMessage = `您答對了 ${score} / ${totalQuestions} 題！`;
             let resultColor = 'text-slate-800';
-
             if (score === totalQuestions) {
                 resultMessage += " 👍 太棒了，完全正確！";
                 resultColor = 'text-green-600';
@@ -471,23 +410,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 resultMessage += " 😅 再加加油！";
                 resultColor = 'text-red-600';
             }
-            
             resultsEl.textContent = resultMessage;
             resultsEl.className = `mt-6 text-center text-lg font-semibold ${resultColor}`;
+            submitBtn.disabled = true;
         });
     }
-
-    // Initializations
-    window.addEventListener('scroll', changeNavOnScroll);
-    createOperatorTasksChart();
-    createProtocolLayersChart();
-    createComparisonChart();
-    createIntelligenceShiftChart();
-    handleQuiz();
-    changeNavOnScroll(); // Initial check
 });
 </script>
 </body>
 </html>
-
-
+"  
