@@ -226,23 +226,53 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-
     // --- Navigation Logic ---
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+    const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
+    const desktopNavLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('main section[id]');
-    
-    navLinks.forEach(link => {
-        const targetId = link.getAttribute('href');
-        if (targetId && targetId.startsWith('#')) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        }
+
+    // 1. Mobile Menu Toggle Button
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        hamburgerIconOpen.classList.toggle('hidden');
+        hamburgerIconClose.classList.toggle('hidden');
     });
+
+    // 2. Close Mobile Menu when ANY link is clicked
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // This ensures the menu always closes, regardless of where the link goes.
+            mobileMenu.classList.add('hidden');
+            hamburgerIconOpen.classList.remove('hidden');
+            hamburgerIconClose.classList.add('hidden');
+        });
+    });
+
+    // 3. Active link highlighting on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                desktopNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.3, rootMargin: '-50% 0px -50% 0px' });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+</script>
+    
 
     function changeNavOnScroll() {
         let index = sections.length;
