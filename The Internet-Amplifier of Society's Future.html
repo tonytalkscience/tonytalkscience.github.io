@@ -56,6 +56,17 @@
         @media (max-width: 768px) {
             .chart-container { height: 300px; }
         }
+
+     /* 將這段加入到 <style> 標籤內 */
+header {
+    transition: transform 0.3s ease-in-out;
+}
+.header-hidden {
+    transform: translateY(-100%);
+}
+
+
+     
     </style>
 </head>
 <body class="antialiased">
@@ -396,6 +407,41 @@
 </footer>
 
 <script>
+
+
+
+
+
+// 將這段加入到 <script> 標籤的最開頭
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 智慧型標頭 (Smart Header) 的邏輯 ---
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    const scrollThreshold = 10; // 捲動超過10像素才觸發，避免太敏感
+
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+            // 向下捲動，且已滾過標頭高度
+            header.classList.add('header-hidden');
+        } else {
+            // 向上捲動
+            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                 header.classList.remove('header-hidden');
+            }
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 對於 iOS 的 bounce 效果
+    }, false);
+
+    // --- 您原有的其他 JavaScript 程式碼可以放在這裡 ---
+    // 例如：Navigation Logic, Charting Logic, Quiz Logic 等等...
+
+});
+
+
+ 
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Navigation Logic ---
