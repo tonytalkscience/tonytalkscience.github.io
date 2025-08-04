@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tony Talks Science</title>
-    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,13 +9,15 @@
       gtag('config', 'G-B417SX4GTY');
     </script>
     
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tony Talks Science</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
@@ -33,17 +31,13 @@
         .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
 
-        /* 將這段加入到 <style> 標籤內 */
-header {
-    transition: transform 0.3s ease-in-out;
-}
-.header-hidden {
-    transform: translateY(-100%);
-}
-
-
-
-        
+        /* 智慧標頭的 CSS */
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -156,79 +150,71 @@ header {
     <section id="timeline" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">控制思想的演進里程碑</h2>
         <div class="relative timeline-container max-w-3xl mx-auto py-4">
-             <div class="timeline-block">
-                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
-                     <span class="font-bold text-md" style="color: #2A9D8F;">1788年</span>
-                     <h3 class="text-lg font-bold mt-1">比例回饋</h3>
-                     <p class="mt-2 text-sm text-slate-600">瓦特的離心式調速器成功商業化，展現了比例回饋控制的巨大威力，開啟了工業自動化時代。</p>
-                 </div>
-             </div>
-             <div class="timeline-block md:timeline-block-right">
-                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
-                     <span class="font-bold text-md" style="color: #2A9D8F;">1868年</span>
-                     <h3 class="text-lg font-bold mt-1">數學覺醒</h3>
-                     <p class="mt-2 text-sm text-slate-600">馬克士威發表《論調速器》，首次使用微分方程為控制器建立數學模型，將控制從工藝變為科學。</p>
-                 </div>
-             </div>
-             <div class="timeline-block">
-                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
-                     <span class="font-bold text-md" style="color: #E9C46A;">1932年</span>
-                     <h3 class="text-lg font-bold mt-1">頻域分析</h3>
-                     <p class="mt-2 text-sm text-slate-600">奈奎斯特提出基於頻率響應的穩定判據，奠定了古典控制理論中頻域分析法的基礎。</p>
-                 </div>
-             </div>
-             <div class="timeline-block md:timeline-block-right">
-                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
-                     <span class="font-bold text-md" style="color: #E9C46A;">1960年</span>
-                     <h3 class="text-lg font-bold mt-1">現代控制</h3>
-                     <p class="mt-2 text-sm text-slate-600">卡爾曼引入狀態空間方法並提出卡爾曼濾波，開啟了現代控制理論時代，並為航太工程提供了關鍵技術。</p>
-                 </div>
-             </div>
               <div class="timeline-block">
-                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
-                     <span class="font-bold text-md" style="color: #F4A261;">1980s-至今</span>
-                     <h3 class="text-lg font-bold mt-1">最佳化與AI</h3>
-                     <p class="mt-2 text-sm text-slate-600">MPC、強健控制、適應性控制以及增強式學習等技術蓬勃發展，將最佳化與學習推向控制設計的核心。</p>
-                 </div>
-             </div>
+                   <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                       <span class="font-bold text-md" style="color: #2A9D8F;">1788年</span>
+                       <h3 class="text-lg font-bold mt-1">比例回饋</h3>
+                       <p class="mt-2 text-sm text-slate-600">瓦特的離心式調速器成功商業化，展現了比例回饋控制的巨大威力，開啟了工業自動化時代。</p>
+                   </div>
+              </div>
+              <div class="timeline-block md:timeline-block-right">
+                   <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                       <span class="font-bold text-md" style="color: #2A9D8F;">1868年</span>
+                       <h3 class="text-lg font-bold mt-1">數學覺醒</h3>
+                       <p class="mt-2 text-sm text-slate-600">馬克士威發表《論調速器》，首次使用微分方程為控制器建立數學模型，將控制從工藝變為科學。</p>
+                   </div>
+              </div>
+              <div class="timeline-block">
+                   <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                       <span class="font-bold text-md" style="color: #E9C46A;">1932年</span>
+                       <h3 class="text-lg font-bold mt-1">頻域分析</h3>
+                       <p class="mt-2 text-sm text-slate-600">奈奎斯特提出基於頻率響應的穩定判據，奠定了古典控制理論中頻域分析法的基礎。</p>
+                   </div>
+              </div>
+              <div class="timeline-block md:timeline-block-right">
+                   <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                       <span class="font-bold text-md" style="color: #E9C46A;">1960年</span>
+                       <h3 class="text-lg font-bold mt-1">現代控制</h3>
+                       <p class="mt-2 text-sm text-slate-600">卡爾曼引入狀態空間方法並提出卡爾曼濾波，開啟了現代控制理論時代，並為航太工程提供了關鍵技術。</p>
+                   </div>
+              </div>
+               <div class="timeline-block">
+                   <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200">
+                       <span class="font-bold text-md" style="color: #F4A261;">1980s-至今</span>
+                       <h3 class="text-lg font-bold mt-1">最佳化與AI</h3>
+                       <p class="mt-2 text-sm text-slate-600">MPC、強健控制、適應性控制以及增強式學習等技術蓬勃發展，將最佳化與學習推向控制設計的核心。</p>
+                   </div>
+              </div>
         </div>
     </section>
 
     <section id="audio_summary" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">語音摘要</h2>
-
-         <h3 class="text-xl font-bold text-center mb-4 text-slate-800">穿越百年恆久不變的控制革命</h3>
-            <audio controlsList="nodownload" controls preload="auto" class="w-full mb-4" src="control-trinity-feedback-modeling-optimization14min21s notebookLM.mp3">您的瀏覽器不支援音訊播放。</audio>
-            <div class="text-slate-700 space-y-4 text-sm sm:text-base leading-relaxed">
-                
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">此語音摘要濃縮了控制工程恆久不變的「三位一體」框架，這個框架貫穿了從古典到現代的所有控制系統。</p>
         <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">穿越百年恆久不變的控制革命</h3>
+            <audio controlsList="nodownload" controls preload="auto" class="w-full mb-4" src="control-trinity-feedback-modeling-optimization14min21s notebookLM.mp3">您的瀏覽器不支援音訊播放。</audio>
             <div class="text-slate-600 space-y-4">
                  <p>控制工程的歷史就是一部圍繞三大支柱不斷深化的歷史。無論技術如何演進，其本質都是在這三個支柱上深化與擴展：</p>
                  <ul class="list-disc list-inside space-y-3 pl-4">
-                     <li><strong style="color: #2A9D8F;">回饋 (Feedback) 是根本：</strong> 這是控制的起點與靈魂，核心在於「處理不確定性」。透過不斷測量誤差並修正，系統才能在真實世界中穩定運作。</li>
-                     <li><strong style="color: #E9C46A;">模型 (Model) 是核心：</strong> 這是系統的「大腦」，讓我們從「試誤」走向「設計」。透過數學描述，我們得以分析、預測並設計出更精確的控制器。</li>
-                     <li><strong style="color: #F4A261;">最佳化 (Optimization) 是目標：</strong> 如果回饋讓我們「站穩」，模型讓我們「看遠」，那最佳化則讓我們「走好」。它回答了「在所有可行策略中，哪個是最好的？」這個問題。</li>
+                       <li><strong style="color: #2A9D8F;">回饋 (Feedback) 是根本：</strong> 這是控制的起點與靈魂，核心在於「處理不確定性」。透過不斷測量誤差並修正，系統才能在真實世界中穩定運作。</li>
+                       <li><strong style="color: #E9C46A;">模型 (Model) 是核心：</strong> 這是系統的「大腦」，讓我們從「試誤」走向「設計」。透過數學描述，我們得以分析、預測並設計出更精確的控制器。</li>
+                       <li><strong style="color: #F4A261;">最佳化 (Optimization) 是目標：</strong> 如果回饋讓我們「站穩」，模型讓我們「看遠」，那最佳化則讓我們「走好」。它回答了「在所有可行策略中，哪個是最好的？」這個問題。</li>
                  </ul>
                  <p class="pt-4">總結來說，這個「三位一體」的羅盤，始終為我們指引著自動化技術前進的方向。</p>
             </div>
         </div>
     </section>
 
-
-    
-              <section id="video-summary" class="mb-16 scroll-mt-20">
-    <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
-    <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以快速掌握控制工程恆久不變的「三位一體」框架，這個框架貫穿了從古典到現代的所有控制系統。</p>
-          <div class="text-center mt-4">
-            <a href="https://youtu.be/nQtR8dOZSNg" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
-                點擊以觀看影片摘要(on Youtube)
-            </a>
-         </div>
-    </div>
-</section>
-
-
+      <section id="video-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以快速掌握控制工程恆久不變的「三位一體」框架，這個框架貫穿了從古典到現代的所有控制系統。</p>
+              <div class="text-center mt-4">
+                <a href="https://youtu.be/nQtR8dOZSNg" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
+                    點擊以觀看影片摘要(on Youtube)
+                </a>
+               </div>
+    </section>
 
     
     <section id="quiz" class="mb-16 scroll-mt-20">
@@ -246,48 +232,41 @@ header {
 </main>
 
     <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
-    <p class="text-slate-500">&copy; 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
+    <p class="text-slate-500">© 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
     <p class="text-slate-500">網頁內容中所引用的部分數據、圖表及觀點，其版權歸原作者或發布機構所有，僅為分析與說明之目的引用，不在此CC授權範圍內。</p>
     <p class="text-slate-500">本內容的生成部分借助 Google Gemini和ChatGPT等模型，發布者應對最終內容的準確性負責。</p>
 </footer>
     
 <script>
-
-    
-
-// 將這段加入到 <script> 標籤的最開頭
 document.addEventListener('DOMContentLoaded', () => {
-    
+    // 【更動 1】: 建立「狀態旗標」
+    let isMenuOpen = false;
+
     // --- 智慧型標頭 (Smart Header) 的邏輯 ---
     let lastScrollTop = 0;
     const header = document.querySelector('header');
-    const scrollThreshold = 10; // 捲動超過10像素才觸發，避免太敏感
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-            // 向下捲動，且已滾過標頭高度
-            header.classList.add('header-hidden');
-        } else {
-            // 向上捲動
-            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
-                 header.classList.remove('header-hidden');
+    const scrollThreshold = 10;
+    if (header) {
+        window.addEventListener('scroll', function() {
+            // 【更動 3】: 讓智慧標頭讀取狀態並做出反應
+            if (isMenuOpen) {
+                return;
             }
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 對於 iOS 的 bounce 效果
-    }, false);
-
-    // --- 您原有的其他 JavaScript 程式碼可以放在這裡 ---
-    // 例如：Navigation Logic, Charting Logic, Quiz Logic 等等...
-
-});
-
-
-
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                }
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
     
-document.addEventListener('DOMContentLoaded', () => {
-    // --- Generic Navigation Logic (from template) ---
+    // --- 以下為您原有的完整程式碼，並在其中加入了狀態更新 ---
+    
+    // --- Generic Navigation Logic ---
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     const sections = document.querySelectorAll('main section[id]');
     
@@ -298,15 +277,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    // Custom offset logic for sticky header
-                    const headerOffset = 80; // height of sticky header + some space
+                    const headerOffset = 80;
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: "smooth"
                     });
+                }
+                 // 點擊連結後，關閉手機選單並更新狀態
+                if (isMenuOpen) {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    document.getElementById('hamburger-icon-open').classList.remove('hidden');
+                    document.getElementById('hamburger-icon-close').classList.add('hidden');
+                    isMenuOpen = false;
                 }
             });
         }
@@ -334,25 +318,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
     const hamburgerIconClose = document.getElementById('hamburger-icon-close');
 
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
+    if(mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+             // 【更動 2】: 讓選單按鈕更新狀態
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
+        });
+    }
 
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-        if (link.getAttribute('href').startsWith('#')) {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                hamburgerIconOpen.classList.remove('hidden');
-                hamburgerIconClose.classList.add('hidden');
-            });
-        }
-    });
-    
     // --- Chart and Interactive Elements Initialization ---
     
-    // Palette from source file
     const PALETTE = {
         teal: '#2A9D8F',
         darkTeal: '#264653',
@@ -555,3 +532,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+"  根據你剛剛說的三項更動, 幫我完整的更新這整個 code, 其餘的文章內容都不要更動
