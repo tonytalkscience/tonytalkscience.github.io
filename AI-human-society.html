@@ -255,36 +255,82 @@ header {
     
 <script>
 
-
-        
-
-// 將這段加入到 <script> 標籤的最開頭
+ 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
+    // --- 全域狀態管理 ---
+    let isMenuOpen = false; // 這是我們新的「狀態旗標」
+
     // --- 智慧型標頭 (Smart Header) 的邏輯 ---
     let lastScrollTop = 0;
     const header = document.querySelector('header');
-    const scrollThreshold = 10; // 捲動超過10像素才觸發，避免太敏感
+    const scrollThreshold = 10;
 
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-            // 向下捲動，且已滾過標頭高度
-            header.classList.add('header-hidden');
-        } else {
-            // 向上捲動
-            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
-                 header.classList.remove('header-hidden');
+    if (header) {
+        window.addEventListener('scroll', function() {
+            // 【⭐ 修正點 1】如果選單是打開的，就直接跳出，不做任何事
+            if (isMenuOpen) {
+                return;
             }
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 對於 iOS 的 bounce 效果
-    }, false);
 
-    // --- 您原有的其他 JavaScript 程式碼可以放在這裡 ---
-    // 例如：Navigation Logic, Charting Logic, Quiz Logic 等等...
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                }
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
 
-});
+    // --- 手機選單 (Mobile Menu) 的邏輯 ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+
+            // 【⭐ 修正點 2】每次點擊後，都更新選單的打開/關閉狀態
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
+        });
+    }
+
+    // --- 您原有的其他 JavaScript 程式碼 (導覽列高亮、圖表、測驗等) ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    // ... (以下是您原有的 IntersectionObserver, Chart, Quiz 等程式碼，保持不變)
+    if (sections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            let intersectingSections = [];
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    intersectingSections.push(entry.target);
+                }
+            });
+
+            if (intersectingSections.length > 0) {
+                intersectingSections.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+                const id = intersectingSections[0].getAttribute('id');
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }, { rootMargin: "-50% 0px -50% 0px", threshold: [0.1, 0.9] });
+
+        sections.forEach(section => observer.observe(section));
+    }
 
 
 
