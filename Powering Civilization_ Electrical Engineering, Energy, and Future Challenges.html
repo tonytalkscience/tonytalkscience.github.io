@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  
-  gtag('config', 'G-B417SX4GTY');
-</script>
-
-
-
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,13 +17,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
         .nav-link { transition: color 0.3s, border-color 0.3s; }
-        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; font-weight: 700; }
         .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
         .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
@@ -38,23 +30,19 @@
         .chart-container { position: relative; width: 100%; max-width: 800px; margin: auto; height: 45vh; max-height: 450px; }
         .flow-card { border-left-width: 4px; }
 
-      /* 將這段加入到 <style> 標籤內 */
-header {
-    transition: transform 0.3s ease-in-out;
-}
-.header-hidden {
-    transform: translateY(-100%);
-}
-
-
-
-      
+        /* 智慧標頭的 CSS */
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body class="antialiased">
 
 
-  <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+ <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
     <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div class="flex items-baseline justify-between h-16">
             <div class="flex-shrink-0">
@@ -93,7 +81,6 @@ header {
     </nav>
 </header>
 
-  
 <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
     
     <section id="acceleration" class="mb-16 scroll-mt-20">
@@ -178,17 +165,11 @@ header {
     </section>
 
     <section id="audio-summary" class="mb-16 scroll-mt-20">
-
-                
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">語音摘要</h2>
-             <h3 class="text-xl font-bold text-center mb-4 text-slate-800">驅動文明的力量</h3>
-            <audio controlsList="nodownload" controls preload="auto" class="w-full mb-4" src="Powering Civilization_ Electrical Engineering, Energy, and Future Challenges 9min40s notebookLM.mp3">您的瀏覽器不支援音訊播放。</audio>
-            <div class="text-slate-700 space-y-4 text-sm sm:text-base leading-relaxed">
-
-                
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">此語音摘要深入探討電機工程如何成為現代文明的基石。</p>
         <div class="bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto">    
-             <div class="text-slate-600 space-y-4">      
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">驅動文明的力量</h3>
+            <audio controlsList="nodownload" controls preload="auto" class="w-full mb-4" src="Powering Civilization_ Electrical Engineering, Energy, and Future Challenges 9min40s notebookLM.mp3">您的瀏覽器不支援音訊播放。</audio>
              <div class="prose max-w-none text-slate-700">
                 <p>電機工程不僅僅是關於電路和設備的學問，它是塑造我們當代世界的根本力量。從點亮城市的龐大電網，到掌中手機的微小晶片，電力無所不在，驅動著通訊、醫療、交通及娛樂的每一次革新。</p>
                 <p>然而，這份便利也伴隨著巨大的挑戰。隨著全球能源需求的激增，我們正處於一個關鍵的十字路口。音檔內容強調，我們當前面臨的核心課題，是如何從依賴化石燃料的現狀，過渡到一個以再生能源為主導的永續未來。</p>
@@ -197,23 +178,16 @@ header {
         </div>
     </section>
 
-
-
-                <section id="video-summary" class="mb-16 scroll-mt-20">
-    <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
-    <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以快速電機工程不僅僅是關於電路和設備的學問，它是塑造我們當代世界的根本力量。從點亮城市的龐大電網，到掌中手機的微小晶片，電力無所不在，驅動著通訊、醫療、交通及娛樂的每一次革新。然而，這份便利也伴隨著巨大的挑戰。</p>
-          <div class="text-center mt-4">
-            <a href="https://youtu.be/4kjL_j8A-C8" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
-                點擊以觀看影片摘要(on Youtube)
-            </a>
-         </div>
-    </div>
-</section>
-
+    <section id="video-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以快速電機工程不僅僅是關於電路和設備的學問，它是塑造我們當代世界的根本力量。從點亮城市的龐大電網，到掌中手機的微小晶片，電力無所不在，驅動著通訊、醫療、交通及娛樂的每一次革新。然而，這份便利也伴隨著巨大的挑戰。</p>
+              <div class="text-center mt-4">
+                <a href="https://youtu.be/4kjL_j8A-C8" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
+                    點擊以觀看影片摘要(on Youtube)
+                </a>
+               </div>
+    </section>
     
-
-
-  
     <section id="quiz" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">知識小測驗</h2>
         <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">來測試一下您對電力與永續能源的了解程度吧！</p>
@@ -230,46 +204,40 @@ header {
 </main>
 
 <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
-    <p class="text-slate-500">&copy; 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
+    <p class="text-slate-500">© 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
     <p class="text-slate-500">網頁內容中所引用的部分數據、圖表及觀點，其版權歸原作者或發布機構所有，僅為分析與說明之目的引用，不在此CC授權範圍內。</p>
     <p class="text-slate-500">本內容的生成部分借助 Google Gemini和ChatGPT等模型，發布者應對最終內容的準確性負責。</p>
 </footer>
 
 <script>
-
-
-// 將這段加入到 <script> 標籤的最開頭
 document.addEventListener('DOMContentLoaded', () => {
-    
+    // 【更動 1】: 建立「狀態旗標」
+    let isMenuOpen = false;
+
     // --- 智慧型標頭 (Smart Header) 的邏輯 ---
     let lastScrollTop = 0;
     const header = document.querySelector('header');
-    const scrollThreshold = 10; // 捲動超過10像素才觸發，避免太敏感
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-            // 向下捲動，且已滾過標頭高度
-            header.classList.add('header-hidden');
-        } else {
-            // 向上捲動
-            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
-                 header.classList.remove('header-hidden');
+    const scrollThreshold = 10;
+    if (header) {
+        window.addEventListener('scroll', function() {
+            // 【更動 3】: 讓智慧標頭讀取狀態並做出反應
+            if (isMenuOpen) {
+                return;
             }
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 對於 iOS 的 bounce 效果
-    }, false);
-
-    // --- 您原有的其他 JavaScript 程式碼可以放在這裡 ---
-    // 例如：Navigation Logic, Charting Logic, Quiz Logic 等等...
-
-});
-
-
-  
-document.addEventListener('DOMContentLoaded', () => {
-
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                }
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
+    
+    // --- 以下為您原有的完整程式碼，並在其中加入了狀態更新 ---
+    
     // --- Color Palette and Global Settings ---
     const FONT_COLOR = '#1e293b';
     const THEME_COLORS = {
@@ -322,7 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Navigation Logic (Desktop & Mobile) ---
     function initNavigation() {
-        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
         const sections = document.querySelectorAll('main section[id]');
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -341,12 +308,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         window.addEventListener('scroll', changeNavOnScroll);
-        changeNavOnScroll(); // Initial check
+        changeNavOnScroll();
 
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
             hamburgerIconOpen.classList.toggle('hidden');
             hamburgerIconClose.classList.toggle('hidden');
+            // 【更動 2】: 讓選單按鈕更新狀態
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
         });
 
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
@@ -355,6 +324,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     mobileMenu.classList.add('hidden');
                     hamburgerIconOpen.classList.remove('hidden');
                     hamburgerIconClose.classList.add('hidden');
+                    // 【更動 2 的延伸】: 點擊連結關閉選單時，也要更新狀態
+                    isMenuOpen = false;
                 });
             }
         });
@@ -554,4 +525,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-
