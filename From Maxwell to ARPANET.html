@@ -14,20 +14,36 @@
     <title>Tony Talks Science</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        body { font-family: 'Noto Sans TC', 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         .nav-link { transition: color 0.3s, border-color 0.3s; }
-        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; font-weight: 700; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; font-weight: 600; }
+        .quiz-option-label:hover { background-color: #f0f9ff; }
         .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
         .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
         .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
         
+        /* Chart container styles from original */
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
         /* Adapted styles for visualizations */
         .packet-animation .packet { animation: move 4s linear infinite; }
         .packet-animation .packet:nth-child(2) { animation-delay: -1s; }
@@ -43,15 +59,13 @@
             50% { stroke-dashoffset: 0; }
         }
 
-        /* 將這段加入到 <style> 標籤內 */
-header {
-    transition: transform 0.3s ease-in-out;
-}
-.header-hidden {
-    transform: translateY(-100%);
-}
-
-        
+        /* 智慧標頭的 CSS */
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -222,20 +236,15 @@ header {
         </div>
     </section>
 
-
-      <section id="video-summary" class="mb-16 scroll-mt-20">
-    <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
-    <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以快速掌握從18世紀的夏貝系統，到19世紀詹姆斯·克拉克·馬克斯威爾奠定電磁學理論基礎，到20世紀中期ARPANET的誕生，這條漫長而關鍵的技術演進之路。</p>
-          <div class="text-center mt-4">
-            <a href="https://youtu.be/Z9Al4iS8L4c" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
-                點擊以觀看影片摘要(on Youtube)
-            </a>
-         </div>
-    </div>
-</section>
-
-    
-
+     <section id="video-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以快速掌握從18世紀的夏貝系統，到19世紀詹姆斯·克拉克·馬克斯威爾奠定電磁學理論基礎，到20世紀中期ARPANET的誕生，這條漫長而關鍵的技術演進之路。</p>
+              <div class="text-center mt-4">
+                <a href="https://youtu.be/Z9Al4iS8L4c" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
+                    點擊以觀看影片摘要(on Youtube)
+                </a>
+               </div>
+    </section>
     
     <section id="quiz" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
@@ -254,69 +263,72 @@ header {
 </main>
 
 <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
-    <p class="text-slate-500">&copy; 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
+    <p class="text-slate-500">© 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
     <p class="text-slate-500">網頁內容中所引用的部分數據、圖表及觀點，其版權歸原作者或發布機構所有，僅為分析與說明之目的引用，不在此CC授權範圍內。</p>
     <p class="text-slate-500">本內容的生成部分借助 Google Gemini，發布者應對最終內容的準確性負責。</p>
 </footer>
     
 <script>
-
-    
-
-
-// 將這段加入到 <script> 標籤的最開頭
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 智慧型標頭 (Smart Header) 的邏輯 ---
-    let lastScrollTop = 0;
+    // 【更動 1】: 建立「狀態旗標」，並統一管理所有元素選擇器
+    let isMenuOpen = false;
     const header = document.querySelector('header');
-    const scrollThreshold = 10; // 捲動超過10像素才觸發，避免太敏感
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-            // 向下捲動，且已滾過標頭高度
-            header.classList.add('header-hidden');
-        } else {
-            // 向上捲動
-            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
-                 header.classList.remove('header-hidden');
-            }
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 對於 iOS 的 bounce 效果
-    }, false);
-
-    // --- 您原有的其他 JavaScript 程式碼可以放在這裡 ---
-    // 例如：Navigation Logic, Charting Logic, Quiz Logic 等等...
-
-});
-
-
-
-    
-document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Navigation Logic ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     const sections = document.querySelectorAll('main section[id]');
+
+    // --- 智慧型標頭 (Smart Header) 的邏輯 ---
+    let lastScrollTop = 0;
+    const scrollThreshold = 10;
+    if (header) {
+        window.addEventListener('scroll', function() {
+            // 【更動 3】: 讓智慧標頭讀取狀態並做出反應
+            if (isMenuOpen) {
+                return;
+            }
+
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                }
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
     
+    // --- 手機選單 (Mobile Menu) 的邏輯 ---
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+            // 【更動 2】: 讓選單按鈕更新狀態
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
+        });
+    }
+
+    // --- 導覽列 (Navigation) 邏輯 ---
     const setActiveLink = () => {
-        let index = sections.length;
-        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
-        
-        document.querySelectorAll('.nav-link').forEach((link) => {
-            if(link.getAttribute('href').startsWith('#')){
-                link.classList.remove('active');
+        let currentSectionId = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 80) { // 80 is an offset for the header height
+                currentSectionId = section.getAttribute('id');
             }
         });
-        
-        if (index >= 0 && sections[index]) {
-            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active');
             }
-        }
+        });
     };
     
     navLinks.forEach(link => {
@@ -326,42 +338,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    // Custom scroll with offset for sticky header
                     const headerOffset = 70;
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }
+                // 點擊連結後，關閉手機選單並更新狀態
+                if (isMenuOpen) {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIconOpen.classList.remove('hidden');
+                    hamburgerIconClose.classList.add('hidden');
+                    isMenuOpen = false;
                 }
             });
         }
     });
 
     window.addEventListener('scroll', setActiveLink);
-
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
-    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
-
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
-
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-        if (link.getAttribute('href').startsWith('#')) {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                hamburgerIconOpen.classList.remove('hidden');
-                hamburgerIconClose.classList.add('hidden');
-            });
-        }
-    });
 
     // --- Chart.js Moore's Law ---
     const initMooresLawChart = () => {
@@ -515,4 +508,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-
+" 根據你剛剛說的三項更動, 幫我完整的更新這整個 code, 其餘的文章內容都不要更動
