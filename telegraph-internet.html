@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
-    
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-B417SX4GTY');
-</script>
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+
     <style>
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
         .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 50vh; }
@@ -31,23 +29,19 @@
         .flowchart-arrow { font-size: 2rem; color: #94a3b8; line-height: 1; align-self: center; transform: rotate(90deg); }
         @media (min-width: 768px) { .flowchart-arrow { transform: rotate(0deg); } }
 
-
-        /* 將這段加入到 <style> 標籤內 */
-header {
-    transition: transform 0.3s ease-in-out;
-}
-.header-hidden {
-    transform: translateY(-100%);
-}
-
-
-        
-</style>
+        /* 智慧標頭的 CSS */
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+    </style>
 </head>
 <body class="antialiased">
 
 <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 py-4">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div class="flex items-baseline justify-between h-16">
             <div class="flex-shrink-0">
                 <h1 class="text-lg sm:text-xl font-bold text-sky-600">從電報世界到網路世界</h1>
@@ -61,9 +55,8 @@ header {
                     <a href="#comparison" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">世紀之變</a>
                     <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">學習測驗</a>
                     <a href="#conclusion" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">結論</a>
-  <a href="index.html">回到首頁</a>
-  <a href="Telegraph-to-Telephone-The-Secret-Blueprint-Switching.html">下一篇</a>
-
+                    <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">回到首頁</a>
+                    <a href="Telegraph-to-Telephone-The-Secret-Blueprint-Switching.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">下一篇</a>
                 </div>
             </div>
             <div class="md:hidden flex items-center">
@@ -82,9 +75,8 @@ header {
             <a href="#comparison" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">世紀之變</a>
             <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">學習測驗</a>
             <a href="#conclusion" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">結論</a>
-  <a href="index.html">回到首頁</a>
-  <a href="Telegraph-to-Telephone-The-Secret-Blueprint-Switching.html">下一篇</a>
-
+            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">回到首頁</a>
+            <a href="Telegraph-to-Telephone-The-Secret-Blueprint-Switching.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700">下一篇</a>
         </div>
     </nav>
 </header>
@@ -115,18 +107,15 @@ header {
         </div>
     </section>
 
-
-    
-  <section id="video-summary" class="mb-16 scroll-mt-20">
-    <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
-    <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以了解電報網路與網際網路之間驚人的傳承關係，以及科技如何將人類的智慧轉移並規模化。</p>
-          <div class="text-center mt-4">
-            <a href="https://youtu.be/W1QsoNb7btw" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
-                點擊以觀看影片摘要(on Youtube)
-            </a>
-         </div>
-    </div>
-</section>
+    <section id="video-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">影片摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">透過這段影片摘要，您可以了解電報網路與網際網路之間驚人的傳承關係，以及科技如何將人類的智慧轉移並規模化。</p>
+              <div class="text-center mt-4">
+                <a href="https://youtu.be/W1QsoNb7btw" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-colors">
+                    點擊以觀看影片摘要(on Youtube)
+                </a>
+               </div>
+    </section>
     
     <section id="telegraph" class="mb-16 scroll-mt-20">
         <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">第一部分：維多利亞時代的網際網路</h2>
@@ -203,47 +192,41 @@ header {
 </main>
 
 <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
-    <p class="text-slate-500">&copy; 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
+    <p class="text-slate-500">© 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
     <p class="text-slate-500">網頁內容中所引用的部分數據、圖表及觀點，其版權歸原作者或發布機構所有，僅為分析與說明之目的引用，不在此CC授權範圍內。</p>
     <p class="text-slate-500">本內容的生成部分借助 Google Gemini和ChatGPT等模型，發布者應對最終內容的準確性負責。</p>
 </footer>
     
 
 <script>
-
-    
-
-// 將這段加入到 <script> 標籤的最開頭
 document.addEventListener('DOMContentLoaded', () => {
-    
+    // 【更動 1】: 建立「狀態旗標」
+    let isMenuOpen = false;
+
     // --- 智慧型標頭 (Smart Header) 的邏輯 ---
     let lastScrollTop = 0;
     const header = document.querySelector('header');
-    const scrollThreshold = 10; // 捲動超過10像素才觸發，避免太敏感
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-            // 向下捲動，且已滾過標頭高度
-            header.classList.add('header-hidden');
-        } else {
-            // 向上捲動
-            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
-                 header.classList.remove('header-hidden');
+    const scrollThreshold = 10;
+    if (header) {
+        window.addEventListener('scroll', function() {
+            // 【更動 3】: 讓智慧標頭讀取狀態並做出反應
+            if (isMenuOpen) {
+                return;
             }
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 對於 iOS 的 bounce 效果
-    }, false);
-
-    // --- 您原有的其他 JavaScript 程式碼可以放在這裡 ---
-    // 例如：Navigation Logic, Charting Logic, Quiz Logic 等等...
-
-});
-
-
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                }
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
     
-document.addEventListener('DOMContentLoaded', () => {
+    // --- 以下為您原有的完整程式碼，並在其中加入了狀態更新 ---
+
     // Navigation Logic
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     const sections = document.querySelectorAll('section');
@@ -256,14 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                 if (mobileMenu.classList.contains('hidden') === false) {
-                    mobileMenu.classList.add('hidden');
-                    hamburgerIconOpen.classList.remove('hidden');
-                    hamburgerIconClose.classList.add('hidden');
+            if (targetId.startsWith('#')) {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        hamburgerIconOpen.classList.remove('hidden');
+                        hamburgerIconClose.classList.add('hidden');
+                        // 【更動 2 的延伸】: 點擊連結關閉選單時，也要更新狀態
+                        isMenuOpen = false;
+                    }
                 }
+            } else {
+                window.location.href = targetId;
             }
         });
     });
@@ -271,18 +260,29 @@ document.addEventListener('DOMContentLoaded', () => {
     function changeNavOnScroll() {
         let index = sections.length;
         while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
-        document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('active'));
-        const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            if(link.getAttribute('href').startsWith('#')) {
+               link.classList.remove('active');
+            }
+        });
+        const activeSection = sections[index];
+        if (activeSection) {
+            const activeLink = document.querySelector(`.nav-link[href="#${activeSection.id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
         }
     }
     
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+            // 【更動 2】: 讓選單按鈕更新狀態
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
+        });
+    }
 
     // Chart.js Global Config
     const sharedChartOptions = {
@@ -292,10 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
             legend: {
                 labels: {
                     color: '#334155', // slate-700
-                    font: {
-                        size: 14,
-                        family: "'Noto Sans TC', sans-serif"
-                    }
+                    font: { size: 14, family: "'Noto Sans TC', sans-serif" }
                 }
             },
             tooltip: {
@@ -534,5 +531,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
-
+"  根據你剛剛說的三項更動, 幫我完整的更新這整個 code, 其餘的文章內容都不要更動
