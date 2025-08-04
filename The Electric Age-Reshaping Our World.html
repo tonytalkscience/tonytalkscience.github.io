@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-B417SX4GTY');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
     </script>
     
     <meta charset="UTF-8">
@@ -15,34 +14,55 @@
     <title>Tony Talks Science</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        .nav-link { transition: color 0.3s, border-color 0.3s; }
-        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Light Gray Background */
+            color: #1e293b; /* Slate Text */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif TC', serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .nav-link.active {
+            color: #0284c7; /* Sky Blue */
+            border-bottom-color: #0284c7;
+        }
+        .quiz-option label:hover {
+            background-color: #f0f9ff; /* Light Sky background on hover */
+        }
         .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
-        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
-        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
-        .prose { max-width: 65ch; margin-left: auto; margin-right: auto; }
-        .prose h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
-        .prose p { margin-bottom: 1rem; line-height: 1.75; }
 
-        /* 將這段加入到 <style> 標籤內 */
-header {
-    transition: transform 0.3s ease-in-out;
-}
-.header-hidden {
-    transform: translateY(-100%);
-}
-
-
-
-        
+        /* 智慧標頭的 CSS */
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -63,9 +83,8 @@ header {
                     <a href="#future" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">未來展望</a>
                     <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">語音摘要</a>
                     <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">知識小測驗</a>
-  <a href="index.html">回到首頁</a>
-  <a href="Electric Motors-Powering Modern Civilization's Evolution and Challenges.html">下一篇</a>
-
+                    <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">回到首頁</a>
+                    <a href="Electric Motors-Powering Modern Civilization's Evolution and Challenges.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700">下一篇</a>
                 </div>
             </div>
             <div class="md:hidden flex items-center">
@@ -85,9 +104,8 @@ header {
             <a href="#future" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">未來展望</a>
             <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">語音摘要</a>
             <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">知識小測驗</a>
-  <a href="index.html">回到首頁</a>
-  <a href="Electric Motors-Powering Modern Civilization's Evolution and Challenges.html">下一篇</a>
-
+            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">回到首頁</a>
+            <a href="Electric Motors-Powering Modern Civilization's Evolution and Challenges.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">下一篇</a>
         </div>
     </nav>
 </header>
@@ -267,41 +285,34 @@ header {
 </footer>
 
 <script>
-
-
-
-// 將這段加入到 <script> 標籤的最開頭
 document.addEventListener('DOMContentLoaded', () => {
-    
+    // 【更動 1】: 建立「狀態旗標」
+    let isMenuOpen = false;
+
     // --- 智慧型標頭 (Smart Header) 的邏輯 ---
     let lastScrollTop = 0;
     const header = document.querySelector('header');
-    const scrollThreshold = 10; // 捲動超過10像素才觸發，避免太敏感
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-            // 向下捲動，且已滾過標頭高度
-            header.classList.add('header-hidden');
-        } else {
-            // 向上捲動
-            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
-                 header.classList.remove('header-hidden');
+    const scrollThreshold = 10;
+    if (header) {
+        window.addEventListener('scroll', function() {
+            // 【更動 3】: 讓智慧標頭讀取狀態並做出反應
+            if (isMenuOpen) {
+                return;
             }
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 對於 iOS 的 bounce 效果
-    }, false);
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                }
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
 
-    // --- 您原有的其他 JavaScript 程式碼可以放在這裡 ---
-    // 例如：Navigation Logic, Charting Logic, Quiz Logic 等等...
-
-});
-
-
+    // --- 以下為您原有的完整程式碼，並在其中加入了狀態更新 ---
     
-document.addEventListener('DOMContentLoaded', () => {
-
     // --- Navigation Logic ---
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     const sections = document.querySelectorAll('main section[id]');
@@ -342,11 +353,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
     const hamburgerIconClose = document.getElementById('hamburger-icon-close');
 
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        hamburgerIconOpen.classList.toggle('hidden');
-        hamburgerIconClose.classList.toggle('hidden');
-    });
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+             // 【更動 2】: 讓選單按鈕更新狀態
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
+        });
+    }
 
     document.querySelectorAll('.mobile-nav-link').forEach(link => {
         if (link.getAttribute('href').startsWith('#')) {
@@ -354,6 +369,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileMenu.classList.add('hidden');
                 hamburgerIconOpen.classList.remove('hidden');
                 hamburgerIconClose.classList.add('hidden');
+                 // 【更動 2 的延伸】: 點擊連結關閉選單時，也要更新狀態
+                isMenuOpen = false;
             });
         }
     });
@@ -516,11 +533,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            resultsDiv.textContent = `您的得分: ${score} / ${quizData.length}`;
-            if(score === quizData.length) {
-                resultsDiv.className = 'text-xl font-bold text-green-600';
-            } else {
-                resultsDiv.className = 'text-xl font-bold text-amber-600';
+            if(resultsDiv){
+                resultsDiv.textContent = `您的得分: ${score} / ${quizData.length}`;
+                if(score === quizData.length) {
+                    resultsDiv.className = 'text-xl font-bold text-green-600';
+                } else {
+                    resultsDiv.className = 'text-xl font-bold text-amber-600';
+                }
             }
             submitBtn.disabled = true;
         };
@@ -530,4 +549,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-
