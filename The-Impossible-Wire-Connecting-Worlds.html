@@ -20,32 +20,24 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
-          body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
-          .nav-link { transition: color 0.3s, border-color 0.3s; }
-          .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
-          .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0284c7; border-bottom-color: #0284c7; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
         .atlantic-tab.active { background-color: #0c4a6e; color: #f8fafc; }
         .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
         .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
         .quiz-option:hover { background-color: #f0f9ff; }
 
-            /* 將這段加入到 <style> 標籤內 */
-header {
-    transition: transform 0.3s ease-in-out;
-}
-.header-hidden {
-    transform: translateY(-100%);
-}
-        
+        /* 智慧標頭的 CSS */
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
     </style>
-
-
-
-
-
-
-
 </head>
 <body class="antialiased">
 
@@ -231,44 +223,40 @@ header {
 </footer>
     
 <script>
-
-
-// 將這段加入到 <script> 標籤的最開頭
 document.addEventListener('DOMContentLoaded', () => {
-    
+    // 【更動 1】: 建立「狀態旗標」
+    let isMenuOpen = false;
+
     // --- 智慧型標頭 (Smart Header) 的邏輯 ---
     let lastScrollTop = 0;
     const header = document.querySelector('header');
-    const scrollThreshold = 10; // 捲動超過10像素才觸發，避免太敏感
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-            // 向下捲動，且已滾過標頭高度
-            header.classList.add('header-hidden');
-        } else {
-            // 向上捲動
-            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
-                 header.classList.remove('header-hidden');
+    const scrollThreshold = 10;
+    if (header) {
+        window.addEventListener('scroll', function() {
+            // 【更動 3】: 讓智慧標頭讀取狀態並做出反應
+            if (isMenuOpen) {
+                return;
             }
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 對於 iOS 的 bounce 效果
-    }, false);
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                }
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
+    
+    // --- 以下為您原有的完整程式碼，並在其中加入了狀態更新 ---
 
-    // --- 您原有的其他 JavaScript 程式碼可以放在這裡 ---
-    // 例如：Navigation Logic, Charting Logic, Quiz Logic 等等...
-
-});
-
-        
-document.addEventListener('DOMContentLoaded', () => {
     // --- Navigation Logic ---
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
     const hamburgerIconClose = document.getElementById('hamburger-icon-close');
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link'); // Combined selector for all nav links
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     const sections = document.querySelectorAll('main section[id]');
 
     // 1. Mobile Menu Toggle Button
@@ -277,16 +265,20 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenu.classList.toggle('hidden');
             hamburgerIconOpen.classList.toggle('hidden');
             hamburgerIconClose.classList.toggle('hidden');
+            // 【更動 2】: 讓選單按鈕更新狀態
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
         });
     }
 
-    // 2. Close Mobile Menu when ANY nav link is clicked
+    // 2. Close Mobile Menu when ANY nav link is clicked and update state
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
                 hamburgerIconOpen.classList.remove('hidden');
                 hamburgerIconClose.classList.add('hidden');
+                // 【更動 2 的延伸】: 點擊連結關閉選單時，也要更新狀態
+                isMenuOpen = false;
             }
         });
     });
@@ -302,7 +294,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (intersectingSections.length > 0) {
-                 // Find the one that is most visible (closest to the top)
                 intersectingSections.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
                 const id = intersectingSections[0].getAttribute('id');
                 
@@ -321,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // --- Page Specific Logic ---
+    // Atlantic Cable Tabs
     const tab1858 = document.getElementById('tab-1858');
     const tab1866 = document.getElementById('tab-1866');
     const content1858 = document.getElementById('content-1858');
@@ -340,21 +332,98 @@ document.addEventListener('DOMContentLoaded', () => {
         tab1866.addEventListener('click', () => switchTab(tab1866, tab1858, content1866, content1858));
     }
 
+    // Conductivity Chart
     const ctx = document.getElementById('conductivityChart')?.getContext('2d');
     if (ctx) {
-        // ... (Chart logic remains the same)
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['銅線', '海床 (矽酸鹽)', '海水 (含離子)'],
+                datasets: [{
+                    label: '相對導電能力 (對數標度)',
+                    data: [1000, 1, 1000000], 
+                    backgroundColor: ['#f59e0b', '#6b7280', '#0ea5e9'],
+                    borderColor: ['#f59e0b', '#6b7280', '#0ea5e9'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        title: { display: true, text: '相對導電能力 (數字越大越導電)' },
+                    }
+                }
+            }
+        });
     }
 
-    const quizData = {
-        // ... (Quiz data remains the same)
-    };
+    // Quiz Logic
+    const quizData = [
+        { question: "「單線接地返路」(SWER) 技術最大的經濟優勢是什麼？", options: ["信號傳輸速度加倍", "將線路成本減半", "完全不需要銅線", "增加了電報的安全性"], answer: 1 },
+        { question: "根據威廉·湯姆森的理論，成功鋪設跨大西洋電纜的關鍵是什麼？", options: ["使用極高的電壓", "使用極細的導體", "使用極靈敏的接收儀器", "完全放棄絕緣"], answer: 2 },
+        { question: "為什麼海水是比海床更理想的電流返迴路徑？", options: ["因為海水溫度較低", "因為海水中富含導電離子", "因為海水壓力更大", "因為海床太硬無法導電"], answer: 1 }
+    ];
 
     const quizContainer = document.getElementById('quiz-container');
     const submitBtn = document.getElementById('submit-quiz-btn');
     const resultsDiv = document.getElementById('quiz-results');
 
     if (quizContainer && submitBtn && resultsDiv) {
-        // ... (Quiz logic remains the same)
+        quizContainer.innerHTML = quizData.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg bg-slate-50">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map((option, i) => `
+                        <label class="quiz-option flex items-center p-3 rounded-md cursor-pointer border border-slate-200">
+                            <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2 h-5"></div>
+            </div>`).join('');
+        
+        submitBtn.onclick = () => {
+            let score = 0;
+            let allAnswered = true;
+            quizData.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                container.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                
+                if (!selected) {
+                    feedbackDiv.innerHTML = '<span class="text-red-600">請選擇一個答案。</span>';
+                    allAnswered = false;
+                } else {
+                    const userAnswer = parseInt(selected.value);
+                    if (userAnswer === q.answer) {
+                        score++;
+                        container.classList.add('correct');
+                        feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+                    } else {
+                        container.classList.add('incorrect');
+                        feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                    }
+                }
+            });
+
+            if (allAnswered) {
+                resultsDiv.textContent = `您的得分: ${score} / ${quizData.length}`;
+                if(score === quizData.length){
+                    resultsDiv.className = 'text-xl font-bold text-green-600';
+                } else {
+                    resultsDiv.className = 'text-xl font-bold text-amber-600';
+                }
+                submitBtn.disabled = true;
+            }
+        };
     }
 });
 </script>
