@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互動式外轉子馬達分析儀</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #0284c7; border-bottom-color: #0284c7; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .tab-button.active { background-color: #0c4a6e; color: #f8fafc; }
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-baseline justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">互動式外轉子馬達分析儀</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#intro" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🎯核心概念</a>
+                    <a href="#comparison-dashboard" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">📊性能儀表板</a>
+                    <a href="#future" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🔭未來展望</a>
+                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🎧語音摘要</a>
+                    <a href="#knowledge-quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🧠知識小測驗</a>
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#intro" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🎯<span class="ml-3">核心概念</span></a>
+            <a href="#comparison-dashboard" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">📊<span class="ml-3">性能儀表板</span></a>
+            <a href="#future" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🔭<span class="ml-3">未來展望</span></a>
+            <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🎧<span class="ml-3">語音摘要</span></a>
+            <a href="#knowledge-quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🧠<span class="ml-3">知識小測驗</span></a>
+        </div>
+    </nav>
+</header>
+    
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    
+    <section id="intro" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">結構的逆轉：一切始於半徑</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+            傳統馬達將轉子置於內部 (內轉子)，而外轉子設計則巧妙地將其反轉，讓轉子在外圍旋轉。這個看似簡單的結構變化，直接利用了物理學中最核心的扭矩原理：$\tau = \vec{r} \times \vec{F}$。透過最大化作用力臂 $\vec{r}$，外轉子在相同的電磁力 $\vec{F}$ 下，能產生遠超傳統設計的扭矩。請將滑鼠懸停在下方的圖示上，觀察旋轉部件和有效扭矩半徑的差異。
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-20">
+                <div class="text-center">
+                    <h3 class="text-xl font-bold mb-2 text-slate-800">內轉子 (Inrunner)</h3>
+                    <div class="motor-container inrunner">
+                        <div class="stator"></div>
+                        <div class="rotor"></div>
+                        <div class="radius-line"></div>
+                        <div class="radius-label">小半徑 r</div>
+                    </div>
+                    <p class="mt-2 text-sm text-slate-600">轉子在內，作用半徑受限。</p>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-bold mb-2 text-slate-800">外轉子 (Outrunner)</h3>
+                    <div class="motor-container outrunner">
+                        <div class="stator"></div>
+                        <div class="rotor"></div>
+                        <div class="radius-line"></div>
+                        <div class="radius-label">大半徑 R</div>
+                    </div>
+                    <p class="mt-2 text-sm text-slate-600">轉子在外，作用半徑幾乎等於外徑。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="principle" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">互動扭矩實驗室</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+            扭矩是力與力臂的乘積。拖動下方的滑桿來改變施力點（即改變力臂的長度），觀察它如何直接影響最終產生的扭矩。這正是外轉子馬達放大扭矩的核心秘密。
+        </p>
+        <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+            <div class="w-full">
+                <div class="relative h-20 flex items-center">
+                    <div class="lever w-full"></div>
+                    <div class="force-arrow" id="forceArrow"></div>
+                </div>
+                <div class="flex justify-center items-center mt-[-10px]">
+                    <div class="fulcrum"></div>
+                </div>
+                <div class="mt-6">
+                    <label for="radiusSlider" class="block mb-2 font-medium text-slate-700">調整作用半徑 (r):</label>
+                    <input type="range" id="radiusSlider" min="10" max="100" value="50" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                </div>
+                <div class="text-center mt-6 p-4 bg-sky-50 rounded-lg">
+                    <p class="text-lg text-slate-700">固定力 F = 10 N</p>
+                    <p class="text-lg text-slate-700">作用半徑 r = <span id="radiusValue" class="font-bold">5.0</span> m</p>
+                    <p class="text-2xl font-bold mt-2 text-slate-800">計算扭矩 τ = <span id="torqueValue" class="text-sky-600">50.0</span> Nm</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison-dashboard" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">性能維度比較儀表板</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+            外轉子設計的優勢並非沒有代價。它在提升扭矩的同時，也改變了馬達在轉動慣量、散熱和動態響應等方面的特性。點擊下方標籤，探索不同維度下的性能權衡。
+        </p>
+        <div id="tab-buttons" class="flex flex-wrap gap-2 justify-center mb-8">
+            <button class="tab-button px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-slate-200 text-slate-700 hover:bg-slate-300 active" data-target="torque">扭矩與速度</button>
+            <button class="tab-button px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-slate-200 text-slate-700 hover:bg-slate-300" data-target="inertia">轉動慣量</button>
+            <button class="tab-button px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-slate-200 text-slate-700 hover:bg-slate-300" data-target="thermal">熱管理</button>
+            <button class="tab-button px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-slate-200 text-slate-700 hover:bg-slate-300" data-target="applications">應用場景</button>
+        </div>
+
+        <div id="tab-content-container" class="bg-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+            <div id="torque-content" class="tab-content-panel active">
+                <h3 class="text-2xl font-semibold text-center mb-4 text-slate-800">扭矩密度 vs. 速度潛力</h3>
+                <p class="text-center max-w-3xl mx-auto mb-8 text-slate-600">外轉子以其大半徑結構實現了卓越的扭矩密度，但這也意味著較低的轉速常數 ($K_v$)。相反，內轉子是典型的高轉速馬達，在高速下能發揮出色的功率密度。</p>
+                <div class="chart-container"><canvas id="torqueChart"></canvas></div>
+            </div>
+            <div id="inertia-content" class="tab-content-panel" style="display:none;">
+                <h3 class="text-2xl font-semibold text-center mb-4 text-slate-800">動態響應：飛輪效應</h3>
+                <p class="text-center max-w-3xl mx-auto mb-8 text-slate-600">轉動慣量衡量了物體抵抗角速度變化的能力。外轉子將質量分佈在遠離中心的外緣，導致其轉動慣量顯著增大。這使其運轉平穩如飛輪，但也犧牲了快速啟停和變向的動態響應能力。</p>
+                <div class="chart-container"><canvas id="inertiaChart"></canvas></div>
+            </div>
+            <div id="thermal-content" class="tab-content-panel" style="display:none;">
+                <h3 class="text-2xl font-semibold text-center mb-4 text-slate-800">熱管理：傳導 vs. 對流</h3>
+                <p class="text-center max-w-3xl mx-auto mb-8 text-slate-600">散熱是馬達持續高性能輸出的關鍵。兩種設計的散熱路徑截然不同。內轉子依靠優良的熱傳導，而外轉子的散熱性能則高度依賴於是否存在有效的空氣對流。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold text-center mb-4 text-slate-700">內轉子：傳導散熱</h4>
+                        <p class="text-sm text-center mb-4 text-slate-600">發熱的定子繞組緊貼外殼，熱量可直接傳導至外部散熱片。</p>
+                        <div class="w-48 h-48 mx-auto border-4 border-slate-300 rounded-full flex justify-center items-center relative"><div class="w-32 h-32 bg-[#8D99AE] rounded-full flex justify-center items-center text-white font-bold">定子(熱源)</div><div class="absolute text-3xl animate-ping" style="right: -15px;">🔥</div><div class="absolute text-3xl" style="right: -15px;">➡️</div><div class="absolute text-sm font-semibold" style="right: -60px;">外殼</div></div>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold text-center mb-4 text-slate-700">外轉子：對流散熱</h4>
+                        <p class="text-sm text-center mb-4 text-slate-600">定子被包裹在內，熱量需靠空氣流動（對流）帶走。</p>
+                        <div class="w-48 h-48 mx-auto border-4 border-slate-300 rounded-full flex justify-center items-center relative bg-[#E07A5F]/20"><div class="w-32 h-32 bg-[#8D99AE] rounded-full flex justify-center items-center text-white font-bold relative">定子(熱源)<div class="absolute text-3xl animate-bounce">🔥</div></div><div class="absolute text-2xl" style="top: 0; left: 20px;">💨</div><div class="absolute text-2xl" style="top: 20px; right: 0;">💨</div><div class="absolute text-2xl" style="bottom: 10px; left: 10px;">💨</div><div class="absolute text-sm font-semibold" style="top: -25px;">空氣對流</div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="applications-content" class="tab-content-panel" style="display:none;">
+                <h3 class="text-2xl font-semibold text-center mb-4 text-slate-800">理想的應用場景</h3>
+                <p class="text-center max-w-3xl mx-auto mb-8 text-slate-600">外轉子的高扭矩、低轉速特性使其成為「直驅」系統的完美選擇，在特定領域展現出無可替代的優勢。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-50 p-6 rounded-lg interactive-card"><div class="text-5xl text-center mb-4">🚁</div><h4 class="text-xl font-bold text-center mb-2 text-slate-700">無人機推進系統</h4><p class="text-sm text-slate-600">能夠直接驅動大尺寸、高效率的螺旋槳，無需減速齒輪箱，減輕了重量並提升可靠性。同時，開放式機臂提供了絕佳的空氣對流冷卻條件。</p></div>
+                    <div class="bg-slate-50 p-6 rounded-lg interactive-card"><div class="text-5xl text-center mb-4">🚲</div><h4 class="text-xl font-bold text-center mb-2 text-slate-700">電動載具輪轂馬達</h4><p class="text-sm text-slate-600">將馬達直接整合進車輪，省去了鏈條、皮帶和齒輪箱，極大簡化了傳動系統，提升了效率、降低了噪音和維護成本。</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="future" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">未來展望：徑向磁通 vs. 軸向磁通</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+            儘管外轉子設計優化了徑向磁通馬達(RFM)，但電機技術仍在演進。新興的軸向磁通馬達(AFM)，因其極其扁平的「餅狀」外形和更直接的磁通路徑，正在挑戰性能的極限，展現出更高的扭矩密度與效率。
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+             <div class="chart-container h-[400px] md:h-[450px]"><canvas id="futureChart"></canvas></div>
+        </div>
+    </section>
+
+    <section id="audio-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">語音摘要</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">點擊下方播放器，聆聽關於外轉子馬達多學科設計的重點摘要。</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">🎧 Outer Rotor Motor Design - 重點回顧</h3>    
+            <audio controlsList="nodownload" controls preload="auto" class="w-full mb-4" src="Outer Rotor Motor Design Multidisciplinary 9min49s deepR.mp3">您的瀏覽器不支援音訊播放。</audio>
+            <div class="prose max-w-none text-slate-600 mt-4">
+                <p>這段語音深入探討了外轉子馬達的設計，這是一項涉及多個學科領域的複雜工程。演講者首先介紹了外轉子馬達的基本原理，強調其與傳統內轉子馬達在結構上的根本差異。接著，演講的核心部分圍繞著外轉子馬達的多個關鍵設計層面展開，包括電磁設計、熱管理、結構力學以及製造考量。在每個主題中，演講者都詳細解釋了設計上的權衡取捨。例如，在電磁設計方面，增加磁鐵體積可以提高扭矩，但同時也會增加成本和重量。在熱管理方面，外轉子馬達雖然散熱路徑較長，但可以透過創新的冷卻技術來克服。最後，演講者總結了外轉子馬達的優勢，如高扭矩密度和緊湊的結構，並點出了其在無人機、電動車等領域的廣泛應用前景。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="knowledge-quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識小測驗</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">測試一下您對外轉子馬達的理解程度吧！</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+            <div id="quiz-container" class="space-y-8"></div>
+            <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+    <footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
+        <p class="text-slate-500">互動式報告由 AI 生成 | 數據來源：外轉子設計分析報告</p>
+        <p class="text-slate-500">本內容的生成部分借助 Google Gemini，發布者應對最終內容的準確性負責。</p>
+    </footer>
+    
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    let isMenuOpen = false;
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (isMenuOpen) return;
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
+    
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+    
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIconOpen.classList.remove('hidden');
+                    hamburgerIconClose.classList.add('hidden');
+                    isMenuOpen = false;
+                }
+            });
+        }
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            if(link.getAttribute('href').startsWith('#')){
+                link.classList.remove('active');
+            }
+        });
+        if (index >= 0 && sections[index]) {
+            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+    changeNavOnScroll(); // Initial check
+
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
+        });
+    }
+
+    // --- Motor-specific Data & Logic ---
+    const motorData = {
+        torque: { labels: ['扭矩密度', '速度潛力 (Kv)'], datasets: [{ label: '內轉子 (Inrunner)', data: [65, 90], backgroundColor: 'rgba(141, 153, 174, 0.7)', borderColor: 'rgba(141, 153, 174, 1)', borderWidth: 1 }, { label: '外轉子 (Outrunner)', data: [95, 45], backgroundColor: 'rgba(2, 132, 199, 0.7)', borderColor: 'rgba(2, 132, 199, 1)', borderWidth: 1 }] },
+        inertia: { labels: ['轉動慣量', '動態響應速度'], datasets: [{ label: '內轉子 (Inrunner)', data: [40, 95], backgroundColor: 'rgba(141, 153, 174, 0.7)', borderColor: 'rgba(141, 153, 174, 1)', borderWidth: 1 }, { label: '外轉子 (Outrunner)', data: [85, 30], backgroundColor: 'rgba(2, 132, 199, 0.7)', borderColor: 'rgba(2, 132, 199, 1)', borderWidth: 1 }] },
+        future: { labels: ['扭矩密度', '功率密度', '效率', '散熱性能', '外形扁平度', '製造成熟度'], datasets: [{ label: '外轉子 (RFM)', data: [7, 6, 7, 6, 7, 9], backgroundColor: 'rgba(2, 132, 199, 0.2)', borderColor: 'rgba(2, 132, 199, 1)', pointBackgroundColor: 'rgba(2, 132, 199, 1)', pointBorderColor: '#fff', pointHoverBackgroundColor: '#fff', pointHoverBorderColor: 'rgba(2, 132, 199, 1)' }, { label: '軸向磁通 (AFM)', data: [9, 9, 9, 8, 10, 5], backgroundColor: 'rgba(129, 178, 154, 0.2)', borderColor: 'rgba(129, 178, 154, 1)', pointBackgroundColor: 'rgba(129, 178, 154, 1)', pointBorderColor: '#fff', pointHoverBackgroundColor: '#fff', pointHoverBorderColor: 'rgba(129, 178, 154, 1)' }] },
+        quiz: { questions: [ { question: "根據本文，外轉子馬達產生更高扭矩的主要物理原理是什麼？", options: ["A) 轉速比較快", "B) 相同的力作用在更大的半徑（力臂）上", "C) 散熱效率更高"], answer: 1 }, { question: "外轉子馬達的哪一項特性使其不適合需要極快速啟停的應用？", options: ["A) 較低的扭矩密度", "B) 較差的熱傳導路徑", "C) 較大的轉動慣量（飛輪效應）"], answer: 2 }, { question: "在無人機應用中，選擇外轉子馬達的主要優勢是什麼？", options: ["A) 可以直接驅動螺旋槳，無需減速齒輪箱", "B) 馬達價格非常便宜", "C) 耗電量極低"], answer: 0 } ] }
+    };
+
+    // Torque Slider Logic
+    const slider = document.getElementById('radiusSlider');
+    const radiusValue = document.getElementById('radiusValue');
+    const torqueValue = document.getElementById('torqueValue');
+    const forceArrow = document.getElementById('forceArrow');
+    if(slider) {
+        slider.addEventListener('input', () => {
+            const force = 10;
+            const radius = slider.value / 10;
+            const torque = force * radius;
+            radiusValue.textContent = radius.toFixed(1);
+            torqueValue.textContent = torque.toFixed(1);
+            const percentage = (slider.value - slider.min) / (slider.max - slider.min);
+            forceArrow.style.left = `calc(${percentage * 100}% - 8px)`;
+        });
+        slider.dispatchEvent(new Event('input'));
+    }
+
+    // Charting Logic
+    const barChartOptions = { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100, ticks: { color: '#475569' }, grid: { color: '#e2e8f0' } }, x: { ticks: { color: '#1e293b', font: { weight: 'bold' } }, grid: { display: false } } }, plugins: { legend: { position: 'top', labels: { color: '#1e293b' } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label || ''}: ${c.parsed.y} (相對指標)` } } } };
+    const radarChartOptions = { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: '#e2e8f0' }, grid: { color: '#e2e8f0' }, pointLabels: { font: { size: 14, weight: 'bold' }, color: '#1e293b' }, ticks: { backdropColor: 'rgba(255, 255, 255, 0.75)', color: '#475569' }, min: 0, max: 10 } }, plugins: { legend: { position: 'top', labels: { color: '#1e293b' } }, tooltip: { callbacks: { label: (c) => `${c.dataset.label || ''}: ${c.parsed.r} / 10` } } } };
+    let torqueChart, inertiaChart, futureChart;
+
+    function createTorqueChart() { if (!torqueChart && document.getElementById('torqueChart')) { const ctx = document.getElementById('torqueChart').getContext('2d'); torqueChart = new Chart(ctx, { type: 'bar', data: motorData.torque, options: barChartOptions }); } }
+    function createInertiaChart() { if (!inertiaChart && document.getElementById('inertiaChart')) { const ctx = document.getElementById('inertiaChart').getContext('2d'); inertiaChart = new Chart(ctx, { type: 'bar', data: motorData.inertia, options: barChartOptions }); } }
+    if (document.getElementById('futureChart')) { const ctx = document.getElementById('futureChart').getContext('2d'); futureChart = new Chart(ctx, { type: 'radar', data: motorData.future, options: radarChartOptions }); }
+
+    // Dashboard Tabs Logic
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanels = document.querySelectorAll('.tab-content-panel');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.dataset.target + '-content';
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            tabPanels.forEach(panel => {
+                panel.style.display = panel.id === targetId ? 'block' : 'none';
+            });
+            if (targetId === 'torque-content') createTorqueChart();
+            if (targetId === 'inertia-content') createInertiaChart();
+        });
+    });
+    createTorqueChart(); // Initial chart creation
+
+    // Quiz Logic
+    const quizContainer = document.getElementById('quiz-container');
+    const submitBtn = document.getElementById('submit-quiz-btn');
+    const resultsDiv = document.getElementById('quiz-results');
+    if (quizContainer) {
+        const quizQuestions = motorData.quiz.questions;
+        quizContainer.innerHTML = quizQuestions.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map((option, i) => `
+                        <label class="flex items-center p-2 rounded-md hover:bg-sky-50 cursor-pointer">
+                            <input type="radio" name="question-${index}" value="${i}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2"></div>
+            </div>`).join('');
+        
+        submitBtn.onclick = () => {
+            let score = 0;
+            quizQuestions.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                container.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                if (!selected) {
+                    feedbackDiv.textContent = '請選擇一個答案。';
+                    container.classList.add('incorrect');
+                    return;
+                }
+                const userAnswer = parseInt(selected.value);
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.options[q.answer]}」</span>`;
+                }
+            });
+            resultsDiv.textContent = `您的得分: ${score} / ${quizQuestions.length}`;
+            resultsDiv.className = `mt-6 text-xl font-bold ${score === quizQuestions.length ? 'text-green-600' : 'text-amber-600'}`;
+            submitBtn.disabled = true;
+        };
+    }
+
+    // Additional styles for motor diagrams
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = `
+        .motor-container { position: relative; width: 200px; height: 200px; display: flex; justify-content: center; align-items: center; }
+        .stator { position: absolute; border: 20px solid #94a3b8; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+        .rotor { position: absolute; border: 20px solid #0ea5e9; border-radius: 50%; transition: transform 1s ease-in-out; }
+        .inrunner .stator { width: 180px; height: 180px; } .inrunner .rotor { width: 120px; height: 120px; }
+        .outrunner .stator { width: 120px; height: 120px; } .outrunner .rotor { width: 180px; height: 180px; }
+        .motor-container:hover .rotor { transform: rotate(360deg); }
+        .radius-line { position: absolute; background-color: #1e293b; height: 2px; transform-origin: left center; transition: all 0.3s ease; }
+        .inrunner .radius-line { width: 40px; left: 100px; } .outrunner .radius-line { width: 70px; left: 100px; }
+        .radius-label { position: absolute; background-color: rgba(255, 255, 255, 0.8); padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; }
+        .motor-container:hover .radius-label { opacity: 1; }
+        .inrunner .radius-label { top: 70px; left: 120px; } .outrunner .radius-label { top: 70px; left: 135px; }
+        .lever { height: 10px; background-color: #94a3b8; border-radius: 5px; }
+        .fulcrum { width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-bottom: 25px solid #1e293b; }
+        .force-arrow { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 15px solid #0ea5e9; position: absolute; bottom: 20px; transition: left 0.2s ease; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        @media (max-width: 768px) { .chart-container { height: 300px; } }
+    `;
+    document.head.appendChild(styleSheet);
+});
+</script>
+
+</body>
+</html>
