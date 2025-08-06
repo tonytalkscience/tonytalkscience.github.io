@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B417SX4GTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B417SX4GTY');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互動式軸向磁通馬達技術解析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #0284c7; border-bottom-color: #0284c7; }
+        .interactive-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .topology-btn.active { background-color: #0c4a6e; color: #f8fafc; }
+        .card { transition: transform 0.3s, box-shadow 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+
+        /* 智慧標頭的 CSS */
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+    </style>
+</head>
+<body class="antialiased bg-slate-50 text-slate-800">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-xl font-bold text-sky-700">軸向磁通馬達解析</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4 flex-wrap justify-end">
+                    <a href="#comparison" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">⚖️ 架構比較</a>
+                    <a href="#topologies" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🧬 拓撲結構</a>
+                    <a href="#innovations" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">💡 關鍵創新</a>
+                    <a href="#applications" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🚀 應用實例</a>
+                    <a href="#audio-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🎧 語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🧠 知識測驗</a>
+                    <a href="index.html" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent whitespace-nowrap flex items-center gap-x-2">🏠 回到首頁</a>
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <span class="sr-only">開啟主選單</span>
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#comparison" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">⚖️<span class="ml-3">架構比較</span></a>
+            <a href="#topologies" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🧬<span class="ml-3">拓撲結構</span></a>
+            <a href="#innovations" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">💡<span class="ml-3">關鍵創新</span></a>
+            <a href="#applications" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🚀<span class="ml-3">應用實例</span></a>
+            <a href="#audio-summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🎧<span class="ml-3">語音摘要</span></a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🧠<span class="ml-3">知識測驗</span></a>
+            <a href="index.html" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50 flex items-center">🏠<span class="ml-3">回到首頁</span></a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <section id="hero" class="mb-16 scroll-mt-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+            <h2 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
+                電動運具的<span class="text-sky-500">劃世代革命</span>
+            </h2>
+            <p class="mt-6 max-w-2xl mx-auto text-lg text-slate-600">
+                沉寂近兩百年，由法拉第構想的軸向磁通馬達，正憑藉其無可比擬的性能密度，掀起一場從超級跑車到航空航太的動力革命。讓我們一同探索這項顛覆性技術。
+            </p>
+            <div class="mt-8">
+                <a href="#comparison" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-600 transition duration-300">開始探索</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison" class="mb-16 scroll-mt-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">根本性的分野：徑向 vs. 軸向</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                    所有馬達都基於相同的物理定律，但結構上的差異導致了性能的巨大分野。軸向磁通馬達透過重新設計磁通路徑，從根本上克服了傳統徑向馬達的內在瓶頸。
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                    <h3 class="text-2xl font-bold text-center text-slate-700">徑向磁通馬達 (RFM)</h3>
+                    <div class="mt-4 w-48 h-48 mx-auto bg-slate-100 rounded-full flex items-center justify-center relative border-4 border-slate-200">
+                        <div class="w-24 h-24 bg-sky-300 rounded-full"></div>
+                        <div class="absolute text-slate-500 font-mono text-sm">
+                            <span class="absolute top-1/2 left-2 -translate-y-1/2">&lt;--</span>
+                            <span class="absolute top-1/2 right-2 -translate-y-1/2">--&gt;</span>
+                            <span class="absolute top-2 left-1/2 -translate-x-1/2 rotate-90">&lt;--</span>
+                            <span class="absolute bottom-2 left-1/2 -translate-x-1/2 rotate-90">--&gt;</span>
+                        </div>
+                        <div class="absolute text-center text-xs text-slate-600">
+                            <p class="font-bold">磁通</p>
+                            <p>徑向</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-slate-600">磁通量 <span class="font-bold">垂直</span> 於旋轉軸，路徑較長且彎曲，導致磁阻較高，效率受限。</p>
+                    <ul class="mt-4 space-y-2 text-sm">
+                        <li class="flex items-start"><span class="text-red-500 font-bold mr-2">✗</span><span>扭矩臂受限於內部轉子半徑</span></li>
+                        <li class="flex items-start"><span class="text-red-500 font-bold mr-2">✗</span><span>線圈懸伸長，銅損較高</span></li>
+                        <li class="flex items-start"><span class="text-red-500 font-bold mr-2">✗</span><span>熱量深埋於定子內，散熱困難</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-2 border-sky-400">
+                    <h3 class="text-2xl font-bold text-center text-sky-600">軸向磁通馬達 (AFM)</h3>
+                     <div class="mt-4 w-48 h-48 mx-auto bg-sky-50 rounded-full flex items-center justify-center relative border-4 border-sky-200">
+                        <div class="w-36 h-2 bg-sky-300"></div>
+                        <div class="absolute text-sky-600 font-mono text-sm">
+                            <span class="absolute top-1/2 left-2 -translate-y-1/2">&lt;--</span>
+                            <span class="absolute top-1/2 right-2 -translate-y-1/2">--&gt;</span>
+                        </div>
+                         <div class="absolute text-center text-xs text-sky-700">
+                            <p class="font-bold">磁通</p>
+                            <p>軸向</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-slate-600">磁通量 <span class="font-bold text-sky-600">平行</span> 於旋轉軸，路徑極短且直，磁阻低，效率極高。</p>
+                    <ul class="mt-4 space-y-2 text-sm">
+                         <li class="flex items-start"><span class="text-green-500 font-bold mr-2">✓</span><span>有效半徑接近外徑，扭矩臂更大</span></li>
+                         <li class="flex items-start"><span class="text-green-500 font-bold mr-2">✓</span><span>線圈懸伸極短，銅線利用率高</span></li>
+                         <li class="flex items-start"><span class="text-green-500 font-bold mr-2">✓</span><span>可直接冷卻線圈，散熱效率卓越</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold text-slate-900">性能指標量化比較</h3>
+                    <p class="text-slate-600">軸向磁通馬達在關鍵性能指標上實現了倍數級的提升。</p>
+                </div>
+                <div class="chart-container bg-white p-4 rounded-lg shadow-lg">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="topologies" class="mb-16 scroll-mt-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">核心拓撲結構探索</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                    軸向磁通馬達的設計極具靈活性。不同的拓撲結構在性能、成本和製造複雜性之間做出了精妙的權衡。點擊下方按鈕以探索各種設計。
+                </p>
+            </div>
+
+            <div class="mt-12 flex justify-center space-x-2 sm:space-x-4">
+                <button class="topology-btn px-4 py-2 sm:px-6 sm:py-3 font-semibold bg-white text-slate-700 rounded-full shadow-sm" data-topology="ssdr">單定子雙轉子 (SSDR)</button>
+                <button class="topology-btn px-4 py-2 sm:px-6 sm:py-3 font-semibold bg-white text-slate-700 rounded-full shadow-sm" data-topology="dssr">雙定子單轉子 (DSSR)</button>
+                <button class="topology-btn px-4 py-2 sm:px-6 sm:py-3 font-semibold bg-white text-slate-700 rounded-full shadow-sm" data-topology="sssr">單定子單轉子 (SSSR)</button>
+            </div>
+
+            <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div id="topology-info" class="text-left">
+                    <h3 id="topology-title" class="text-2xl font-bold text-sky-600"></h3>
+                    <p id="topology-description" class="mt-4 text-slate-600"></p>
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-slate-800">優點:</h4>
+                        <ul id="topology-pros" class="mt-2 space-y-2 list-inside text-slate-600"></ul>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="font-semibold text-slate-800">缺點:</h4>
+                        <ul id="topology-cons" class="mt-2 space-y-2 list-inside text-slate-600"></ul>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="topologyRadarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="innovations" class="mb-16 scroll-mt-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">材料與製程的革命</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                    現代軸向磁通馬達的性能飛躍，離不開材料科學和元件製造技術的突破。這些創新是將理論變為現實的關鍵。
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-sky-100 text-sky-600 text-2xl font-bold">1</div>
+                    <h3 class="mt-5 text-xl font-semibold text-slate-900">定子鐵芯材料</h3>
+                    <p class="mt-2 text-base text-slate-600">SMC（軟磁複合材料）的應用允許複雜的3D磁路設計，極大降低高頻渦流損耗，是實現無磁軛分段式定子的關鍵。</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-lg">
+                     <div class="flex items-center justify-center h-12 w-12 rounded-full bg-sky-100 text-sky-600 text-2xl font-bold">2</div>
+                    <h3 class="mt-5 text-xl font-semibold text-slate-900">繞組技術</h3>
+                    <p class="mt-2 text-base text-slate-600">採用集中式繞組和扁平線（髮夾式繞組），大幅縮短無效的線圈懸伸，提高槽滿率，降低銅損並改善散熱。</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-lg">
+                     <div class="flex items-center justify-center h-12 w-12 rounded-full bg-sky-100 text-sky-600 text-2xl font-bold">3</div>
+                    <h3 class="mt-5 text-xl font-semibold text-slate-900">PCB 定子</h3>
+                    <p class="mt-2 text-base text-slate-600">一項革命性創新，用印刷電路板取代傳統繞線。實現了極致輕量化，且無鐵芯設計從根本上消除了齒槽轉矩，運轉極其平順。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="applications" class="mb-16 scroll-mt-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">真實世界的影響力</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                    從頂級超跑到電動飛機，軸向磁通馬達憑藉其卓越性能，正在多個尖端領域證明其價值，並重新定義電動化的可能性。
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card group relative overflow-hidden rounded-lg bg-slate-800 text-white shadow-lg">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    <div class="p-6 flex flex-col justify-end h-64">
+                        <h3 class="text-xl font-bold">混合動力超跑</h3>
+                        <p class="mt-1 text-sm opacity-90">Ferrari SF90, Koenigsegg Regera</p>
+                        <p class="mt-4 text-sm font-light">提供極高的功率密度，實現了緊湊、輕量化且強大的電驅單元，與傳統引擎完美協同。</p>
+                    </div>
+                </div>
+                <div class="card group relative overflow-hidden rounded-lg bg-slate-800 text-white shadow-lg">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    <div class="p-6 flex flex-col justify-end h-64">
+                        <h3 class="text-xl font-bold">航空航太</h3>
+                        <p class="mt-1 text-sm opacity-90">Rolls-Royce 'Spirit of Innovation'</p>
+                        <p class="mt-4 text-sm font-light">無與倫比的功率重量比是電動飛行的關鍵。三台YASA馬達驅動的飛機創下了電動飛行速度世界紀錄。</p>
+                    </div>
+                </div>
+                <div class="card group relative overflow-hidden rounded-lg bg-slate-800 text-white shadow-lg">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    <div class="p-6 flex flex-col justify-end h-64">
+                        <h3 class="text-xl font-bold">船舶海事</h3>
+                        <p class="mt-1 text-sm opacity-90">Jaguar Vector V20E</p>
+                        <p class="mt-4 text-sm font-light">輕量化且強大的推進系統，為電動快艇提供破紀錄的動力，展示了其在海事應用的潛力。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="audio-summary" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">技術講座精華</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">聆聽這段 10 分鐘的摘要，深入了解軸向磁通馬達如何成為電動車領域的遊戲規則改變者，以及其背後的關鍵技術與未來展望。</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-center mb-4 text-slate-800">🎧 改變電動車遊戲規則的馬達技術</h3>
+            <audio controlsList="nodownload" controls preload="auto" class="w-full mb-4" src="Axial Flux Motor-electric car, deepR 10min26s.mp3">您的瀏覽器不支援音訊播放。</audio>
+            <div class="prose max-w-none text-slate-600 mt-4">
+                <p>本音訊深入探討了軸向磁通 (AFM) 馬達，特別是英國公司 YASA 的技術，如何徹底改變電動車 (EV) 的性能。傳統的徑向磁通馬達 (RFM) 體積大、效率較低，而 AFM 馬達憑藉其「鬆餅狀」的扁平結構，實現了無與倫比的功率和扭矩密度。這意味著馬達可以更小、更輕，同時提供更強的動力。</p>
+                <p>音訊中提到，法拉利 SF90 等超級跑車已率先採用此技術來提升性能。賓士對 YASA 的收購，更預示著這項技術將從頂級跑車逐步擴展到主流豪華電動車市場。關鍵優勢包括卓越的散熱性能、更高的效率（減少能量浪費）以及更平順的動力輸出。總結來說，軸向磁通馬達是實現下一代更輕、更高效、性能更強電動車的核心關鍵。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="mb-16 scroll-mt-20">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center break-words">知識隨堂考</h2>
+        <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">您對軸向磁通馬達的了解有多深？來挑戰這三道題目，測試一下您的學習成果！</p>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+            <div id="quiz-container" class="space-y-8">
+                </div>
+            <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">提交答案</button>
+                <button id="reset-quiz-btn" class="hidden px-6 py-3 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-700 transition-colors duration-300">再試一次</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
+    <p class="text-slate-500">© 2025 本網頁中由作者原創及與AI協作產出的分析、評論與視覺化設計部分，採用 創用CC 姓名標示-非商業性-禁止改作 4.0 國際 (CC BY-NC-ND 4.0) 授權條款釋出。</p>
+    <p class="text-slate-500">網頁內容中所引用的部分數據、圖表及觀點，其版權歸原作者或發布機構所有，僅為分析與說明之目的引用，不在此CC授權範圍內。</p>
+    <p class="text-slate-500">本內容的生成部分借助 Google Gemini等模型，發布者應對最終內容的準確性負責。</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    let isMenuOpen = false;
+
+    // --- Smart Header Logic ---
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    const scrollThreshold = 10;
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (isMenuOpen) {
+                return;
+            }
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                }
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
+    
+    // --- Navigation Logic ---
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+    
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIconOpen.classList.remove('hidden');
+                    hamburgerIconClose.classList.add('hidden');
+                    isMenuOpen = false;
+                }
+            });
+        }
+    });
+
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            if(link.getAttribute('href').startsWith('#')){
+                link.classList.remove('active');
+             }
+        });
+        if (index >= 0 && sections[index]) {
+            const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
+        });
+    }
+
+    // --- Performance Chart Logic ---
+    const performanceData = {
+        labels: ['扭矩密度', '功率密度', '效率', '緊湊性 (1/體積)'],
+        datasets: [
+            {
+                label: '徑向磁通馬達 (RFM)',
+                data: [1, 1, 93, 1],
+                backgroundColor: 'rgba(100, 116, 139, 0.6)',
+                borderColor: 'rgba(100, 116, 139, 1)',
+                borderWidth: 1
+            },
+            {
+                label: '軸向磁通馬達 (AFM)',
+                data: [3, 2.5, 97, 3],
+                backgroundColor: 'rgba(14, 165, 233, 0.6)',
+                borderColor: 'rgba(14, 165, 233, 1)',
+                borderWidth: 1
+            }
+        ]
+    };
+    const performanceCtx = document.getElementById('performanceChart')?.getContext('2d');
+    if (performanceCtx) {
+        new Chart(performanceCtx, {
+            type: 'bar',
+            data: performanceData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '相對性能倍數 (RFM為基準1)'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'AFM vs. RFM 性能指標'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed.x !== null) {
+                                   if(context.label === '效率') {
+                                       label += context.parsed.x + '%';
+                                   } else {
+                                       label += context.parsed.x + 'x';
+                                   }
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // --- Topology Radar Chart Logic ---
+    const topologyData = {
+        ssdr: {
+            title: '單定子雙轉子 (SSDR / Torus)',
+            description: '此結構將單個定子盤夾在兩個轉子盤之間，是YASA公司的核心技術，也是當前高性能AFM的主流選擇。它在性能、散熱和效率上達到最佳平衡。',
+            pros: [
+                '<li><span class="text-green-500 font-bold mr-2">✓</span>軸向力完美平衡，機械結構穩定。</li>',
+                '<li><span class="text-green-500 font-bold mr-2">✓</span>繞組效率極高，銅損低。</li>',
+                '<li><span class="text-green-500 font-bold mr-2">✓</span>非常適合無磁軛設計，功率密度極致。</li>',
+                '<li><span class="text-green-500 font-bold mr-2">✓</span>中心定子可設計高效的直接冷卻通道。</li>'
+            ],
+            cons: [
+                '<li><span class="text-red-500 font-bold mr-2">✗</span>製造複雜度最高，特別是無磁軛版本。</li>',
+                '<li><span class="text-red-500 font-bold mr-2">✗</span>對組裝精度要求極高。</li>'
+            ],
+            chartData: [5, 5, 4, 5, 2]
+        },
+        dssr: {
+            title: '雙定子單轉子 (DSSR / AFIR)',
+            description: '此結構將單個轉子盤夾在兩個定子盤之間。其主要優點是消除了淨軸向力，結構相對簡單。',
+            pros: [
+                '<li><span class="text-green-500 font-bold mr-2">✓</span>軸向力基本平衡，軸承負載小。</li>',
+                '<li><span class="text-green-500 font-bold mr-2">✓</span>結構相對簡單，被認為更易於製造。</li>'
+            ],
+            cons: [
+                '<li><span class="text-red-500 font-bold mr-2">✗</span>中心轉子散熱是巨大挑戰。</li>',
+                '<li><span class="text-red-500 font-bold mr-2">✗</span>繞組效率較低，懸伸部分較長，銅損高。</li>',
+                '<li><span class="text-red-500 font-bold mr-2">✗</span>功率密度不如SSDR。</li>'
+            ],
+            chartData: [4, 3, 2, 5, 4]
+        },
+        sssr: {
+            title: '單定子單轉子 (SSSR)',
+            description: '這是最基礎的AFM拓撲，由一個定子盤和一個轉子盤組成。因其致命的結構缺陷，實際應用非常有限。',
+            pros: [
+                '<li><span class="text-green-500 font-bold mr-2">✓</span>結構最簡單。</li>',
+                '<li><span class="text-green-500 font-bold mr-2">✓</span>所需永磁體材料最少。</li>'
+            ],
+            cons: [
+                '<li><span class="text-red-500 font-bold mr-2">✗</span>存在巨大的不平衡軸向磁吸引力。</li>',
+                '<li><span class="text-red-500 font-bold mr-2">✗</span>軸承負載極大，機械結構不穩定。</li>',
+                '<li><span class="text-red-500 font-bold mr-2">✗</span>難以維持精密的氣隙，功率受限。</li>'
+            ],
+            chartData: [2, 2, 3, 1, 5]
+        }
+    };
+    const topologyRadarCtx = document.getElementById('topologyRadarChart')?.getContext('2d');
+    if(topologyRadarCtx) {
+        const radarChart = new Chart(topologyRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['功率密度', '效率', '散熱性能', '軸向力平衡', '製造簡易度'],
+                datasets: [{
+                    label: '綜合評分',
+                    data: topologyData.ssdr.chartData,
+                    fill: true,
+                    backgroundColor: 'rgba(14, 165, 233, 0.2)',
+                    borderColor: 'rgb(14, 165, 233)',
+                    pointBackgroundColor: 'rgb(14, 165, 233)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(14, 165, 233)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: { line: { borderWidth: 3 } },
+                scales: {
+                    r: {
+                        angleLines: { display: false },
+                        suggestedMin: 0,
+                        suggestedMax: 5,
+                        pointLabels: { font: { size: 14 } },
+                        ticks: { stepSize: 1 }
+                    }
+                },
+                plugins: { title: { display: true, text: '拓撲結構性能雷達圖' } }
+            }
+        });
+
+        const topologyTitle = document.getElementById('topology-title');
+        const topologyDescription = document.getElementById('topology-description');
+        const topologyPros = document.getElementById('topology-pros');
+        const topologyCons = document.getElementById('topology-cons');
+        const topologyButtons = document.querySelectorAll('.topology-btn');
+
+        function updateTopologyInfo(topologyKey) {
+            const data = topologyData[topologyKey];
+            topologyTitle.textContent = data.title;
+            topologyDescription.textContent = data.description;
+            topologyPros.innerHTML = data.pros.join('');
+            topologyCons.innerHTML = data.cons.join('');
+            
+            radarChart.data.datasets[0].data = data.chartData;
+            radarChart.update();
+
+            topologyButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.topology === topologyKey);
+            });
+        }
+
+        topologyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                updateTopologyInfo(button.dataset.topology);
+            });
+        });
+        updateTopologyInfo('ssdr');
+    }
+    
+    // --- Quiz Logic ---
+    const allQuestions = [
+        { question: "軸向磁通馬達 (AFM) 相較於傳統徑向磁通馬達 (RFM) 的主要優勢是什麼？", options: ["製造成本較低", "轉速較慢", "較高的功率密度與扭矩密度", "結構較為複雜"], answer: "較高的功率密度與扭矩密度" },
+        { question: "在 Ferrari SF90 Stradale 這類混合動力超級跑車中，軸向磁通馬達扮演什麼關鍵角色？", options: ["作為主要的發電機", "僅用於空調系統", "提供額外的強大動力，實現輕量化與高性能", "用於冷卻電池"], answer: "提供額外的強大動力，實現輕量化與高性能" },
+        { question: "YASA 公司被哪家知名汽車製造商收購，顯示了軸向磁通馬達在主流市場的潛力？", options: ["Toyota", "Ford", "Mercedes-Benz", "Volkswagen"], answer: "Mercedes-Benz" },
+        { question: "下列何者是軸向磁通馬達最主流、性能均衡的拓撲結構 (Topology)？", options: ["鼠籠式 (Squirrel Cage)", "爪極式 (Claw Pole)", "單定子-雙轉子 (Torus / SSDR)", "內轉子式 (Internal Rotor)"], answer: "單定子-雙轉子 (Torus / SSDR)" },
+        { question: "軸向磁通馬達的磁通方向是？", options: ["平行於旋轉軸", "垂直於旋轉軸", "沿切線方向", "隨機方向"], answer: "平行於旋轉軸" }
+    ];
+    let selectedQuestions = [];
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function initQuiz() {
+        const quizContainer = document.getElementById('quiz-container');
+        const submitBtn = document.getElementById('submit-quiz-btn');
+        const resetBtn = document.getElementById('reset-quiz-btn');
+        const resultsDiv = document.getElementById('quiz-results');
+        if (!quizContainer || !submitBtn || !resultsDiv || !resetBtn) return;
+
+        shuffleArray(allQuestions);
+        selectedQuestions = allQuestions.slice(0, 3);
+        
+        quizContainer.innerHTML = '';
+        resultsDiv.innerHTML = '';
+        submitBtn.classList.remove('hidden');
+        submitBtn.disabled = false;
+        resetBtn.classList.add('hidden');
+        
+        selectedQuestions.forEach((q, index) => {
+            const shuffledOptions = [...q.options];
+            shuffleArray(shuffledOptions);
+            const optionsHTML = shuffledOptions.map(option => `
+                <label class="flex items-center p-2 rounded-md hover:bg-sky-50 cursor-pointer">
+                    <input type="radio" name="question-${index}" value="${option}" class="h-4 w-4 mr-3 text-sky-600 border-gray-300 focus:ring-sky-500">
+                    <span class="text-slate-700">${option}</span>
+                </label>
+            `).join('');
+
+            const questionElement = document.createElement('div');
+            questionElement.id = `question-${index}`;
+            questionElement.className = 'quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg';
+            questionElement.innerHTML = `
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">${optionsHTML}</div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2"></div>
+            `;
+            quizContainer.appendChild(questionElement);
+        });
+
+        submitBtn.onclick = () => {
+            let score = 0;
+            selectedQuestions.forEach((q, index) => {
+                const container = document.getElementById(`question-${index}`);
+                const feedbackDiv = document.getElementById(`feedback-${index}`);
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                
+                container.classList.remove('correct', 'incorrect');
+                feedbackDiv.innerHTML = '';
+                
+                // Disable all radio buttons for this question
+                const radios = container.querySelectorAll(`input[name="question-${index}"]`);
+                radios.forEach(radio => radio.disabled = true);
+
+                if (!selected) {
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 未作答。</span> <span class="text-slate-600">正確答案是：「${q.answer}」</span>`;
+                    container.classList.add('incorrect');
+                    return;
+                }
+
+                const userAnswer = selected.value;
+                if (userAnswer === q.answer) {
+                    score++;
+                    container.classList.add('correct');
+                    feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+                } else {
+                    container.classList.add('incorrect');
+                    feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。</span> <span class="text-slate-600">正確答案是：「${q.answer}」</span>`;
+                }
+            });
+
+            resultsDiv.textContent = `您的得分: ${score} / ${selectedQuestions.length}`;
+            resultsDiv.className = score === selectedQuestions.length ? 'text-xl font-bold text-green-600' : 'text-xl font-bold text-amber-600';
+            
+            submitBtn.classList.add('hidden');
+            resetBtn.classList.remove('hidden');
+        };
+        
+        resetBtn.onclick = initQuiz;
+    }
+
+    // --- Initialize all components ---
+    initQuiz();
+    changeNavOnScroll(); // Set initial state for nav links
+});
+</script>
+</body>
+</html>
+
