@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互動式報告：距離的死亡與重生</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #0284c7; border-bottom-color: #0284c7; }
+        .era-button.active { background-color: #0c4a6e; color: #f8fafc; }
+        .frontier-button.active { background-color: #38bdf8; color: #0c4a6e; }
+        .quiz-option:checked + label { background-color: #0c4a6e; color: #f8fafc; border-color: #0c4a6e;}
+        .quiz-question-container.correct { background-color: #f0fdf4; border-left-color: #22c55e; }
+        .quiz-question-container.incorrect { background-color: #fef2f2; border-left-color: #ef4444; }
+
+        header { transition: transform 0.3s ease-in-out; }
+        .header-hidden { transform: translateY(-100%); }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <h1 class="text-lg sm:text-xl font-bold text-sky-700">距離的死亡與重生</h1>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="#hero" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">🚀 啟程</a>
+                    <a href="#earth" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">🌍 地球村脈動</a>
+                    <a href="#paradox" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">🎭 超連結悖論</a>
+                    <a href="#frontier" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">🌌 終極邊疆</a>
+                    <a href="#summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">🎧 語音摘要</a>
+                    <a href="#quiz" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-sky-600 border-b-2 border-transparent">🧠 知識測驗</a>
+                </div>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:text-sky-600 hover:bg-slate-100 focus:outline-none">
+                    <svg id="hamburger-icon-open" class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg id="hamburger-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden pb-4">
+            <a href="#hero" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">🚀 啟程</a>
+            <a href="#earth" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">🌍 地球村脈動</a>
+            <a href="#paradox" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">🎭 超連結悖論</a>
+            <a href="#frontier" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">🌌 終極邊疆</a>
+            <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">🎧 語音摘要</a>
+            <a href="#quiz" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-50">🧠 知識測驗</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+    <section id="hero" class="min-h-[80vh] flex items-center justify-center text-center scroll-mt-20">
+        <div>
+            <h2 class="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">距離，曾是不可撼動的現實。</h2>
+            <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">自電報的火花點燃，人類踏上了近兩百年的「距離消亡」之旅。但當我們在地球上消滅物理距離時，是否也創造了新的社會鴻溝？當我們望向星辰，距離又將以何種姿態重生？</p>
+            <a href="#earth" class="mt-8 inline-block bg-sky-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-sky-700 transition-transform transform hover:scale-105">開始探索 &darr;</a>
+        </div>
+    </section>
+
+    <section id="earth" class="py-16 scroll-mt-20">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl md:text-4xl font-bold text-slate-900">地球村的脈動：一部時空壓縮史</h3>
+            <p class="mt-3 text-lg text-slate-600 max-w-3xl mx-auto">從電報到5G，通訊技術以前所未有的力量壓縮著時間與空間。點擊下方按鈕，親眼見證這場革命如何展開。</p>
+        </div>
+        <div class="flex justify-center space-x-2 md:space-x-4 mb-8 flex-wrap gap-2">
+            <button class="era-button text-sm md:text-base py-2 px-4 rounded-full bg-slate-200 text-slate-700 font-semibold transition-all duration-300" data-era="electric">電氣時代</button>
+            <button class="era-button text-sm md:text-base py-2 px-4 rounded-full bg-slate-200 text-slate-700 font-semibold transition-all duration-300" data-era="broadcast">廣播時代</button>
+            <button class="era-button text-sm md:text-base py-2 px-4 rounded-full bg-slate-200 text-slate-700 font-semibold transition-all duration-300" data-era="digital">數位革命</button>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center bg-white p-6 rounded-xl shadow-lg">
+            <div id="era-info" class="lg:col-span-2 bg-slate-50 p-6 rounded-lg min-h-[300px]">
+                <h4 id="era-title" class="text-2xl font-bold mb-3 text-slate-800"></h4>
+                <p id="era-description" class="text-slate-600 leading-relaxed"></p>
+            </div>
+            <div class="lg:col-span-3">
+                <div class="relative h-72 md:h-96">
+                    <canvas id="techTimelineChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="paradox" class="py-16 scroll-mt-20">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl md:text-4xl font-bold text-slate-900">超連結的悖論</h3>
+            <p class="mt-3 text-lg text-slate-600 max-w-3xl mx-auto">技術上距離的消亡，在社會與心理層面，反而催生了新的距離。這引出了一個核心結論：<span class="font-bold text-red-500">物理距離的消亡，催生了社會距離的再臨。</span></p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+            <div class="bg-white p-6 rounded-xl shadow-lg h-full">
+                <h4 class="text-xl font-bold text-slate-800">資訊過載 & 數位成癮</h4>
+                <p class="mt-2 text-slate-600">源源不絕的資訊流超出人腦處理能力，引發焦慮與認知疲勞。為連結而生的工具，卻可能導致用戶陷入已被確認的行為障礙「網路成癮」。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg h-full">
+                <h4 class="text-xl font-bold text-slate-800">注意力經濟 & 即時的暴政</h4>
+                <p class="mt-2 text-slate-600">在注意力經濟中，用戶的關注力是商品。為了最大化停留時間，平台演算法推送刺激性內容，而「永遠在線」的期望則剝奪了深度思考的空間。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg md:col-span-2 lg:col-span-1">
+                <h4 class="text-xl font-bold text-slate-800 mb-4">過濾氣泡 & 迴聲室效應</h4>
+                <p class="text-slate-600 mb-6">個人化演算法將用戶與不同觀點隔離，並在同溫層中強化其既有信念，這被認為是加劇當代政治極化的重要因素。</p>
+                <div class="w-full h-48 flex items-center justify-center bg-slate-50 rounded-lg p-4">
+                     <div style="border: 2px solid #3b82f6; color: #3b82f6; border-radius: 50%; width: 120px; height: 120px; display:flex; align-items:center; justify-content:center; text-align:center; flex-direction:column; font-weight: 600;">我的世界<div style="border: 2px solid #60a5fa; color: #60a5fa; border-radius: 50%; width: 60px; height: 60px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:0.75rem; margin-top: 4px;">我的觀點</div></div>
+                     <div class="mx-4 text-slate-400 text-2xl font-light">&harr;</div>
+                     <div style="border: 2px solid #ef4444; color: #ef4444; border-radius: 50%; width: 120px; height: 120px; display:flex; align-items:center; justify-content:center; text-align:center; font-weight: 600; opacity: 0.4;">他人的世界</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="frontier" class="py-16 scroll-mt-20">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl md:text-4xl font-bold text-slate-900">終極邊疆：距離的重生</h3>
+            <p class="mt-3 text-lg text-slate-600 max-w-3xl mx-auto">當我們望向星辰，地球上那套「消滅延遲」的邏輯徹底失效。物理定律成為不可逾越的障礙，迫使我們重新定義「通訊」與「進步」。</p>
+        </div>
+        <div class="flex justify-center space-x-4 mb-8">
+            <button class="frontier-button py-2 px-6 rounded-full bg-slate-200 text-slate-800 font-semibold transition" data-frontier="lightspeed">光速的暴政</button>
+            <button class="frontier-button py-2 px-6 rounded-full bg-slate-200 text-slate-800 font-semibold transition" data-frontier="quantum">量子的承諾</button>
+        </div>
+        <div id="frontier-content-container" class="max-w-4xl mx-auto">
+            </div>
+    </section>
+    
+    <section id="conclusion" class="py-16 scroll-mt-20 bg-slate-800 text-slate-300 rounded-xl shadow-lg">
+         <div class="container mx-auto px-6 text-center">
+            <h3 class="text-3xl font-bold text-white mb-4">結論：重新定義距離</h3>
+            <p class="max-w-3xl mx-auto leading-relaxed">人類面臨雙重挑戰：對內，我們需要發展數位素養，學會在超連結世界中有意識地為自己創造反思的「距離」。對外，我們必須擁抱延遲，發展能管理延遲的自主系統，並用量子技術保障星際通訊的絕對安全。人類的未來，取決於我們能否以智慧來管理距離，而非盲目地追求其消亡。</p>
+        </div>
+    </section>
+
+    <section id="summary" class="py-16 scroll-mt-20">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl md:text-4xl font-bold text-slate-900">語音摘要</h3>
+            <p class="mt-3 text-lg text-slate-600 max-w-3xl mx-auto">點擊下方播放器，聆聽關於「距離的死亡與重生」的重點摘要。</p>
+        </div>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+             <h3 class="text-xl font-bold text-center mb-4 text-slate-800">🎧 距離的死亡與重生</h3>
+             <audio controls class="w-full mb-4">
+                <source src="distance dead reborn light speed 9min11s deepR.mp3" type="audio/mpeg">
+                您的瀏覽器不支援音訊播放。
+             </audio>
+             <div class="prose max-w-none text-slate-600 mt-4">
+                <p>這段 9 分 11 秒的音訊深入探討了本報告的核心主題。開頭闡述了電報和電話如何首次實現「距離的死亡」，將資訊傳播從物理運輸中解放出來。中段分析了數位時代的矛盾，即物理距離的消失如何諷刺地導致了「過濾氣泡」和「迴聲室」等社會距離的產生。最後，音訊將視角轉向太空探索，論證了光速限制如何使「距離重生」，迫使我們從追求即時性轉向管理延遲，並探討了量子通訊在確保星際資訊安全方面的潛力，而非速度。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="py-16 scroll-mt-20">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl md:text-4xl font-bold text-slate-900">知識小測驗</h3>
+            <p class="mt-3 text-lg text-slate-600 max-w-3xl mx-auto">測試您對本報告的理解程度，系統將隨機選擇三道題目。</p>
+        </div>
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">🧠 開始測驗</h3>
+            <div id="quiz-container" class="space-y-8"></div>
+            <div class="mt-8 flex items-center gap-6">
+                <button id="submit-quiz-btn" class="px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors duration-300">提交答案</button>
+                <div id="quiz-results" class="text-xl font-bold text-slate-700"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="text-center p-8 mt-4 border-t border-slate-200 text-sm">
+    <p class="text-slate-500">© 2024 互動式報告改編與格式化 by AI</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Smart Header Logic ---
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    let isMenuOpen = false;
+    window.addEventListener('scroll', function() {
+        if (isMenuOpen) return;
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+            header.classList.add('header-hidden');
+        } else {
+            header.classList.remove('header-hidden');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    }, false);
+
+    // --- Navigation Logic ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIconOpen = document.getElementById('hamburger-icon-open');
+    const hamburgerIconClose = document.getElementById('hamburger-icon-close');
+    
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIconOpen.classList.toggle('hidden');
+            hamburgerIconClose.classList.toggle('hidden');
+            isMenuOpen = !mobileMenu.classList.contains('hidden');
+        });
+    }
+
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                hamburgerIconOpen.classList.remove('hidden');
+                hamburgerIconClose.classList.add('hidden');
+                isMenuOpen = false;
+            }
+        });
+    });
+
+    const sections = document.querySelectorAll('main section[id]');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 64) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // --- Page Content Data ---
+    const pageData = {
+        timeline: {
+            electric: {
+                title: "電氣時代：資訊與個人的解放",
+                description: "電報首次讓資訊與運輸脫鉤，重塑了全球經濟與政治。隨後，電話將充滿情感的人類聲音注入網絡，在實現「遠距離再個人化」的同時，也帶來了對私人空間的「侵入感」。",
+                technologies: ['電報', '電話'],
+                reach: [10, 50] 
+            },
+            broadcast: {
+                title: "廣播時代：大眾媒介的崛起",
+                description: "無線電創造了同步的「心靈劇場」，建構了國家認同。電視則成為「全球壁爐」，推動了消費主義文化，但也引發了關於「文化帝國主義」的爭議。",
+                technologies: ['無線電廣播', '電視'],
+                reach: [5000, 10000]
+            },
+            digital: {
+                title: "數位革命：超連結的悖論",
+                description: "網際網路終結了「守門人」模式，催生了平台經濟與注意力經濟。行動通訊與物聯網則將網路編織進物理世界的每個角落，將「距離消亡」推向極致。",
+                technologies: ['網際網路', '行動通訊', '物聯網'],
+                reach: [1000000, 50000000, 1000000000]
+            }
+        },
+        frontier: {
+            lightspeed: `
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h4 class="text-2xl font-bold text-center mb-6 text-slate-800">地球 vs. 火星：無法消除的延遲</h4>
+                    <p class="text-slate-600 text-center mb-8">光速，宇宙的終極速度上限，在星際尺度上轉化為巨大的時間延遲。任何即時互動都變得不可能，這迫使所有深空探索任務都必須高度自主。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 items-center text-center gap-6">
+                        <div>
+                            <p class="text-5xl font-bold text-sky-500">&lt; 1s</p>
+                            <p class="mt-2 text-slate-500">地球內部通訊延遲</p>
+                        </div>
+                        <div class="text-slate-400 text-4xl font-light">&rarr;</div>
+                        <div>
+                            <p class="text-5xl font-bold text-red-500">6-44 分鐘</p>
+                            <p class="mt-2 text-slate-500">地火來回通訊延遲</p>
+                        </div>
+                    </div>
+                    <p class="mt-8 text-sm text-slate-500 text-center">典範轉移：在星際時代，挑戰不再是<span class="font-bold text-red-500">降低</span>延遲，而是如何<span class="font-bold text-sky-500">管理</span>延遲。</p>
+                </div>`,
+            quantum: `
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h4 class="text-2xl font-bold text-center mb-2 text-slate-800">量子的真正承諾：絕對安全</h4>
+                    <p class="text-slate-600 text-center mb-4">利用量子糾纏進行超光速通訊是個迷思。其真正價值在於安全：基於「不可複製原理」，量子密鑰分發 (QKD) 技術提供了物理定律保障的絕對保密性。</p>
+                    <div class="space-y-4 mt-6">
+                        <div class="flex items-center p-3 bg-slate-100 rounded-md"><span class="text-sky-500 font-bold mr-4">1.</span><p>發送方 (Alice) 將密鑰編碼在單個光子的量子態上，發往接收方 (Bob)。</p></div>
+                        <div class="flex items-center p-3 bg-slate-100 rounded-md"><span class="text-red-500 font-bold mr-4">2.</span><p>任何竊聽者 (Eve) 的測量行為，都<span class="font-bold">必然</span>會干擾光子的量子態，留下痕跡。</p></div>
+                        <div class="flex items-center p-3 bg-slate-100 rounded-md"><span class="text-sky-500 font-bold mr-4">3.</span><p>Bob 與 Alice 比對部分數據，若錯誤率異常，則證明存在竊聽，金鑰作廢。</p></div>
+                    </div>
+                    <p class="mt-8 text-sm text-slate-500 text-center">結論：量子通訊的價值不是<span class="font-bold text-red-500">速度</span>，而是在漫長延遲中確保資訊的絕對<span class="font-bold text-sky-500">安全</span>。</p>
+                </div>`
+        },
+        quiz: [
+            { question: "根據報告，哪一項技術首次讓資訊的傳播速度超越了物理運輸？", options: ["網際網路", "電話", "電報", "電視"], answer: 2 },
+            { question: "報告中提到的「超連結的悖論」是指什麼？", options: ["網路速度越快，費用越高", "物理距離消失，但社會距離產生", "資訊越多，知識越少", "線上朋友越多，現實朋友越少"], answer: 1 },
+            { question: "在星際通訊中，「光速的暴政」導致的主要挑戰是什麼？", options: ["訊號容易被攔截", "通訊費用極高", "無法消除的時間延遲", "需要巨大的天線"], answer: 2 },
+            { question: "量子通訊的真正價值，根據報告的論述，主要在於什麼？", options: ["超越光速的通訊", "極高的資訊安全性", "降低通訊成本", "讓AI自主溝通"], answer: 1 },
+            { question: "「過濾氣泡」和「迴聲室效應」主要與哪個時代的技術相關？", options: ["電氣時代", "廣播時代", "數位革命", "工業革命"], answer: 2 },
+            { question: "從地球向火星發送一條訊息，其來回的通訊延遲大約是多少？", options: ["小於1秒", "大約10秒", "6到44分鐘", "超過24小時"], answer: 2 }
+        ]
+    };
+
+    // --- Timeline Section Logic ---
+    const eraButtons = document.querySelectorAll('.era-button');
+    const eraTitle = document.getElementById('era-title');
+    const eraDescription = document.getElementById('era-description');
+    let techChart;
+
+    function initChart() {
+        const ctx = document.getElementById('techTimelineChart').getContext('2d');
+        techChart = new Chart(ctx, {
+            type: 'bar',
+            data: { labels: [], datasets: [{ data: [], backgroundColor: '#38bdf8' }] },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { type: 'logarithmic', ticks: { color: '#64748b' } }, x: { ticks: { color: '#64748b' } } },
+                plugins: { legend: { display: false }, tooltip: { bodyFont: { size: 14 } } }
+            }
+        });
+    }
+
+    function updateEraContent(era) {
+        const eraData = pageData.timeline[era];
+        eraTitle.textContent = eraData.title;
+        eraDescription.textContent = eraData.description;
+        techChart.data.labels = eraData.technologies;
+        techChart.data.datasets[0].data = eraData.reach;
+        techChart.data.datasets[0].label = '影響力/觸及範圍 (對數)';
+        techChart.update();
+        eraButtons.forEach(button => {
+            button.classList.toggle('active', button.dataset.era === era);
+        });
+    }
+    
+    initChart();
+    eraButtons.forEach(button => button.addEventListener('click', () => updateEraContent(button.dataset.era)));
+    updateEraContent('electric'); // Initial state
+
+    // --- Frontier Section Logic ---
+    const frontierButtons = document.querySelectorAll('.frontier-button');
+    const frontierContainer = document.getElementById('frontier-content-container');
+
+    function updateFrontierContent(frontier) {
+        frontierContainer.innerHTML = pageData.frontier[frontier];
+        frontierButtons.forEach(button => {
+            button.classList.toggle('active', button.dataset.frontier === frontier);
+        });
+    }
+
+    frontierButtons.forEach(button => button.addEventListener('click', () => updateFrontierContent(button.dataset.frontier)));
+    updateFrontierContent('lightspeed'); // Initial state
+
+    // --- Quiz Section Logic ---
+    const quizContainer = document.getElementById('quiz-container');
+    const submitBtn = document.getElementById('submit-quiz-btn');
+    const resultsDiv = document.getElementById('quiz-results');
+    let selectedQuestions = [];
+
+    function initQuiz() {
+        selectedQuestions = pageData.quiz.sort(() => 0.5 - Math.random()).slice(0, 3);
+        quizContainer.innerHTML = selectedQuestions.map((q, index) => `
+            <div id="question-${index}" class="quiz-question-container border-l-4 border-transparent p-4 transition-colors duration-300 rounded-r-lg">
+                <p class="font-bold text-lg text-slate-800 mb-3">${index + 1}. ${q.question}</p>
+                <div class="space-y-2">
+                    ${q.options.map((option, i) => `
+                        <label class="flex items-center p-3 rounded-md border-2 border-slate-200 hover:bg-sky-50 cursor-pointer transition">
+                            <input type="radio" name="question-${index}" value="${i}" class="hidden quiz-option">
+                            <span class="text-slate-700">${option}</span>
+                        </label>`).join('')}
+                </div>
+                <div id="feedback-${index}" class="text-sm font-bold mt-2"></div>
+            </div>`).join('');
+    }
+
+    submitBtn.addEventListener('click', () => {
+        let score = 0;
+        selectedQuestions.forEach((q, index) => {
+            const container = document.getElementById(`question-${index}`);
+            const feedbackDiv = document.getElementById(`feedback-${index}`);
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            
+            if (!selected) {
+                 feedbackDiv.innerHTML = '<span class="text-red-600">請選擇一個答案。</span>';
+                 return;
+            }
+
+            const userAnswer = parseInt(selected.value);
+            container.classList.remove('correct', 'incorrect');
+
+            if (userAnswer === q.answer) {
+                score++;
+                container.classList.add('correct');
+                feedbackDiv.innerHTML = '<span class="text-green-600">✔️ 正確</span>';
+            } else {
+                container.classList.add('incorrect');
+                feedbackDiv.innerHTML = `<span class="text-red-600">❌ 錯誤。正確答案：${q.options[q.answer]}</span>`;
+            }
+        });
+        resultsDiv.textContent = `您的得分: ${score} / ${selectedQuestions.length}`;
+    });
+    
+    initQuiz();
+});
+</script>
+
+</body>
+</html>
